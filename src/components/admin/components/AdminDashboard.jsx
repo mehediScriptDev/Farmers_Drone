@@ -69,9 +69,9 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full px-6 py-3'>
       {/* Header Section */}
-      <div className='mb-6'>
+      <div className='mb-6 '>
         <div>
           <h1 className='text-2xl font-bold text-gray-900 mb-2'>
             {dashboardData.overview?.title || 'Admin Dashboard'}
