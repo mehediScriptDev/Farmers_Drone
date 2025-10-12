@@ -25,11 +25,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const menuItems = [
    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon: LayoutDashboard, path: "" },
-  { id: "customer", label: t("sidebar.employee.customer"), icon: User, path: "customer" },
+  { id: "customer", label: t("sidebar.employee.customer"), icon: User, path: "customers" },
   { id: "orders", label: t("sidebar.employee.orders"), icon: ShoppingCart, path: "orders" },
   { id: "payments", label: t("sidebar.employee.payments"), icon: CreditCard, path: "payments" },
-  { id: "support", label: t("sidebar.employee.support"), icon: Headphones, path: "support" },
-  { id: "message", label:"Message", icon: MessageCircle, path: "message" },
+  { id: "support", label: t("sidebar.employee.support"), icon: Headphones, path: "supports" },
+  { id: "message", label:"Message", icon: MessageCircle, path: "messages" },
   ];
 
   return (

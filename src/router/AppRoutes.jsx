@@ -50,6 +50,11 @@ import {
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import EmployeeDashBoardLayout from '../components/employee/employdashboard/EmployeeDashBoardLayout';
 import Dashboard from '../components/employee/employdashboard/Dashboard';
+import Coustomerpage from '../components/employee/employdashboard/Coustomerpage';
+import OrderManagementPage from '../components/employee/employdashboard/OrderManagementPage';
+import MessagePage from '../components/employee/employdashboard/MessagePage';
+import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
+import SupportPage from '../components/employee/employdashboard/SupportPage';
 
 
 const AppRoutes = createBrowserRouter([
@@ -133,10 +138,25 @@ const AppRoutes = createBrowserRouter([
         index: true,
         element: <Dashboard />,
       },
-      // {
-      //   path:"customer",
-      //   element:<Coustomerpage/>
-      // }
+      {
+        path:"customers",
+        element:<Coustomerpage/>
+      },
+      {
+        path:"orders",
+        element:<OrderManagementPage/>
+      },
+      {
+        path:"payments",
+        element:<PaymentManagement/>
+      },{
+        path:"supports",
+        element:<SupportPage/>
+      },
+      {
+        path:"messages",
+        element:<MessagePage/>
+      }
     ],
   },
   {
