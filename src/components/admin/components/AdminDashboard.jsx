@@ -69,7 +69,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className='w-full px-6 py-3'>
+    <div className='w-full bg-[#EAEDF4] px-6 py-3'>
       {/* Header Section */}
       <div className='mb-6 '>
         <div>

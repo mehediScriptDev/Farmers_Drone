@@ -14,7 +14,8 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const MarketingSidebar
+ = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,9 +29,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     },
     {
       id: 'drone-operators',
-      label: t('sidebar.admin.droneOperator'),
+      label: 'Campaigns',
       icon: Plane,
-      path: 'drone-operators',
+      path: 'campaigns',
     },
     {
       id: 'users',
@@ -44,36 +45,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: UserCheck,
       path: 'employees',
     },
-    {
-      id: 'field-agents',
-      label: t('sidebar.admin.fieldAgent'),
-      icon: MapPin,
-      path: 'field-agents',
-    },
-    {
-      id: 'jobs',
-      label: t('sidebar.admin.jobs'),
-      icon: Briefcase,
-      path: 'jobs',
-    },
-    {
-      id: 'payments',
-      label: t('sidebar.admin.paymentsManagement'),
-      icon: CreditCard,
-      path: 'payments',
-    },
-    {
-      id: 'reports',
-      label: t('sidebar.admin.reports'),
-      icon: BarChart3,
-      path: 'reports',
-    },
-    {
-      id: 'complaints',
-      label: t('sidebar.admin.complaints'),
-      icon: AlertTriangle,
-      path: 'complaints',
-    },
+    
   ];
 
   return (
@@ -92,7 +64,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-[#F5F7FA] shadow-lg transform ${
+        className={`bg-[#EAEDF4] shadow-lg transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 overflow-y-auto`}
       >
@@ -145,4 +117,4 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default Sidebar;
+export default MarketingSidebar;
