@@ -167,7 +167,7 @@ const AppRoutes = createBrowserRouter([
     path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
-        <DashboardLayout />
+        <FieldAgentDashboard />
       </PrivateFieldAgentRoute>
     ),
     children: [
