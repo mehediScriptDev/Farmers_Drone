@@ -11,8 +11,9 @@ import RegistrationModal from './components/Modal/RegistrationModal';
 import ApiService from '../../services/apiService';
 import { useTranslation } from 'react-i18next';
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from './components/Modal/AssistProfileSetupModal';
+import axiosInstance from '../../../../config/axiosConfig';
 
-const Coustomerpage = ({ setSelectedCustomer, setActiveSection }) => {
+const Coustomerpage = () => {
   const [open, setOpen] = useState(false);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -41,7 +42,10 @@ const Coustomerpage = ({ setSelectedCustomer, setActiveSection }) => {
     const fetchCustomerData = async () => {
       try {
         setLoading(true);
-        const data = await ApiService.get('/employee/customerManagementData.json');
+          const response = await axiosInstance.get(
+          '/employee/data/dashboardOverviewData.json'
+        );
+        const data = response.data;
         setActivities(
           data.customers.map((customer) => ({
             name: customer.serviceName,
@@ -127,13 +131,7 @@ const Coustomerpage = ({ setSelectedCustomer, setActiveSection }) => {
                 {t('dashboard.employee.button.assistProfile')}
               </button>
               <button
-                onClick={() => {
-                  if (activities.length > 0) {
-                    // Select first customer if none selected
-                    setSelectedCustomer(activities[0]);
-                  }
-                  setActiveSection('reportAnalysis');
-                }}
+                
                 className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.reportAnalysis')}
@@ -230,10 +228,7 @@ const Coustomerpage = ({ setSelectedCustomer, setActiveSection }) => {
                   <td className="px-3 md:px-6 py-4">
                     <button
                       className="text-gray-600 hover:text-gray-900"
-                      onClick={() => {
-                        setSelectedCustomer(activity); // select row customer
-                        setActiveSection('reportAnalysis'); // open report page
-                      }}
+                      
                     >
                       <Eye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>

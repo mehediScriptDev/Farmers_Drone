@@ -1,13 +1,16 @@
+
+
+
+
 import { useState, useEffect, useMemo, useCallback } from "react";
 
 import { Users, ShoppingCart, CreditCard, Headphones, Eye, TrendingUp, TrendingDown, ChevronUp, ChevronDown } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
+import axiosInstance from "../../../config/axiosConfig";
 import RegistrationModal from "./components/Modal/RegistrationModal";
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from "./components/Modal/AssistProfileSetupModal";
-import ApiService from "../../services/apiService";
-import { useTranslation } from "react-i18next";
-
-function DashBoard({ onViewCustomerDetails }) {
+function DashBoard() {
   const [selectedPeriod, setSelectedPeriod] = useState("Last 30 days");
   const [open, setOpen] = useState(false);
   const [activities, setActivities] = useState([]);
@@ -55,7 +58,11 @@ function DashBoard({ onViewCustomerDetails }) {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        const data = await ApiService.get("/employee/dashboardOverviewData.json");
+         const response = await axiosInstance.get(
+          '/employee/data/dashboardOverviewData.json'
+        );
+        const data = response.data;
+        
         setActivities(data.recentActivities || []);
         setSummary(data.summary || {});
         setLoading(false);
@@ -295,7 +302,7 @@ function DashBoard({ onViewCustomerDetails }) {
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button onClick={() => onViewCustomerDetails(activity)} className="text-gray-600 hover:text-gray-900">
+                    <button  className="text-gray-600 hover:text-gray-900">
                       <Eye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </td>
@@ -317,8 +324,7 @@ function DashBoard({ onViewCustomerDetails }) {
         </div>
       </div>
 
-
-      {/* Modals */}
+{/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
       {/* <AssistProfileSetupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
       <AssistProfileSetupModal2
@@ -344,6 +350,7 @@ function DashBoard({ onViewCustomerDetails }) {
         onClose={handleCloseSubModal}
         email={customerEmail}
       />
+      
     </div>
   );
 }

@@ -54,33 +54,200 @@
   },
   "dashboard": {
     "admin": {
-      "title": "एडमिन डैशबोर्ड",
-      "welcome": "वापसी पर स्वागत है, प्रशासक",
-      "fullAccess": "पूर्ण पहुंच",
-      "overview": "डैशबोर्ड अवलोकन",
-      "overviewDescription": "अपने प्लेटफॉर्म प्रदर्शन और मुख्य मेट्रिक्स की निगरानी करें",
-      "stats": {
-        "active-users": "सक्रिय उपयोगकर्ता",
-        "total-jobs": "कुल नौकरियां",
-        "revenue": "आय",
-        "complaints": "शिकायतें",
-        "tickets": "टिकट",
-        "ticket": "टिकट"
-      },
-      "recentActivity": "हाल की उपयोगकर्ता गतिविधि",
-      "revenueChart": "पिछले 7 दिनों की आय"
+      "title": "प्रशासन डैशबोर्ड",
+      "welcome": "वापस स्वागत है, व्यवस्थापक",
+      "fullAccess": "पूर्ण पहुँच",
+      "overview": "अवलोकन",
+      "overviewDescription": "अपने प्रशासन डैशबोर्ड में आपका स्वागत है। विभिन्न अनुभागों के बीच नेविगेट करने के लिए साइडबार का उपयोग करें।"
     },
     "employee": {
-      "title": "कर्मचारी डैशबोर्ड",
-      "welcome": "वापसी पर स्वागत है, कर्मचारी"
+      "title": {
+        "dashPageTitle": "  डैशबोर्ड अवलोकन",
+        "customPageTitle": "ग्राहक प्रबंधन",
+        "orderPageTitle": "ऑर्डर प्रबंधन",
+        "paymentPageTitle": "भुगतान प्रबंधन",
+        "supportPageTitle": "सपोर्ट प्रबंधन"
+        
+      },
+      "subTitle": {
+        "dashpageSub": "अपने ग्राहक सेवा प्रदर्शन की निगरानी करें",
+        "custompageSub": "ग्राहक पंजीकरण और प्रोफ़ाइल सेटअप प्रबंधित करें",
+        "orderpageSub": "ग्राहक ऑर्डर बनाएं, पुनर्निर्धारित करें और प्रबंधित करें",
+        "paymentpageSub": "भुगतान, छूट और बिलिंग समस्याओं को संभालें",
+        "supportpageSub": "सपोर्ट टिकट और उन्नयन बनाएँ और प्रबंधित करें"
+
+      },
+      "table": {
+        "serviceName": "सेवा का नाम",
+        "contact": "संपर्क",
+        "location": "स्थान",
+        "served": "सर्वर",
+        "progress": "प्रगति",
+        "priority": "प्राथमिकता",
+        "action": "क्रिया",
+        "tableTitle": "हाल की व्यावसायिक गतिविधि",
+        "orderIdName": "ऑर्डर आईडी/नाम",
+        "assignTo": "सौंपें",
+        "serviceDate": "सेवा की तिथि",
+        "payment": "भुगतान",
+        "discount": "छूट",
+        "outstanding": "बकाया",
+        "recentCustomer": "हाल के ग्राहक",
+        "searchField": "यहाँ खोजें...",
+        "recentTransaction": "हाल का लेन-देन",
+        "tableServiceName": "सेवा / नाम",
+        "tableIssues": "समस्याएं",
+        "tableDate": "तारीख",
+        "tableProgress": "प्रगति",
+        "tablePriority": "प्राथमिकता",
+        "tableAction": "क्रिया"
+      },
+      "button": {
+        "registerNewCustomer": "नया ग्राहक पंजीकृत करें",
+        "assistProfile": "प्रोफ़ाइल सेटअप में सहायता करें",
+        "reportAnalysis": "रिपोर्ट विश्लेषण",
+        "createServiceRequest": "नई सेवा अनुरोध बनाएँ",
+        "cancel": "ऑर्डर रद्द/संपादित करें",
+        "reshedule": "ऑर्डर पुनर्निर्धारित करें",
+        "collectPayment": "भुगतान एकत्र करें",
+        "discount": "लागू किए गए क्रेडिट/छूट",
+        "billing": "बिलिंग समस्याओं का समाधान",
+        "supportCreateTicket": "सपोर्ट टिकट बनाएं",
+        "supportEscalate": "तकनीकी टीम को बढ़ाएँ"
+      },
+      "modal": {
+        "collectTitle": "भुगतान एकत्र करें",
+        "closeButton": "×",
+        "customerLabel": "ग्राहक",
+        "customerPlaceholder": "ग्राहक का नाम या ऑर्डर आईडी दर्ज करें",
+        "amountLabel": "राशि",
+        "amountPlaceholder": "$00.00",
+        "paymentMethodLabel": "भुगतान विधि",
+        "paymentMethodOption": "क्रेडिट कार्ड",
+        "notesLabel": "नोट्स",
+        "notesPlaceholder": "भुगतान नोट्स जोड़ें",
+        "processButton": "भुगतान प्रक्रिया करें",
+        "applyTitle": "क्रेडिट / डिस्काउंट लागू करें",
+        "applyCloseButton": "×",
+        "applyCustomerLabel": "ग्राहक",
+        "applyCustomerPlaceholder": "ग्राहक का नाम या ऑर्डर आईडी दर्ज करें",
+        "applyDiscountTypeLabel": "डिस्काउंट प्रकार",
+        "applyDiscountTypeOption1": "प्रतिशत डिस्काउंट",
+        "applyDiscountTypeOption2": "राशि",
+        "applyAmountLabel": "राशि",
+        "applyAmountPlaceholder": "$00.00",
+        "applyNotesLabel": "नोट्स",
+        "applyNotesPlaceholder": "भुगतान नोट्स जोड़ें",
+        "applyButton": "डिस्काउंट लागू करें",
+        "resolveTitle": "बिलिंग समस्याओं का समाधान करें",
+        "resolveCloseButton": "×",
+        "resolveCustomerLabel": "ग्राहक",
+        "resolveCustomerPlaceholder": "ग्राहक का नाम या ऑर्डर आईडी दर्ज करें",
+        "resolveIssueTypeLabel": "समस्याओं का प्रकार",
+        "resolveIssueTypeOption1": "गलत शुल्क",
+        "resolveIssueTypeOption2": "भुगतान विफल",
+        "resolveIssueTypeOption3": "रिफंड अनुरोध",
+        "resolveIssueTypeOption4": "डुप्लिकेट शुल्क",
+        "resolveIssueTypeOption5": "बिलिंग पता समस्या",
+        "resolveTransactionIdLabel": "लेन-देन आईडी",
+        "resolveTransactionIdPlaceholder": "लेन-देन आईडी दर्ज करें (यदि लागू हो)",
+        "resolveNotesLabel": "नोट्स",
+        "resolveNotesPlaceholder": "भुगतान नोट्स जोड़ें",
+        "resolveButton": "समस्या हल करें",
+        "ticketCustomerLabel": "ग्राहक *",
+        "ticketCustomerPlaceholder": "ग्राहक का नाम या फ़ोन नंबर दर्ज करें",
+        "ticketPriorityLabel": "प्राथमिकता",
+        "ticketPriorityOption1": "निम्न",
+        "ticketPriorityOption2": "मध्यम",
+        "ticketPriorityOption3": "उच्च",
+        "ticketCategoryLabel": "श्रेणी",
+        "ticketCategoryOption1": "तकनीकी समस्या",
+        "ticketCategoryOption2": "बिलिंग समस्या",
+        "ticketCategoryOption3": "अन्य",
+        "ticketIssueTitleLabel": "समस्या का शीर्षक *",
+        "ticketIssueTitlePlaceholder": "समस्या का संक्षिप्त विवरण",
+        "ticketServiceTypeLabel": "सेवा प्रकार",
+        "ticketServiceTypeOption1": "मैपिंग और सर्वेक्षण",
+        "ticketServiceTypeOption2": "स्थापन",
+        "ticketServiceTypeOption3": "रखरखाव",
+        "ticketIssueDescriptionLabel": "समस्या का विवरण *",
+        "ticketIssueDescriptionPlaceholder": "ग्राहक की समस्या का विस्तृत विवरण...",
+        "ticketCreateButton": "टिकट बनाएं"
+      },
+      "pages": {
+        "dashboard": {
+          "dropDown": {
+            "last7days": "पिछले 7 दिन",
+            "last30days": "पिछले 30 दिन",
+            "last60days": "पिछले 60 दिन",
+            "last90days": "पिछले 90 दिन",
+            "last6months": "पिछले 6 महीने",
+            "last12months": "पिछले 12 महीने",
+            "overview": "सारांश"
+          },
+          "card": {
+            "1st": "कुल ग्राहक",
+            "2nd": "सक्रिय आदेश",
+            "3rd": "लंबित भुगतान",
+            "4th": "खुले टिकट",
+            "5th": "पूर्ण किए गए आदेश",
+            "6th": "रद्द किए गए आदेश"
+          }
+        },
+        "order": {
+          "modal": {
+            "createServiceRequest": "नई सेवा अनुरोध बनाएँ",
+            "customer": "ग्राहक",
+            "enterCustomerNameOrPhone": "ग्राहक का नाम या फ़ोन नंबर दर्ज करें",
+            "serviceType": "सेवा प्रकार*",
+            "mappingSurveying": "मैपिंग और सर्वेक्षण",
+            "preferredDate": "पसंदीदा तिथि",
+            "dateFormat": "मम/दि/वववव",
+            "preferredTime": "पसंदीदा समय",
+            "timeFormat": "घ:मि AM - 12:00 PM",
+            "specialInstruction": "विशेष निर्देश"
+          },
+
+          "rescheduleServiceOrder": {
+            "title": "सेवा आदेश पुनर्निर्धारण",
+            "orderId": "ऑर्डर आईडी",
+            "customerName": "ग्राहक का नाम या फ़ोन नंबर दर्ज करें",
+            "serviceType": "सेवा प्रकार*",
+            "mappingSurveying": "मैपिंग और सर्वेक्षण",
+            "preferredDate": "पसंदीदा तिथि",
+            "dateFormat": "माह/दिन/साल",
+            "preferredTime": "पसंदीदा समय",
+            "timeFormat": "घंटा:मिनट पूर्वाह्न - अपराह्न",
+            "specialInstruction": "कोई विशेष निर्देश या आवश्यकताएँ...",
+            "createRequest": "अनुरोध बनाएं"
+          },
+          "cancelServiceOrder": {
+            "title": "सेवा आदेश रद्द करें",
+            "orderId": "ऑर्डर आईडी",
+            "customerName": "ग्राहक का नाम या फ़ोन नंबर दर्ज करें",
+            "action": "कार्रवाई*",
+            "mappingSurveying": "मैपिंग और सर्वेक्षण",
+            "reason": "कारण",
+            "specialInstruction": "कोई विशेष निर्देश या आवश्यकताएँ...",
+            "cancel": "रद्द करें"
+          }
+        },
+        "payment": {
+          "card": {
+            "refundProcessed": "रिफंड संसाधित",
+            "pendingPayments": "लंबित भुगतान",
+            "todaysCollections": "आज की वसूली"
+          }
+        }
+      }
     },
     "fieldAgent": {
       "title": "फील्ड एजेंट डैशबोर्ड",
-      "welcome": "वापसी पर स्वागत है, फील्ड एजेंट"
+      "welcome": "वापस स्वागत है, फील्ड एजेंट"
     },
     "marketing": {
       "title": "मार्केटिंग डैशबोर्ड",
-      "welcome": "वापसी पर स्वागत है, मार्केटिंग टीम"
+      "welcome": "वापस स्वागत है, मार्केटिंग टीम"
     }
   },
   "sidebar": {
@@ -95,13 +262,12 @@
       "reports": "रिपोर्ट",
       "complaints": "शिकायतें"
     },
-    "employee": {
-      "myTasks": "मेरे कार्य",
-      "schedule": "अनुसूची",
-      "reports": "रिपोर्ट",
-      "profile": "प्रोफाइल",
-      "messages": "संदेश",
-      "training": "प्रशिक्षण"
+   "employee": {
+      "dashboard": "डैशबोर्ड",
+      "customer": "ग्राहक",
+      "orders": "आदेश",
+      "payments": "भुगतान",
+      "support": "सहायता"
     },
     "fieldAgent": {
       "myAssignments": "मेरे असाइनमेंट",

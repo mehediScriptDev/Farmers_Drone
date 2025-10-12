@@ -48,8 +48,9 @@ import {
   PrivateMarketingRoute,
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
-import { EmployDashBoardLayout } from '../components/employee/EmployDashBoardLayout';
-import Dashboard from '../components/employee/Dashboard';
+import EmployeeDashBoardLayout from '../components/employee/employdashboard/EmployeeDashBoardLayout';
+import Dashboard from '../components/employee/employdashboard/Dashboard';
+
 
 const AppRoutes = createBrowserRouter([
   {
@@ -124,14 +125,18 @@ const AppRoutes = createBrowserRouter([
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-       <EmployDashBoardLayout />
+       <EmployeeDashBoardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
       {
         index: true,
         element: <Dashboard />,
-      }
+      },
+      // {
+      //   path:"customer",
+      //   element:<Coustomerpage/>
+      // }
     ],
   },
   {

@@ -1,8 +1,18 @@
-import React from "react";
-import { IoMdArrowBack } from "react-icons/io";
-import { TbWorld } from "react-icons/tb";
 
-const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
+
+
+
+import React from 'react';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { Home } from 'lucide-react';
+
+function CustomerDetailsPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { customerId } = useParams();
+
+  // se
+  const customer = location.state?.customer;
 
   const customerData = {
     name: customer?.name || 'Albert Flores',
@@ -10,65 +20,79 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
     address: '2118 Thornridge Dr, Syracuse, Connecticut 35624',
     location: { latitude: '23.8103° N', longitude: '90.4125° E' }
   };
+
   const orders = [
     {
-      id: "ORD-001",
-      serviceName: "Agro Drone Service",
-      description: "Precision crop monitoring and field insights powered by aerial data.",
-      images: 4,
-      videos: 2,
-      pdfs: 1,
-      time: "10 minutes ago",
-      date: "8 Sep, 2025",
-      icon: "🚁"
+      id: 1,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
     },
     {
-      id: "ORD-002",
-      serviceName: "Agro Drone Service",
-      description: "Precision crop monitoring and field insights powered by aerial data.",
-      images: 4,
-      videos: 2,
-      pdfs: 1,
-      time: "10 minutes ago",
-      date: "8 Sep, 2025",
-      icon: "🚁"
+      id: 2,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
     },
     {
-      id: "ORD-003",
-      serviceName: "Agro Drone Service",
-      description: "Precision crop monitoring and field insights powered by aerial data.",
-      images: 4,
-      videos: 2,
-      pdfs: 1,
-      time: "10 minutes ago",
-      date: "8 Sep, 2025",
-      icon: "🚁"
+      id: 3,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
     },
     {
-      id: "ORD-004",
-      serviceName: "Agro Drone Service",
-      description: "Precision crop monitoring and field insights powered by aerial data.",
-      images: 4,
-      videos: 2,
-      pdfs: 1,
-      time: "10 minutes ago",
-      date: "8 Sep, 2025",
-      icon: "🚁"
+      id: 3,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
+    },
+    {
+      id: 3,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
+    },
+    {
+      id: 4,
+      service: 'Agro Drone Service',
+      description: 'Precision crop monitoring and field insights powered by aerial data.',
+      image: 4, videos: 2, inf: 1,
+      time: '10 minutes ago',
+      date: '8 Sep, 2023'
     }
   ];
 
+  // Order Details button click handler
+  const handleOrderClick = (order) => {
+    navigate(`/order/${order.id}`, { state: { order, customer } });
+  };
+
+  // Go to Dashboard button
+  const handleBackToDashboard = () => {
+    navigate('/');
+  };
 
   return (
-    <div className="h-full bg-gray-50 ">
+    <div className="min-h-screen bg-gray-50">
       <div className="flex-1 p-4 md:p-8">
         <button
-          onClick={onBack}
+          onClick={handleBackToDashboard}
           className="mb-6 flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 font-medium transition-colors"
         >
-          <IoMdArrowBack className="w-4 h-4" />
+          <Home className="w-4 h-4" />
           back
         </button>
-        <div className="bg-white border border-gray-100 rounded-xl shadow-sm lg:bg-transparent lg:border-0 lg:shadow-none p-4 sm:p-5 lg:p-6 mb-6">
+<div className="bg-white border border-gray-100 rounded-xl shadow-sm lg:bg-transparent lg:border-0 lg:shadow-none p-4 sm:p-5 lg:p-6 mb-6">
           <div className="flex flex-col lg:flex-row items-start gap-4 sm:gap-5 lg:gap-6">
 
             {/* Profile Section */}
@@ -87,9 +111,7 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
 
             {/* Location Box */}
             <div className="bg-green-50 border border-green-100 px-4 py-2 sm:px-5 sm:py-3 rounded-lg w-full sm:w-auto">
-              <div className="text-[11px] flex gap-2 sm:text-xs text-gray-600 mb-1 font-medium">
-                <TbWorld className="w-4 h-4 text-gray-600" />
-                New Field (India Gate-wal)</div>
+              <div className="text-[11px] sm:text-xs text-gray-600 mb-1 font-medium">New Field (India Gate-wal)</div>
               <div className="text-xs sm:text-sm text-gray-800">
                 Latitude: <span className="font-semibold">{customerData.location.latitude}</span>
               </div>
@@ -125,7 +147,7 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
                 </div>
 
                 <button
-                  onClick={() => onViewOrderDetails(order)}
+                  onClick={() => handleOrderClick(order)}
                   className="w-full bg-[#00C805] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors text-sm shadow-sm"
                 >
                   Order Details
@@ -137,12 +159,12 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
           </div>
         </div>
 
-        <div className="mt-6">
+         <div className="mt-6">
           <div className="flex items-center gap-3 mb-4">
             <h2 className="text-2xl font-bold text-gray-900">KYC Document</h2>
             <div className="flex -space-x-2">
-              <img
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop"
+              <img 
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" 
                 alt="User 1"
                 className="w-8 h-8 rounded-full border-2 border-white object-cover"
               />
@@ -188,7 +210,7 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
             </div>
 
             {/* Passport */}
-            <div className="bg-gray-300 rounded-lg p-8 flex items-center justify-center min-h-[180px]">
+            <div className="bg-gray-300 rounded-lg p-8 flex items-center justify-center min-h-[280px]">
               <div className="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg shadow-lg p-6 w-full max-w-md border-4 border-orange-400">
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center">
@@ -202,7 +224,7 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
                     <div className="text-white text-xs font-bold">⚖️</div>
                   </div>
                 </div>
-
+                
                 <div className="flex gap-4 mb-3">
                   <div className="w-24 h-28 bg-blue-100 rounded border-2 border-gray-400 flex items-center justify-center">
                     <div className="w-20 h-24 bg-blue-200 rounded-full"></div>
@@ -250,6 +272,6 @@ const CustomerDetailsPage = ({ customer, onBack, onViewOrderDetails }) => {
       </div>
     </div>
   );
-};
+}
 
 export default CustomerDetailsPage;

@@ -17,27 +17,182 @@
     "passwordHint": "Password: 12345",
     "demoAccountsNote": "Demo accounts will be created automatically on first login."
   },
-  "dashboard": {
+"dashboard": {
     "admin": {
       "title": "Admin Dashboard",
       "welcome": "Welcome back, Administrator",
       "fullAccess": "Full Access",
-      "overview": "Dashboard Overview",
-      "overviewDescription": "Monitor your platform performance and key metrics",
-      "stats": {
-        "active-users": "Active User",
-        "total-jobs": "Total Jobs",
-        "revenue": "Revenue",
-        "complaints": "Complaints",
-        "tickets": "Tickets",
-        "ticket": "Ticket"
-      },
-      "recentActivity": "Recent User Activity",
-      "revenueChart": "Last 7 days revenue"
+      "overview": "Overview",
+      "overviewDescription": "Welcome to your admin dashboard. Use the sidebar to navigate between different sections."
     },
     "employee": {
-      "title": "Employee Dashboard",
-      "welcome": "Welcome back, Employee"
+      "title": {
+        "dashPageTitle": " Dashboard Overview",
+        "customPageTitle": "Customer Management",
+        "orderPageTitle": "Orders Management",
+        "paymentPageTitle": "Payment Management",
+        "supportPageTitle": "Support Management"
+      },
+      "subTitle": {
+        "dashpageSub": "Monitor Your customer Service Performance",
+        "custompageSub": "Manage customer registration and profile setup",
+        "orderpageSub": "Create, reschedule, and manage customer orders",
+        "paymentpageSub": "Handle payments,discounts and billing issues",
+        "supportpageSub": "Create and manage support tickets and escalations"
+      },
+      "table": {
+        "serviceName": "Service/name",
+        "contact": "Contact",
+        "location": "Location",
+        "served": "Served BY",
+        "progress": "Progress",
+        "priority": "Priority",
+        "action": "Action",
+        "tableTitle": "Recent Business Activity",
+        "orderIdName": "Order Id/Name",
+        "assignTo": "Assign To",
+        "serviceDate": "Service Date",
+        "payment": "Payment",
+        "discount": "Discount",
+        "outstanding": "Outstanding",
+        "searchField": "Search here...",
+        "recentCustomer": "Recent Customer",
+        "recentTransaction": " Recent Transaction",
+        "tableIssues": "Issues",
+        "tableDate": "Date"
+     
+      },
+      "button": {
+        "registerNewCustomer": "Register New Customer",
+        "assistProfile": "Assist in Profile Setup",
+        "reportAnalysis": "Report Analysis",
+        "createServiceRequest": "Create new Service Request",
+        "cancel": "Cancel/Modify Order",
+        "reshedule": "Reshedule Order",
+        "collectPayment": "Collect Payment",
+        "discount": "Applied Credits/Discount",
+        "billing": "Resolve Billing Issues",
+        "supportCreateTicket": "Create SUPPORT TICKET",
+        "supportEscalate": "Escalate to technical team"
+      },
+      "modal": {
+        "collectTitle": "Collect Payment",
+        "customerLabel": "Customer",
+        "customerPlaceholder": "Enter customer name or order ID",
+        "amountLabel": "Amount",
+        "amountPlaceholder": "$00.00",
+        "paymentMethodLabel": "Payment Method",
+        "paymentMethodOption": "Credit card",
+        "notesLabel": "Notes",
+        "notesPlaceholder": "Add payment notes",
+        "processButton": "Process Payment",
+        "applyTitle": "Apply Credits / Discounts",
+        "applyCustomerPlaceholder": "Enter customer name or order ID",
+        "applyDiscountTypeLabel": "Discount Type",
+        "applyDiscountTypeOption1": "Percentage Discount",
+        "applyDiscountTypeOption2": "Amount",
+        "applyAmountLabel": "Amount",
+        "applyAmountPlaceholder": "$00.00",
+        "applyNotesPlaceholder": "Add payment notes",
+        "applyButton": "Apply Discount",
+        "resolveTitle": "Resolve Billing Issues",
+        "resolveCustomerPlaceholder": "Enter customer name or order ID",
+        "resolveIssueTypeLabel": "Issues Type",
+        "resolveIssueTypeOption1": "Incorrect Charge",
+        "resolveIssueTypeOption2": "Payment Failed",
+        "resolveIssueTypeOption3": "Refund Request",
+        "resolveIssueTypeOption4": "Duplicate Charge",
+        "resolveIssueTypeOption5": "Billing Address Issue",
+        "resolveTransactionIdLabel": "Transaction ID",
+        "resolveTransactionIdPlaceholder": "Enter Transaction ID (if applicable)",
+        "resolveNotesPlaceholder": "Add payment notes",
+        "resolveButton": "Resolve Issue",
+        "ticketCustomerLabel": "Customer *",
+        "ticketCustomerPlaceholder": "Enter customer name or phone number",
+        "ticketPriorityLabel": "Priority",
+        "ticketPriorityOption1": "Low",
+        "ticketPriorityOption2": "Medium",
+        "ticketPriorityOption3": "High",
+        "ticketCategoryLabel": "Category",
+        "ticketCategoryOption1": "Technical Issue",
+        "ticketCategoryOption2": "Billing Issue",
+        "ticketCategoryOption3": "Other",
+        "ticketIssueTitleLabel": "Issue Title *",
+        "ticketIssueTitlePlaceholder": "Brief description of the issue",
+        "ticketServiceTypeLabel": "Service Type",
+        "ticketServiceTypeOption1": "Mapping & Surveying",
+        "ticketServiceTypeOption2": "Installation",
+        "ticketServiceTypeOption3": "Maintenance",
+        "ticketIssueDescriptionLabel": "Issue Description *",
+        "ticketIssueDescriptionPlaceholder": "Detailed description of the customer's issue...",
+        "ticketCreateButton": "Create Ticket"
+      },
+      "pages": {
+        "dashboard": {
+          "dropDown": {
+            "last7days": "Last 7 days",
+            "last30days": "Last 30 days",
+            "last60days": "Last 60 days",
+            "last90days": "Last 90 days",
+            "last6months": "Last 6 months",
+            "last12months": "Last 12 months",
+            "overview": "overview"
+          },
+          "card": {
+            "1st": "Total Customers",
+            "2nd": "Active Orders",
+            "3rd": "Pending Payments",
+            "4th": "Open Tickets",
+            "5th": "Completed Orders",
+            "6th": "Canceled Orders"
+          }
+        },
+        "order": {
+          "modal": {
+            "createServiceRequest": "Create Service Request",
+            "customer": "Customer",
+            "enterCustomerNameOrPhone": "Enter customer name or phone number",
+            "serviceType": "Service Type*",
+            "mappingSurveying": "Mapping & Surveying",
+            "preferredDate": "Preferred Date",
+            "dateFormat": "mm/dd/yyyy",
+            "preferredTime": "Preferred Time",
+            "timeFormat": "HH:MM AM - 12:00 PM",
+            "specialInstruction": "Special Instruction"
+          },
+          "rescheduleServiceOrder": {
+            "title": "Reschedule Service Order",
+            "orderId": "Order ID",
+            "customerName": "Enter customer name or phone number",
+            "serviceType": "Service Type*",
+            "mappingSurveying": "Mapping & Surveying",
+            "preferredDate": "Preferred Date",
+            "dateFormat": "mm/dd/yyyy",
+            "preferredTime": "Preferred Time",
+            "timeFormat": "HH:MM AM - 12:00 PM",
+            "specialInstruction": "Any special instructions or requirements...",
+            "createRequest": "Create Request"
+          },
+
+          "cancelServiceOrder": {
+            "title": "Cancel Service Order",
+            "orderId": "Order ID",
+            "customerName": "Enter customer name or phone number",
+            "action": "Action*",
+            "mappingSurveying": "Mapping & Surveying",
+            "reason": "Reason",
+            "specialInstruction": "Any special instructions or requirements...",
+            "cancel": "Cancel"
+          }
+        },
+        "payment": {
+          "card": {
+            "refundProcessed": "Refund Processed",
+            "pendingPayments": "Pending Payments",
+            "todaysCollections": "Today's Collections"
+          }
+        }
+      }
     },
     "fieldAgent": {
       "title": "Field Agent Dashboard",
@@ -61,12 +216,11 @@
       "complaints": "Complaints"
     },
     "employee": {
-      "myTasks": "My Tasks",
-      "schedule": "Schedule",
-      "reports": "Reports",
-      "profile": "Profile",
-      "messages": "Messages",
-      "training": "Training"
+      "dashboard": "Dashboard",
+      "customer": "Customer",
+      "orders": "Orders",
+      "payments": "Paypents",
+      "support": "Support"
     },
     "fieldAgent": {
       "myAssignments": "My Assignments",
