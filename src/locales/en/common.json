@@ -154,12 +154,9 @@
       "reports": "Reports"
     },
     "marketing": {
-      "analytics": "Analytics",
       "campaigns": "Campaigns",
-      "audience": "Audience",
-      "socialMedia": "Social Media",
-      "emailMarketing": "Email Marketing",
-      "contentManagement": "Content Management"
+      "leadManagement"  :"Lead Management",
+      "analytics": "Analytics"
     }
   },
   "stats": {

@@ -189,10 +189,7 @@
     "marketing": {
       "analytics": "विश्लेषण",
       "campaigns": "अभियान",
-      "audience": "दर्शक",
-      "socialMedia": "सोशल मीडिया",
-      "emailMarketing": "ईमेल मार्केटिंग",
-      "contentManagement": "सामग्री प्रबंधन"
+      "leadManagement": "लीड प्रबंधन"
     }
   },
 
