@@ -92,9 +92,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-gray-100 shadow-lg transform transition-transform duration-300 ease-in-out
-        lg:translate-x-0 lg:static lg:inset-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        className={`bg-white shadow-lg transform ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 overflow-y-auto`}
       >
         <div className='flex flex-col h-full'>
           {/* Menu Items */}

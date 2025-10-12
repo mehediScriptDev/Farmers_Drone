@@ -1,16 +1,27 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Header } from './Header';
-import { Footer } from './Footer';
+import { useAuth } from '../../hooks/useAuth';
+import UserNav from './UserNav';
+import Footer from './Footer';
+import { useLocation } from 'react-router';
+import { Outlet } from 'react-router-dom';
+
 
 export const Layout = () => {
+  const {user} = useAuth()
+  const location = useLocation();
+
   return (
     <div className='flex flex-col min-h-screen bg-gray-50 w-full'>
-      <Header />
+      {user? <Header/>:<UserNav/>}
       <main className='flex-grow w-full flex flex-col'>
-        <Outlet />
+        <Outlet/>
       </main>
-      <Footer />
+      {/* {user? "":<Footer/>} */}
+      {!user && location.pathname !== '/loginpage' && location.pathname !== '/login'? <Footer/> : null}
     </div>
   );
 };
+
+

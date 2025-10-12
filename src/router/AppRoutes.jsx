@@ -55,6 +55,11 @@ import {
   PrivateMarketingRoute,
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
+import MainLayout from './../LandingPageUI/Layout/MainLayout';
+import Services from './../LandingPageUI/Pages/Services';
+import About from './../LandingPageUI/Pages/About';
+import Blog from './../LandingPageUI/Pages/Blog';
+import Contact  from './../LandingPageUI/Pages/Contact';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -63,20 +68,28 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <MainLayout />,
       },
       {
-        path: '/login',
-        element: <LoginPage />,
+        path: '/services',
+        element: <Services />,
       },
       {
-        path: '/unauthorized',
-        element: <NotAuthorizedPage />,
+        path: '/about',
+        element: <About />,
       },
       {
-        path: '/dashboard',
-        element: <RoleBasedRedirect />,
+        path: '/blog',
+        element: <Blog />,
       },
+      {
+        path: '/contact',
+        element: <Contact/>,
+      },
+      {
+        path: 'login',
+        element: <LoginPage/>
+      }
     ],
   },
   {
@@ -123,6 +136,7 @@ const AppRoutes = createBrowserRouter([
         path: 'users',
         element: <UserManagement />,
       },
+      
     ],
   },
   {
@@ -238,6 +252,18 @@ const AppRoutes = createBrowserRouter([
         element: <Audience />,
       },
     ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <RoleBasedRedirect />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/unauthorized',
+    element: <NotAuthorizedPage />,
   },
   {
     path: '*',
