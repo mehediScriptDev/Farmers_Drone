@@ -1,0 +1,243 @@
+{
+  "navigation": {
+    "dashboard": "डैशबोर्ड",
+    "login": "लॉगिन",
+    "logout": "लॉगआउट",
+    "getStarted": "शुरू करें",
+    "goToDashboard": "डैशबोर्ड पर जाएं"
+  },
+  "stats": {
+    "totalUsers": "कुल उपयोगकर्ता",
+    "activeSessions": "सक्रिय सत्र",
+    "totalRevenue": "कुल आय",
+    "openComplaints": "खुली शिकायतें",
+    "activeUser": "सक्रिय उपयोगकर्ता",
+    "totalJobs": "कुल नौकरियां",
+    "revenue": "आय",
+    "complaints": "शिकायतें",
+    "ticket": "टिकट",
+    "lastSevenDaysRevenue": "पिछले 7 दिनों की आय",
+    "recentUserActivity": "हाल की उपयोगकर्ता गतिविधि"
+  },
+  "pagination": {
+    "previous": "पिछला",
+    "next": "अगला",
+    "showing": "दिखा रहे हैं",
+    "of": "में से",
+    "users": "उपयोगकर्ता"
+  },
+  "table": {
+    "headers": {
+      "user": "उपयोगकर्ता",
+      "role": "भूमिका",
+      "jobTitle": "काम का शीर्षक",
+      "status": "स्थिति",
+      "lastActive": "अंतिम सक्रिय",
+      "actions": "कार्रवाई"
+    },
+    "status": {
+      "completed": "पूरा हो गया",
+      "inProgress": "प्रगति में",
+      "notStarted": "शुरू नहीं हुआ"
+    }
+  },
+  "auth": {
+    "welcomeBack": "वापस स्वागत है",
+    "signInToAccount": "अपने खाते में साइन इन करें",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "signIn": "साइन इन",
+    "signingIn": "साइन इन हो रहा है...",
+    "demoAccounts": "डेमो खाते",
+    "passwordHint": "पासवर्ड: 12345",
+    "demoAccountsNote": "डेमो खाते पहली लॉगिन पर स्वचालित रूप से बनाए जाएंगे।"
+  },
+  "dashboard": {
+    "admin": {
+      "title": "एडमिन डैशबोर्ड",
+      "welcome": "वापसी पर स्वागत है, प्रशासक",
+      "fullAccess": "पूर्ण पहुंच",
+      "overview": "डैशबोर्ड अवलोकन",
+      "overviewDescription": "अपने प्लेटफॉर्म प्रदर्शन और मुख्य मेट्रिक्स की निगरानी करें",
+      "stats": {
+        "active-users": "सक्रिय उपयोगकर्ता",
+        "total-jobs": "कुल नौकरियां",
+        "revenue": "आय",
+        "complaints": "शिकायतें",
+        "tickets": "टिकट",
+        "ticket": "टिकट"
+      },
+      "recentActivity": "हाल की उपयोगकर्ता गतिविधि",
+      "revenueChart": "पिछले 7 दिनों की आय"
+    },
+    "employee": {
+      "title": "कर्मचारी डैशबोर्ड",
+      "welcome": "वापसी पर स्वागत है, कर्मचारी"
+    },
+    "fieldAgent": {
+      "title": "फील्ड एजेंट डैशबोर्ड",
+      "welcome": "वापसी पर स्वागत है, फील्ड एजेंट"
+    },
+    "marketing": {
+      "title": "मार्केटिंग डैशबोर्ड",
+      "welcome": "वापसी पर स्वागत है, मार्केटिंग टीम"
+    }
+  },
+  "sidebar": {
+    "prasadDashboard": "डेमो लोगो",
+    "admin": {
+      "droneOperator": "ड्रोन ऑपरेटर",
+      "userManagement": "उपयोगकर्ता प्रबंधन",
+      "employeeManagement": "कर्मचारी प्रबंधन",
+      "fieldAgent": "फील्ड एजेंट",
+      "jobs": "नौकरियां",
+      "paymentsManagement": "भुगतान प्रबंधन",
+      "reports": "रिपोर्ट",
+      "complaints": "शिकायतें"
+    },
+    "employee": {
+      "myTasks": "मेरे कार्य",
+      "schedule": "अनुसूची",
+      "reports": "रिपोर्ट",
+      "profile": "प्रोफाइल",
+      "messages": "संदेश",
+      "training": "प्रशिक्षण"
+    },
+    "fieldAgent": {
+      "myAssignments": "मेरे असाइनमेंट",
+      "locationTracking": "स्थान ट्रैकिंग",
+      "routeOptimization": "मार्ग अनुकूलन",
+      "vehicleManagement": "वाहन प्रबंधन",
+      "photoCapture": "फोटो कैप्चर",
+      "reports": "रिपोर्ट"
+    },
+    "marketing": {
+      "analytics": "विश्लेषण",
+      "campaigns": "अभियान",
+      "audience": "दर्शक",
+      "socialMedia": "सोशल मीडिया",
+      "emailMarketing": "ईमेल मार्केटिंग",
+      "contentManagement": "सामग्री प्रबंधन"
+    }
+  },
+
+  "home": {
+    "title": "प्रसाद डैशबोर्ड में आपका स्वागत है",
+    "subtitle": "आधुनिक डिज़ाइन और शक्तिशाली सुविधाओं के साथ आपके संगठन के प्रबंधन के लिए एक व्यापक भूमिका-आधारित डैशबोर्ड एप्लिकेशन।",
+    "roleBasedAccess": "भूमिका-आधारित पहुंच नियंत्रण",
+    "roleBasedDescription": "आपके संगठन में प्रत्येक भूमिका के लिए अनुकूलित विभिन्न डैशबोर्ड अनुभव",
+    "features": {
+      "roleBasedAccess": "भूमिका-आधारित पहुंच",
+      "roleBasedDescription": "विभिन्न भूमिकाओं के लिए अलग डैशबोर्ड",
+      "modernDesign": "आधुनिक डिज़ाइन",
+      "modernDescription": "स्वच्छ और सहज उपयोगकर्ता इंटरफ़ेस",
+      "secure": "सुरक्षित",
+      "secureDescription": "Firebase प्रमाणीकरण और सुरक्षा",
+      "responsive": "उत्तरदायी",
+      "responsiveDescription": "सभी डिवाइसेस पर पूर्ण रूप से काम करता है"
+    }
+  },
+  "roles": {
+    "admin": "एडमिन",
+    "adminDescription": "पूर्ण सिस्टम नियंत्रण और उपयोगकर्ता प्रबंधन",
+    "marketing": "मार्केटिंग",
+    "marketingDescription": "अभियान विश्लेषण और ग्राहक अंतर्दृष्टि",
+    "employee": "कर्मचारी",
+    "employeeDescription": "कार्य प्रबंधन और व्यक्तिगत कार्यक्षेत्र",
+    "fieldAgent": "फील्ड एजेंट",
+    "fieldAgentDescription": "स्थान ट्रैकिंग और फील्ड रिपोर्टिंग"
+  },
+  "languages": {
+    "english": "English",
+    "hindi": "हिंदी"
+  },
+  "fieldAgent": {
+    "fieldAgent": "फील्ड एजेंट",
+    "dashboard": "डैशबोर्ड",
+    "assignments": "असाइनमेंट",
+    "location": "स्थान",
+    "photos": "फोटो",
+    "reports": "रिपोर्ट",
+    "settings": "सेटिंग्स",
+    "welcome": "वापसी पर स्वागत है, फील्ड एजेंट",
+    "todayAssignments": "आज के असाइनमेंट",
+    "completedTasks": "पूर्ण कार्य",
+    "pendingTasks": "लंबित कार्य",
+    "myAssignments": "मेरे असाइनमेंट",
+    "visitClient": "क्लाइंट A का दौरा करें",
+    "clientAddress": "123 बिजनेस स्ट्रीट, मुंबई",
+    "surveyArea": "क्षेत्र B का सर्वेक्षण करें",
+    "surveyLocation": "सेक्टर 15, नोएडा",
+    "pending": "लंबित",
+    "completed": "पूर्ण",
+    "locationTracking": "स्थान ट्रैकिंग",
+    "currentLocation": "वर्तमान स्थान:",
+    "mapPlaceholder": "[मानचित्र यहाँ प्रदर्शित होगा]",
+    "photoGallery": "फोटो गैलरी",
+    "fieldReports": "फील्ड रिपोर्ट",
+    "reportDate": "दिनांक",
+    "reportType": "प्रकार",
+    "status": "स्थिति",
+    "siteVisit": "साइट विज़िट",
+    "submitted": "जमा किया गया",
+    "notificationSettings": "सूचना सेटिंग्स",
+    "emailNotifications": "ईमेल सूचनाएं",
+    "pushNotifications": "पुश सूचनाएं"
+  },
+  "marketing": {
+    "marketing": "मार्केटिंग",
+    "dashboard": "डैशबोर्ड",
+    "campaigns": "अभियान",
+    "analytics": "विश्लेषण",
+    "leads": "लीड्स",
+    "email": "ईमेल",
+    "settings": "सेटिंग्स",
+    "welcome": "वापसी पर स्वागत है, मार्केटिंग टीम",
+    "activeCampaigns": "सक्रिय अभियान",
+    "totalLeads": "कुल लीड्स",
+    "conversionRate": "कन्वर्जन दर",
+    "revenue": "राजस्व",
+    "recentCampaigns": "हाल के अभियान",
+    "summerSale": "समर सेल 2024",
+    "newProduct": "नया प्रोडक्ट लॉन्च",
+    "active": "सक्रिय",
+    "scheduled": "निर्धारित",
+    "topPerforming": "शीर्ष प्रदर्शन चैनल",
+    "emailMarketing": "ईमेल मार्केटिंग",
+    "socialMedia": "सोशल मीडिया",
+    "campaignManagement": "अभियान प्रबंधन",
+    "createCampaign": "अभियान बनाएं",
+    "campaignName": "अभियान का नाम",
+    "type": "प्रकार",
+    "performance": "प्रदर्शन",
+    "social": "सोशल",
+    "marketingAnalytics": "मार्केटिंग विश्लेषण",
+    "trafficSources": "ट्रैफिक स्रोत",
+    "conversionFunnel": "कन्वर्जन फ़नल",
+    "chartPlaceholder": "[चार्ट यहाँ प्रदर्शित होगा]",
+    "leadManagement": "लीड प्रबंधन",
+    "allLeads": "सभी लीड्स",
+    "newLeads": "नए लीड्स",
+    "qualified": "योग्य",
+    "leadName": "लीड का नाम",
+    "source": "स्रोत",
+    "score": "स्कोर",
+    "website": "वेबसाइट",
+    "contacted": "संपर्क किया गया",
+    "createEmail": "ईमेल बनाएं",
+    "sentEmails": "भेजे गए ईमेल",
+    "openRate": "खुलने की दर",
+    "clickRate": "क्लिक दर",
+    "defaultCampaignSettings": "डिफ़ॉल्ट अभियान सेटिंग्स",
+    "autoOptimize": "स्वचालित अनुकूलन अभियान",
+    "trackConversions": "कन्वर्जन ट्रैक करें"
+  },
+  "common": {
+    "logout": "लॉगआउट",
+    "pageNotFound": "पेज नहीं मिला",
+    "error": "त्रुटि",
+    "retry": "पुनः प्रयास करें",
+    "noData": "कोई डेटा उपलब्ध नहीं",
+    "manageAndMonitor": "प्रबंधन और निगरानी"
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "navigation": {
+    "dashboard": "Dashboard",
+    "login": "Login",
+    "logout": "Logout",
+    "getStarted": "Get Started",
+    "goToDashboard": "Go to Dashboard"
+  },
+  "auth": {
+    "welcomeBack": "Welcome Back",
+    "signInToAccount": "Sign in to your account",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "demoAccounts": "Demo Accounts",
+    "passwordHint": "Password: 12345",
+    "demoAccountsNote": "Demo accounts will be created automatically on first login."
+  },
+  "dashboard": {
+    "admin": {
+      "title": "Admin Dashboard",
+      "welcome": "Welcome back, Administrator",
+      "fullAccess": "Full Access",
+      "overview": "Dashboard Overview",
+      "overviewDescription": "Monitor your platform performance and key metrics",
+      "stats": {
+        "active-users": "Active User",
+        "total-jobs": "Total Jobs",
+        "revenue": "Revenue",
+        "complaints": "Complaints",
+        "tickets": "Tickets",
+        "ticket": "Ticket"
+      },
+      "recentActivity": "Recent User Activity",
+      "revenueChart": "Last 7 days revenue"
+    },
+    "employee": {
+      "title": "Employee Dashboard",
+      "welcome": "Welcome back, Employee"
+    },
+    "fieldAgent": {
+      "title": "Field Agent Dashboard",
+      "welcome": "Welcome back, Field Agent"
+    },
+    "marketing": {
+      "title": "Marketing Dashboard",
+      "welcome": "Welcome back, Marketing Team"
+    }
+  },
+  "sidebar": {
+    "prasadDashboard": "Demo Logo",
+    "admin": {
+      "droneOperator": "Drone operator",
+      "userManagement": "User management",
+      "employeeManagement": "Employee management",
+      "fieldAgent": "Field agent",
+      "jobs": "Jobs",
+      "paymentsManagement": "Payments management",
+      "reports": "Reports",
+      "complaints": "Complaints"
+    },
+    "employee": {
+      "myTasks": "My Tasks",
+      "schedule": "Schedule",
+      "reports": "Reports",
+      "profile": "Profile",
+      "messages": "Messages",
+      "training": "Training"
+    },
+    "fieldAgent": {
+      "myAssignments": "My Assignments",
+      "locationTracking": "Location Tracking",
+      "routeOptimization": "Route Optimization",
+      "vehicleManagement": "Vehicle Management",
+      "photoCapture": "Photo Capture",
+      "reports": "Reports"
+    },
+    "marketing": {
+      "analytics": "Analytics",
+      "campaigns": "Campaigns",
+      "audience": "Audience",
+      "socialMedia": "Social Media",
+      "emailMarketing": "Email Marketing",
+      "contentManagement": "Content Management"
+    }
+  },
+  "stats": {
+    "totalUsers": "Total Users",
+    "activeSessions": "Active Sessions",
+    "totalRevenue": "Total Revenue",
+    "openComplaints": "Open Complaints",
+    "activeUser": "Active User",
+    "totalJobs": "Total Jobs",
+    "revenue": "Revenue",
+    "complaints": "Complaints",
+    "ticket": "Ticket",
+    "lastSevenDaysRevenue": "Last 7 days revenue",
+    "recentUserActivity": "Recent User Activity"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "showing": "Showing",
+    "of": "of",
+    "users": "Users"
+  },
+  "table": {
+    "headers": {
+      "user": "User",
+      "role": "Role",
+      "jobTitle": "Job title",
+      "status": "Status",
+      "lastActive": "Last Active",
+      "actions": "Actions"
+    },
+    "status": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "notStarted": "Not started"
+    }
+  },
+  "home": {
+    "title": "Welcome to Prasad Dashboard",
+    "subtitle": "A comprehensive role-based dashboard application for managing your organization with modern design and powerful features.",
+    "roleBasedAccess": "Role-Based Access Control",
+    "roleBasedDescription": "Different dashboard experiences tailored for each role in your organization",
+    "features": {
+      "roleBasedAccess": "Role-Based Access",
+      "roleBasedDescription": "Different dashboards for different roles",
+      "modernDesign": "Modern Design",
+      "modernDescription": "Clean and intuitive user interface",
+      "secure": "Secure",
+      "secureDescription": "Firebase authentication and security",
+      "responsive": "Responsive",
+      "responsiveDescription": "Works perfectly on all devices"
+    }
+  },
+  "roles": {
+    "admin": "Admin",
+    "adminDescription": "Full system control and user management",
+    "marketing": "Marketing",
+    "marketingDescription": "Campaign analytics and customer insights",
+    "employee": "Employee",
+    "employeeDescription": "Task management and personal workspace",
+    "fieldAgent": "Field Agent",
+    "fieldAgentDescription": "Location tracking and field reporting"
+  },
+  "languages": {
+    "english": "English",
+    "hindi": "हिंदी"
+  },
+  "fieldAgent": {
+    "fieldAgent": "Field Agent",
+    "dashboard": "Dashboard",
+    "assignments": "Assignments",
+    "location": "Location",
+    "photos": "Photos",
+    "reports": "Reports",
+    "settings": "Settings",
+    "welcome": "Welcome back, Field Agent",
+    "todayAssignments": "Today's Assignments",
+    "completedTasks": "Completed Tasks",
+    "pendingTasks": "Pending Tasks",
+    "myAssignments": "My Assignments",
+    "visitClient": "Visit Client A",
+    "clientAddress": "123 Business Street, Mumbai",
+    "surveyArea": "Survey Area B",
+    "surveyLocation": "Sector 15, Noida",
+    "pending": "Pending",
+    "completed": "Completed",
+    "locationTracking": "Location Tracking",
+    "currentLocation": "Current Location:",
+    "mapPlaceholder": "[Map will be displayed here]",
+    "photoGallery": "Photo Gallery",
+    "fieldReports": "Field Reports",
+    "reportDate": "Date",
+    "reportType": "Type",
+    "status": "Status",
+    "siteVisit": "Site Visit",
+    "submitted": "Submitted",
+    "notificationSettings": "Notification Settings",
+    "emailNotifications": "Email Notifications",
+    "pushNotifications": "Push Notifications"
+  },
+  "marketing": {
+    "marketing": "Marketing",
+    "dashboard": "Dashboard",
+    "campaigns": "Campaigns",
+    "analytics": "Analytics",
+    "leads": "Leads",
+    "email": "Email",
+    "settings": "Settings",
+    "welcome": "Welcome back, Marketing Team",
+    "activeCampaigns": "Active Campaigns",
+    "totalLeads": "Total Leads",
+    "conversionRate": "Conversion Rate",
+    "revenue": "Revenue",
+    "recentCampaigns": "Recent Campaigns",
+    "summerSale": "Summer Sale 2024",
+    "newProduct": "New Product Launch",
+    "active": "Active",
+    "scheduled": "Scheduled",
+    "topPerforming": "Top Performing Channels",
+    "emailMarketing": "Email Marketing",
+    "socialMedia": "Social Media",
+    "campaignManagement": "Campaign Management",
+    "createCampaign": "Create Campaign",
+    "campaignName": "Campaign Name",
+    "type": "Type",
+    "performance": "Performance",
+    "social": "Social",
+    "marketingAnalytics": "Marketing Analytics",
+    "trafficSources": "Traffic Sources",
+    "conversionFunnel": "Conversion Funnel",
+    "chartPlaceholder": "[Chart will be displayed here]",
+    "leadManagement": "Lead Management",
+    "allLeads": "All Leads",
+    "newLeads": "New Leads",
+    "qualified": "Qualified",
+    "leadName": "Lead Name",
+    "source": "Source",
+    "score": "Score",
+    "website": "Website",
+    "contacted": "Contacted",
+    "createEmail": "Create Email",
+    "sentEmails": "Sent Emails",
+    "openRate": "Open Rate",
+    "clickRate": "Click Rate",
+    "defaultCampaignSettings": "Default Campaign Settings",
+    "autoOptimize": "Auto-optimize campaigns",
+    "trackConversions": "Track conversions"
+  },
+  "common": {
+    "logout": "Logout",
+    "pageNotFound": "Page not found",
+    "error": "Error",
+    "retry": "Retry",
+    "noData": "No data available",
+    "manageAndMonitor": "Manage and monitor"
+  }
+}
