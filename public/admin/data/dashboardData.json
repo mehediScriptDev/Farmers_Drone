@@ -109,6 +109,42 @@
         "status": "Rejected",
         "statusType": "error",
         "lastActive": "28 minutes ago"
+      },
+      {
+        "id": 5,
+        "user": "Jacob Jones",
+        "role": "Customer",
+        "jobTitle": "Drone Service Not Arriving on Scheduled Time",
+        "status": "Completed",
+        "statusType": "success",
+        "lastActive": "2 minutes ago"
+      },
+      {
+        "id": 6,
+        "user": "Floyd Miles",
+        "role": "Operator",
+        "jobTitle": "Inaccurate Information in Soil Analysis Results",
+        "status": "In Progress",
+        "statusType": "warning",
+        "lastActive": "22 minutes ago"
+      },
+      {
+        "id": 7,
+        "user": "Dianne Russell",
+        "role": "Customer",
+        "jobTitle": "Questioning the Accuracy of Crop Monitoring Reports",
+        "status": "In Progress",
+        "statusType": "warning",
+        "lastActive": "1 hour ago"
+      },
+      {
+        "id": 8,
+        "user": "Theresa Webb",
+        "role": "Operator",
+        "jobTitle": "Drone Service Not Arriving on Scheduled Time",
+        "status": "Rejected",
+        "statusType": "error",
+        "lastActive": "28 minutes ago"
       }
     ],
     "pagination": {

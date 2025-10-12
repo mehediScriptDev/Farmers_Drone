@@ -60,6 +60,7 @@ import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
 import Blog from './../LandingPageUI/Pages/Blog';
 import Contact  from './../LandingPageUI/Pages/Contact';
+import Leads from './../components/marketing/Leads';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -236,8 +237,8 @@ const AppRoutes = createBrowserRouter([
         element: <Campaigns />,
       },
       {
-        path: 'content-management',
-        element: <ContentManagement />,
+        path: 'leads',
+        element: <Leads />,
       },
       {
         path: 'email-marketing',

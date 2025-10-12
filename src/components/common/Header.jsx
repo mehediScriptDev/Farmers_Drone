@@ -28,8 +28,8 @@ export const Header = () => {
           to={'/'}
           className="flex items-center space-x-2"
         >
-          <span className="text-xs font-bold text-gray-800">
-            <img src={logo} alt="" />
+          <span className="text-xs ml-10 sm:ml-4 lg:ml-0  w-24 lg:w-32 font-bold text-gray-800">
+            <img src={logo} alt="logo" />
           </span>
         </Link>
         <div className="flex items-center space-x-2 sm:space-x-5">
