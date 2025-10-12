@@ -2,19 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import {
-  LayoutDashboard,
-  Plane,
-  Users,
-  UserCheck,
-  MapPin,
-  Briefcase,
-  CreditCard,
-  BarChart3,
-  AlertTriangle,
-} from "lucide-react";
 import {FiUsers , FiTarget } from "react-icons/fi";
 import { FaChartBar } from "react-icons/fa6";
+import { BiGridAlt } from "react-icons/bi";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -25,7 +15,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     {
       id: "dashboard",
       label: t("navigation.dashboard"),
-      icon: LayoutDashboard,
+      icon: BiGridAlt,
       path: "", // This will be the index route
     },
     {
@@ -43,7 +33,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     {
       id: "analytics",
       label: t("sidebar.marketing.analytics"),
-      icon: UserCheck,
+      icon: FaChartBar,
       path: "analytics",
     }
   ];
