@@ -9,18 +9,18 @@ export const DashboardLayout = () => {
   const { user } = useAuth();
 
   return (
-    <div className='flex h-screen bg-gray-50'>
-      {user?.role === 'admin' && (
-        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      )}
-      <div className='flex-1 flex flex-col overflow-hidden'>
-        <Header />
-        <main className='flex-1 overflow-x-hidden overflow-y-auto bg-gray-100'>
-          <div className='p-6'>
-            <Outlet />
-          </div>
-        </main>
+    <div className="flex flex-col h-screen bg-gray-50">
+  <Header /> {/* Navbar at the top */}
+  <div className="flex flex-1 overflow-hidden">
+    {user?.role === 'admin' && (
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    )}
+    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+      <div className="w-full p-6">
+        <Outlet />
       </div>
-    </div>
+    </main>
+  </div>
+</div>
   );
 };

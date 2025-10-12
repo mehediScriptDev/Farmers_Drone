@@ -11,6 +11,8 @@ import {
   HiMenuAlt3,
   HiX,
 } from 'react-icons/hi';
+import Campaigns from './Campaigns';
+import Leads from './Leads';
 
 const MarketingDashboard = () => {
   const { t } = useTranslation();
@@ -110,70 +112,7 @@ const MarketingDashboard = () => {
         );
       case 'campaigns':
         return (
-          <div className='space-y-6'>
-            <div className='flex justify-between items-center'>
-              <h2 className='text-2xl font-bold text-gray-900'>
-                {t('marketing.campaignManagement')}
-              </h2>
-              <button className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700'>
-                {t('marketing.createCampaign')}
-              </button>
-            </div>
-            <div className='bg-white rounded-lg shadow overflow-hidden'>
-              <table className='min-w-full divide-y divide-gray-200'>
-                <thead className='bg-gray-50'>
-                  <tr>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.campaignName')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.type')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.status')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.performance')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
-                  <tr>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      {t('marketing.summerSale')}
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      {t('marketing.email')}
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-                        {t('marketing.active')}
-                      </span>
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      25.6%
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      {t('marketing.newProduct')}
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      {t('marketing.social')}
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800'>
-                        {t('marketing.scheduled')}
-                      </span>
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      --
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Campaigns/>
         );
       case 'analytics':
         return (
@@ -207,62 +146,7 @@ const MarketingDashboard = () => {
         );
       case 'leads':
         return (
-          <div className='space-y-6'>
-            <h2 className='text-2xl font-bold text-gray-900'>
-              {t('marketing.leadManagement')}
-            </h2>
-            <div className='bg-white rounded-lg shadow overflow-hidden'>
-              <div className='p-6 border-b border-gray-200'>
-                <div className='flex space-x-4'>
-                  <button className='px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700'>
-                    {t('marketing.allLeads')}
-                  </button>
-                  <button className='px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300'>
-                    {t('marketing.newLeads')}
-                  </button>
-                  <button className='px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300'>
-                    {t('marketing.qualified')}
-                  </button>
-                </div>
-              </div>
-              <table className='min-w-full divide-y divide-gray-200'>
-                <thead className='bg-gray-50'>
-                  <tr>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.leadName')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.source')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.score')}
-                    </th>
-                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                      {t('marketing.status')}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className='bg-white divide-y divide-gray-200'>
-                  <tr>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      Rahul Sharma
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      {t('marketing.website')}
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                      85/100
-                    </td>
-                    <td className='px-6 py-4 whitespace-nowrap'>
-                      <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800'>
-                        {t('marketing.contacted')}
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Leads/>
         );
       case 'email':
         return (
