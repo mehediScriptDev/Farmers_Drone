@@ -11,6 +11,7 @@ import RegistrationModal from './components/Modal/RegistrationModal';
 import { useTranslation } from 'react-i18next';
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from './components/Modal/AssistProfileSetupModal';
 import axiosInstance from '../../../config/axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 
 const Coustomerpage = () => {
@@ -20,6 +21,7 @@ const Coustomerpage = () => {
   const [error, setError] = useState(null);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
+   const navigate = useNavigate();
   
    const [mainModalOpen, setMainModalOpen] = useState(false);
     const [subModalType, setSubModalType] = useState(null);
@@ -131,7 +133,7 @@ const Coustomerpage = () => {
                 {t('dashboard.employee.button.assistProfile')}
               </button>
               <button
-                
+                onClick={() => navigate("/employee/report-analysis")}
                 className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.reportAnalysis')}

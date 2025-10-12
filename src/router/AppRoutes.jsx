@@ -55,6 +55,7 @@ import OrderManagementPage from '../components/employee/employdashboard/OrderMan
 import MessagePage from '../components/employee/employdashboard/MessagePage';
 import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
 import SupportPage from '../components/employee/employdashboard/SupportPage';
+import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 
 
 const AppRoutes = createBrowserRouter([
@@ -141,6 +142,10 @@ const AppRoutes = createBrowserRouter([
       {
         path:"customers",
         element:<Coustomerpage/>
+        
+      },{
+        path:"report-analysis",
+        element:<ReportAnalysisPage/>
       },
       {
         path:"orders",
