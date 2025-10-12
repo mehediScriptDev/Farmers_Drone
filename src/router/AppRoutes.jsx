@@ -8,7 +8,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 
 // Dashboard Components
 import AdminDashboard from '../components/admin/components/AdminDashboard';
-import EmployeeDashboard from '../components/employee/EmployeeDashboard';
+
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
 import MarketingDashboard from '../components/marketing/MarketingDashboard';
 
@@ -22,13 +22,6 @@ import PaymentsManagement from '../components/admin/components/PaymentsManagemen
 import Reports from '../components/admin/components/Reports';
 import UserManagement from '../components/admin/components/UserManagement';
 
-// Employee Components
-import Profile from '../components/employee/Profile';
-import EmployeeReports from '../components/employee/Reports';
-import Schedule from '../components/employee/Schedule';
-import Training from '../components/employee/Training';
-import Messages from '../components/employee/Messages';
-import MyTasks from '../components/employee/MyTasks';
 
 // Field Agent Components
 import FieldAgentReports from '../components/fieldAgent/Reports';
@@ -55,6 +48,8 @@ import {
   PrivateMarketingRoute,
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
+import { EmployDashBoardLayout } from '../components/employee/EmployDashBoardLayout';
+import Dashboard from '../components/employee/Dashboard';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -129,38 +124,14 @@ const AppRoutes = createBrowserRouter([
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-        <DashboardLayout />
+       <EmployDashBoardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
       {
         index: true,
-        element: <EmployeeDashboard />,
-      },
-      {
-        path: 'profile',
-        element: <Profile />,
-      },
-      {
-        path: 'reports',
-        element: <EmployeeReports />,
-      },
-      {
-        path: 'schedule',
-        element: <Schedule />,
-      },
-      {
-        path: 'training',
-        element: <Training />,
-      },
-      {
-        path: 'messages',
-        element: <Messages />,
-      },
-      {
-        path: 'tasks',
-        element: <MyTasks />,
-      },
+        element: <Dashboard />,
+      }
     ],
   },
   {
