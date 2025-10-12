@@ -28,6 +28,7 @@ const FieldAgentDashboard = () => {
   const [rank, setRank] = useState("Silver");
 
   const usersPerPage = 4;
+  const [searchTerm, setSearchTerm] = useState("");
 
   const ICONS = {
     PiUsersThreeBold: PiUsersThreeBold,
@@ -53,7 +54,9 @@ const FieldAgentDashboard = () => {
     const fetchAgentData = async () => {
       try {
         setLoading(true);
-        const data = await axiosInstance.get("/fieldAgent/data/fieldAgentData.json");
+        const data = await axiosInstance.get(
+          "/fieldAgent/data/fieldAgentData.json"
+        );
         setStatsData(data.data.statsData);
         setTableData(data.data.tableData);
       } catch (err) {
@@ -102,13 +105,42 @@ const FieldAgentDashboard = () => {
     return copy;
   }, [tableData, sortKey, sortDir]);
 
+
+  const filteredData = useMemo(() => {
+    if (!searchTerm.trim()) return sortedData;
+    const rx = new RegExp(
+      searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+      "i"
+    );
+
+    return sortedData.filter((row) => {
+      const haystacks = [
+        row.customerList,
+        row.role,
+        row.registrationCommission,
+        row.firstOrderCommission,
+        row.effectiveDate,
+        row.registrationDate,
+        row.customerType,
+        row.nextFollowUpDate,
+        row.serviceInterest,
+        row.quickActions,
+      ];
+      return haystacks.some((h) => rx.test((h ?? "").toString()));
+    });
+  }, [sortedData, searchTerm]);
+
   // Pagination based on sorted data
-  const totalUsers = sortedData.length;
+  const totalUsers = filteredData.length;
   const totalPages = Math.ceil(totalUsers / usersPerPage);
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = sortedData.slice(indexOfFirstUser, indexOfLastUser);
+  const currentUsers = filteredData.slice(indexOfFirstUser, indexOfLastUser);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   const handleSelect = (item) => {
@@ -209,8 +241,10 @@ const FieldAgentDashboard = () => {
                   </span>
                   <input
                     type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search"
-                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-xl  text-base"
+                    className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-xl text-base"
                   />
                 </div>
                 <div className="relative inline-block text-left">
