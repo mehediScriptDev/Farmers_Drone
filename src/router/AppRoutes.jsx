@@ -49,9 +49,10 @@ import {
   PrivateMarketingRoute,
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
-import DashBoard from '../components/marketing/components/DashBoard';
 import LeadManagment from '../components/marketing/components/LeadManagment';
 import Anylytics from '../components/marketing/components/Anylytics';
+import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
+import Campains from '../components/marketing/components/Campains';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -208,11 +209,11 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashBoard/>
+        element: <MarketingDashBoard/>
       },
       {
         path :"campaigns",
-        element : <div>camp</div>
+        element : <Campains/>
       },
       {
         path: "LeadManagment",
@@ -221,7 +222,6 @@ const AppRoutes = createBrowserRouter([
         path : "analytics",
         element : <Anylytics/>
       }
-     
     ],
   },
   {
