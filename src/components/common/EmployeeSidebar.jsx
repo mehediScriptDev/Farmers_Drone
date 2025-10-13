@@ -210,7 +210,6 @@ const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     label: t("sidebar.employee.dashboard"),
     icon: RiDashboardLine,
     path: "",
-    // এই matchPaths এ customer details ও order details এর রুটগুলি অন্তর্ভুক্ত করুন।
     matchPaths: ["/employee", "/employee/", "customers/:customerId", "order/:id"], 
   },
   {
@@ -218,7 +217,7 @@ const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     label: t("sidebar.employee.customer"),
     icon: PiUsersThreeBold,
     path: "customerspage",
-    // শুধুমাত্র কাস্টমার পেজ এবং রিপোর্ট পেজকে match করবে, ডিটেইলস পেজ নয়।
+    
     matchPaths: ["customerspage", "report-analysis"], 
   },
     {
@@ -251,8 +250,6 @@ const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     },
   ];
 
-  // Location change detect করে activeMenu update করো
-// EmployeeSidebar.jsx - useEffect hook
 useEffect(() => {
   const pathname = location.pathname;
 
