@@ -60,6 +60,7 @@ import LeadManagment from '../components/marketing/components/LeadManagment';
 import Anylytics from '../components/marketing/components/Anylytics';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
+import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -138,49 +139,52 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/employee',
-    element: (
-      <PrivateEmployeeRoute>
-        <DashboardLayout />
-      </PrivateEmployeeRoute>
-    ),
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      }, {
-
-        path: "customers/:customerId",
-        element: <CoustomerDetailsPage />
-
-      },
-      {
-        path: "customers",
-        element: <Coustomerpage />
-
-      },
-      {
-        path: "report-analysis",
-        element: <ReportAnalysisPage />
-      },
-      {
-        path: "orders",
-        element: <OrderManagementPage />
-      },
-      {
-        path: "payments",
-        element: <PaymentManagement />
-      }, {
-        path: "supports",
-        element: <SupportPage />
-      },
-      {
-        path: "messages",
-        element: <MessagePage />
-      }
-    ],
-  },
+ {
+  path: '/employee',
+  element: (
+    <PrivateEmployeeRoute>
+      <DashboardLayout />
+    </PrivateEmployeeRoute>
+  ),
+  children: [
+    {
+      index: true,
+      element: <Dashboard />,
+    },
+    {
+      path: "customers/:customerId",
+      element: <CoustomerDetailsPage />,
+    },
+    {
+      path: "customers/:customerId/order/:id",
+      element: <OrderDetailsPage />,
+    },
+    {
+      path: "customerspage",
+      element: <Coustomerpage />,
+    },
+    {
+      path: "report-analysis",
+      element: <ReportAnalysisPage />,
+    },
+    {
+      path: "orders",
+      element: <OrderManagementPage />,
+    },
+    {
+      path: "payments",
+      element: <PaymentManagement />,
+    },
+    {
+      path: "supports",
+      element: <SupportPage />,
+    },
+    {
+      path: "messages",
+      element: <MessagePage />,
+    },
+  ],
+},
   {
     path: '/field-agent',
     element: (

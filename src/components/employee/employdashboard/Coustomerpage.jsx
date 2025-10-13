@@ -103,7 +103,7 @@ const Coustomerpage = () => {
     );
 
   return (
-    <div className="flex-1 p-4 md:p-8">
+    <div className="flex-1 p-4 md:px-12 ">
       <div className="mb-6 md:mb-8">
         <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
           {t('dashboard.employee.title.customPageTitle')}

@@ -1,6 +1,8 @@
+
 import React, { useState, useRef } from "react";
 import { Star } from "lucide-react";
-import { FaPlay } from "react-icons/fa";
+import { FaArrowLeft, FaPlay } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 // ---------------- VideoCard Component ----------------
 function VideoCard({ src }) {
@@ -32,7 +34,7 @@ function VideoCard({ src }) {
           className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/50 transition"
         >
           <div className="flex items-center justify-center w-14 h-14 bg-white rounded-full shadow-lg">
-            <FaPlay className="text-black text-3xl ml-1 w-6 h-6" />
+            <FaPlay className="text-black text-3xl" />
           </div>
         </button>
       )}
@@ -41,9 +43,8 @@ function VideoCard({ src }) {
 }
 
 // ---------------- Main Component ----------------
-export default function OrderDetailsPage({ order, onBack }) {
-  // ---------------- State ----------------
-  const [orderData, setOrderData] = useState({
+export default function OrderDetailsPage() {
+  const [orderData] = useState({
     serviceOrderId: "#0123456789",
     customerOrderId: "#0123456789",
     basicSpecifics: [
@@ -62,8 +63,8 @@ export default function OrderDetailsPage({ order, onBack }) {
     rescheduling: {
       rescheduledBy: "Customer (self)",
       rescheduledDate: "23-sep-25",
-      rescheduleCount: "7 time",
-      RescheduleReason:
+      rescheduleCount: "7 times",
+      rescheduleReason:
         "Marine Drive, Netaji Subhash Chandra Bose Road, Churchgate, South Mumbai",
     },
     serviceMetrics: [
@@ -81,14 +82,14 @@ export default function OrderDetailsPage({ order, onBack }) {
     },
   });
 
-  const [images, setImages] = useState([
+  const [images] = useState([
     "https://images.unsplash.com/photo-1599328580087-15c9dab481f3?w=500&auto=format&fit=crop&q=60",
     "https://images.unsplash.com/photo-1609692029268-f9ba9b2a728b?w=500&auto=format&fit=crop&q=60",
     "https://images.unsplash.com/photo-1604129319050-36cc1107bead?w=500&auto=format&fit=crop&q=60",
     "https://plus.unsplash.com/premium_photo-1661917179706-33e305a4ee45?w=500&auto=format&fit=crop&q=60",
   ]);
 
-  const [videos, setVideos] = useState([
+  const [videos] = useState([
     "https://media.istockphoto.com/id/1151123617/video/aerial-view-rice-field-terraces-panoramic-hillside-with-rice-farming-on-mountains.mp4?s=mp4-640x640-is&k=20&c=hmY8doayeuO0G9wSRRdZnOzPMAa6NS6t-wK84NHZymw=",
     "https://media.istockphoto.com/id/1276446161/video/inaho-bathed-in-the-light-of-dusk.mp4?s=mp4-640x640-is&k=20&c=nHuYPo_sigSbHYgFyXEWpntw7XCPPatO-_oxz3CRtnE=",
   ]);
@@ -97,14 +98,21 @@ export default function OrderDetailsPage({ order, onBack }) {
   const [hover, setHover] = useState(0);
   const [tip, setTip] = useState("$30");
   const [review, setReview] = useState("");
+  const navigate = useNavigate(); // ✅ navigate hook
 
-  // ---------------- Render ----------------
   return (
-    <div className="min-h-screen bg-white">
-      <div className="flex">
-        <main className="flex-1 lg:ml-60 p-4 md:pt-8 bg-white">
-          <div className="max-w-6xl rounded bg-white">
+  
+     
+        <main className="p-4 md:px-12 ">
+          <div className="max-w-8xl mx-auto rounded bg-white">
             <div className="p-6 md:p-12 bg-[#F4F9FF]">
+               {/* ✅ Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center border-2 border-[#666666] p-2 rounded-full gap-2 mb-2 text-gray-700 hover:text-gray-900 font-medium cursor-pointer hover:bg-white"
+      >
+        <FaArrowLeft className="w-5 h-5" /> 
+      </button>
               {/* Order IDs */}
               <div className="mb-6 space-y-2">
                 <div className="flex justify-between items-center text-sm py-1.5">
@@ -153,12 +161,12 @@ export default function OrderDetailsPage({ order, onBack }) {
                   Scheduling
                 </h3>
                 <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm py-1.5">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-sm py-1.5">
                     <span className="font-medium text-base md:text-lg">
-                      Service Location:{" "}
-                      <span className="font-normal">
-                        {orderData.scheduling.serviceLocation}
-                      </span>
+                      Service Location:
+                    </span>
+                    <span className="font-normal text-sm md:text-base mt-1 md:mt-0">
+                      {orderData.scheduling.serviceLocation}
                     </span>
                   </div>
                   <div className="flex justify-between items-center text-sm py-1.5">
@@ -180,13 +188,12 @@ export default function OrderDetailsPage({ order, onBack }) {
                 </div>
               </div>
 
-              {/* Rescheduling Info */}
+              {/* Rescheduling */}
               <div className="mb-6">
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
                   Rescheduling Info
                 </h3>
                 <div className="space-y-2">
-                  
                   <div className="flex justify-between items-center text-sm py-1.5">
                     <span className="font-medium text-base md:text-lg">
                       Rescheduled By:
@@ -211,12 +218,12 @@ export default function OrderDetailsPage({ order, onBack }) {
                       {orderData.rescheduling.rescheduleCount}
                     </span>
                   </div>
-                  <div className="flex justify-between items-center text-sm py-1.5">
+                  <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-sm py-1.5">
                     <span className="font-medium text-base md:text-lg">
-                      Service Location:{" "}
-                      <span className="font-normal">
-                        {orderData.rescheduling.RescheduleReason}
-                      </span>
+                      Service Location:
+                    </span>
+                    <span className="font-normal text-sm md:text-base mt-1 md:mt-0">
+                      {orderData.rescheduling.rescheduleReason}
                     </span>
                   </div>
                 </div>
@@ -249,19 +256,17 @@ export default function OrderDetailsPage({ order, onBack }) {
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
                   Payment & Status Section
                 </h3>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm py-1.5">
-                    <span className="font-medium text-base md:text-lg">
-                      Service Order Payment Status:
-                    </span>
-                    <span className="font-normal text-sm md:text-base">
-                      {orderData.paymentStatus}
-                    </span>
-                  </div>
+                <div className="flex justify-between items-center text-sm py-1.5">
+                  <span className="font-medium text-base md:text-lg">
+                    Service Order Payment Status:
+                  </span>
+                  <span className="font-normal text-sm md:text-base">
+                    {orderData.paymentStatus}
+                  </span>
                 </div>
               </div>
 
-              {/* Notes & Confirmation */}
+              {/* Notes */}
               <div className="mb-6">
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
                   Notes & Confirmation
@@ -284,14 +289,14 @@ export default function OrderDetailsPage({ order, onBack }) {
               </div>
             </div>
 
-            {/* Bottom Section: Images, Videos, Feedback */}
+            {/* Bottom Section */}
             <div className="mt-10">
               {/* Images */}
               <div className="mb-6">
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 pb-2">
                   Images
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {images.map((img, idx) => (
                     <div
                       key={idx}
@@ -312,14 +317,14 @@ export default function OrderDetailsPage({ order, onBack }) {
                 <h3 className="text-xl md:text-2xl font-semibold mb-3 pb-2">
                   Videos
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {videos.map((video, idx) => (
                     <VideoCard key={idx} src={video} />
                   ))}
                 </div>
               </div>
 
-              {/* Customer Feedback */}
+              {/* Feedback */}
               <div className="mb-6 bg-[#F0FFF1] rounded-lg p-6 mt-10 shadow-sm">
                 <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
                   Customer Feedback
@@ -389,7 +394,7 @@ export default function OrderDetailsPage({ order, onBack }) {
             </div>
           </div>
         </main>
-      </div>
-    </div>
+      
+   
   );
 }

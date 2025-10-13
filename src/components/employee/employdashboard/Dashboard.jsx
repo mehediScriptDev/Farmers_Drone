@@ -2,16 +2,11 @@
 
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { LuEye } from "react-icons/lu";
+import { LuEye, LuHeadset } from "react-icons/lu";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiShoppingCart } from "react-icons/fi";
-import { FaRegCreditCard } from "react-icons/fa"
-import { LuHeadset } from "react-icons/lu";
-import { IoMdTrendingUp } from "react-icons/io";
-import { IoMdTrendingDown } from "react-icons/io";
-import { FaChevronDown } from "react-icons/fa";
-import { FaChevronUp } from "react-icons/fa";
-import { IoIosCalendar } from "react-icons/io";
+import { FaRegCreditCard, FaChevronDown, FaChevronUp } from "react-icons/fa"
+import { IoMdTrendingUp, IoMdTrendingDown, IoIosCalendar } from "react-icons/io";
 
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../../../config/axiosConfig";
@@ -160,11 +155,11 @@ function DashBoard() {
   const handleNext = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
 
   return (
-    <div className="p-4 md:p-8 ">
+    <div className="p-4 md:px-12 ">
       {/* Header */}
       <div className="mb-4 md:mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-[#002244] mb-2 text-center md:text-left">{t('dashboard.employee.title.dashPageTitle')}</h1>
-        <p className="text-sm md:text-base text-gray-600">{t('dashboard.employee.subTitle.dashpageSub')}</p>
+        <p className="text-sm md:text-base text-gray-600 text-center md:text-left">{t('dashboard.employee.subTitle.dashpageSub')}</p>
       </div>
 
       {/* Period Select */}
@@ -306,27 +301,28 @@ function DashBoard() {
                           setActivities((prev) =>
                             prev.map((item) =>
                               item.id === activity.id
-                                ? { ...item, dropdownOpen: !item.dropdownOpen }
-                                : { ...item, dropdownOpen: false }
+                                ? { ...item, dropdownOpen: !item.dropdownOpen } // toggle current
+                                : { ...item, dropdownOpen: false } // close others
                             )
                           )
                         }
                         className={`w-full flex justify-between items-center px-3 py-1 rounded text-xs md:text-sm 
-        transition-all duration-200
-        bg-[#394C6B] text-white hover:bg-[#28A844]
-      `}
+    transition-all duration-200
+    bg-[#394C6B] text-white
+  `}
                       >
                         {activity.progress}
                         {activity.dropdownOpen ? (
-                          <FaChevronUp className="w-4 h-4 text-white pl-4" />
+                          <FaChevronUp className="w-4 h-4 text-white ml-2" />
                         ) : (
-                          <FaChevronDown className="w-4 h-4 text-white" />
+                          <FaChevronDown className="w-4 h-4 text-white ml-2" />
                         )}
                       </button>
 
+
                       {/* Dropdown Menu */}
                       {activity.dropdownOpen && (
-                        <div className="absolute z-20 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+                        <div className="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 ">
                           <button
                             onClick={() => {
                               setActivities((prev) =>
@@ -341,8 +337,7 @@ function DashBoard() {
             ${activity.progress === "In Progress"
                                 ? "bg-[#28A844] text-white"
                                 : "hover:bg-[#28A844] hover:text-white text-gray-700"
-                              }
-          `}
+                              } `}
                           >
                             In Progress
                           </button>
@@ -370,9 +365,6 @@ function DashBoard() {
                       )}
                     </div>
                   </td>
-
-
-
                   <td className="px-3 md:px-6 py-4">
                     <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === "High" ? "text-red-600" : activity.priority === "Medium" ? "text-yellow-600" : "text-green-600"}`}>
                       {activity.priority}

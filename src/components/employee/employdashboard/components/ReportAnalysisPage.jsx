@@ -58,6 +58,7 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
 
 const ReportAnalysisPage = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("last30days");
+  // eslint-disable-next-line no-unused-vars
   const [filters, setFilters] = useState({
     customerTypes: ["Aerial Media Services", "Ground Media Services"],
     serviceCategories: ["Aerial Photography & Videography (MP)", "Event Photography"],
@@ -174,7 +175,7 @@ const ReportAnalysisPage = () => {
   };
 
   return (
-    <div className="flex-1 p-4 md:p-6">
+    <div className="flex-1 p-4 md:px-12 ">
       {/* Header */}
       <div className="mb-6 md:mb-8">
         <h1 className="text-xl md:text-2xl font-bold text-gray-900">Customer Management</h1>

@@ -29,7 +29,7 @@ export const DashboardLayout = () => {
     {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
-    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#F9FAFB]">
       <div className="w-full">
         <Outlet />
       </div>
