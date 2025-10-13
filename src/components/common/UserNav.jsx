@@ -19,12 +19,12 @@ export default function Nav() {
   ];
 
   return (
-    <nav className="bg-white shadow-sm  sticky top-0 z-50">
-      <div className="w-11/12 mx-auto  px-4 sm:px-6 lg:px-8 xl:h-20 flex items-center justify-center">
+    <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="lg:max-w-7xl mx-auto w-11/12  xl:h-20 flex items-center justify-center">
         <div className="flex justify-between items-center  w-full h-16">
           {/* Logo */}
           <Link to={'/'} className="flex items-center">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-items-start">
               <img src={logo} alt="navlogo" />
             </div>
           </Link>
