@@ -373,7 +373,7 @@ export default function AddCustomerModal({ isOpen, onClose }) {
             <div className="space-y-4">
               {["lat1", "lat2", "lat3", "acres"].map((key, idx) => (
                 <div key={key}>
-                  <label className="block text-sm font-medium mb-1 flex justify-between">
+                  <label className="text-sm font-medium mb-1 flex justify-between">
                     {t(
                       `dashboard.fieldAgent.ThirdModal.${
                         [
