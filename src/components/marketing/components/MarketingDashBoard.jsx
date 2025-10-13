@@ -1,17 +1,97 @@
-import { FaPlus, FaDollarSign } from "react-icons/fa";
-import { FaArrowTrendUp } from "react-icons/fa6";
+import { FaPlus, FaRegClock } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
+import { FaArrowTrendUp, FaDollarSign } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { FiTrash2 } from "react-icons/fi";
+import { HiOutlineChevronUp } from "react-icons/hi"; // For the custom dropdown arrow
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import axiosInstance from "../../../config/axiosConfig";
 
+const iconMap = {
+  HiCursorClick: HiCursorClick,
+  FaArrowTrendUp: FaArrowTrendUp,
+  FaDollarSign: FaDollarSign,
+};
+
+// --- Custom Dropdown Component ---
+const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  // Changed "Cool" to "Cold" to match your original image.
+  const options = [
+    { label: "All Leads", value: "All" },
+    { label: "Hot", value: "Hot" },
+    { label: "Warm", value: "Warm" },
+    { label: "Cold", value: "Cold" },
+  ];
+
+  const handleSelect = (value) => {
+    setSelectedStatus(value);
+    setIsOpen(false);
+  };
+
+  // The active background color, matching the bright green in your image
+  const activeBg = 'bg-lime-400';
+
+  return (
+    <div className="relative inline-block text-left" onClick={() => setIsOpen(!isOpen)}>
+      {/* Button/Display for the Dropdown */}
+      <button
+        type="button"
+        className="w-full justify-between items-center inline-flex px-2 md:px-4 py-1.5 md:py-2 border border-gray-300 rounded-lg text-xs md:text-base text-gray-700 bg-white shadow-sm hover:bg-gray-50 transition-colors"
+        id="options-menu"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+      >
+        {options.find(opt => opt.value === selectedStatus)?.label}
+        <HiOutlineChevronUp 
+          className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-200 ${isOpen ? 'rotate-0' : 'rotate-180'}`} 
+          aria-hidden="true" 
+        />
+      </button>
+
+      {/* Dropdown Options List */}
+      {isOpen && (
+        <div
+          className="origin-top-right absolute right-0 mt-2 w-full min-w-[150px] rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="options-menu"
+        >
+          <div className="py-1">
+            {options.map((option) => (
+              <div
+                key={option.value}
+                onClick={() => handleSelect(option.value)}
+                className={`
+                  block px-4 py-2 text-xs md:text-sm cursor-pointer transition-colors
+                  ${option.value === selectedStatus 
+                    // ACTIVE/SELECTED STYLE: full bright background
+                    ? `${activeBg} text-gray-900 font-semibold` 
+                    // HOVER STYLE: lighter background on hover
+                    : `text-gray-700 hover:${activeBg}/70`
+                  }
+                `}
+                role="menuitem"
+              >
+                {option.label}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ----------------------------------------------------------------------
+// Main Component
+// ----------------------------------------------------------------------
+
 const MarketingDashBoard = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState("Last 30 days");
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutomationModalOpen, setIsAutomationModalOpen] = useState(false);
@@ -30,10 +110,15 @@ const MarketingDashBoard = () => {
   const [leads, setLeads] = useState([]);
   const [allSeasonalCampaigns, setAllSeasonalCampaigns] = useState([]);
   const [allLoyaltyPrograms, setAllLoyaltyPrograms] = useState([]);
-
-  const totalPages = Math.ceil(activities.length / rowsPerPage);
+  const [selectedPeriod, setSelectedPeriod] = useState("30"); // 30 days default
+  const [filteredActivities, setFilteredActivities] = useState([]);
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const totalPages = Math.ceil(filteredActivities.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const paginatedData = activities.slice(startIndex, startIndex + rowsPerPage);
+  const paginatedData = filteredActivities.slice(
+    startIndex,
+    startIndex + rowsPerPage
+  );
 
   useEffect(() => {
     const updateCardsPerPage = () => {
@@ -57,10 +142,10 @@ const MarketingDashBoard = () => {
         const data = await axiosInstance.get(
           "/MarketingDeshboard/data/marketingLandingPage.json"
         );
-        console.log(data.data);
+        // Original setActivities
+        setActivities(data.data.activities);
         setAutomationSettings(data.data.automationSettings);
         setStats(data.data.stats);
-        setActivities(data.data.activities);
         setStatusStyles(data.data.statusStyles);
         setLeads(data.data.leads);
         setAllSeasonalCampaigns(data.data.allSeasonalCampaigns);
@@ -69,9 +154,28 @@ const MarketingDashBoard = () => {
         console.log(err);
       }
     };
-
     fetchAgentData();
   }, []);
+  useEffect(() => {
+    if (!activities) return;
+    const today = new Date();
+    const days = parseInt(selectedPeriod, 10);
+
+    const filtered = activities.filter((item) => {
+      const activityDate = new Date(item.date);
+      const diffTime = today - activityDate;
+      const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+      const matchDays = diffDays <= days;
+      const matchStatus =
+        selectedStatus === "All" || item.status === selectedStatus;
+
+      return matchDays && matchStatus;
+    });
+
+    setFilteredActivities(filtered);
+    setCurrentPage(1);
+  }, [selectedPeriod, selectedStatus, activities]);
 
   const getPaginatedData = (data, currentPage) => {
     const startIndex = (currentPage - 1) * cardsPerPage;
@@ -188,8 +292,8 @@ const MarketingDashBoard = () => {
   const loyaltyTotalPages = getTotalPages(allLoyaltyPrograms);
 
   return (
-    <div className="bg-[#F9FAFB]">
-      <div className="flex-1 p-4 md:px-10 bg-gray-50 mt-2">
+    <div className="bg-[#F9FAFB] p-4 md:px-12">
+      <div className="flex-1  bg-gray-50 mt-2">
         <div className="mb-1 md:mb-6 flex flex-col md:flex-row justify-between">
           <div>
             <h1 className="!text-xl md:!text-4xl font-bold text-[#002244]">
@@ -218,36 +322,50 @@ const MarketingDashBoard = () => {
 
         <div className="mb-4 md:mb-6 flex">
           <select
-            className="px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg !text-xs md:text-base text-gray-700"
+            className="px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A]"
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
           >
-            <option>Last 7 days</option>
-            <option>Last 30 days</option>
-            <option>Last 90 days</option>
+            <option value="7">Last 7 days</option>
+            <option value="30">Last 30 days</option>
+            <option value="90">Last 90 days</option>
           </select>
         </div>
+        {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
           {stats.map((stat, index) => {
-            const Icon = stat.icon;
+            const Icon = iconMap[stat.icon]; // convert string to component
             return (
               <div
                 key={index}
-                className="bg-white p-3 md:p-6 rounded-lg shadow-sm border border-gray-200 flex justify-between flex-col gap-1.5"
+                className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between gap-3"
               >
-                <div className=" text-gray-600 text-xs md:text-sm">
+                <div className="text-gray-500 text-sm font-medium">
                   {stat.label}
                 </div>
-                <div className="flex items-start justify-between ">
-                  <span className="text-2xl md:text-3xl font-semibold text-gray-900 mb-2">
+
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl md:text-3xl font-semibold text-gray-900">
                     {stat.value}
                   </span>
-                  <di className={`${stat.iconBg} p-2 rounded-lg`}>
-                    <Icon className="w-4 h-4 md:w-8 md:h-8 text-gray-400" />
-                  </di>
+
+                  <div className={`${stat.iconBg} p-2 rounded-xl`}>
+                    {Icon ? (
+                      <Icon className="w-6 h-6 text-gray-500" />
+                    ) : (
+                      <span className="text-gray-400">?</span>
+                    )}
+                  </div>
                 </div>
+
                 <div
-                  className={`text-xs md:text-sm flex items-center gap-1 text-yellow-400 `}
+                  className={`text-xs md:text-sm ${
+                    stat.trend === "up"
+                      ? "text-green-500"
+                      : stat.trend === "down"
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  }`}
                 >
                   {stat.change}
                 </div>
@@ -259,35 +377,30 @@ const MarketingDashBoard = () => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200">
           <div className="p-4 md:p-6 border-b border-gray-200">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div>
-                <h2 className="text-lg md:text-2xl font-bold text-gray-900">
+              <div className="md:text-center lg:text-left">
+                <h2 className="text-lg md:text-2xl font-bold text-[#464646]">
                   Lead Management
                 </h2>
-                <h3>Truck and nuture your marketing leads</h3>
+                <h3 className="text-[#464646] ">
+                  Truck and nuture your marketing leads
+                </h3>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-                <select
-                  className="px-2 md:px-4 py-1.5 md:py-2 border border-gray-300 rounded-lg text-xs md:text-base text-gray-700 "
-                  value={selectedPeriod}
-                  onChange={(e) => setSelectedPeriod(e.target.value)}
-                >
-                  {leads.map((lead) => {
-                    return (
-                      <>
-                        <option value={lead}>{lead}</option>
-                      </>
-                    );
-                  })}
-                </select>
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 md:mx-auto lg:mx-0">
+                {/* --- REPLACED CODE BLOCK START --- */}
+                <LeadStatusDropdown 
+                  selectedStatus={selectedStatus}
+                  setSelectedStatus={setSelectedStatus}
+                />
+                {/* --- REPLACED CODE BLOCK END --- */}
                 <button
                   onClick={() => setOpen(true)}
-                  className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
+                  className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
                 >
-                  Register New Customer
+                  Export Leads
                 </button>
                 <button
                   onClick={() => setIsAutomationModalOpen(true)}
-                  className="px-3 md:px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-red-700 font-medium text-[10px] md:text-base flex items-center gap-1"
+                  className="px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center gap-1 "
                 >
                   Automation
                 </button>
@@ -299,25 +412,25 @@ const MarketingDashBoard = () => {
             <table className="w-full min-w-max">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Lead
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Contact
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Source
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Location
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Score
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Status
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
                     Action
                   </th>
                 </tr>
@@ -352,12 +465,19 @@ const MarketingDashBoard = () => {
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <button className="rounded-full p-1 text-gray-400 hover:text-green-500 transition">
-                        &#8635;
+                      <button className="rounded-full p-1  text-green-200 transition">
+                        <FaRegClock />
                       </button>
                     </td>
                   </tr>
                 ))}
+                {paginatedData.length === 0 && (
+                  <tr>
+                    <td colSpan="7" className="text-center py-4 text-gray-500">
+                      No activities in this period
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -407,7 +527,7 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800">
               Seasonal campaigns
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center gap-1 md:gap-2 transition-opacity">
+            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center gap-1 md:gap-2 transition-opacity">
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -453,7 +573,7 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800">
               Loyalty programs
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center gap-2 transition-opacity">
+            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center gap-2 transition-opacity">
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -499,7 +619,7 @@ const MarketingDashBoard = () => {
         <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl w-full max-w-md max-h-[70vh] overflow-hidden flex flex-col">
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 md:p-5 border-b border-gray-200">
+            <div className="flex items-center justify-between p-4 md:p-5 border-gray-200">
               <div>
                 <h2 className="text-base md:text-lg font-semibold text-gray-900">
                   if lead is hot

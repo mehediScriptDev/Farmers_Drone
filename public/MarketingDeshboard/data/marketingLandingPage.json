@@ -66,7 +66,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 95,
-      "status": "Hot"
+      "status": "Hot",
+      "date"  : "2025-10-13"
     },
     {
       "lead": "Agritech Solutions",
@@ -74,7 +75,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 75,
-      "status": "Warm"
+      "status": "Warm",
+      "date"  : "2025-10-08"
     },
     {
       "lead": "Agritech Solutions",
@@ -82,7 +84,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cool"
+      "status": "Cold",
+      "date"  : "2025-10-04"
     },
     {
       "lead": "Agritech Solutions",
@@ -90,7 +93,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 85,
-      "status": "Hot"
+      "status": "Hot",
+      "date"  : "2025-09-30"
     },
     {
       "lead": "Agritech Solutions",
@@ -98,7 +102,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cool"
+      "status": "Cold",
+      "date"  : "2025-10-20"
     },
     {
       "lead": "Agritech Solutions",
@@ -106,7 +111,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 85,
-      "status": "Hot"
+      "status": "Hot",
+      "date"  : "2025-09-25"
     }
   ],
   "statusStyles": {

@@ -171,7 +171,7 @@ const FieldAgentDashboard = () => {
                     <h3 className="text-2xl md:text-4xl font-semi text-black mb-2">
                       {stat.value}
                     </h3>
-                    <p className=" text-sm font-medium">
+                    <p className="text-button-primary text-sm font-medium">
                       {stat.change}
                     </p>
                   </div>
@@ -229,7 +229,6 @@ const FieldAgentDashboard = () => {
           <div className="bg-white p-8 sm:p-12 rounded-2xl  w-full max-w-xl border border-gray-100">
             <input type="file" name="" id="" />
           </div>
-          
         </div>
 
         {/* Table Section */}
