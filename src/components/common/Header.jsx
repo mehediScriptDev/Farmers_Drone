@@ -33,16 +33,20 @@ export const Header = () => {
           </span>
         </Link>
         <div className="flex items-center space-x-2 sm:space-x-5">
+          {/* Language switcher */}
           <LanguageSwitcher />
+
           {user &&
             (["admin", "marketing", "employee"].includes(user.role) ? (
               <Link className="text-gray-800 text-xl lg:flex hidden">
                 <FiBell />
               </Link>
             ) : null)}
+
             {
               user.role == 'admin'? <Link className="text-gray-800 text-xl lg:flex hidden"><FiSettings /></Link> :null
             }
+            
           {user ? (
             <div className=" flex items-end justify-center gap-2">
               {/* dropdown btn */}

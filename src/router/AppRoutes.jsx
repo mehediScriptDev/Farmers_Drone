@@ -58,6 +58,8 @@ import Leads from './../components/marketing/Leads';
 import DashBoard from '../components/marketing/components/DashBoard';
 import LeadManagment from '../components/marketing/components/LeadManagment';
 import Anylytics from '../components/marketing/components/Anylytics';
+import MarketingDashboard from './../components/marketing/MarketingDashboard';
+import Campaigns from './../components/marketing/Campaigns';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -140,7 +142,7 @@ const AppRoutes = createBrowserRouter([
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-        <EmployeeDashBoardLayout />
+        <DashboardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
@@ -178,7 +180,7 @@ const AppRoutes = createBrowserRouter([
     path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
-        <FieldAgentDashboard />
+        <DashboardLayout />
       </PrivateFieldAgentRoute>
     ),
     children: [
@@ -216,21 +218,21 @@ const AppRoutes = createBrowserRouter([
     path: '/marketing',
     element: (
       <PrivateMarketingRoute>
-        <MarketingDashboardLayout />
+        <DashboardLayout />
       </PrivateMarketingRoute>
     ),
     children: [
       {
         index: true,
-        element: <DashBoard/>
+        element: <MarketingDashboard/>
       },
       {
         path :"campaigns",
-        element : <div>camp</div>
+        element : <Campaigns/>
       },
       {
         path: "LeadManagment",
-        element : <LeadManagment/>
+        element : <Leads/>
       },{
         path : "analytics",
         element : <Anylytics/>
