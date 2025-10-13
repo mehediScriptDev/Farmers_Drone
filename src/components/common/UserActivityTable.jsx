@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { HiDotsVertical, HiUser } from 'react-icons/hi';
 import Pagination from './Pagination';
 
@@ -14,22 +13,19 @@ const getStatusColor = (statusType) => {
 };
 
 const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
-  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentData, setCurrentData] = useState(data?.data || []);
+  const [currentData, setCurrentData] = useState([]);
 
-  // Update current data when page changes
+  const itemsPerPage = 5;
+
   useEffect(() => {
-    if (!data) return;
-
-    if (currentPage === 1) {
-      setCurrentData(data.data || []);
-    } else if (currentPage === 2 && data.page2Data) {
-      setCurrentData(data.page2Data);
-    }
+    if (!data?.data) return;
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    setCurrentData(data.data.slice(startIdx, endIdx));
   }, [currentPage, data]);
 
-  if (!data || (!data.data && !data.page2Data)) {
+  if (!data || !data.data?.length) {
     return (
       <div className='bg-white rounded-xl shadow-sm p-6'>
         <h3 className='text-lg font-semibold text-gray-900 mb-4'>{title}</h3>
@@ -40,19 +36,15 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
     );
   }
 
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    console.log('Page changed to:', page);
-  };
+  const handlePageChange = (page) => setCurrentPage(page);
 
-  // Translated headers
   const translatedHeaders = [
-    t('table.headers.user'),
-    t('table.headers.role'),
-    t('table.headers.jobTitle'),
-    t('table.headers.status'),
-    t('table.headers.lastActive'),
-    t('table.headers.actions'),
+    'User',
+    'Role',
+    'Job Title',
+    'Status',
+    'Last Active',
+    'Actions',
   ];
 
   return (
@@ -68,7 +60,7 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
               {translatedHeaders.map((header, index) => (
                 <th
                   key={index}
-                  className={`px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider ${
+                  className={`px-6 py-3 text-sm font-semibold text-gray-700 uppercase tracking-wider ${
                     index === translatedHeaders.length - 1
                       ? 'text-center'
                       : 'text-left'
@@ -96,13 +88,11 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
                     </div>
                   </div>
                 </td>
-                <td className='px-6 py-4 whitespace-nowrap'>
-                  <div className='text-sm text-gray-900'>{row.role}</div>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                  {row.role}
                 </td>
-                <td className='px-6 py-4'>
-                  <div className='text-sm text-gray-900 max-w-xs truncate'>
-                    {row.jobTitle}
-                  </div>
+                <td className='px-6 py-4 text-sm text-gray-900 max-w-xs truncate'>
+                  {row.jobTitle}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap'>
                   <span
@@ -127,16 +117,12 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
         </table>
       </div>
 
-      {data.pagination && (
-        <Pagination
-          currentPage={currentPage}
-          totalItems={data.pagination.total}
-          showingText={data.pagination.showing}
-          hasNext={currentPage < 2}
-          hasPrevious={currentPage > 1}
-          onPageChange={handlePageChange}
-        />
-      )}
+      <Pagination
+        currentPage={currentPage}
+        totalItems={data.data.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

@@ -8,7 +8,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 
 // Dashboard Components
 import AdminDashboard from '../components/admin/components/AdminDashboard';
-import EmployeeDashboard from '../components/employee/EmployeeDashboard';
+
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
 import { MarketingDashboardLayout } from '../components/marketing/MarketingDashboardLayout';
 
@@ -21,14 +21,6 @@ import Jobs from '../components/admin/components/Jobs';
 import PaymentsManagement from '../components/admin/components/PaymentsManagement';
 import Reports from '../components/admin/components/Reports';
 import UserManagement from '../components/admin/components/UserManagement';
-
-// Employee Components
-import Profile from '../components/employee/Profile';
-import EmployeeReports from '../components/employee/Reports';
-import Schedule from '../components/employee/Schedule';
-import Training from '../components/employee/Training';
-import Messages from '../components/employee/Messages';
-import MyTasks from '../components/employee/MyTasks';
 
 // Field Agent Components
 import FieldAgentReports from '../components/fieldAgent/Reports';
@@ -52,7 +44,22 @@ import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
 import Anylytics from '../components/marketing/components/Anylytics';
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
-import Campains from '../components/marketing/components/Campains';
+import MainLayout from './../LandingPageUI/Layout/MainLayout';
+import Services from './../LandingPageUI/Pages/Services';
+import About from './../LandingPageUI/Pages/About';
+import Blog from './../LandingPageUI/Pages/Blog';
+import Contact from './../LandingPageUI/Pages/Contact';
+import EmployeeDashBoardLayout from '../components/employee/employdashboard/EmployeeDashBoardLayout';
+import Dashboard from '../components/employee/employdashboard/Dashboard';
+import Coustomerpage from '../components/employee/employdashboard/Coustomerpage';
+import OrderManagementPage from '../components/employee/employdashboard/OrderManagementPage';
+import MessagePage from '../components/employee/employdashboard/MessagePage';
+import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
+import SupportPage from '../components/employee/employdashboard/SupportPage';
+import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
+import Leads from './../components/marketing/Leads';
+import MarketingDashboard from './../components/marketing/MarketingDashboard';
+import Campaigns from './../components/marketing/Campaigns';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -61,19 +68,27 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <MainLayout />,
       },
       {
-        path: '/login',
+        path: '/services',
+        element: <Services />,
+      },
+      {
+        path: '/about',
+        element: <About />,
+      },
+      {
+        path: '/blog',
+        element: <Blog />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
+      },
+      {
+        path: 'login',
         element: <LoginPage />,
-      },
-      {
-        path: '/unauthorized',
-        element: <NotAuthorizedPage />,
-      },
-      {
-        path: '/dashboard',
-        element: <RoleBasedRedirect />,
       },
     ],
   },
@@ -133,31 +148,31 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <EmployeeDashboard />,
+        element: <Dashboard />,
       },
       {
-        path: 'profile',
-        element: <Profile />,
+        path: 'customers',
+        element: <Coustomerpage />,
       },
       {
-        path: 'reports',
-        element: <EmployeeReports />,
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
       },
       {
-        path: 'schedule',
-        element: <Schedule />,
+        path: 'orders',
+        element: <OrderManagementPage />,
       },
       {
-        path: 'training',
-        element: <Training />,
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
       },
       {
         path: 'messages',
-        element: <Messages />,
-      },
-      {
-        path: 'tasks',
-        element: <MyTasks />,
+        element: <MessagePage />,
       },
     ],
   },
@@ -165,7 +180,7 @@ const AppRoutes = createBrowserRouter([
     path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
-        <FieldAgentDashboard />
+        <DashboardLayout />
       </PrivateFieldAgentRoute>
     ),
     children: [
@@ -203,7 +218,7 @@ const AppRoutes = createBrowserRouter([
     path: '/marketing',
     element: (
       <PrivateMarketingRoute>
-        <MarketingDashboardLayout />
+        <DashboardLayout />
       </PrivateMarketingRoute>
     ),
     children: [
@@ -213,16 +228,28 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path :"campaigns",
-        element : <Campains/>
+        element : <Campaigns/>
       },
       {
         path: "LeadManagment",
-        element : <LeadManagment/>
+        element : <Leads/>
       },{
         path : "analytics",
         element : <Anylytics/>
       }
     ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivateRoute>
+        <RoleBasedRedirect />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/unauthorized',
+    element: <NotAuthorizedPage />,
   },
   {
     path: '*',

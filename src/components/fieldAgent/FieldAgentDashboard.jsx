@@ -105,7 +105,6 @@ const FieldAgentDashboard = () => {
     return copy;
   }, [tableData, sortKey, sortDir]);
 
-
   const filteredData = useMemo(() => {
     if (!searchTerm.trim()) return sortedData;
     const rx = new RegExp(
@@ -172,7 +171,7 @@ const FieldAgentDashboard = () => {
                     <h3 className="text-2xl md:text-4xl font-semi text-black mb-2">
                       {stat.value}
                     </h3>
-                    <p className="text-button-primary text-sm font-medium">
+                    <p className=" text-sm font-medium">
                       {stat.change}
                     </p>
                   </div>
@@ -186,44 +185,51 @@ const FieldAgentDashboard = () => {
             );
           })}
         </div>
-        <div className="bg-white p-8 sm:p-12 rounded-2xl  w-full max-w-xs border border-gray-100 mb-10">
-          <div className="flex justify-center mb-1">
-            {rank == "Gold" && (
-              <FaTrophy
-                className="text-8xl"
-                style={{
-                  color: "#FFD700",
-                  filter: "drop-shadow(0 6px 8px rgba(255, 215, 0, 0.3))",
-                }}
-                aria-label="Gold Trophy Icon"
-              />
-            )}
-            {rank == "Silver" && (
-              <FaTrophy
-                className="text-8xl"
-                style={{
-                  color: "#C0C0C0",
-                  filter: "drop-shadow(0 8px 16px rgba(192, 192, 192, 0.4)))",
-                }}
-                aria-label="Silver Trophy Icon"
-              />
-            )}
-            {rank == "Bronze" && (
-              <FaTrophy
-                className="text-8xl"
-                style={{
-                  color: "#CD7F32",
-                  filter: "drop-shadow(0 8px 16px rgba(205, 127, 50, 0.4))",
-                }}
-                aria-label="Silver Trophy Icon"
-              />
-            )}
-          </div>
 
-          {/* Text - styled in green as shown in the original image */}
-          <p className="md:text-2xl font-medium tracking-wider text-green-600 text-center">
-            {rank}
-          </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+          <div className="bg-white p-8 sm:p-12 rounded-2xl  w-full max-w-xl border border-gray-100">
+            <div className="flex justify-center mb-1">
+              {rank == "Gold" && (
+                <FaTrophy
+                  className="text-8xl"
+                  style={{
+                    color: "#FFD700",
+                    filter: "drop-shadow(0 6px 8px rgba(255, 215, 0, 0.3))",
+                  }}
+                  aria-label="Gold Trophy Icon"
+                />
+              )}
+              {rank == "Silver" && (
+                <FaTrophy
+                  className="text-8xl"
+                  style={{
+                    color: "#C0C0C0",
+                    filter: "drop-shadow(0 8px 16px rgba(192, 192, 192, 0.4)))",
+                  }}
+                  aria-label="Silver Trophy Icon"
+                />
+              )}
+              {rank == "Bronze" && (
+                <FaTrophy
+                  className="text-8xl"
+                  style={{
+                    color: "#CD7F32",
+                    filter: "drop-shadow(0 8px 16px rgba(205, 127, 50, 0.4))",
+                  }}
+                  aria-label="Silver Trophy Icon"
+                />
+              )}
+            </div>
+
+            {/* Text - styled in green as shown in the original image */}
+            <p className="md:text-2xl font-medium tracking-wider text-green-600 text-center">
+              {rank}
+            </p>
+          </div>
+          <div className="bg-white p-8 sm:p-12 rounded-2xl  w-full max-w-xl border border-gray-100">
+            <input type="file" name="" id="" />
+          </div>
+          
         </div>
 
         {/* Table Section */}
@@ -652,9 +658,9 @@ const FieldAgentDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {currentUsers.map((row) => (
+                {currentUsers.map((row, idx) => (
                   <tr
-                    key={row.id}
+                    key={idx}
                     className="hover:bg-gray-50 transition-colors border-b border-gray-100"
                   >
                     <td className="py-4 px-6 text-sm text-black">
