@@ -195,8 +195,85 @@
       }
     },
     "fieldAgent": {
-      "title": "Field Agent Dashboard",
-      "welcome": "Welcome back, Field Agent"
+      "fieldAgentSummery": {
+        "userAdded": "Total user added by you",
+        "ActiveCustomers": "Active Customers",
+        "totalcommition": "Total commission earned",
+        "totalPayments": "Ourstanding payments"
+      },
+      "userAdd": {
+        "AddedByYou": "Added by you",
+        "AddCustomer": "Add Customer"
+      },
+      "tableHeader": {
+        "CustomerList": "Customer List",
+        "Role": "Role",
+        "RegistrationCommission": "Registration Commission",
+        "FirstOrderCommission": "First Order Commission",
+        "EffectiveDate": "Effective Date",
+        "RegistrationDate": "Registration Date",
+        "CustomerType": "Customer Type",
+        "NextFollowUpDate": "Next Follow-up Date",
+        "ServiceInterest": "Service Interest",
+        "QuickActions": "Quick Actions"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "users": "Users",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "FirstModal": {
+        "addCustomer": "Add Customer",
+        "customerInfo": "Customer Info",
+        "firstName": "First name",
+        "middleName": "Middle name",
+        "lastName": "Last name",
+        "alsoKnownAs": "Also Known As",
+        "nickname": "Nickname",
+        "phone": "Phone",
+        "email": "Email",
+        "geoLocation": "Geo location",
+        "selectOnMap": "Select on map",
+        "district": "District",
+        "enterDistrict": "Enter your District name",
+        "mandal": "Mandal",
+        "enterMandal": "Enter your Mandal name",
+        "village": "Village",
+        "enterVillage": "Enter your Village name",
+        "registeredBy": "Registered By",
+        "selectAgent": "Select Agent",
+        "FieldAgent": "Agent 1",
+        "next": "Next",
+        "confirmRegistration": "Confirm Registration"
+      },
+      "SecondModal": {
+        "addressDetails": "Address Details",
+        "kycDocumentsUpload": "KYC Documents Upload",
+        "street": "Street",
+        "streetAddress": "Street address",
+        "city": "City",
+        "enterCity": "City",
+        "state": "State",
+        "enterState": "State",
+        "postalCode": "Postal Code",
+        "enterPostalCode": "400020",
+        "country": "Country",
+        "enterCountry": "India",
+        "industry": "Industry",
+        "selectIndustry": "Select industry",
+        "agriculture": "Agriculture",
+        "surveyMapping": "Survey & Mapping"
+      },
+      "ThirdModal": {
+        "serviceLocations": "Service Locations",
+        "firstLatLong": "1st Latitude/Longitude",
+        "firstLatLongValue": "Lat, Long",
+        "secondLatLong": "2nd Latitude/Longitude",
+        "thirdLatLong": "3rd Latitude/Longitude",
+        "numberOfAcres": "Number of acres",
+        "landAreaInAcres": "Land area in acres"
+      }
     },
     "marketing": {
       "title": "Marketing Dashboard",
@@ -231,12 +308,9 @@
       "reports": "Reports"
     },
     "marketing": {
-      "analytics": "Analytics",
       "campaigns": "Campaigns",
-      "audience": "Audience",
-      "socialMedia": "Social Media",
-      "emailMarketing": "Email Marketing",
-      "contentManagement": "Content Management"
+      "leadManagement"  :"Lead Management",
+      "analytics": "Analytics"
     }
   },
   "stats": {

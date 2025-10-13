@@ -10,7 +10,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../components/admin/components/AdminDashboard';
 
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
-import MarketingDashboard from '../components/marketing/MarketingDashboard';
+import { MarketingDashboardLayout } from '../components/marketing/MarketingDashboardLayout';
 
 // Admin Components
 import Complaints from '../components/admin/components/Complaints';
@@ -30,13 +30,7 @@ import PhotoCapture from '../components/fieldAgent/PhotoCapture';
 import RouteOptimization from '../components/fieldAgent/RouteOptimization';
 import VehicleManagement from '../components/fieldAgent/VehicleManagement';
 
-// Marketing Components
-import Analytics from '../components/marketing/Analytics';
-import Campaigns from '../components/marketing/Campaigns';
-import ContentManagement from '../components/marketing/ContentManagement';
-import EmailMarketing from '../components/marketing/EmailMarketing';
-import SocialMedia from '../components/marketing/SocialMedia';
-import Audience from '../components/marketing/Audience';
+
 
 // Private Route Components
 import {
@@ -61,6 +55,9 @@ import PaymentManagement from '../components/employee/employdashboard/PaymentMan
 import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 import Leads from './../components/marketing/Leads';
+import DashBoard from '../components/marketing/components/DashBoard';
+import LeadManagment from '../components/marketing/components/LeadManagment';
+import Anylytics from '../components/marketing/components/Anylytics';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -181,7 +178,7 @@ const AppRoutes = createBrowserRouter([
     path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
-        <DashboardLayout />
+        <FieldAgentDashboard />
       </PrivateFieldAgentRoute>
     ),
     children: [
@@ -219,38 +216,26 @@ const AppRoutes = createBrowserRouter([
     path: '/marketing',
     element: (
       <PrivateMarketingRoute>
-        <DashboardLayout />
+        <MarketingDashboardLayout />
       </PrivateMarketingRoute>
     ),
     children: [
       {
         index: true,
-        element: <MarketingDashboard />,
+        element: <DashBoard/>
       },
       {
-        path: 'analytics',
-        element: <Analytics />,
+        path :"campaigns",
+        element : <div>camp</div>
       },
       {
-        path: 'campaigns',
-        element: <Campaigns />,
-      },
-      {
-        path: 'leads',
-        element: <Leads />,
-      },
-      {
-        path: 'email-marketing',
-        element: <EmailMarketing />,
-      },
-      {
-        path: 'social-media',
-        element: <SocialMedia />,
-      },
-      {
-        path: 'audience',
-        element: <Audience />,
-      },
+        path: "LeadManagment",
+        element : <LeadManagment/>
+      },{
+        path : "analytics",
+        element : <Anylytics/>
+      }
+     
     ],
   },
   {

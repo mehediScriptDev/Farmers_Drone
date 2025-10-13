@@ -26,7 +26,9 @@ axiosInstance.interceptors.request.use(
       config &&
       typeof config.url === 'string' &&
       (config.url.startsWith('/admin/data') ||
-        config.url.startsWith('/employee/data'))
+        config.url.startsWith('/employee/data') ||
+        // Add fieldAgent static data path to bypass external API base
+        config.url.startsWith('/fieldAgent/data'))
     ) {
       // Force requests for local static JSON (in public/admin/data or public/employee/data)
       // to use the app root rather than whatever VITE_API_BASE_URL points to.

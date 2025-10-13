@@ -206,7 +206,84 @@
     },
     "fieldAgent": {
       "title": "फील्ड एजेंट डैशबोर्ड",
-      "welcome": "वापस स्वागत है, फील्ड एजेंट"
+      "welcome": "वापस स्वागत है, फील्ड एजेंट",
+      "fieldAgentSummery": {
+        "userAdded": "आपके द्वारा जोड़े गए कुल उपयोगकर्ता",
+        "totalcommition": "कुल अर्जित कमीशन",
+        "totalPayments": "हमारा बकाया भुगतान"
+      },
+      "userAdd": {
+        "AddedByYou": "आपके द्वारा जोड़ा गया",
+        "AddCustomer": "ग्राहक जोड़ें"
+      },
+      "tableHeader": {
+        "CustomerList": "ग्राहक सूची",
+        "Role": "भूमिका",
+        "RegistrationCommission": "पंजीकरण कमीशन",
+        "FirstOrderCommission": "पहले ऑर्डर का कमीशन",
+        "EffectiveDate": "प्रभावी तिथि",
+        "RegistrationDate": "पंजीकरण तिथि",
+        "CustomerType": "ग्राहक प्रकार",
+        "NextFollowUpDate": "अगली फॉलो-अप तिथि",
+        "ServiceInterest": "सेवा रुचि",
+        "QuickActions": "त्वरित क्रियाएँ"
+      },
+      "pagination": {
+        "showing": "दिखा रहे हैं",
+        "users": "उपयोगकर्ता",
+        "previous": "पिछला",
+        "next": "अगला"
+      },
+      "FirstModal": {
+        "addCustomer": "ग्राहक जोड़ें",
+        "customerInfo": "ग्राहक जानकारी",
+        "firstName": "पहला नाम",
+        "middleName": "मध्यम नाम",
+        "lastName": "अंतिम नाम",
+        "alsoKnownAs": "के रूप में भी जाना जाता है",
+        "nickname": "उपनाम",
+        "phone": "फ़ोन",
+        "email": "ईमेल",
+        "geoLocation": "भौगोलिक स्थान",
+        "selectOnMap": "मानचित्र पर चुनें",
+        "district": "जिला",
+        "enterDistrict": "अपना जिले का नाम दर्ज करें",
+        "mandal": "मंडल",
+        "enterMandal": "अपना मंडल का नाम दर्ज करें",
+        "village": "गांव",
+        "enterVillage": "अपने गांव का नाम दर्ज करें",
+        "registeredBy": "द्वारा पंजीकृत",
+        "selectAgent": "एजेंट चुनें",
+        "FieldAgent": "एजेंट 1",
+        "next": "अगला",
+        "confirmRegistration": "पंजीकरण की पुष्टि करें"
+      },
+      "SecondModal": {
+        "addressDetails": "पता विवरण",
+        "kycDocumentsUpload": "केवाईसी दस्तावेज़ अपलोड",
+        "street": "सड़क",
+        "streetAddress": "सड़क का पता",
+        "city": "शहर",
+        "enterCity": "शहर",
+        "state": "राज्य",
+        "enterState": "राज्य",
+        "postalCode": "डाक कोड",
+        "country": "देश",
+        "enterCountry": "भारत",
+        "industry": "उद्योग",
+        "selectIndustry": "उद्योग चुनें",
+        "agriculture": "कृषि",
+        "surveyMapping": "सर्वेक्षण और मानचित्रण"
+      },
+      "ThirdModal": {
+        "serviceLocations": "सेवा स्थान",
+        "firstLatLong": "पहला अक्षांश/देशांतर",
+        "firstLatLongValue": "अक्षांश, देशांतर",
+        "secondLatLong": "दूसरा अक्षांश/देशांतर",
+        "thirdLatLong": "तीसरा अक्षांश/देशांतर",
+        "numberOfAcres": "एकड़ की संख्या",
+        "landAreaInAcres": "भूमि क्षेत्र (एकड़ में)"
+      }
     },
     "marketing": {
       "title": "मार्केटिंग डैशबोर्ड",
@@ -243,10 +320,7 @@
     "marketing": {
       "analytics": "विश्लेषण",
       "campaigns": "अभियान",
-      "audience": "दर्शक",
-      "socialMedia": "सोशल मीडिया",
-      "emailMarketing": "ईमेल मार्केटिंग",
-      "contentManagement": "सामग्री प्रबंधन"
+      "leadManagement": "लीड प्रबंधन"
     }
   },
   "stats": {
