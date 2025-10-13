@@ -56,6 +56,7 @@ import MessagePage from '../components/employee/employdashboard/MessagePage';
 import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
 import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
+import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
 
 const AppRoutes = createBrowserRouter([
@@ -131,36 +132,42 @@ const AppRoutes = createBrowserRouter([
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-       <EmployeeDashBoardLayout />
+        <EmployeeDashBoardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
       {
         index: true,
         element: <Dashboard />,
+      }, {
+
+        path: "customers/:customerId",
+        element: <CoustomerDetailsPage />
+
       },
       {
-        path:"customers",
-        element:<Coustomerpage/>
-        
-      },{
-        path:"report-analysis",
-        element:<ReportAnalysisPage/>
+        path: "customers",
+        element: <Coustomerpage />
+
       },
       {
-        path:"orders",
-        element:<OrderManagementPage/>
+        path: "report-analysis",
+        element: <ReportAnalysisPage />
       },
       {
-        path:"payments",
-        element:<PaymentManagement/>
-      },{
-        path:"supports",
-        element:<SupportPage/>
+        path: "orders",
+        element: <OrderManagementPage />
       },
       {
-        path:"messages",
-        element:<MessagePage/>
+        path: "payments",
+        element: <PaymentManagement />
+      }, {
+        path: "supports",
+        element: <SupportPage />
+      },
+      {
+        path: "messages",
+        element: <MessagePage />
       }
     ],
   },

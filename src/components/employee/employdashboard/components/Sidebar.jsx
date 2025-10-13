@@ -2,28 +2,24 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { HiMenuAlt3 } from 'react-icons/hi';
-import {
-  LayoutDashboard,
-  Users,
-  ShoppingCart,
-  CreditCard,
-  Headphones,
-  MessageCircle,
-  User,
-} from 'lucide-react';
-
+import { RiDashboardLine } from "react-icons/ri";
+import { PiUsersThreeBold } from "react-icons/pi";
+import { FiShoppingCart } from "react-icons/fi";
+import { FaRegCreditCard } from "react-icons/fa"
+import { LuHeadset } from "react-icons/lu";
+import { LuMessageCircle } from "react-icons/lu";
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
   const menuItems = [
-    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon: LayoutDashboard, path: "" },
-    { id: "customer", label: t("sidebar.employee.customer"), icon: User, path: "customers" },
-    { id: "orders", label: t("sidebar.employee.orders"), icon: ShoppingCart, path: "orders" },
-    { id: "payments", label: t("sidebar.employee.payments"), icon: CreditCard, path: "payments" },
-    { id: "support", label: t("sidebar.employee.support"), icon: Headphones, path: "supports" },
-    { id: "message", label:"Message", icon: MessageCircle, path: "messages" },
+    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon:RiDashboardLine , path: "" },
+    { id: "customer", label: t("sidebar.employee.customer"), icon: PiUsersThreeBold, path: "customers" },
+    { id: "orders", label: t("sidebar.employee.orders"), icon: FiShoppingCart, path: "orders" },
+    { id: "payments", label: t("sidebar.employee.payments"), icon:FaRegCreditCard, path: "payments" },
+    { id: "support", label: t("sidebar.employee.support"), icon: LuHeadset, path: "supports" },
+    { id: "message", label:"Message", icon: LuMessageCircle, path: "messages" },
   ];
 
   const handleNavigation = (path) => {
@@ -70,10 +66,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-200
                     ${isActive
                       ? 'bg-white border-l-4 border-green-600 font-semibold shadow-sm'
-                      : 'text-black hover:bg-gray-50 border-l-4 border-transparent'
+                      : 'text-[#002244] hover:bg-gray-50 border-l-4 border-transparent text-[16px]'
                     }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-green-600' : 'text-gray-500'}`} />
+                  <Icon className={`w-5 h-5 `} />
                   <span>{item.label}</span>
                 </button>
               );

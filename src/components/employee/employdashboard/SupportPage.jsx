@@ -17,7 +17,7 @@ const SupportPage = () => {
     const [supportData, setSupportData] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const { t} = useTranslation();
+    const { t } = useTranslation();
     const ITEMS_PER_PAGE = 4;
 
     // Fetch data from API or JSON
@@ -25,11 +25,11 @@ const SupportPage = () => {
         const fetchData = async () => {
             try {
                 // Replace this with your actual API endpoint
-               const response = await axiosInstance.get(
-          '/employee/data/support.json'
-        );
-        const data = response.data;
-                
+                const response = await axiosInstance.get(
+                    '/employee/data/support.json'
+                );
+                const data = response.data;
+
                 // Add default date if missing
                 const supportWithDate = data.supportData.map(item => ({
                     ...item,
@@ -95,7 +95,7 @@ const SupportPage = () => {
             <div className="mb-4 md:mb-6">
                 <h1 className="text-lg md:text-2xl font-bold text-gray-900"> {t('dashboard.employee.title.supportPageTitle')}</h1>
                 <p className="text-xs md:text-base text-gray-600">
-                   {t('dashboard.employee.subTitle.supportpageSub')}
+                    {t('dashboard.employee.subTitle.supportpageSub')}
                 </p>
             </div>
 
@@ -154,7 +154,7 @@ const SupportPage = () => {
                 </div>
 
                 <div className="overflow-x-auto overflow-y-visible">
-                    <table className="w-full">
+                    <table className="w-full table-fixed">
                         <thead className="bg-gray-50 border-b border-gray-200">
                             <tr>
                                 <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
@@ -185,13 +185,14 @@ const SupportPage = () => {
                                             <div className="relative inline-block w-full">
                                                 <button
                                                     onClick={() => toggleDropdown(index)}
-                                                    className={`w-full flex items-center justify-center gap-1 border border-gray-300 px-2 py-1 rounded transition-colors duration-200 ${activeDropdown === index ? 'bg-green-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-50'}`}
+                                                    className='text-2xl'
+
                                                 >
                                                     <BiChevronDown className={`transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''}`} />
-                                                    Action
+
                                                 </button>
                                                 {activeDropdown === index && (
-                                                    <div className="absolute right-0 top-full mt-1 w-48 bg-white border border-gray-200 rounded shadow-lg z-50">
+                                                    <div className="absolute right-40 top-full  w-48 bg-white border border-gray-200 rounded shadow-lg z-50">
                                                         <button
                                                             onClick={handleManageTicket}
                                                             className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors"
@@ -254,3 +255,4 @@ const SupportPage = () => {
 };
 
 export default SupportPage
+ 

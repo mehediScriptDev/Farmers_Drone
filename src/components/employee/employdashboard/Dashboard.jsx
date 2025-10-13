@@ -1,6 +1,17 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
 
-import { Users, ShoppingCart, CreditCard, Headphones, Eye, TrendingUp, TrendingDown, ChevronUp, ChevronDown } from "lucide-react";
+
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { LuEye } from "react-icons/lu";
+import { PiUsersThreeBold } from "react-icons/pi";
+import { FiShoppingCart } from "react-icons/fi";
+import { FaRegCreditCard } from "react-icons/fa"
+import { LuHeadset } from "react-icons/lu";
+import { IoMdTrendingUp } from "react-icons/io";
+import { IoMdTrendingDown } from "react-icons/io";
+import { FaChevronDown } from "react-icons/fa";
+import { FaChevronUp } from "react-icons/fa";
+import { IoIosCalendar } from "react-icons/io";
 
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../../../config/axiosConfig";
@@ -21,11 +32,10 @@ function DashBoard() {
     canceledOrders: 0,
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const { t } = useTranslation();
-
-
   const [mainModalOpen, setMainModalOpen] = useState(false);
   const [subModalType, setSubModalType] = useState(null);
   const [customerEmail, setCustomerEmail] = useState("");
@@ -78,42 +88,42 @@ function DashBoard() {
         label: t("dashboard.employee.pages.dashboard.card.1st"),
         value: summary.totalCustomers,
         trend: "up",
-        icon: Users,
+        icon: PiUsersThreeBold,
         bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.2nd"),
         value: summary.totalRevenue,
         trend: "up",
-        icon: ShoppingCart,
+        icon: FiShoppingCart,
         bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.3rd"),
         value: summary.pendingPayments,
         trend: "down",
-        icon: CreditCard,
+        icon: FaRegCreditCard,
         bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.4th"),
         value: summary.avgDuration,
         trend: "up",
-        icon: Headphones,
+        icon: LuHeadset,
         bgColor: "bg-[#ECFDF6]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.5th"),
         value: summary.completedOrders,
         trend: "up",
-        icon: ShoppingCart,
+        icon: FiShoppingCart,
         bgColor: "bg-[#ECFDF6]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.6th"),
         value: summary.canceledOrders,
         trend: "down",
-        icon: ShoppingCart,
+        icon: FiShoppingCart,
         bgColor: "bg-[#ECFDF6]"
       },
     ];
@@ -153,28 +163,28 @@ function DashBoard() {
     <div className="p-4 md:p-8 ">
       {/* Header */}
       <div className="mb-4 md:mb-6">
-        <h1 className="text-lg md:text-2xl font-bold text-gray-900 mb-2">{t('dashboard.employee.title.dashPageTitle')}</h1>
-        <p className="text-xs md:text-base text-gray-600">{t('dashboard.employee.subTitle.dashpageSub')}</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-[#002244] mb-2 text-center md:text-left">{t('dashboard.employee.title.dashPageTitle')}</h1>
+        <p className="text-sm md:text-base text-gray-600">{t('dashboard.employee.subTitle.dashpageSub')}</p>
       </div>
 
       {/* Period Select */}
       <div className="mb-4 md:mb-6 flex flex-col items-start gap-2 relative">
         <h2 className="text-lg md:text-xl font-normal text-gray-700">  {periodOptions.find(p => p.key === selectedPeriod)?.label || t("dashboard.employee.pages.dashboard.dropDown.last30days")}
           {t("dashboard.employee.pages.dashboard.dropDown.overview")}</h2>
-        <div className="relative w-52">
+        <div className="relative ">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2 bg-white border border-gray-300 rounded-xl text-xs md:text-sm text-gray-700 shadow-sm hover:shadow-md transition-all duration-200"
-          >
+            className="w-full flex items-center gap-4 px-3 py-2 md:px-4 md:py-2 bg-gray-50 border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-[#1A1A1A]  transition-all duration-200"
+          ><IoIosCalendar className="w-6 h-6  font-bold" />
             {
 
               periodOptions.find(p => p.key === selectedPeriod)?.label ||
               t("dashboard.employee.pages.dashboard.dropDown.last30days")
             }
             {dropdownOpen ? (
-              <ChevronUp className="w-4 h-4 text-gray-500" />
+              <FaChevronUp className="w-4 h-4 text-[#666666]" />
             ) : (
-              <ChevronDown className="w-4 h-4 text-gray-500" />
+              <FaChevronDown className="w-4 h-4 text-[#666666]" />
             )}
           </button>
           {dropdownOpen && (
@@ -209,7 +219,7 @@ function DashBoard() {
       {!loading && !error && (
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 md:gap-6 mb-6 md:mb-8">
           {summaryStats.map((stat, index) => {
-            const Icon = stat.icon || Users;
+            const Icon = stat.icon || PiUsersThreeBold;
             return (
               <div
                 key={index}
@@ -220,15 +230,15 @@ function DashBoard() {
                   <span className="text-gray-600 text-xs md:text-sm">{stat.label}</span>
                   <div className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
                   <div
-                    className={`text-xs md:text-sm flex items-center gap-1 ${stat.trend === "up" ? "text-green-600" : "text-red-600"
+                    className={` flex items-center gap-1 ${stat.trend === "up" ? "text-green-600" : "text-red-600"
                       }`}
                   >
                     {stat.trend === "up" ? (
-                      <TrendingUp className="w-3 h-3 md:w-4 md:h-4" />
+                      <IoMdTrendingUp className="w-3 h-3 md:w-4 md:h-4" />
                     ) : (
-                      <TrendingDown className="w-3 h-3 md:w-4 md:h-4" />
+                      <>  <IoMdTrendingDown className="w-3 h-3 md:w-4 md:h-4" /></>
                     )}
-                    {stat.trend === "up" ? "Increase" : "Decrease"}
+                    {stat.trend === "up" ? "+30 %" : " -7 %"}
                   </div>
                 </div>
 
@@ -246,7 +256,7 @@ function DashBoard() {
       )}
 
       {/* Activities Table */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{t('dashboard.employee.table.tableTitle')}</h2>
           <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
@@ -286,24 +296,100 @@ function DashBoard() {
                       {activity.servedBy}
                     </span>
                   </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <select className="px-2 md:px-3 py-1 bg-gray-700 text-white rounded text-xs md:text-sm">
-                      <option>{activity.progress}</option>
-                    </select>
+
+                  {/* ✅ Progress Dropdown */}
+                  <td className="px-3 md:px-6 py-4 relative">
+                    <div className="relative inline-block w-full">
+                      {/* Dropdown Button */}
+                      <button
+                        onClick={() =>
+                          setActivities((prev) =>
+                            prev.map((item) =>
+                              item.id === activity.id
+                                ? { ...item, dropdownOpen: !item.dropdownOpen }
+                                : { ...item, dropdownOpen: false }
+                            )
+                          )
+                        }
+                        className={`w-full flex justify-between items-center px-3 py-1 rounded text-xs md:text-sm 
+        transition-all duration-200
+        bg-[#394C6B] text-white hover:bg-[#28A844]
+      `}
+                      >
+                        {activity.progress}
+                        {activity.dropdownOpen ? (
+                          <FaChevronUp className="w-4 h-4 text-white pl-4" />
+                        ) : (
+                          <FaChevronDown className="w-4 h-4 text-white" />
+                        )}
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      {activity.dropdownOpen && (
+                        <div className="absolute z-20 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+                          <button
+                            onClick={() => {
+                              setActivities((prev) =>
+                                prev.map((item) =>
+                                  item.id === activity.id
+                                    ? { ...item, progress: "In Progress", dropdownOpen: false }
+                                    : item
+                                )
+                              );
+                            }}
+                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors
+            ${activity.progress === "In Progress"
+                                ? "bg-[#28A844] text-white"
+                                : "hover:bg-[#28A844] hover:text-white text-gray-700"
+                              }
+          `}
+                          >
+                            In Progress
+                          </button>
+
+                          <button
+                            onClick={() => {
+                              setActivities((prev) =>
+                                prev.map((item) =>
+                                  item.id === activity.id
+                                    ? { ...item, progress: "Completed", dropdownOpen: false }
+                                    : item
+                                )
+                              );
+                            }}
+                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors
+            ${activity.progress === "Completed"
+                                ? "bg-[#28A844] text-white"
+                                : "hover:bg-[#28A844] hover:text-white text-gray-700"
+                              }
+          `}
+                          >
+                            Completed
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </td>
+
+
+
                   <td className="px-3 md:px-6 py-4">
                     <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === "High" ? "text-red-600" : activity.priority === "Medium" ? "text-yellow-600" : "text-green-600"}`}>
                       {activity.priority}
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button className="text-gray-600 hover:text-gray-900">
-                      <Eye className="w-4 h-4 md:w-5 md:h-5" />
+                    <button
+                      onClick={() => navigate(`/employee/customers/${activity.id}`)}
+                      className="text-gray-600 hover:text-gray-900"
+                    >
+                      <LuEye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </td>
                 </tr>
               ))}
             </tbody>
+
           </table>
         </div>
 
