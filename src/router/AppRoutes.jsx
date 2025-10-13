@@ -232,7 +232,7 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "LeadManagment",
-        element : <LeadManagment/>
+        element : <Leads/>
       },{
         path : "analytics",
         element : <Anylytics/>
