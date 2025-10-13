@@ -1,0 +1,101 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { HiMenuAlt3 } from 'react-icons/hi';
+import {
+  LayoutDashboard,
+  Users,
+  ShoppingCart,
+  CreditCard,
+  Headphones,
+  MessageCircle,
+  User,
+} from 'lucide-react';
+
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const menuItems = [
+    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon: LayoutDashboard, path: "" },
+    { id: "customer", label: t("sidebar.employee.customer"), icon: User, path: "customers" },
+    { id: "orders", label: t("sidebar.employee.orders"), icon: ShoppingCart, path: "orders" },
+    { id: "payments", label: t("sidebar.employee.payments"), icon: CreditCard, path: "payments" },
+    { id: "support", label: t("sidebar.employee.support"), icon: Headphones, path: "supports" },
+    { id: "message", label:"Message", icon: MessageCircle, path: "messages" },
+  ];
+
+  const handleNavigation = (path) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(path);
+    setSidebarOpen(false);
+  };
+
+  return (
+    <>
+      {/* Mobile Menu Button */}
+      {!sidebarOpen && (
+        <div className='lg:hidden fixed top-4 left-4 z-50'>
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className='bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200'
+          >
+            <HiMenuAlt3 className='w-5 h-5 text-gray-700' />
+          </button>
+        </div>
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-gray-100 shadow-lg transform transition-transform duration-300 ease-in-out
+        lg:translate-x-0 lg:static lg:inset-0
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      >
+        <div className='flex flex-col h-full'>
+          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const pathSegments = location.pathname.split('/').filter(Boolean);
+              const currentPath = pathSegments[pathSegments.length - 1] || '';
+              const isActive =
+                (item.path === '' && pathSegments.length === 1) || 
+                currentPath === item.path;
+
+              return (
+                <button
+                  key={item.id}
+                  type='button'
+                  onClick={() => handleNavigation(item.path)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-200
+                    ${isActive
+                      ? 'bg-white border-l-4 border-green-600 font-semibold shadow-sm'
+                      : 'text-black hover:bg-gray-50 border-l-4 border-transparent'
+                    }`}
+                >
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-green-600' : 'text-gray-500'}`} />
+                  <span>{item.label}</span>
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+      </div>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className='fixed inset-0 z-30 bg-black/40 lg:hidden transition-opacity duration-300'
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+    </>
+  );
+};
+
+export default Sidebar;
+
+
+
+
+

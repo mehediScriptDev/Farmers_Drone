@@ -8,7 +8,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 
 // Dashboard Components
 import AdminDashboard from '../components/admin/components/AdminDashboard';
-import EmployeeDashboard from '../components/employee/EmployeeDashboard';
+
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
 import MarketingDashboard from '../components/marketing/MarketingDashboard';
 
@@ -21,14 +21,6 @@ import Jobs from '../components/admin/components/Jobs';
 import PaymentsManagement from '../components/admin/components/PaymentsManagement';
 import Reports from '../components/admin/components/Reports';
 import UserManagement from '../components/admin/components/UserManagement';
-
-// Employee Components
-import Profile from '../components/employee/Profile';
-import EmployeeReports from '../components/employee/Reports';
-import Schedule from '../components/employee/Schedule';
-import Training from '../components/employee/Training';
-import Messages from '../components/employee/Messages';
-import MyTasks from '../components/employee/MyTasks';
 
 // Field Agent Components
 import FieldAgentReports from '../components/fieldAgent/Reports';
@@ -59,7 +51,15 @@ import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
 import Blog from './../LandingPageUI/Pages/Blog';
-import Contact  from './../LandingPageUI/Pages/Contact';
+import Contact from './../LandingPageUI/Pages/Contact';
+import EmployeeDashBoardLayout from '../components/employee/employdashboard/EmployeeDashBoardLayout';
+import Dashboard from '../components/employee/employdashboard/Dashboard';
+import Coustomerpage from '../components/employee/employdashboard/Coustomerpage';
+import OrderManagementPage from '../components/employee/employdashboard/OrderManagementPage';
+import MessagePage from '../components/employee/employdashboard/MessagePage';
+import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
+import SupportPage from '../components/employee/employdashboard/SupportPage';
+import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -84,12 +84,12 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: '/contact',
-        element: <Contact/>,
+        element: <Contact />,
       },
       {
         path: 'login',
-        element: <LoginPage/>
-      }
+        element: <LoginPage />,
+      },
     ],
   },
   {
@@ -136,44 +136,43 @@ const AppRoutes = createBrowserRouter([
         path: 'users',
         element: <UserManagement />,
       },
-      
     ],
   },
   {
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-        <DashboardLayout />
+        <EmployeeDashBoardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
       {
         index: true,
-        element: <EmployeeDashboard />,
+        element: <Dashboard />,
       },
       {
-        path: 'profile',
-        element: <Profile />,
+        path: 'customers',
+        element: <Coustomerpage />,
       },
       {
-        path: 'reports',
-        element: <EmployeeReports />,
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
       },
       {
-        path: 'schedule',
-        element: <Schedule />,
+        path: 'orders',
+        element: <OrderManagementPage />,
       },
       {
-        path: 'training',
-        element: <Training />,
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
       },
       {
         path: 'messages',
-        element: <Messages />,
-      },
-      {
-        path: 'tasks',
-        element: <MyTasks />,
+        element: <MessagePage />,
       },
     ],
   },
