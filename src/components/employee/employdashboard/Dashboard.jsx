@@ -1,7 +1,3 @@
-
-
-
-
 import { useState, useEffect, useMemo, useCallback } from "react";
 
 import { Users, ShoppingCart, CreditCard, Headphones, Eye, TrendingUp, TrendingDown, ChevronUp, ChevronDown } from "lucide-react";
@@ -58,11 +54,11 @@ function DashBoard() {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-         const response = await axiosInstance.get(
+        const response = await axiosInstance.get(
           '/employee/data/dashboardOverviewData.json'
         );
         const data = response.data;
-        
+
         setActivities(data.recentActivities || []);
         setSummary(data.summary || {});
         setLoading(false);
@@ -83,42 +79,42 @@ function DashBoard() {
         value: summary.totalCustomers,
         trend: "up",
         icon: Users,
-        bgColor:"bg-[#F7FFE5]"
+        bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.2nd"),
         value: summary.totalRevenue,
         trend: "up",
         icon: ShoppingCart,
-         bgColor:"bg-[#F7FFE5]"
+        bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.3rd"),
         value: summary.pendingPayments,
         trend: "down",
         icon: CreditCard,
-         bgColor:"bg-[#F7FFE5]"
+        bgColor: "bg-[#F7FFE5]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.4th"),
         value: summary.avgDuration,
         trend: "up",
         icon: Headphones,
-         bgColor:"bg-[#ECFDF6]"
+        bgColor: "bg-[#ECFDF6]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.5th"),
         value: summary.completedOrders,
         trend: "up",
         icon: ShoppingCart,
-         bgColor:"bg-[#ECFDF6]"
+        bgColor: "bg-[#ECFDF6]"
       },
       {
         label: t("dashboard.employee.pages.dashboard.card.6th"),
         value: summary.canceledOrders,
         trend: "down",
         icon: ShoppingCart,
-         bgColor:"bg-[#ECFDF6]"
+        bgColor: "bg-[#ECFDF6]"
       },
     ];
   }, [t, summary]);
@@ -212,40 +208,39 @@ function DashBoard() {
       {/* Stats */}
       {!loading && !error && (
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 md:gap-6 mb-6 md:mb-8">
-        {summaryStats.map((stat, index) => {
-  const Icon = stat.icon || Users;
-  return (
-    <div
-      key={index}
-      className="bg-white p-3 md:p-4 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center"
-    >
-      {/* Left Side Text */}
-      <div>
-        <span className="text-gray-600 text-xs md:text-sm">{stat.label}</span>
-        <div className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-        <div
-          className={`text-xs md:text-sm flex items-center gap-1 ${
-            stat.trend === "up" ? "text-green-600" : "text-red-600"
-          }`}
-        >
-          {stat.trend === "up" ? (
-            <TrendingUp className="w-3 h-3 md:w-4 md:h-4" />
-          ) : (
-            <TrendingDown className="w-3 h-3 md:w-4 md:h-4" />
-          )}
-          {stat.trend === "up" ? "Increase" : "Decrease"}
-        </div>
-      </div>
+          {summaryStats.map((stat, index) => {
+            const Icon = stat.icon || Users;
+            return (
+              <div
+                key={index}
+                className="bg-white p-3 md:p-4 rounded-lg shadow-sm border border-gray-200 flex justify-between items-center"
+              >
+                {/* Left Side Text */}
+                <div>
+                  <span className="text-gray-600 text-xs md:text-sm">{stat.label}</span>
+                  <div className="text-xl md:text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                  <div
+                    className={`text-xs md:text-sm flex items-center gap-1 ${stat.trend === "up" ? "text-green-600" : "text-red-600"
+                      }`}
+                  >
+                    {stat.trend === "up" ? (
+                      <TrendingUp className="w-3 h-3 md:w-4 md:h-4" />
+                    ) : (
+                      <TrendingDown className="w-3 h-3 md:w-4 md:h-4" />
+                    )}
+                    {stat.trend === "up" ? "Increase" : "Decrease"}
+                  </div>
+                </div>
 
-      {/* Right Side Icon */}
-      <div
-        className={`w-10 h-10 md:w-12 md:h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}
-      >
-        <Icon className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
-      </div>
-    </div>
-  );
-})}
+                {/* Right Side Icon */}
+                <div
+                  className={`w-10 h-10 md:w-12 md:h-12 ${stat.bgColor} rounded-lg flex items-center justify-center`}
+                >
+                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
+                </div>
+              </div>
+            );
+          })}
 
         </div>
       )}
@@ -302,7 +297,7 @@ function DashBoard() {
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button  className="text-gray-600 hover:text-gray-900">
+                    <button className="text-gray-600 hover:text-gray-900">
                       <Eye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
                   </td>
@@ -324,7 +319,7 @@ function DashBoard() {
         </div>
       </div>
 
-{/* Modals */}
+      {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
       {/* <AssistProfileSetupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
       <AssistProfileSetupModal2
@@ -350,7 +345,7 @@ function DashBoard() {
         onClose={handleCloseSubModal}
         email={customerEmail}
       />
-      
+
     </div>
   );
 }
