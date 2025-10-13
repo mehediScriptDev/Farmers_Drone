@@ -3,48 +3,41 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiTarget } from "react-icons/fi";
-import {
-  LayoutDashboard,
-  Plane,
-  Users,
-  UserCheck,
-  MapPin,
-  Briefcase,
-  CreditCard,
-  BarChart3,
-  AlertTriangle,
-} from "lucide-react";
+
+import {FiUsers} from "react-icons/fi";
+import { FaChartBar } from "react-icons/fa6";
+import { BiGridAlt } from "react-icons/bi";
 
 const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
+   const menuItems = [
     {
       id: "dashboard",
       label: t("navigation.dashboard"),
-      icon: LayoutDashboard,
+      icon: BiGridAlt,
       path: "", // This will be the index route
     },
     {
       id: "campaigns",
-      label: "Campaigns",
-      icon: FiTarget,
+      label: t("sidebar.marketing.campaigns"),
+      icon: FiTarget ,
       path: "campaigns",
     },
     {
-      id: "users",
-      label: "Lead Management",
-      icon: Users,
-      path: "leads",
+      id: "Lead_managment",
+      label: t("sidebar.marketing.leadManagement"),
+      icon: FiUsers,
+      path: "LeadManagment",
     },
     {
-      id: "employees",
-      label: t("sidebar.admin.employeeManagement"),
-      icon: UserCheck,
-      path: "employees",
-    },
+      id: "analytics",
+      label: t("sidebar.marketing.analytics"),
+      icon: FaChartBar,
+      path: "analytics",
+    }
   ];
 
   return (
@@ -65,7 +58,7 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div
         className={`bg-[#EAEDF4] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 w-[304px] xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
           {/* Menu Items */}

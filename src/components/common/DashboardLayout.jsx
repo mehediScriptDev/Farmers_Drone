@@ -26,9 +26,9 @@ export const DashboardLayout = () => {
       <EmployeeSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )}
    
-    {user?.role === 'field_agent' && (
+    {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-    )}
+    )} */}
     <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
       <div className="w-full">
         <Outlet />

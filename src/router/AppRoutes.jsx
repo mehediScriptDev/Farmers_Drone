@@ -58,6 +58,8 @@ import Leads from './../components/marketing/Leads';
 import DashBoard from '../components/marketing/components/DashBoard';
 import LeadManagment from '../components/marketing/components/LeadManagment';
 import Anylytics from '../components/marketing/components/Anylytics';
+import MarketingDashboard from './../components/marketing/MarketingDashboard';
+import Campaigns from './../components/marketing/Campaigns';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -222,11 +224,11 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashBoard/>
+        element: <MarketingDashboard/>
       },
       {
         path :"campaigns",
-        element : <div>camp</div>
+        element : <Campaigns/>
       },
       {
         path: "LeadManagment",

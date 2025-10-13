@@ -2,78 +2,25 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import {
-  LayoutDashboard,
-  Plane,
-  Users,
-  UserCheck,
-  MapPin,
-  Briefcase,
-  CreditCard,
-  BarChart3,
-  AlertTriangle,
-} from "lucide-react";
+import { RiDashboardLine } from "react-icons/ri";
+import { PiUsersThreeBold } from "react-icons/pi";
+import { FiShoppingCart } from "react-icons/fi";
+import { FaRegCreditCard } from "react-icons/fa"
+import { LuHeadset } from "react-icons/lu";
+import { LuMessageCircle } from "react-icons/lu";
 
 const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
-    {
-      id: "dashboard",
-      label: t("navigation.dashboard"),
-      icon: LayoutDashboard,
-      path: "", // This will be the index route
-    },
-    {
-      id: "drone-operators",
-      label: t("sidebar.admin.droneOperator"),
-      icon: Plane,
-      path: "drone-operators",
-    },
-    {
-      id: "users",
-      label: t("sidebar.admin.userManagement"),
-      icon: Users,
-      path: "users",
-    },
-    {
-      id: "employees",
-      label: t("sidebar.admin.employeeManagement"),
-      icon: UserCheck,
-      path: "employees",
-    },
-    {
-      id: "field-agents",
-      label: t("sidebar.admin.fieldAgent"),
-      icon: MapPin,
-      path: "field-agents",
-    },
-    {
-      id: "jobs",
-      label: t("sidebar.admin.jobs"),
-      icon: Briefcase,
-      path: "jobs",
-    },
-    {
-      id: "payments",
-      label: t("sidebar.admin.paymentsManagement"),
-      icon: CreditCard,
-      path: "payments",
-    },
-    {
-      id: "reports",
-      label: t("sidebar.admin.reports"),
-      icon: BarChart3,
-      path: "reports",
-    },
-    {
-      id: "complaints",
-      label: t("sidebar.admin.complaints"),
-      icon: AlertTriangle,
-      path: "complaints",
-    },
+    const menuItems = [
+    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon:RiDashboardLine , path: "" },
+    { id: "customer", label: t("sidebar.employee.customer"), icon: PiUsersThreeBold, path: "customers" },
+    { id: "orders", label: t("sidebar.employee.orders"), icon: FiShoppingCart, path: "orders" },
+    { id: "payments", label: t("sidebar.employee.payments"), icon:FaRegCreditCard, path: "payments" },
+    { id: "support", label: t("sidebar.employee.support"), icon: LuHeadset, path: "supports" },
+    { id: "message", label:"Message", icon: LuMessageCircle, path: "messages" },
   ];
 
   return (
