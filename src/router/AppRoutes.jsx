@@ -60,6 +60,7 @@ import MessagePage from '../components/employee/employdashboard/MessagePage';
 import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
 import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
+import Leads from './../components/marketing/Leads';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -235,8 +236,8 @@ const AppRoutes = createBrowserRouter([
         element: <Campaigns />,
       },
       {
-        path: 'content-management',
-        element: <ContentManagement />,
+        path: 'leads',
+        element: <Leads />,
       },
       {
         path: 'email-marketing',

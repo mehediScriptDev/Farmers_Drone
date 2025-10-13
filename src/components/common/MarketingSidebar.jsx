@@ -2,6 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { FiTarget } from "react-icons/fi";
 import {
   LayoutDashboard,
   Plane,
@@ -14,7 +15,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,52 +28,22 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       path: "", // This will be the index route
     },
     {
-      id: "drone-operators",
-      label: t("sidebar.admin.droneOperator"),
-      icon: Plane,
-      path: "drone-operators",
+      id: "campaigns",
+      label: "Campaigns",
+      icon: FiTarget,
+      path: "campaigns",
     },
     {
       id: "users",
-      label: t("sidebar.admin.userManagement"),
+      label: "Lead Management",
       icon: Users,
-      path: "users",
+      path: "leads",
     },
     {
       id: "employees",
       label: t("sidebar.admin.employeeManagement"),
       icon: UserCheck,
       path: "employees",
-    },
-    {
-      id: "field-agents",
-      label: t("sidebar.admin.fieldAgent"),
-      icon: MapPin,
-      path: "field-agents",
-    },
-    {
-      id: "jobs",
-      label: t("sidebar.admin.jobs"),
-      icon: Briefcase,
-      path: "jobs",
-    },
-    {
-      id: "payments",
-      label: t("sidebar.admin.paymentsManagement"),
-      icon: CreditCard,
-      path: "payments",
-    },
-    {
-      id: "reports",
-      label: t("sidebar.admin.reports"),
-      icon: BarChart3,
-      path: "reports",
-    },
-    {
-      id: "complaints",
-      label: t("sidebar.admin.complaints"),
-      icon: AlertTriangle,
-      path: "complaints",
     },
   ];
 
@@ -92,7 +63,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-[#F5F7FA] shadow-lg transform ${
+        className={`bg-[#EAEDF4] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 overflow-y-auto`}
       >
@@ -108,6 +79,26 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 currentPath === item.path;
 
               return (
+                // <button
+                //   key={item.id}
+                //   type='button'
+                //   onClick={() => {
+                //     navigate(item.path);
+                //     setSidebarOpen(false);
+                //   }}
+                //   className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-200 ${
+                //     isActive
+                //       ? 'bg-white border-l-4 border-green-600 font-semibold shadow-sm'
+                //       : 'text-black hover:bg-gray-50'
+                //   }`}
+                // >
+                //   <Icon
+                //     className={`w-5 h-5 ${
+                //       isActive ? 'text-green-600' : 'text-gray-500'
+                //     }`}
+                //   />
+                //   <span>{item.label}</span>
+                // </button>
                 <button
                   key={item.id}
                   type="button"
@@ -115,11 +106,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     navigate(item.path);
                     setSidebarOpen(false);
                   }}
-                  
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-300 ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
                     isActive
-                      ? "bg-white border-l-4 border-green-600 font-semibold shadow-sm"
-                      : "text-black hover:bg-gray-50 border-l-4 border-transparent"
+                      ? "bg-white border-green-600 font-semibold shadow-sm"
+                      : "border-transparent text-black hover:bg-gray-50"
                   }`}
                 >
                   <Icon
@@ -146,4 +136,4 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default Sidebar;
+export default MarketingSidebar;

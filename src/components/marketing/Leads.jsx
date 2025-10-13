@@ -177,12 +177,12 @@ const Leads = () => {
   ];
 
   return (
-    <div className="">
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100">
-        <div className="p-6 border-b border-gray-100">
+    <div className="w-11/12 lg:w-[96%] mx-auto py-5">
+      <div className="bg-white  rounded-xl shadow-sm border border-gray-100">
+        <div className="p-4 border-b border-gray-100">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-2">
             <div>
-              <h2 className="text-xl lg:text-4xl font-bold text-gray-900 mb-2">
+              <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-2">
                 Lead Management
               </h2>
               <p className="text-sm lg:text-[16px] text-gray-600">

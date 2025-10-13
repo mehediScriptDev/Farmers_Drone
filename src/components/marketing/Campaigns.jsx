@@ -3,26 +3,30 @@ import React, { useState, useRef, useEffect } from "react";
 
 
 const Campaigns = () => {
-   const [seasonalCampaigns, setSeasonalCampaigns] = useState([]);
+  const [seasonalCampaigns, setSeasonalCampaigns] = useState([]);
   const [loyaltyCampaigns, setLoyaltyCampaigns] = useState([]);
   const [seasonalPage, setSeasonalPage] = useState(1);
   const [loyaltyPage, setLoyaltyPage] = useState(1);
   // campaigns create btns modal
-  const [seasonalModalOpen,setSeasonalModalOpen] = useState(false);
-  const [loyaltyCampagnMopen,setLoyaltyCampagnMopen] = useState(false);
+  const [seasonalModalOpen, setSeasonalModalOpen] = useState(false);
+  const [loyaltyCampagnMopen, setLoyaltyCampagnMopen] = useState(false);
 
-  console.log("season modal", seasonalModalOpen, "loyaltimodal",loyaltyCampagnMopen);
-  
+  console.log(
+    "season modal",
+    seasonalModalOpen,
+    "loyaltimodal",
+    loyaltyCampagnMopen
+  );
 
- useEffect(()=>{
-  axios.get('/Campaigns.json')
-  .then(res=>{
-    setSeasonalCampaigns(res.data.seasonalCampaigns)
-    setLoyaltyCampaigns(res.data.loyaltyCampaigns)
-    
-  })
-  .catch(err=>console.log(err))
- },[])
+  useEffect(() => {
+    axios
+      .get("/Campaigns.json")
+      .then((res) => {
+        setSeasonalCampaigns(res.data.seasonalCampaigns);
+        setLoyaltyCampaigns(res.data.loyaltyCampaigns);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const itemsPerPage = 5;
 
@@ -60,17 +64,22 @@ const Campaigns = () => {
     setCurrentPage,
     totalPages,
     totalItems,
-    createClick
+    createClick,
   }) => (
-    <div className="bg-white rounded-lg shadow mb-8 p-6">
+    <div className="bg-white w-11/12 lg:w-[96%] mx-auto rounded-lg shadow mb-8 p-4">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
-        <h2 className="text-xl lg:text-3xl xl:text-4xl font-bold text-center lg:text-left text-gray-900">{title}</h2>
-        <button onClick={createClick} className="bg-green-500 mt-2 hover:bg-green-600 text-gray-900 px-4 py-2 rounded text-sm font-medium flex items-center">
+        <h2 className="text-xl lg:text-3xl  font-bold text-center lg:text-left text-gray-900">
+          {title}
+        </h2>
+        <button
+          onClick={createClick}
+          className="bg-green-500 mt-2 hover:bg-green-600 text-gray-900 px-4 py-2 rounded text-sm font-medium flex items-center"
+        >
           <span className="mr-1">+</span> Create Campaign
         </button>
       </div>
 
-      <div className="overflow-x-auto h-[527px]">
+      <div className="overflow-x-auto h-[500px]">
         <table className="w-full lg:table-auto">
           <thead className="sticky top-0 bg-gray-100 z-10">
             <tr className="border border-gray-200">
@@ -163,7 +172,7 @@ const Campaigns = () => {
           setCurrentPage={setSeasonalPage}
           totalPages={totalSeasonalPages}
           totalItems={seasonalCampaigns.length}
-          createClick={()=>setSeasonalModalOpen(true)}
+          createClick={() => setSeasonalModalOpen(true)}
         />
 
         {/* Loyalty Campaign Table */}
@@ -175,7 +184,7 @@ const Campaigns = () => {
             setCurrentPage={handleLoyaltyPageChange}
             totalPages={totalLoyaltyPages}
             totalItems={loyaltyCampaigns.length}
-            createClick={()=>setLoyaltyCampagnMopen(true)}
+            createClick={() => setLoyaltyCampagnMopen(true)}
           />
         </div>
       </div>
