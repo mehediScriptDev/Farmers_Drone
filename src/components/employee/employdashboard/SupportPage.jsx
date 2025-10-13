@@ -90,7 +90,7 @@ const SupportPage = () => {
     };
 
     return (
-        <div className="flex-1 p-4 md:p-8 bg-gray-50 min-h-screen">
+        <div className="flex-1 p-4 md:p-8 bg-[#fafffd] min-h-screen">
             {/* Header */}
             <div className="mb-4 md:mb-6">
                 <h1 className="text-lg md:text-2xl font-bold text-gray-900"> {t('dashboard.employee.title.supportPageTitle')}</h1>

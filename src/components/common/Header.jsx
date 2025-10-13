@@ -16,7 +16,7 @@ export const Header = () => {
   const { user } = useAuth();
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
+    <header className="bg-white shadow-sm sticky top-0 z-30">
       <nav
         className={`${
           user?.role === "field_agent" ? "max-w-7xl w-11/12" : "w-[95%]"

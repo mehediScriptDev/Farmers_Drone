@@ -162,7 +162,7 @@ const Campaigns = () => {
   );
 
   return (
-    <div className="min-h-screen w-full">
+    <div className="min-h-screen bg-[#fafffd] w-full">
       <div className="w-full  py-6">
         {/* Seasonal Campaign Table */}
         <CampaignTable

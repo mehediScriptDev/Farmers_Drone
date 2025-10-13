@@ -30,7 +30,7 @@ export const DashboardLayout = () => {
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
     <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-      <div className="w-full">
+      <div className="w-full bg-[#fafffd]">
         <Outlet />
       </div>
     </main>
