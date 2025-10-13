@@ -140,7 +140,7 @@ const AppRoutes = createBrowserRouter([
     path: '/employee',
     element: (
       <PrivateEmployeeRoute>
-        <EmployeeDashBoardLayout />
+        <DashboardLayout />
       </PrivateEmployeeRoute>
     ),
     children: [
@@ -178,7 +178,7 @@ const AppRoutes = createBrowserRouter([
     path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
-        <FieldAgentDashboard />
+        <DashboardLayout />
       </PrivateFieldAgentRoute>
     ),
     children: [
@@ -216,7 +216,7 @@ const AppRoutes = createBrowserRouter([
     path: '/marketing',
     element: (
       <PrivateMarketingRoute>
-        <MarketingDashboardLayout />
+        <DashboardLayout />
       </PrivateMarketingRoute>
     ),
     children: [

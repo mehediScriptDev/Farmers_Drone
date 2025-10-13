@@ -4,6 +4,9 @@ import Sidebar from './Sidebar';
 import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
+import EmployeeSidebar from './EmployeeSidebar';
+import FieldAgent from '../admin/components/FieldAgent';
+import FieldSidebar from './FieldSidebar';
 
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -18,6 +21,13 @@ export const DashboardLayout = () => {
     )}
     {user?.role === 'marketing' && (
       <MarketingSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    )}
+    {user?.role === 'employee' && (
+      <EmployeeSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+    )}
+   
+    {user?.role === 'field_agent' && (
+      <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )}
     <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
       <div className="w-full">
