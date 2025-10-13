@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 
 /* Ensure full width layout */
 html,
@@ -6,7 +7,7 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+ 
 }
 
 #root {
@@ -14,7 +15,7 @@ body {
   min-height: 100vh;
 }
 
-:root {
+/* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -27,7 +28,7 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
 
 
@@ -63,13 +64,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 } */
 
-@media (prefers-color-scheme: light) {
+.active{
+  border-radius: 0%;
+  border-bottom: 2px solid rgb(61, 230, 61);
+}
+
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
-  }
+  } */
 
   /* button {
     background-color: #f9f9f9;
   } */
-}
+/* } */

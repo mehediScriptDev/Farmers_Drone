@@ -195,8 +195,85 @@
       }
     },
     "fieldAgent": {
-      "title": "Field Agent Dashboard",
-      "welcome": "Welcome back, Field Agent"
+      "fieldAgentSummery": {
+        "userAdded": "Total user added by you",
+        "ActiveCustomers": "Active Customers",
+        "totalcommition": "Total commission earned",
+        "totalPayments": "Ourstanding payments"
+      },
+      "userAdd": {
+        "AddedByYou": "Added by you",
+        "AddCustomer": "Add Customer"
+      },
+      "tableHeader": {
+        "CustomerList": "Customer List",
+        "Role": "Role",
+        "RegistrationCommission": "Registration Commission",
+        "FirstOrderCommission": "First Order Commission",
+        "EffectiveDate": "Effective Date",
+        "RegistrationDate": "Registration Date",
+        "CustomerType": "Customer Type",
+        "NextFollowUpDate": "Next Follow-up Date",
+        "ServiceInterest": "Service Interest",
+        "QuickActions": "Quick Actions"
+      },
+      "pagination": {
+        "showing": "Showing",
+        "users": "Users",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "FirstModal": {
+        "addCustomer": "Add Customer",
+        "customerInfo": "Customer Info",
+        "firstName": "First name",
+        "middleName": "Middle name",
+        "lastName": "Last name",
+        "alsoKnownAs": "Also Known As",
+        "nickname": "Nickname",
+        "phone": "Phone",
+        "email": "Email",
+        "geoLocation": "Geo location",
+        "selectOnMap": "Select on map",
+        "district": "District",
+        "enterDistrict": "Enter your District name",
+        "mandal": "Mandal",
+        "enterMandal": "Enter your Mandal name",
+        "village": "Village",
+        "enterVillage": "Enter your Village name",
+        "registeredBy": "Registered By",
+        "selectAgent": "Select Agent",
+        "FieldAgent": "Agent 1",
+        "next": "Next",
+        "confirmRegistration": "Confirm Registration"
+      },
+      "SecondModal": {
+        "addressDetails": "Address Details",
+        "kycDocumentsUpload": "KYC Documents Upload",
+        "street": "Street",
+        "streetAddress": "Street address",
+        "city": "City",
+        "enterCity": "City",
+        "state": "State",
+        "enterState": "State",
+        "postalCode": "Postal Code",
+        "enterPostalCode": "400020",
+        "country": "Country",
+        "enterCountry": "India",
+        "industry": "Industry",
+        "selectIndustry": "Select industry",
+        "agriculture": "Agriculture",
+        "surveyMapping": "Survey & Mapping"
+      },
+      "ThirdModal": {
+        "serviceLocations": "Service Locations",
+        "firstLatLong": "1st Latitude/Longitude",
+        "firstLatLongValue": "Lat, Long",
+        "secondLatLong": "2nd Latitude/Longitude",
+        "thirdLatLong": "3rd Latitude/Longitude",
+        "numberOfAcres": "Number of acres",
+        "landAreaInAcres": "Land area in acres"
+      }
     },
     "marketing": {
       "title": "Marketing Dashboard",
@@ -204,7 +281,7 @@
     }
   },
   "sidebar": {
-    "prasadDashboard": "Demo Logo",
+    "prasadDashboard": "Prasad Dashboard",
     "admin": {
       "droneOperator": "Drone operator",
       "userManagement": "User management",
@@ -231,48 +308,16 @@
       "reports": "Reports"
     },
     "marketing": {
-      "analytics": "Analytics",
       "campaigns": "Campaigns",
-      "audience": "Audience",
-      "socialMedia": "Social Media",
-      "emailMarketing": "Email Marketing",
-      "contentManagement": "Content Management"
+      "leadManagement"  :"Lead Management",
+      "analytics": "Analytics"
     }
   },
   "stats": {
     "totalUsers": "Total Users",
     "activeSessions": "Active Sessions",
     "totalRevenue": "Total Revenue",
-    "openComplaints": "Open Complaints",
-    "activeUser": "Active User",
-    "totalJobs": "Total Jobs",
-    "revenue": "Revenue",
-    "complaints": "Complaints",
-    "ticket": "Ticket",
-    "lastSevenDaysRevenue": "Last 7 days revenue",
-    "recentUserActivity": "Recent User Activity"
-  },
-  "pagination": {
-    "previous": "Previous",
-    "next": "Next",
-    "showing": "Showing",
-    "of": "of",
-    "users": "Users"
-  },
-  "table": {
-    "headers": {
-      "user": "User",
-      "role": "Role",
-      "jobTitle": "Job title",
-      "status": "Status",
-      "lastActive": "Last Active",
-      "actions": "Actions"
-    },
-    "status": {
-      "completed": "Completed",
-      "inProgress": "In Progress",
-      "notStarted": "Not started"
-    }
+    "openComplaints": "Open Complaints"
   },
   "home": {
     "title": "Welcome to Prasad Dashboard",
@@ -387,10 +432,235 @@
   },
   "common": {
     "logout": "Logout",
-    "pageNotFound": "Page not found",
-    "error": "Error",
-    "retry": "Retry",
-    "noData": "No data available",
-    "manageAndMonitor": "Manage and monitor"
+    "pageNotFound": "Page not found"
+  },
+    "hero": {
+    "tagline": "Professional Drone Services Across India",
+    "title": "Elevate Your Business with Advanced",
+    "highlight": "Drone Solutions",
+    "description": "From precision agriculture to infrastructure inspection, we deliver cutting-edge aerial solutions for enterprises, government, and specialized industries.",
+    "cta": "Book a Service"
+  },
+  "landingstats": {
+  "satisfiedClients": "Satisfied Clients",
+  "projectsCompleted": "Projects Completed",
+  "industryCertifications": "Industry Certifications",
+  "clientSatisfaction": "Client Satisfaction"
+},
+  "industries": {
+    "header": "Industries We Serve",
+    "subheader": "Specialized drone solutions tailored to your industry needs",
+    "learnMore": "Learn more",
+    "viewAllServices": "View All Services",
+    "agriculture": {
+      "title": "Agriculture & Farming",
+      "description": "Advanced aerial solutions for agriculture & farming"
+    },
+    "construction": {
+      "title": "Construction",
+      "description": "Advanced aerial solutions for construction"
+    },
+    "energy": {
+      "title": "Energy & Utilities",
+      "description": "Advanced aerial solutions for energy & utilities"
+    },
+    "publicSafety": {
+      "title": "Public Safety & Government",
+      "description": "Advanced aerial solutions for public safety & government"
+    }
+  },
+  "blogs": {
+    "header": "Blog & Research",
+    "subheader": "Explore industry insights, learn from real success stories, and gain in-depth knowledge through our expert whitepapers.",
+    "learnMore": "Learn more",
+    "viewAll": "View All Blog & Research",
+    "agriculture": {
+      "category": "Industry Insights",
+      "title": "The Future of Precision Agriculture in India",
+      "description": "How drone technology is revolutionizing farming practices and increasing yields by up to 30%."
+    },
+    "construction": {
+      "category": "Success Stories",
+      "title": "5 Drone Innovations in Construction",
+      "description": "Real-world examples of how leading construction firms are using drones to save time and money."
+    }
+  },
+  "faq": {
+    "header": "Frequently Asked Questions",
+    "q1": "What areas do you serve?",
+    "a1": "We provide drone services across all 28 states and 8 union territories of India. Our team can deploy within 24-48 hours for most locations.",
+    "q2": "Are your pilots certified?",
+    "a2": "Yes, all our pilots are certified by DGCA (Directorate General of Civil Aviation) and have extensive training and experience in commercial drone operations.",
+    "q3": "How do I book a drone service?",
+    "a3": "You can book our services through our website, mobile app, or by calling our customer service team. We'll discuss your requirements and provide a customized quote.",
+    "q4": "What is the typical turnaround time for data delivery?",
+    "a4": "Standard turnaround time is 3-5 business days for processed data. Rush delivery options are available for urgent projects with delivery in 24-48 hours.",
+    "q5": "How long does pilot training take?",
+    "a5": "Our comprehensive pilot training program takes 4-6 weeks, including both theoretical knowledge and practical flying sessions, culminating in DGCA certification.",
+    "q6": "Can you integrate with our existing systems?",
+    "a6": "Yes, we offer API integration and can work with most enterprise systems. Our technical team will coordinate with your IT department for seamless integration.",
+    "q7": "What data formats do you deliver?",
+    "a7": "We deliver data in multiple formats including GeoTIFF, JPG, PNG, PDF reports, CAD files, and 3D models. Custom formats can be provided based on your requirements.",
+    "q8": "Do you offer subscription packages?",
+    "a8": "Yes, we offer flexible subscription packages for regular monitoring and inspection services. Contact us to discuss a custom package that fits your needs."
+  },
+  
+  "about": {
+    "header": "About Hindustan Drone Services",
+    "description": "India's premier drone service provider, delivering excellence in aerial solutions since 2018. Trusted by government agencies, Fortune 500 companies, and enterprises across the nation."
+  },
+   "mission": {
+    "header": "Our Mission",
+    "description": "To revolutionize industries through accessible, safe, and innovative drone technology. We bridge the gap between cutting-edge aerial capabilities and real-world business needs, delivering measurable value to our clients. Our vision is to become the most trusted drone services partner across India, setting industry standards for quality, safety, and customer satisfaction.",
+    "coreValuesHeader": "Our Core Values",
+    "safetyFirst": {
+      "title": "Safety First",
+      "description": "Uncompromising standards in operations and compliance"
+    },
+    "innovation": {
+      "title": "Innovation",
+      "description": "Cutting-edge technology and continuous improvement"
+    },
+    "customerFocus": {
+      "title": "Customer Focus",
+      "description": "Tailored solutions for every client need"
+    }
+  },
+   "team": {
+    "header": "Leadership Team",
+    "subheader": "Backed by expertise, driven by innovation. Our team is committed to setting the standard for drone services excellence across the nation.",
+    "arun": {
+      "name": "Arun Reddy",
+      "role": "Director - Client Relations",
+      "description": "10+ years logistics management"
+    },
+    "priya": {
+      "name": "Priya Sharma",
+      "role": "COO - Pilot Operations",
+      "description": "Ex-IAF, 3000+ flight hours"
+    },
+    "meena": {
+      "name": "Meena Patel",
+      "role": "VP of Technology",
+      "description": "IIT Bombay, Aerospace Engineering"
+    },
+    "rajeev": {
+      "name": "Rajeev Kumar",
+      "role": "CEO and Founder",
+      "description": "15+ years in Aviation"
+    }
+  },
+   "services": {
+    "header": "Comprehensive Drone Services",
+    "subheader": "Professional aerial solutions tailored to your industry. Powered by cutting-edge technology and operated by certified experts.",
+    "bookService": "Book a Service",
+    "learnMore": "Learn more",
+    "agriculture": {
+      "title": "Agriculture & Farming",
+      "description": "Advanced aerial solutions for agriculture & farming",
+      "features": {
+        "cropMonitoring": "Crop Health Monitoring",
+        "precisionSpraying": "Precision Spraying",
+        "irrigationMapping": "Irrigation Mapping",
+        "yieldPrediction": "Yield Prediction"
+      }
+    },
+    "construction": {
+      "title": "Construction & Infrastructure",
+      "description": "Advanced aerial solutions for construction",
+      "features": {
+        "siteMapping": "3D Site Mapping",
+        "progressTracking": "Progress Tracking",
+        "volumetricCalc": "Volumetric Calculations",
+        "safetyAudits": "Safety Audits"
+      }
+    },
+    "energy": {
+      "title": "Energy & Utilities",
+      "description": "Power line inspection, solar panel assessment, wind turbine monitoring.",
+      "features": {
+        "thermalImaging": "Thermal Imaging",
+        "assetInspection": "Asset Inspection",
+        "vegetationMgmt": "Vegetation Management",
+        "faultDetection": "Fault Detection"
+      }
+    },
+    "publicSafety": {
+      "title": "Public Safety & Government",
+      "description": "Emergency response, disaster management, surveillance, and crowd monitoring.",
+      "features": {
+        "emergency": "Emergency Response",
+        "disaster": "Disaster Assessment",
+        "surveillance": "Border Surveillance",
+        "trafficMonitoring": "Traffic Monitoring"
+      }
+    }
+  },
+   "contact": {
+    "header": "Contact Us",
+    "subheader": "Ready to transform your operations with drone technology? Get in touch with our team today."
+  },
+  "contact2": {
+    "form": {
+      "header": "Contact Us",
+      "firstName": "First Name",
+      "firstNamePlaceholder": "John",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Smith",
+      "phone": "Phone Number",
+      "phonePlaceholder": "+91 98165 43210",
+      "email": "Email",
+      "emailPlaceholder": "example@gmail.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What do you want",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here",
+      "submit": "Send Message"
+    }
+  },
+   "footer": {
+    "cta": {
+      "title": "Let's book a drone!",
+      "description": "Get cutting-edge drone services tailored for your needs — from agriculture and construction to energy, safety, and more. Our certified pilots and advanced technology ensure accuracy, efficiency, and safety every time. Book today and experience the future of aerial solutions.",
+      "button": "Book a Service"
+    },
+    "brand": {
+      "name": "Demo Logo",
+      "description": "Professional drone services for agriculture, construction, energy, and more. Trusted by enterprises across India."
+    },
+    "service": {
+      "title": "Service",
+      "items": ["Agriculture & Farming", "Construction", "Energy & Utilities", "Public Safety"]
+    },
+    "company": {
+      "title": "Company",
+      "items": ["About Us", "Privacy Policy"]
+    },
+    "contact": {
+      "title": "Contact",
+      "address": "Hyderabad, Telangana, India",
+      "phone": "+91 1800 123 4567",
+      "email": "info@hindustandardrone.com"
+    },
+    "copyright": "Hindustan Drone Services. All rights reserved."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "blog": "Blog & Research",
+    "contact": "Contact",
+    "download": "Download App",
+    "login": "Login"
+  },
+  "blog": {
+    "title": "Blog & Research",
+    "subtitle": "Industry insights, success stories, and research from India's leading drone service provider.",
+    "description": "Explore industry insights, learn from real success stories, and gain in-depth knowledge through our expert whitepapers."
   }
+  
+  
+
+
+
 }
