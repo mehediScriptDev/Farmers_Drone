@@ -23,26 +23,30 @@ export const Header = () => {
 
   return (
     <header className="bg-white shadow-sm sticky top-0 lg:z-50">
-      <nav className="w-11/12 mx-auto  px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+      <nav className="w-[95%] mx-auto h-20 flex justify-between items-center">
         <Link
           to={'/'}
           className="flex items-center space-x-2"
         >
-          <span className="text-xs ml-10 sm:ml-4 lg:ml-0  w-24 lg:w-32 font-bold text-gray-800">
+          <span className="text-xs ml-14 sm:ml-12 lg:ml-0  w-24 lg:w-32 font-bold text-gray-800">
             <img src={logo} alt="logo" />
           </span>
         </Link>
         <div className="flex items-center space-x-2 sm:space-x-5">
+          {/* Language switcher */}
           <LanguageSwitcher />
+
           {user &&
             (["admin", "marketing", "employee"].includes(user.role) ? (
               <Link className="text-gray-800 text-xl lg:flex hidden">
                 <FiBell />
               </Link>
             ) : null)}
+
             {
               user.role == 'admin'? <Link className="text-gray-800 text-xl lg:flex hidden"><FiSettings /></Link> :null
             }
+            
           {user ? (
             <div className=" flex items-end justify-center gap-2">
               {/* dropdown btn */}

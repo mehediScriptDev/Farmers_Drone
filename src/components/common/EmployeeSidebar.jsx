@@ -2,42 +2,25 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { FiTarget } from "react-icons/fi";
+import { RiDashboardLine } from "react-icons/ri";
+import { PiUsersThreeBold } from "react-icons/pi";
+import { FiShoppingCart } from "react-icons/fi";
+import { FaRegCreditCard } from "react-icons/fa"
+import { LuHeadset } from "react-icons/lu";
+import { LuMessageCircle } from "react-icons/lu";
 
-import {FiUsers} from "react-icons/fi";
-import { FaChartBar } from "react-icons/fa6";
-import { BiGridAlt } from "react-icons/bi";
-
-const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
 
-   const menuItems = [
-    {
-      id: "dashboard",
-      label: t("navigation.dashboard"),
-      icon: BiGridAlt,
-      path: "", // This will be the index route
-    },
-    {
-      id: "campaigns",
-      label: t("sidebar.marketing.campaigns"),
-      icon: FiTarget ,
-      path: "campaigns",
-    },
-    {
-      id: "Lead_managment",
-      label: t("sidebar.marketing.leadManagement"),
-      icon: FiUsers,
-      path: "LeadManagment",
-    },
-    {
-      id: "analytics",
-      label: t("sidebar.marketing.analytics"),
-      icon: FaChartBar,
-      path: "analytics",
-    }
+    const menuItems = [
+    { id: "dashboard", label: t("sidebar.employee.dashboard"), icon:RiDashboardLine , path: "" },
+    { id: "customer", label: t("sidebar.employee.customer"), icon: PiUsersThreeBold, path: "customers" },
+    { id: "orders", label: t("sidebar.employee.orders"), icon: FiShoppingCart, path: "orders" },
+    { id: "payments", label: t("sidebar.employee.payments"), icon:FaRegCreditCard, path: "payments" },
+    { id: "support", label: t("sidebar.employee.support"), icon: LuHeadset, path: "supports" },
+    { id: "message", label:"Message", icon: LuMessageCircle, path: "messages" },
   ];
 
   return (
@@ -56,9 +39,9 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       {/* Sidebar */}
       <div
-        className={`bg-[#EAEDF4] shadow-lg transform ${
+        className={`bg-[#F5F7FA] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 w-64 w-[304px] xl:pl-9 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-2 left-0 z-50 w-[304px] xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
           {/* Menu Items */}
@@ -72,26 +55,6 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 currentPath === item.path;
 
               return (
-                // <button
-                //   key={item.id}
-                //   type='button'
-                //   onClick={() => {
-                //     navigate(item.path);
-                //     setSidebarOpen(false);
-                //   }}
-                //   className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-200 ${
-                //     isActive
-                //       ? 'bg-white border-l-4 border-green-600 font-semibold shadow-sm'
-                //       : 'text-black hover:bg-gray-50'
-                //   }`}
-                // >
-                //   <Icon
-                //     className={`w-5 h-5 ${
-                //       isActive ? 'text-green-600' : 'text-gray-500'
-                //     }`}
-                //   />
-                //   <span>{item.label}</span>
-                // </button>
                 <button
                   key={item.id}
                   type="button"
@@ -99,10 +62,11 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     navigate(item.path);
                     setSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
+                  
+                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-300 ${
                     isActive
-                      ? "bg-white border-green-600 font-semibold shadow-sm"
-                      : "border-transparent text-black hover:bg-gray-50"
+                      ? "bg-white border-l-4 border-green-600 font-semibold shadow-sm"
+                      : "text-black hover:bg-gray-50 border-l-4 border-transparent"
                   }`}
                 >
                   <Icon
@@ -129,4 +93,4 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default MarketingSidebar;
+export default EmployeeSidebar;
