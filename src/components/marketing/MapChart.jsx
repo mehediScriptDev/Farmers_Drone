@@ -4,7 +4,7 @@ const MapChart = () => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
   return (
     <svg
-      width="405"
+      width="auto"
       height="417"
       viewBox="0 0 405 417"
       fill="none"
