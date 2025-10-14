@@ -23,7 +23,7 @@ export const Header = () => {
         } mx-auto h-20 flex justify-between items-center`}
       >
         <Link to={"/"} className="flex items-center space-x-2">
-          <span className={`text-xs ${user?.role === 'field_agent' ? '' : 'ml-14 sm:ml-12 lg:ml-0'}  w-24 lg:w-32 font-bold text-gray-800`}>
+          <span className={`text-xs ${user?.role === 'field_agent' ? '' : 'ml-16 sm:ml-14 lg:ml-0'}  w-28 sm:w-30 lg:w-32 font-bold text-gray-800`}>
             <img src={logo} alt="logo" />
           </span>
         </Link>

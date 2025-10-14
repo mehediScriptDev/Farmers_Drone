@@ -49,7 +49,7 @@ const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 onClick={() => setSidebarOpen(false)}
                                 className="absolute top-4 right-3 rounded-full lg:hidden"
                               >
-                                <HiX className="w-5 h-5 text-gray-700" />
+                                <HiX className="w-7 h-7 text-gray-700" />
                               </button>
           {/* Menu Items */}
           <nav className="flex-1 px-3 py-4 overflow-y-auto">
