@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { HiFire } from "react-icons/hi";
 import { APP_NAME, ROUTES } from "../../constants/app";
-import logo from "../assets/images/logo.png";
+import logo from "../../../public/assets/images/logo.png";
 import { FiBell } from "react-icons/fi";
 import { FiSettings } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
