@@ -163,6 +163,7 @@ const AppRoutes = createBrowserRouter([
       path: "customerspage",
       element: <Coustomerpage />,
     },
+    
     {
       path: "report-analysis",
       element: <ReportAnalysisPage />,

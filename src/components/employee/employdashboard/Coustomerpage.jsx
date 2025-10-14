@@ -229,6 +229,7 @@ const Coustomerpage = () => {
                   </td>
                   <td className="px-3 md:px-6 py-4">
                     <button
+                    
                       className="text-gray-600 hover:text-gray-900"
                       
                     >
