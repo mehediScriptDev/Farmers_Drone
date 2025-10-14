@@ -96,7 +96,7 @@ const PaymentManagement = () => {
   const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); };
 
   return (
-    <div className="flex-1 p-4 md:p-8">
+    <div className="flex-1 p-4 md:px-12 ">
       {/* Header */}
       <div className="mb-4 md:mb-6">
         <h1 className="text-lg md:text-2xl font-bold text-gray-900 mb-2">
