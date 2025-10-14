@@ -6,13 +6,14 @@ import {
   FaShare,
   FaChevronDown,
   FaAngleLeft,
-  FaCamera, 
-  FaSms
+  FaCamera,
+  FaSms,
 } from "react-icons/fa";
-import { IoClose,IoMail, IoNotificationsOutline  } from "react-icons/io5";
+import { IoClose, IoMail, IoNotificationsOutline } from "react-icons/io5";
 
 export default function CampaignModal({ onClose }) {
   const [step, setStep] = useState(1);
+  const [campaignType, setCampaignType] = useState("");
   const [selectedSegment, setSelectedSegment] = useState("");
   const [selectedGoal, setSelectedGoal] = useState("");
   const [budget, setBudget] = useState("");
@@ -22,7 +23,7 @@ export default function CampaignModal({ onClose }) {
   const [targetedAudience, setTargetedAudience] = useState("");
   const [campaignImages, setCampaignImages] = useState([]);
   const [selectedChannels, setSelectedChannels] = useState([]);
-console.log(selectedChannels)
+  console.log(campaignType);
 
   const objectives = [
     {
@@ -63,9 +64,15 @@ console.log(selectedChannels)
   };
   const handleNext = () => {
     // Step 1 Validation
-    if (step === 1 && !selectedSegment) {
-      setError("⚠️ Please select a target segment.");
-      return;
+    if (step === 1) {
+      if (!campaignType) {
+        setError("⚠️ Please select a Campaign Type.");
+        return;
+      }
+      if (!selectedSegment) {
+        setError("⚠️ Please select a target segment.");
+        return;
+      }
     }
 
     // Step 2 Validation
@@ -154,13 +161,20 @@ console.log(selectedChannels)
             {/* Content */}
             <div className="p-4">
               <h3 className="font-semibold mb-4 text-base md:text-lg">
-                Create New Campaign
+                Set Campaign Type
               </h3>
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {objectives.map((obj, i) => (
                   <button
                     key={i}
-                    className="flex flex-col items-start p-3 bg-[#E2E8F0] rounded-lg hover:border-blue-500 hover:bg-blue-50 transition text-left"
+                    onClick={() => setCampaignType(obj.title)}
+                    className={`flex flex-col items-start p-3 rounded-lg  hover:bg-blue-50 transition text-left
+                        ${
+                          campaignType === obj.title
+                            ? "border-blue-500 bg-blue-50 text-blue-700"
+                            : "border-gray-200 bg-[#E2E8F0] hover:border-blue-300"
+                        }
+                        `}
                   >
                     {obj.icon}
                     <h4 className="font-medium text-sm mt-2">{obj.title}</h4>
@@ -212,6 +226,12 @@ console.log(selectedChannels)
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
                 Create New Campaign
               </h2>
+              <button
+                onClick={handleClose}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <IoClose className="w-6 h-6" />
+              </button>
             </div>
 
             {/* Progress Bar */}
@@ -242,7 +262,7 @@ console.log(selectedChannels)
                     className={`px-4 py-3 border rounded-lg text-sm font-medium transition-colors ${
                       selectedGoal === goal.id
                         ? "border-blue-500 bg-blue-50 text-blue-700"
-                        : "border-gray-200 bg-gray-50 hover:border-blue-300"
+                        : "border-gray-200 bg-[#E2E8F0] hover:border-blue-300"
                     }`}
                   >
                     {goal.label}
@@ -292,6 +312,12 @@ console.log(selectedChannels)
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
                 Create New Campaign
               </h2>
+              <button
+                onClick={handleClose}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <IoClose className="w-6 h-6" />
+              </button>
             </div>
 
             {/* Progress */}
@@ -396,7 +422,7 @@ console.log(selectedChannels)
                       className="cursor-pointer text-center"
                     >
                       <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mb-2 mx-auto">
-                        <FaCamera/>
+                        <FaCamera />
                       </div>
                       <p className="text-xs text-gray-600">
                         Upload campaign images
@@ -481,7 +507,7 @@ console.log(selectedChannels)
                       : "bg-gray-50 border-gray-200 hover:border-gray-300"
                   }`}
                 >
-                  <IoMail className="w-6 h-6"/>
+                  <IoMail className="w-6 h-6" />
                   <span className="text-sm font-medium">Email</span>
                 </button>
 
@@ -494,7 +520,7 @@ console.log(selectedChannels)
                       : "bg-gray-50 border-gray-200 hover:border-gray-300"
                   }`}
                 >
-                  <FaSms className="w-6 h-6"/>
+                  <FaSms className="w-6 h-6" />
                   <span className="text-sm font-medium">SMS</span>
                 </button>
 
@@ -507,7 +533,7 @@ console.log(selectedChannels)
                       : "bg-gray-50 border-gray-200 hover:border-gray-300"
                   }`}
                 >
-                  <IoNotificationsOutline className="w-6 h-6"/>
+                  <IoNotificationsOutline className="w-6 h-6" />
                   <span className="text-sm font-medium">Push Notification</span>
                 </button>
 

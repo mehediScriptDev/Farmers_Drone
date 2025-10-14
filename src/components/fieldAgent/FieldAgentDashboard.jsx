@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { FaRupeeSign, FaAngleUp, FaAngleDown, FaTrophy } from "react-icons/fa";
@@ -11,8 +11,8 @@ import { CiSearch } from "react-icons/ci";
 import { useAuth } from "../../hooks/useAuth";
 
 const FieldAgentDashboard = () => {
-  const {user} = useAuth();
-  console.log(user)
+  const { user } = useAuth();
+  console.log(user);
   const { t } = useTranslation();
 
   const [statsData, setStatsData] = useState([]);
@@ -22,6 +22,23 @@ const FieldAgentDashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => setIsOpen((prev) => !prev);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   // Sorting state
   const [sortKey, setSortKey] = useState("customerList");
@@ -145,7 +162,6 @@ const FieldAgentDashboard = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  const toggleDropdown = () => setIsOpen(!isOpen);
   const handleSelect = (item) => {
     console.log("Selected:", item.label);
     setIsOpen(false);
@@ -256,7 +272,10 @@ const FieldAgentDashboard = () => {
                     className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-xl text-base"
                   />
                 </div>
-                <div className="relative inline-block text-left">
+                <div
+                  ref={dropdownRef}
+                  className="relative inline-block text-left"
+                >
                   <button
                     onClick={toggleDropdown}
                     className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-full shadow-sm bg-transparent hover:bg-gray-100 transition duration-150 ease-in-out"

@@ -1,4 +1,4 @@
-import { FaPlus, FaRegClock } from "react-icons/fa";
+import { FaChevronDown, FaPlus, FaRegClock } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { FaArrowTrendUp, FaDollarSign } from "react-icons/fa6";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -7,9 +7,9 @@ import { FiTrash2 } from "react-icons/fi";
 import { HiOutlineChevronUp } from "react-icons/hi"; // For the custom dropdown arrow
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../config/axiosConfig";
 import CampaignModal from "./modals/CampaignModal";
+import { Link, useLocation } from "react-router-dom";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -100,7 +100,6 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
 
 const MarketingDashBoard = () => {
   const [open, setOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAutomationModalOpen, setIsAutomationModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -108,7 +107,6 @@ const MarketingDashBoard = () => {
   const [loyaltyPage, setLoyaltyPage] = useState(1);
   const [cardsPerPage, setCardsPerPage] = useState(3);
   const rowsPerPage = 4;
-  const navigate = useNavigate();
 
   const [automationSettings, setAutomationSettings] = useState("");
   const [stats, setStats] = useState([]);
@@ -117,7 +115,7 @@ const MarketingDashBoard = () => {
   const [leads, setLeads] = useState([]);
   const [allSeasonalCampaigns, setAllSeasonalCampaigns] = useState([]);
   const [allLoyaltyPrograms, setAllLoyaltyPrograms] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState("30"); // 30 days default
+  const [selectedPeriod, setSelectedPeriod] = useState("30");
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [campaignModal, setCampaignModal] = useState(false);
@@ -127,7 +125,8 @@ const MarketingDashBoard = () => {
     startIndex,
     startIndex + rowsPerPage
   );
-  console.log(automationSettings);
+  const location = useLocation();
+  console.log(location);
 
   useEffect(() => {
     const updateCardsPerPage = () => {
@@ -312,15 +311,6 @@ const MarketingDashBoard = () => {
               Monitor your customer service performance
             </p>
           </div>
-          <div className="mt-3 flex gap-2">
-            <button
-              onClick={() => setCampaignModal(true)}
-              className="px-4 md:px-6 py-2 bg-[#28A844] text-[#1A202C] rounded-sm hover:bg-green-400 font-medium text-[14px] md:text-base flex items-center gap-1"
-            >
-              <FaPlus />
-              Create Campain
-            </button>
-          </div>
         </div>
 
         <div className="pb-3 md:pb-5">
@@ -328,17 +318,19 @@ const MarketingDashBoard = () => {
             Last 30 days overview
           </h2>
         </div>
-
-        <div className="mb-4 md:mb-6 flex">
+        <div className="relative mb-4 md:mb-6 w-34">
           <select
-            className="px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A]"
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
+            className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A] appearance-none"
           >
             <option value="7">Last 7 days</option>
             <option value="30">Last 30 days</option>
             <option value="90">Last 90 days</option>
           </select>
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <FaChevronDown />
+          </div>
         </div>
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
@@ -536,7 +528,10 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Seasonal campaigns
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44">
+            <button
+              onClick={() => setCampaignModal(true)}
+              className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
+            >
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -560,14 +555,11 @@ const MarketingDashBoard = () => {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {campaign.description}
                   </p>
-                  <button
-                    onClick={() =>
-                      alert(`Viewing details for: ${campaign.title}`)
-                    }
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
-                  >
-                    See Details
-                  </button>
+                  <Link to={`campaigns/${campaign.id}`}>
+                    <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                      See Details
+                    </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -582,7 +574,10 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Loyalty programs
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44">
+            <button
+              onClick={() => setCampaignModal(true)}
+              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
+            >
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -594,6 +589,7 @@ const MarketingDashBoard = () => {
                 key={idx}
                 className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103"
               >
+                {}
                 <img
                   src={program.image}
                   alt={program.title}
@@ -606,14 +602,11 @@ const MarketingDashBoard = () => {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {program.description}
                   </p>
-                  <button
-                    onClick={() =>
-                      alert(`Viewing details for: ${program.title}`)
-                    }
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
-                  >
-                    See Details
-                  </button>
+                  <Link to={`campaign/${program.id}`}>
+                    <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                      See Details
+                    </button>
+                  </Link>
                 </div>
               </div>
             ))}

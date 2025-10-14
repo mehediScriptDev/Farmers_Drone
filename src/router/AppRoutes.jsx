@@ -61,6 +61,7 @@ import Leads from './../components/marketing/Leads';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
+import CampaignDetails from '../components/marketing/components/CampaignDetails';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -234,6 +235,10 @@ const AppRoutes = createBrowserRouter([
       {
         index: true,
         element: <MarketingDashBoard/>
+      },
+      {
+        path : "campaigns/:id",
+        element : <CampaignDetails/>,
       },
       {
         path :"campaigns",
