@@ -9,6 +9,7 @@ import { HiOutlineChevronUp } from "react-icons/hi"; // For the custom dropdown 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../../config/axiosConfig";
+import CampaignModal from "./modals/CampaignModal";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -19,7 +20,7 @@ const iconMap = {
 // --- Custom Dropdown Component ---
 const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   // Changed "Cool" to "Cold" to match your original image.
   const options = [
     { label: "All Leads", value: "All" },
@@ -34,10 +35,13 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   };
 
   // The active background color, matching the bright green in your image
-  const activeBg = 'bg-lime-400';
+  const activeBg = "bg-lime-400";
 
   return (
-    <div className="relative inline-block text-left" onClick={() => setIsOpen(!isOpen)}>
+    <div
+      className="relative inline-block text-left"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       {/* Button/Display for the Dropdown */}
       <button
         type="button"
@@ -46,10 +50,12 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
-        {options.find(opt => opt.value === selectedStatus)?.label}
-        <HiOutlineChevronUp 
-          className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-200 ${isOpen ? 'rotate-0' : 'rotate-180'}`} 
-          aria-hidden="true" 
+        {options.find((opt) => opt.value === selectedStatus)?.label}
+        <HiOutlineChevronUp
+          className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-200 ${
+            isOpen ? "rotate-0" : "rotate-180"
+          }`}
+          aria-hidden="true"
         />
       </button>
 
@@ -68,11 +74,12 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
                 onClick={() => handleSelect(option.value)}
                 className={`
                   block px-4 py-2 text-xs md:text-sm cursor-pointer transition-colors
-                  ${option.value === selectedStatus 
-                    // ACTIVE/SELECTED STYLE: full bright background
-                    ? `${activeBg} text-gray-900 font-semibold` 
-                    // HOVER STYLE: lighter background on hover
-                    : `text-gray-700 hover:${activeBg}/70`
+                  ${
+                    option.value === selectedStatus
+                      ? // ACTIVE/SELECTED STYLE: full bright background
+                        `${activeBg} text-gray-900 font-semibold`
+                      : // HOVER STYLE: lighter background on hover
+                        `text-gray-700 hover:${activeBg}/70`
                   }
                 `}
                 role="menuitem"
@@ -113,12 +120,14 @@ const MarketingDashBoard = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("30"); // 30 days default
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("All");
+  const [campaignModal, setCampaignModal] = useState(false);
   const totalPages = Math.ceil(filteredActivities.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filteredActivities.slice(
     startIndex,
     startIndex + rowsPerPage
   );
+  console.log(automationSettings);
 
   useEffect(() => {
     const updateCardsPerPage = () => {
@@ -305,8 +314,8 @@ const MarketingDashBoard = () => {
           </div>
           <div className="mt-3 flex gap-2">
             <button
-              onClick={() => setOpen(true)}
-              className="px-1 md:px-6 py-2 bg-[#28A844] text-[#1A202C] rounded-sm hover:bg-green-400 font-medium text-[10px] md:text-base flex items-center gap-1"
+              onClick={() => setCampaignModal(true)}
+              className="px-4 md:px-6 py-2 bg-[#28A844] text-[#1A202C] rounded-sm hover:bg-green-400 font-medium text-[14px] md:text-base flex items-center gap-1"
             >
               <FaPlus />
               Create Campain
@@ -387,7 +396,7 @@ const MarketingDashBoard = () => {
               </div>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 md:mx-auto lg:mx-0">
                 {/* --- REPLACED CODE BLOCK START --- */}
-                <LeadStatusDropdown 
+                <LeadStatusDropdown
                   selectedStatus={selectedStatus}
                   setSelectedStatus={setSelectedStatus}
                 />
@@ -524,10 +533,10 @@ const MarketingDashBoard = () => {
         {/* Seasonal Campaigns Section */}
         <div className="my-4 md:my-12 bg-white p-3 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Seasonal campaigns
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center gap-1 md:gap-2 transition-opacity">
+            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 ">
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -570,10 +579,10 @@ const MarketingDashBoard = () => {
         {/* Loyalty Programs Section */}
         <div className="my-4 md:my-6 bg-white p-3 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Loyalty programs
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center gap-2 transition-opacity">
+            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2">
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -692,6 +701,9 @@ const MarketingDashBoard = () => {
             </div>
           </div>
         </div>
+      )}
+      {campaignModal && (
+        <CampaignModal onClose={() => setCampaignModal(false)} />
       )}
     </div>
   );
