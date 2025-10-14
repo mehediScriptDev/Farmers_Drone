@@ -259,10 +259,10 @@ function DashBoard() {
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">{t('dashboard.employee.table.tableTitle')}</h2>
           <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
-            <button onClick={() => setOpen(true)} className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base">
+            <button onClick={() => setOpen(true)} className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.registerNewCustomer')}
             </button>
-            <button onClick={() => setMainModalOpen(true)} className="px-4 md:px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
+            <button onClick={() => setMainModalOpen(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.assistProfile')}
             </button>
           </div>

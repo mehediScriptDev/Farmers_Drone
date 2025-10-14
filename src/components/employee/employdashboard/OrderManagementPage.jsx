@@ -77,14 +77,14 @@ useEffect(() => {
       <div className="flex gap-2 md:gap-3 mb-2 md:mb-4">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
+          className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
         >
           <Plus className="inline-block w-6 h-8 mr-1 -ml-1 " />
           {t('dashboard.employee.button.createServiceRequest')}
         </button>
         <button
           onClick={() => setIsResheduleModalOpen(true)} 
-          className="px-4 md:px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
+          className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
         >
           <Calendar className="inline-block w-6 h-8 mr-1 -ml-1 " />
            {t('dashboard.employee.button.reshedule')}

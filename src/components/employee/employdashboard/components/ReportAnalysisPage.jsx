@@ -21,7 +21,7 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="w-full flex justify-between items-center px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white shadow-sm hover:shadow-md transition"
+        className="w-full flex justify-between items-center px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white transition"
       >
         <span>{value || placeholder}</span>
         <ChevronDown className={`w-5 h-5 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -197,7 +197,7 @@ const ReportAnalysisPage = () => {
               <div className="relative w-52">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2 bg-white border border-gray-300 rounded-xl text-xs md:text-sm text-gray-700 shadow-sm hover:shadow-md transition-all duration-200"
+                  className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2  border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-gray-700  transition-all duration-200"
                 >
                   {periodOptions.find((p) => p.key === selectedPeriod)?.label}
                   {dropdownOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}

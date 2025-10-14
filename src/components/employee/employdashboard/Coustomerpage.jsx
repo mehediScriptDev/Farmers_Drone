@@ -122,19 +122,19 @@ const Coustomerpage = () => {
             <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
               <button
                 onClick={() => setOpen(true)}
-                className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.registerNewCustomer')}
               </button>
               <button
                 onClick={() => setMainModalOpen(true)}
-                className="px-4 md:px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.assistProfile')}
               </button>
               <button
                 onClick={() => navigate("/employee/report-analysis")}
-                className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.reportAnalysis')}
               </button>
@@ -144,7 +144,7 @@ const Coustomerpage = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b border-gray-200">
               <tr>
                 <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.serviceName')}

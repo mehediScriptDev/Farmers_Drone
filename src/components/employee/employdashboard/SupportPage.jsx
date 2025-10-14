@@ -103,13 +103,13 @@ const SupportPage = () => {
             <div className="flex flex-col sm:flex-row gap-2 md:gap-3 mb-4">
                 <button
                     onClick={() => setShowCreate(true)}
-                    className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base flex items-center justify-center"
+                    className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base flex items-center justify-center"
                 >
                     <Plus className="w-5 h-5 mr-2" /> Create SUPPORT TICKET
                 </button>
                 <button
                     onClick={() => setShowEscalate(true)}
-                    className="px-4 md:px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center"
+                    className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center"
                 >
                     <GrUserSettings className="w-5 h-5 mr-2" /> Escalate to technical team
                 </button>
