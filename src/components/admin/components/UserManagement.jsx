@@ -46,7 +46,7 @@ const UserManagement = () => {
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-gray-50 w-full flex items-center justify-center'>
+      <div className='min-h-screen bg-[#fafffd] w-full flex items-center justify-center'>
         <div className='text-gray-700'>Loading user data...</div>
       </div>
     );
@@ -54,7 +54,7 @@ const UserManagement = () => {
 
   if (error) {
     return (
-      <div className='min-h-screen bg-gray-50 w-full flex items-center justify-center'>
+      <div className='min-h-screen bg-[#fafffd] w-full flex items-center justify-center'>
         <div className='text-center'>
           <p className='text-red-600 mb-4'>Error: {error}</p>
           <button
@@ -69,7 +69,7 @@ const UserManagement = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 w-full'>
+    <div className='min-h-screen bg-[#fafffd] w-full'>
       <div className='w-full px-4 sm:px-6 lg:px-8 py-6'>
         {/* Header Section */}
         <div className='bg-white rounded-xl shadow-sm p-6 sm:p-8 mb-8'>

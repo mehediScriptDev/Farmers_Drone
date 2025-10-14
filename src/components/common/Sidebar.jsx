@@ -94,9 +94,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div
         className={`bg-[#F5F7FA] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-2 left-0 z-50 w-[304px] xl:pl-9 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-3 left-0 z-50 w-[304px] pt-10 lg:pt-0 xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
+          {/* manual close btn */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="absolute top-4 right-3 rounded-full lg:hidden"
+          >
+            <HiX className="w-5 h-5 text-gray-700" />
+          </button>
           {/* Menu Items */}
           <nav className="flex-1 px-3 py-4 overflow-y-auto">
             {menuItems.map((item) => {
@@ -115,7 +122,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     navigate(item.path);
                     setSidebarOpen(false);
                   }}
-                  
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-300 ${
                     isActive
                       ? "bg-white border-l-4 border-green-600 font-semibold shadow-sm"

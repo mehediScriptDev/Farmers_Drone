@@ -8,8 +8,11 @@ import AddCustomerModal from "./AddCustomerModal";
 import axiosInstance from "../../config/axiosConfig";
 import { FiFilter, FiChevronDown } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
+import { useAuth } from "../../hooks/useAuth";
 
 const FieldAgentDashboard = () => {
+  const {user} = useAuth();
+  console.log(user)
   const { t } = useTranslation();
 
   const [statsData, setStatsData] = useState([]);
@@ -59,6 +62,7 @@ const FieldAgentDashboard = () => {
         );
         setStatsData(data.data.statsData);
         setTableData(data.data.tableData);
+        // console.log(data.data)
       } catch (err) {
         setError(err);
       } finally {
