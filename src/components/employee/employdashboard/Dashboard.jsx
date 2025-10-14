@@ -270,7 +270,7 @@ function DashBoard() {
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b border-gray-200">
               <tr>
                 <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
                 <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.contact')}</th>
@@ -298,7 +298,7 @@ function DashBoard() {
 
                   {/* Progress Dropdown with Fixed Positioning */}
                   <td className="px-3 md:px-6 py-4">
-                    <div className="relative inline-block w-full">
+                    <div className="relative inline-block ">
                       {/* Dropdown Button */}
                       <button
                         onClick={() =>

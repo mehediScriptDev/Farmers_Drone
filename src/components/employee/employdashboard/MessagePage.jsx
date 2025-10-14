@@ -128,7 +128,7 @@ export default function MessagePage() {
     };
 
     return (
-        <div className="flex h-screen bg-gray-50 overflow-hidden md:p-8 ">
+        <div className="flex h-screen bg-gray-50 overflow-hidden p-4 md:px-12 ">
             
             {/* Left Panel */}
             <div className={`${showChat ? 'hidden' : 'flex'} md:flex w-full md:w-80 flex-col bg-white border-r border-gray-200 shadow-sm flex-shrink-0`}>

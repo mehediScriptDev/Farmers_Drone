@@ -155,14 +155,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
           <h2 className="text-lg md:text-4xl font-semibold text-center flex-1">
             {t("dashboard.fieldAgent.FirstModal.addCustomer")}
           </h2>
- 
-          {/* NEW: Close button on the right using react-icons; keeps layout intact [web:12] */}
           <button
-            onClick={handleClose} // close handler [web:5]
+            onClick={handleClose} 
             aria-label="Close"
             className=" text-gray-600 transition w-10 h-10 flex justify-center items-center"
           >
-            <AiOutlineClose className="w-6 h-6" /> {/* icon only [web:12] */}
+            <AiOutlineClose className="w-6 h-6" />
           </button>
         </div>
  
