@@ -34,7 +34,7 @@ export default function Nav() {
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.contact"), href: "/contact" },
   ];
-
+// hello
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
       <div className="lg:max-w-7xl mx-auto w-11/12  xl:h-20 flex items-center justify-center">
