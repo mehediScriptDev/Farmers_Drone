@@ -19,7 +19,7 @@ const Campaigns = () => {
 
   useEffect(() => {
     axios
-      .get("/MarketingDeshboard/data/Campaigns.json")
+      .get("/MarketingDashboard/data/Campaigns.json")
       .then((res) => {
         setSeasonalCampaigns(res.data.seasonalCampaigns);
         setLoyaltyCampaigns(res.data.loyaltyCampaigns);
