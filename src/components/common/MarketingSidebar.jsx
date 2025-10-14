@@ -58,7 +58,7 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div
         className={`bg-[#EAEDF4] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 xl:pt-3 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
           {/* manual close btn */}
