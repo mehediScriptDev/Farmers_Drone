@@ -177,7 +177,7 @@ const Leads = () => {
   ];
 
   return (
-    <div className="w-11/12  lg:w-[96%] mx-auto py-5">
+    <div className="md:px-12  mx-auto my-6 p-6">
       <div className="bg-white  rounded-xl shadow-sm border border-gray-100">
         <div className="p-4 border-b border-gray-100">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-2">
