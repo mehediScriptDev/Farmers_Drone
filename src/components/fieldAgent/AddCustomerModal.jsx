@@ -1,5 +1,10 @@
-import React, { useState, useCallback } from "react";
-import { ChevronLeft, MapPin, Upload, XCircle } from "lucide-react";
+import { AiOutlineClose } from "react-icons/ai";
+
+import { useState, useCallback, useEffect, useRef } from "react";
+import { FaChevronLeft } from "react-icons/fa";
+import { HiLocationMarker } from "react-icons/hi";
+import { FiUpload } from "react-icons/fi";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 
 const INITIAL_FORM = {
@@ -32,6 +37,9 @@ export default function AddCustomerModal({ isOpen, onClose }) {
   const [validationError, setValidationError] = useState("");
   const [formData, setFormData] = useState(INITIAL_FORM);
   const { t } = useTranslation();
+
+  // NEW: ref for the inner modal panel to detect outside clicks [web:2][web:5]
+  const panelRef = useRef(null); // [web:2][web:5]
 
   const handleInputChange = useCallback(
     (e) => {
@@ -97,6 +105,24 @@ export default function AddCustomerModal({ isOpen, onClose }) {
     handleClose();
   }, [formData, handleClose]);
 
+  // NEW: window/document event to close modal when clicking outside the panel [web:2][web:5]
+  useEffect(() => {
+    if (!isOpen) return; // only attach when open [web:5]
+
+    const handleOutsideClick = (e) => {
+      // If click target is not inside the modal panel, close it [web:2][web:5]
+      if (panelRef.current && !panelRef.current.contains(e.target)) {
+        handleClose(); // close via the provided close logic [web:5]
+      }
+    };
+
+    // Use mousedown for more responsive interactions [web:2][web:5]
+    window.addEventListener("mousedown", handleOutsideClick); // [web:2][web:5]
+    return () => {
+      window.removeEventListener("mousedown", handleOutsideClick); // cleanup [web:5]
+    };
+  }, [isOpen, handleClose]); // [web:5]
+
   if (!isOpen) return null;
 
   const stepTitles = [
@@ -111,40 +137,44 @@ export default function AddCustomerModal({ isOpen, onClose }) {
       bg-black/60 transition-opacity duration-300
       ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
+      {/* NEW: attach ref to the inner container to preserve layout and detect outside clicks [web:2][web:5] */}
       <div
+        ref={panelRef} // NEW [web:2][web:5]
         className={`bg-white w-full max-w-3xl mx-4 md:mx-6 rounded-lg shadow-lg max-h-[90vh] flex flex-col
         transform transition-transform duration-300 px-2 md:px-4 lg:px-12
         ${isOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
       >
         {/* Header */}
-        <div className="sticky top-0 bg-white border-b rounded-t-2xl border-gray-200 px-6 py-4 flex items-center gap-4 z-10">
+        <div className="sticky top-0 bg-white border-b rounded-t-2xl border-gray-200 px-2 py-2 md:py-4 flex items-center gap-4 z-10">
           <button
             onClick={modalStep > 1 ? prevStep : handleClose}
-            className="hover:bg-gray-100 p-2 rounded-lg text-gray-600 transition"
+            className="bg-gray-200 hover:bg-gray-300  rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <FaChevronLeft className="w-6 h-6" />
           </button>
           <h2 className="text-lg md:text-4xl font-semibold text-center flex-1">
             {t("dashboard.fieldAgent.FirstModal.addCustomer")}
           </h2>
+
+          {/* NEW: Close button on the right using react-icons; keeps layout intact [web:12] */}
+          <button
+            onClick={handleClose} // close handler [web:5]
+            aria-label="Close"
+            className="bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
+          >
+            <AiOutlineClose className="w-6 h-6" /> {/* icon only [web:12] */}
+          </button>
         </div>
 
         {/* Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4">
           <h3 className="text-base md:text-lg lg:text-3xl font-semibold">
             {stepTitles[modalStep - 1]}
           </h3>
 
-          {validationError && (
-            <div className="flex items-center p-3 mb-4 text-sm font-medium text-red-800 bg-red-100 rounded-lg">
-              <XCircle className="w-5 h-5 mr-2" />
-              {validationError}
-            </div>
-          )}
-
           {/* Step 1 - Customer Info */}
           {modalStep === 1 && (
-            <div className="space-y-3">
+            <div className="space-y-2.5 md:space-y-3">
               {[
                 {
                   name: "firstName",
@@ -211,7 +241,7 @@ export default function AddCustomerModal({ isOpen, onClose }) {
                     )}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-green-500"
                   />
-                  <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <HiLocationMarker className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 </div>
               </div>
 
@@ -274,7 +304,7 @@ export default function AddCustomerModal({ isOpen, onClose }) {
                     onChange={handleInputChange}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-green-500"
                   />
-                  <Upload className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <FiUpload className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 </div>
               </div>
 
@@ -411,6 +441,12 @@ export default function AddCustomerModal({ isOpen, onClose }) {
               ))}
             </div>
           )}
+          {validationError && (
+            <div className="flex items-center p-3 mb-4 text-sm font-medium text-red-800 bg-red-100 rounded-lg">
+              <AiFillCloseCircle className="w-5 h-5 mr-2" />
+              {validationError}
+            </div>
+          )}
         </div>
 
         {/* Footer */}
@@ -418,14 +454,14 @@ export default function AddCustomerModal({ isOpen, onClose }) {
           {modalStep < 3 ? (
             <button
               onClick={nextStep}
-              className="w-full !bg-button-primary hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md disabled:bg-gray-400"
+              className="w-full bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md disabled:bg-gray-400"
             >
               {t("Next")}
             </button>
           ) : (
             <button
               onClick={handleConfirm}
-              className="w-full !bg-button-primary hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
+              className="w-full bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
             >
               {t("Confirm Registration")}
             </button>

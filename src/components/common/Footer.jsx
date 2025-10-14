@@ -12,7 +12,7 @@ export default function Footer() {
       {/* CTA Section */}
       <div className="bg-gray-50 py-6 sm:py-10 lg:pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 ">
         <div className="lg:w-10/12 mx-auto max-w-7xl">
-          <div className="bg-green-900 relative -mb-40 z-40 rounded-2xl p-8 md:p-12 text-center shadow-lg">
+          <div className="bg-[#002347] relative -mb-40 z-40 rounded-2xl p-8 md:p-12 text-center shadow-lg">
             <h2 className="text-xl sm:text-3xl xl:text-4xl font-bold text-white mb-6">
               {t("footer.cta.title")}
             </h2>
@@ -27,7 +27,7 @@ export default function Footer() {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#002201] -z-0 text-white px-4 sm:px-6 md:px-8 lg:px-10 pt-40  py-1">
+      <footer className="bg-[#001933] -z-0 text-white px-4 sm:px-6 md:px-8 lg:px-10 pt-40  py-1">
         <div className="lg:w-10/12 mx-auto max-w-7xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-6 sm:mb-6 lg:mb-12">
             {/* Brand Column */}
@@ -118,7 +118,7 @@ export default function Footer() {
       </footer>
 
       {/* Copyright */}
-      <footer className="py-3 bg-black text-center text-gray-400 text-xs lg:text-sm">
+      <footer className="py-3 bg-[#001224] text-center text-gray-400 text-xs lg:text-sm">
         © {currentYear} {t("footer.copyright")}
       </footer>
     </div>

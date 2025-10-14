@@ -62,7 +62,7 @@ const LeadsDropdown = () => {
               className={`w-full px-4 py-2.5 text-left text-sm lg:text-lg transition-colors ${
                 selected === option.value
                   ? "bg-lime-300 text-gray-900"
-                  : "text-gray-700 hover:bg-lime-300"
+                  : "text-gray-700 hover:bg-lime-100"
               }`}
             >
               {option.label}
@@ -177,7 +177,7 @@ const Leads = () => {
   ];
 
   return (
-    <div className="w-11/12 lg:w-[96%] mx-auto py-5">
+    <div className="w-11/12  lg:w-[96%] mx-auto py-5">
       <div className="bg-white  rounded-xl shadow-sm border border-gray-100">
         <div className="p-4 border-b border-gray-100">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-2">

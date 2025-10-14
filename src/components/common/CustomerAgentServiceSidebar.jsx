@@ -30,7 +30,7 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     icon: PiUsersThreeBold,
     path: "customerspage",
     
-    matchPaths: ["customerspage", "report-analysis"], 
+    matchPaths: ["customerspage", "report-analysis","customers/:customerId"], 
   },
     {
       id: "orders",
