@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 
 // Import dashboard components
@@ -10,6 +11,7 @@ import StatsCard from '../../common/StatsCard';
 import axiosInstance from '../../../config/axiosConfig';
 
 const AdminDashboard = () => {
+  const { t } = useTranslation();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -74,30 +76,37 @@ const AdminDashboard = () => {
       <div className='mb-6 '>
         <div>
           <h1 className='text-2xl font-bold text-gray-900 mb-2'>
-            {dashboardData.overview?.title || 'Admin Dashboard'}
+            {t('dashboard.admin.title')}
           </h1>
-          <p className='text-gray-600'>
-            {dashboardData.overview?.subtitle ||
-              'Monitor your platform performance and key metrics'}
-          </p>
+          <p className='text-gray-600'>{t('dashboard.admin.subtitle')}</p>
         </div>
       </div>
 
       {/* Stats Grid */}
       {dashboardData.overview?.stats && (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-          {dashboardData.overview.stats.map((stat, index) => (
-            <StatsCard key={stat.id || index} stat={stat} />
-          ))}
+          {dashboardData.overview.stats.map((stat, index) => {
+            const translatedStat = {
+              ...stat,
+              label: t(`dashboard.admin.stats.${stat.id}.label`),
+              change: t(`dashboard.admin.stats.${stat.id}.change`),
+            };
+            return <StatsCard key={stat.id || index} stat={translatedStat} />;
+          })}
         </div>
       )}
 
       {/* Additional Stats */}
       {dashboardData.overview?.additionalStats && (
         <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-          {dashboardData.overview.additionalStats.map((stat, index) => (
-            <StatsCard key={stat.id || index} stat={stat} />
-          ))}
+          {dashboardData.overview.additionalStats.map((stat, index) => {
+            const translatedStat = {
+              ...stat,
+              label: t(`dashboard.admin.stats.${stat.id}.label`),
+              change: t(`dashboard.admin.stats.${stat.id}.change`),
+            };
+            return <StatsCard key={stat.id || index} stat={translatedStat} />;
+          })}
         </div>
       )}
 
@@ -106,7 +115,7 @@ const AdminDashboard = () => {
         <div className='mb-8'>
           <RevenueChart
             data={dashboardData.revenueChart.data}
-            title={dashboardData.revenueChart.title}
+            title={t('dashboard.admin.revenueChart.title')}
           />
         </div>
       )}
@@ -116,7 +125,7 @@ const AdminDashboard = () => {
         <div>
           <UserActivityTable
             data={dashboardData.recentActivity}
-            title={dashboardData.recentActivity.title}
+            title={t('dashboard.admin.userActivity.title')}
           />
         </div>
       )}

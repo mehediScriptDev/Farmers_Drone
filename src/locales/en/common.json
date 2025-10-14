@@ -17,13 +17,53 @@
     "passwordHint": "Password: 12345",
     "demoAccountsNote": "Demo accounts will be created automatically on first login."
   },
-"dashboard": {
+  "dashboard": {
     "admin": {
       "title": "Admin Dashboard",
+      "subtitle": "Monitor your platform performance and key metrics",
       "welcome": "Welcome back, Administrator",
       "fullAccess": "Full Access",
       "overview": "Overview",
-      "overviewDescription": "Welcome to your admin dashboard. Use the sidebar to navigate between different sections."
+      "overviewDescription": "Welcome to your admin dashboard. Use the sidebar to navigate between different sections.",
+      "stats": {
+        "active-users": {
+          "label": "Active Users",
+          "change": "+8.2% from last month"
+        },
+        "total-jobs": {
+          "label": "Total Jobs",
+          "change": "+12% from last month"
+        },
+        "revenue": {
+          "label": "Revenue",
+          "change": "+7% from last month"
+        },
+        "complaints": {
+          "label": "Complaints",
+          "change": "-4% from last month"
+        },
+        "tickets": {
+          "label": "Tickets",
+          "change": "+8.2% from last month"
+        }
+      },
+      "revenueChart": {
+        "title": "Last 7 days revenue"
+      },
+      "userActivity": {
+        "title": "Recent User Activity",
+        "headers": {
+          "user": "User",
+          "role": "Role",
+          "jobTitle": "Job Title",
+          "status": "Status",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "pagination": {
+          "showing": "Showing {{current}} of {{total}} Users"
+        }
+      }
     },
     "employee": {
       "title": {
@@ -60,7 +100,6 @@
         "recentTransaction": " Recent Transaction",
         "tableIssues": "Issues",
         "tableDate": "Date"
-     
       },
       "button": {
         "registerNewCustomer": "Register New Customer",
@@ -309,7 +348,7 @@
     },
     "marketing": {
       "campaigns": "Campaigns",
-      "leadManagement"  :"Lead Management",
+      "leadManagement": "Lead Management",
       "analytics": "Analytics"
     }
   },
@@ -434,7 +473,7 @@
     "logout": "Logout",
     "pageNotFound": "Page not found"
   },
-    "hero": {
+  "hero": {
     "tagline": "Professional Drone Services Across India",
     "title": "Elevate Your Business with Advanced",
     "highlight": "Drone Solutions",
@@ -442,11 +481,11 @@
     "cta": "Book a Service"
   },
   "landingstats": {
-  "satisfiedClients": "Satisfied Clients",
-  "projectsCompleted": "Projects Completed",
-  "industryCertifications": "Industry Certifications",
-  "clientSatisfaction": "Client Satisfaction"
-},
+    "satisfiedClients": "Satisfied Clients",
+    "projectsCompleted": "Projects Completed",
+    "industryCertifications": "Industry Certifications",
+    "clientSatisfaction": "Client Satisfaction"
+  },
   "industries": {
     "header": "Industries We Serve",
     "subheader": "Specialized drone solutions tailored to your industry needs",
@@ -504,12 +543,12 @@
     "q8": "Do you offer subscription packages?",
     "a8": "Yes, we offer flexible subscription packages for regular monitoring and inspection services. Contact us to discuss a custom package that fits your needs."
   },
-  
+
   "about": {
     "header": "About Hindustan Drone Services",
     "description": "India's premier drone service provider, delivering excellence in aerial solutions since 2018. Trusted by government agencies, Fortune 500 companies, and enterprises across the nation."
   },
-   "mission": {
+  "mission": {
     "header": "Our Mission",
     "description": "To revolutionize industries through accessible, safe, and innovative drone technology. We bridge the gap between cutting-edge aerial capabilities and real-world business needs, delivering measurable value to our clients. Our vision is to become the most trusted drone services partner across India, setting industry standards for quality, safety, and customer satisfaction.",
     "coreValuesHeader": "Our Core Values",
@@ -526,7 +565,7 @@
       "description": "Tailored solutions for every client need"
     }
   },
-   "team": {
+  "team": {
     "header": "Leadership Team",
     "subheader": "Backed by expertise, driven by innovation. Our team is committed to setting the standard for drone services excellence across the nation.",
     "arun": {
@@ -550,7 +589,7 @@
       "description": "15+ years in Aviation"
     }
   },
-   "services": {
+  "services": {
     "header": "Comprehensive Drone Services",
     "subheader": "Professional aerial solutions tailored to your industry. Powered by cutting-edge technology and operated by certified experts.",
     "bookService": "Book a Service",
@@ -596,7 +635,7 @@
       }
     }
   },
-   "contact": {
+  "contact": {
     "header": "Contact Us",
     "subheader": "Ready to transform your operations with drone technology? Get in touch with our team today."
   },
@@ -618,7 +657,7 @@
       "submit": "Send Message"
     }
   },
-   "footer": {
+  "footer": {
     "cta": {
       "title": "Let's book a drone!",
       "description": "Get cutting-edge drone services tailored for your needs — from agriculture and construction to energy, safety, and more. Our certified pilots and advanced technology ensure accuracy, efficiency, and safety every time. Book today and experience the future of aerial solutions.",
@@ -630,7 +669,12 @@
     },
     "service": {
       "title": "Service",
-      "items": ["Agriculture & Farming", "Construction", "Energy & Utilities", "Public Safety"]
+      "items": [
+        "Agriculture & Farming",
+        "Construction",
+        "Energy & Utilities",
+        "Public Safety"
+      ]
     },
     "company": {
       "title": "Company",
@@ -658,9 +702,4 @@
     "subtitle": "Industry insights, success stories, and research from India's leading drone service provider.",
     "description": "Explore industry insights, learn from real success stories, and gain in-depth knowledge through our expert whitepapers."
   }
-  
-  
-
-
-
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HiDotsVertical, HiUser } from 'react-icons/hi';
 import Pagination from './Pagination';
 
@@ -13,6 +14,7 @@ const getStatusColor = (statusType) => {
 };
 
 const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentData, setCurrentData] = useState([]);
 
@@ -39,12 +41,12 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   const handlePageChange = (page) => setCurrentPage(page);
 
   const translatedHeaders = [
-    'User',
-    'Role',
-    'Job Title',
-    'Status',
-    'Last Active',
-    'Actions',
+    t('dashboard.admin.userActivity.headers.user'),
+    t('dashboard.admin.userActivity.headers.role'),
+    t('dashboard.admin.userActivity.headers.jobTitle'),
+    t('dashboard.admin.userActivity.headers.status'),
+    t('dashboard.admin.userActivity.headers.lastActive'),
+    t('dashboard.admin.userActivity.headers.actions'),
   ];
 
   return (
