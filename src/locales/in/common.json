@@ -63,6 +63,26 @@
         "pagination": {
           "showing": "{{total}} उपयोगकर्ताओं में से {{current}} दिखा रहे हैं"
         }
+      },
+      "droneOperator": {
+        "title": "उपयोगकर्ता प्रबंधन",
+        "tabOperator": "ऑपरेटर",
+        "tabCustomer": "ग्राहक",
+        "tabEmployee": "कर्मचारी",
+        "tabFieldAgent": "फील्ड एजेंट",
+        "subTabAll": "सभी ड्रोन ऑपरेटर",
+        "subTabPending": "लंबित",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "dateTime": "तिथि/समय",
+          "name": "नाम",
+          "location": "स्थान",
+          "registrationId": "पंजीकरण आईडी",
+          "actions": "कार्रवाई"
+        },
+        "seeDetails": "विवरण देखें",
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहा है",
+        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला"
       }
     },
     "employee": {

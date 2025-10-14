@@ -29,8 +29,6 @@ import PhotoCapture from '../components/fieldAgent/PhotoCapture';
 import RouteOptimization from '../components/fieldAgent/RouteOptimization';
 import VehicleManagement from '../components/fieldAgent/VehicleManagement';
 
-
-
 // Private Route Components
 import {
   PrivateRoute,
@@ -61,6 +59,7 @@ import Leads from './../components/marketing/Leads';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
+import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 
 const AppRoutes = createBrowserRouter([
   {
@@ -114,6 +113,10 @@ const AppRoutes = createBrowserRouter([
         element: <DroneOperator />,
       },
       {
+        path: 'drone-operators/:operatorId',
+        element: <DroneOperatorDetails />,
+      },
+      {
         path: 'employees',
         element: <EmployeeManagement />,
       },
@@ -139,52 +142,52 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
- {
-  path: '/employee',
-  element: (
-    <PrivateEmployeeRoute>
-      <DashboardLayout />
-    </PrivateEmployeeRoute>
-  ),
-  children: [
-    {
-      index: true,
-      element: <Dashboard />,
-    },
-    {
-      path: "customers/:customerId",
-      element: <CoustomerDetailsPage />,
-    },
-    {
-      path: "customers/:customerId/order/:id",
-      element: <OrderDetailsPage />,
-    },
-    {
-      path: "customerspage",
-      element: <Coustomerpage />,
-    },
-    {
-      path: "report-analysis",
-      element: <ReportAnalysisPage />,
-    },
-    {
-      path: "orders",
-      element: <OrderManagementPage />,
-    },
-    {
-      path: "payments",
-      element: <PaymentManagement />,
-    },
-    {
-      path: "supports",
-      element: <SupportPage />,
-    },
-    {
-      path: "messages",
-      element: <MessagePage />,
-    },
-  ],
-},
+  {
+    path: '/employee',
+    element: (
+      <PrivateEmployeeRoute>
+        <DashboardLayout />
+      </PrivateEmployeeRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'customers/:customerId',
+        element: <CoustomerDetailsPage />,
+      },
+      {
+        path: 'customers/:customerId/order/:id',
+        element: <OrderDetailsPage />,
+      },
+      {
+        path: 'customerspage',
+        element: <Coustomerpage />,
+      },
+      {
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
+      },
+      {
+        path: 'orders',
+        element: <OrderManagementPage />,
+      },
+      {
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
+      },
+      {
+        path: 'messages',
+        element: <MessagePage />,
+      },
+    ],
+  },
   {
     path: '/field-agent',
     element: (
@@ -233,19 +236,20 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MarketingDashBoard/>
+        element: <MarketingDashBoard />,
       },
       {
-        path :"campaigns",
-        element : <Campaigns/>
+        path: 'campaigns',
+        element: <Campaigns />,
       },
       {
-        path: "LeadManagment",
-        element : <Leads/>
-      },{
-        path : "analytics",
-        element : <Anylytics/>
-      }
+        path: 'LeadManagment',
+        element: <Leads />,
+      },
+      {
+        path: 'analytics',
+        element: <Anylytics />,
+      },
     ],
   },
   {

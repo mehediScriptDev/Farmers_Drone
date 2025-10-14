@@ -63,6 +63,26 @@
         "pagination": {
           "showing": "Showing {{current}} of {{total}} Users"
         }
+      },
+      "droneOperator": {
+        "title": "User Management",
+        "tabOperator": "Operator",
+        "tabCustomer": "Customer",
+        "tabEmployee": "Employee",
+        "tabFieldAgent": "Field agent",
+        "subTabAll": "All Drone Operator",
+        "subTabPending": "Pending",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "dateTime": "DATE/TIME",
+          "name": "NAME",
+          "location": "LOCATION",
+          "registrationId": "REGISTRATION ID",
+          "actions": "ACTIONS"
+        },
+        "seeDetails": "See Details",
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noOperatorsFound": "No Drone Operators Found"
       }
     },
     "employee": {
