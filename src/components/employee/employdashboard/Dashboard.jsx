@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEye, LuHeadset } from "react-icons/lu";
