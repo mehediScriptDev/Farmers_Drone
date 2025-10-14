@@ -536,7 +536,7 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Seasonal campaigns
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 ">
+            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44">
               <FaPlus size={20} />
               Create Campaign
             </button>
@@ -582,7 +582,7 @@ const MarketingDashBoard = () => {
             <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
               Loyalty programs
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2">
+            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44">
               <FaPlus size={20} />
               Create Campaign
             </button>
