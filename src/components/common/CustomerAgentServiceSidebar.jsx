@@ -10,7 +10,7 @@ import { FaRegCreditCard } from "react-icons/fa";
 import { LuHeadset } from "react-icons/lu";
 import { LuMessageCircle } from "react-icons/lu";
 
-const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -187,4 +187,4 @@ useEffect(() => {
   );
 };
 
-export default EmployeeSidebar;
+export default CustomerAgentServiceSidebar;

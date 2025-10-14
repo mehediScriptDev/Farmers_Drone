@@ -140,7 +140,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
       {/* NEW: attach ref to the inner container to preserve layout and detect outside clicks [web:2][web:5] */}
       <div
         ref={panelRef} // NEW [web:2][web:5]
-        className={`bg-white w-full max-w-3xl mx-4 md:mx-6 rounded-lg shadow-lg max-h-[90vh] flex flex-col
+        className={`bg-white w-full max-w-2xl mx-4 md:mx-6 rounded-lg shadow-lg max-h-[90vh] flex flex-col
         transform transition-transform duration-300 px-2 md:px-4 lg:px-12
         ${isOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
       >
@@ -150,7 +150,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
             onClick={modalStep > 1 ? prevStep : handleClose}
             className="bg-gray-200 hover:bg-gray-300  rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
           >
-            <FaChevronLeft className="w-6 h-6" />
+            <FaChevronLeft className="w-4 h-4" />
           </button>
           <h2 className="text-lg md:text-4xl font-semibold text-center flex-1">
             {t("dashboard.fieldAgent.FirstModal.addCustomer")}
@@ -160,7 +160,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
           <button
             onClick={handleClose} // close handler [web:5]
             aria-label="Close"
-            className="bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
+            className=" text-gray-600 transition w-10 h-10 flex justify-center items-center"
           >
             <AiOutlineClose className="w-6 h-6" /> {/* icon only [web:12] */}
           </button>

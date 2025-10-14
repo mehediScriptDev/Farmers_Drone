@@ -1,3 +1,7 @@
+
+
+
+
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { LuEye, LuHeadset } from "react-icons/lu";
@@ -10,6 +14,7 @@ import { useTranslation } from "react-i18next";
 import axiosInstance from "../../../config/axiosConfig";
 import RegistrationModal from "./components/Modal/RegistrationModal";
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from "./components/Modal/AssistProfileSetupModal";
+
 function DashBoard() {
   const [selectedPeriod, setSelectedPeriod] = useState("Last 30 days");
   const [open, setOpen] = useState(false);
@@ -52,7 +57,7 @@ function DashBoard() {
     { key: "last6months", label: t("dashboard.employee.pages.dashboard.dropDown.last6months") },
     { key: "last12months", label: t("dashboard.employee.pages.dashboard.dropDown.last12months") },
   ];
-  // Fetch dashboard data
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -74,7 +79,6 @@ function DashBoard() {
     fetchDashboardData();
   }, []);
 
-  // Memoized summary stats
   const summaryStats = useMemo(() => {
     return [
       {
@@ -122,7 +126,6 @@ function DashBoard() {
     ];
   }, [t, summary]);
 
-  // Filter activities by selected period
   const filteredActivities = useMemo(() => {
     if (!activities) return [];
     const now = new Date();
@@ -143,21 +146,24 @@ function DashBoard() {
     });
   }, [activities, selectedPeriod]);
 
-  // Pagination
   const totalPages = Math.ceil(filteredActivities.length / itemsPerPage);
   const paginatedActivities = filteredActivities.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
   const handlePrevious = () => setCurrentPage(prev => Math.max(prev - 1, 1));
   const handleNext = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
+
+  const startItem = (currentPage - 1) * itemsPerPage + 1;
+  const endItem = Math.min(currentPage * itemsPerPage, filteredActivities.length);
 
   return (
     <div className="p-4 md:px-12 ">
       {/* Header */}
-      <div className="mb-4 md:mb-6">
-        <h1 className="text-2xl md:text-3xl font-bold text-[#002244] mb-2 text-center md:text-left">{t('dashboard.employee.title.dashPageTitle')}</h1>
-        <p className="text-sm md:text-base text-gray-600 text-center md:text-left">{t('dashboard.employee.subTitle.dashpageSub')}</p>
+      <div className="mb-3 md:mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#002244] mb-2 text-left">{t('dashboard.employee.title.dashPageTitle')}</h1>
+        <p className="text-sm md:text-base text-gray-600 text-left">{t('dashboard.employee.subTitle.dashpageSub')}</p>
       </div>
 
       {/* Period Select */}
@@ -290,8 +296,8 @@ function DashBoard() {
                     </span>
                   </td>
 
-                  {/* ✅ Progress Dropdown */}
-                  <td className="px-3 md:px-6 py-4 relative">
+                  {/* Progress Dropdown with Fixed Positioning */}
+                  <td className="px-3 md:px-6 py-4">
                     <div className="relative inline-block w-full">
                       {/* Dropdown Button */}
                       <button
@@ -299,16 +305,12 @@ function DashBoard() {
                           setActivities((prev) =>
                             prev.map((item) =>
                               item.id === activity.id
-                                ? { ...item, dropdownOpen: !item.dropdownOpen } // toggle current
-                                : { ...item, dropdownOpen: false } // close others
+                                ? { ...item, dropdownOpen: !item.dropdownOpen }
+                                : { ...item, dropdownOpen: false }
                             )
                           )
                         }
-                        className={`w-full flex justify-between items-center px-3 py-1 rounded text-xs md:text-sm 
-    transition-all duration-200
-    bg-[#394C6B] text-white
-  `}
-                      >
+                        className={`w-full flex justify-between items-center px-3 py-1 rounded text-xs md:text-sm transition-all duration-200 bg-[#394C6B] text-white`}>
                         {activity.progress}
                         {activity.dropdownOpen ? (
                           <FaChevronUp className="w-4 h-4 text-white ml-2" />
@@ -316,11 +318,9 @@ function DashBoard() {
                           <FaChevronDown className="w-4 h-4 text-white ml-2" />
                         )}
                       </button>
-
-
-                      {/* Dropdown Menu */}
+                      {/* Dropdown Menu with Fixed Position */}
                       {activity.dropdownOpen && (
-                        <div className="absolute z-50 mt-1 w-full bg-white rounded-lg shadow-lg border border-gray-200 ">
+                        <div className="absolute z-50 mt-1 w-max bg-white rounded-lg shadow-lg border border-gray-200 top-full left-0">
                           <button
                             onClick={() => {
                               setActivities((prev) =>
@@ -331,11 +331,10 @@ function DashBoard() {
                                 )
                               );
                             }}
-                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors
-            ${activity.progress === "In Progress"
+                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors whitespace-nowrap ${activity.progress === "In Progress"
                                 ? "bg-[#28A844] text-white"
-                                : "hover:bg-[#28A844] hover:text-white text-gray-700"
-                              } `}
+                                : "hover:bg-[#28A844] text-gray-700"
+                              }`}
                           >
                             In Progress
                           </button>
@@ -350,12 +349,10 @@ function DashBoard() {
                                 )
                               );
                             }}
-                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors
-            ${activity.progress === "Completed"
+                            className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors whitespace-nowrap ${activity.progress === "Completed"
                                 ? "bg-[#28A844] text-white"
-                                : "hover:bg-[#28A844] hover:text-white text-gray-700"
-                              }
-          `}
+                                : "hover:bg-[#28A844] text-gray-700"
+                              }`}
                           >
                             Completed
                           </button>
@@ -363,8 +360,9 @@ function DashBoard() {
                       )}
                     </div>
                   </td>
+
                   <td className="px-3 md:px-6 py-4">
-                    <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === "High" ? "text-red-600" : activity.priority === "Medium" ? "text-yellow-600" : "text-green-600"}`}>
+                    <span className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-[16px] whitespace-nowrap ${activity.priority === "High" ? "text-[#24963E] bg-[#EAF6EC]" : activity.priority === "Medium" ? "text-[#FFC107] bg-[#FFF9E6]" : "text-[#DC3545] bg-[#FCEBEC]"}`}>
                       {activity.priority}
                     </span>
                   </td>
@@ -383,21 +381,35 @@ function DashBoard() {
           </table>
         </div>
 
-        {/* Pagination */}
+        {/* Updated Pagination */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs md:text-sm text-gray-600">
-            Showing {paginatedActivities.length} of {filteredActivities.length} results
+          <div className="flex items-center gap-2">
+            <span className="text-red-600 text-lg">↓</span>
+            <span className="text-xs md:text-sm text-gray-600">
+              Showing {startItem} to {endItem} of {filteredActivities.length} results
+            </span>
           </div>
           <div className="flex gap-2">
-            <button onClick={handlePrevious} disabled={currentPage === 1} className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50">Previous</button>
-            <button onClick={handleNext} disabled={currentPage === totalPages || totalPages === 0} className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50">Next</button>
+            <button 
+              onClick={handlePrevious} 
+              disabled={currentPage === 1} 
+              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <button 
+              onClick={handleNext} 
+              disabled={currentPage === totalPages || totalPages === 0} 
+              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>
 
       {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
-      {/* <AssistProfileSetupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
       <AssistProfileSetupModal2
         isOpen={mainModalOpen}
         onClose={() => setMainModalOpen(false)}
@@ -427,3 +439,5 @@ function DashBoard() {
 }
 
 export default DashBoard;
+
+

@@ -4,7 +4,7 @@ import Sidebar from './Sidebar';
 import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
-import EmployeeSidebar from './EmployeeSidebar';
+import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
 import FieldAgent from '../admin/components/FieldAgent';
 import FieldSidebar from './FieldSidebar';
 
@@ -23,7 +23,7 @@ export const DashboardLayout = () => {
       <MarketingSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )}
     {user?.role === 'employee' && (
-      <EmployeeSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <CustomerAgentServiceSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )}
    
     {/* {user?.role === 'field_agent' && (
