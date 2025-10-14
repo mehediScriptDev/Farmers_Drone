@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from '../components/common/Layout';
 import { DashboardLayout } from '../components/common/DashboardLayout';
-import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import NotAuthorizedPage from '../pages/NotAuthorizedPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -49,7 +48,6 @@ import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
 import Blog from './../LandingPageUI/Pages/Blog';
 import Contact from './../LandingPageUI/Pages/Contact';
-import EmployeeDashBoardLayout from '../components/employee/employdashboard/EmployeeDashBoardLayout';
 import Dashboard from '../components/employee/employdashboard/Dashboard';
 import Coustomerpage from '../components/employee/employdashboard/Coustomerpage';
 import OrderManagementPage from '../components/employee/employdashboard/OrderManagementPage';
@@ -57,9 +55,12 @@ import MessagePage from '../components/employee/employdashboard/MessagePage';
 import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
 import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
+import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
+
 import Leads from './../components/marketing/Leads';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
+import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -138,44 +139,52 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/employee',
-    element: (
-      <PrivateEmployeeRoute>
-        <DashboardLayout />
-      </PrivateEmployeeRoute>
-    ),
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: 'customers',
-        element: <Coustomerpage />,
-      },
-      {
-        path: 'report-analysis',
-        element: <ReportAnalysisPage />,
-      },
-      {
-        path: 'orders',
-        element: <OrderManagementPage />,
-      },
-      {
-        path: 'payments',
-        element: <PaymentManagement />,
-      },
-      {
-        path: 'supports',
-        element: <SupportPage />,
-      },
-      {
-        path: 'messages',
-        element: <MessagePage />,
-      },
-    ],
-  },
+ {
+  path: '/employee',
+  element: (
+    <PrivateEmployeeRoute>
+      <DashboardLayout />
+    </PrivateEmployeeRoute>
+  ),
+  children: [
+    {
+      index: true,
+      element: <Dashboard />,
+    },
+    {
+      path: "customers/:customerId",
+      element: <CoustomerDetailsPage />,
+    },
+    {
+      path: "customers/:customerId/order/:id",
+      element: <OrderDetailsPage />,
+    },
+    {
+      path: "customerspage",
+      element: <Coustomerpage />,
+    },
+    {
+      path: "report-analysis",
+      element: <ReportAnalysisPage />,
+    },
+    {
+      path: "orders",
+      element: <OrderManagementPage />,
+    },
+    {
+      path: "payments",
+      element: <PaymentManagement />,
+    },
+    {
+      path: "supports",
+      element: <SupportPage />,
+    },
+    {
+      path: "messages",
+      element: <MessagePage />,
+    },
+  ],
+},
   {
     path: '/field-agent',
     element: (
