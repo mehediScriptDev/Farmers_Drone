@@ -1,5 +1,8 @@
- import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+
+
+
+import React, { useEffect, useState } from "react";
+import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
 function CustomerDetailsPage() {
@@ -9,6 +12,8 @@ function CustomerDetailsPage() {
 
   // eslint-disable-next-line no-unused-vars
   const [customer, setCustomer] = useState(location.state?.customer || null);
+  // eslint-disable-next-line no-unused-vars
+  const [fromPath, setFromPath] = useState(location.state?.fromPath || null);
 
   const customerData = {
     name: customer?.name || "Albert Flores",
@@ -33,27 +38,14 @@ function CustomerDetailsPage() {
     { id: 6, service: "Agro Drone Service", description: "Precision crop monitoring and field insights powered by aerial data.", image: 4, videos: 2, inf: 1, time: "10 minutes ago", date: "8 Sep, 2023" },
   ];
 
-  const handleOrderClick = (order) => {
-    navigate(`/employee/customers/${customerId}/order/${order.id}`, {
-      state: { order, customer: customerData, activeMenu: location.state?.activeMenu || "dashboard" },
-    });
-  };
 
-  const handleBack = () => {
-    // Go back to previous menu or default employee dashboard
-    if (location.state?.activeMenu === "customer") {
-      navigate("/employee/customerspage", { state: { activeMenu: "customer" } });
-    } else {
-      navigate("/employee", { state: { activeMenu: "dashboard" } });
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="flex-1 p-4 md:px-12">
         {/* Back Button */}
         <button
-          onClick={handleBack}
+            onClick={() => navigate(-1)}
           aria-label="Back"
           className="mb-4 text-2xl flex items-center gap-2 p-3 sm:p-4 bg-white border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 font-medium transition-colors"
         >
@@ -111,12 +103,15 @@ function CustomerDetailsPage() {
                   <span className=" border bg-[#FFFFFF] border-[#DCDCDC] px-2  rounded-md flex justify-center items-center">{order.inf}  pdf</span>
                   <span className="ml-auto text-xs text-gray-500">{order.time}</span>
                 </div>
-                <button
-                  onClick={() => handleOrderClick(order)}
+                <Link to={`/employee/orders/${order.id}`}>
+                 <button
+                  
                   className="w-full bg-[#28A844] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors text-sm shadow-sm"
                 >
                   Order Details
                 </button>
+                </Link>
+               
               </div>
             ))}
           </div>
@@ -133,3 +128,8 @@ function CustomerDetailsPage() {
 }
 
 export default CustomerDetailsPage;
+
+
+
+
+

@@ -1,9 +1,5 @@
-
-
-
-
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LuEye, LuHeadset } from "react-icons/lu";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiShoppingCart } from "react-icons/fi";
@@ -30,7 +26,6 @@ function DashBoard() {
     canceledOrders: 0,
   });
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const { t } = useTranslation();
@@ -57,7 +52,6 @@ function DashBoard() {
     { key: "last6months", label: t("dashboard.employee.pages.dashboard.dropDown.last6months") },
     { key: "last12months", label: t("dashboard.employee.pages.dashboard.dropDown.last12months") },
   ];
-
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
@@ -363,12 +357,15 @@ function DashBoard() {
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button
-                      onClick={() => navigate(`/employee/customers/${activity.id}`)}
+                    <Link to={`/employee/customers/${activity.id}`}>
+                     <button
+                     
                       className="text-gray-600 hover:text-gray-900"
                     >
                       <LuEye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
+                    </Link>
+                   
                   </td>
                 </tr>
               ))}

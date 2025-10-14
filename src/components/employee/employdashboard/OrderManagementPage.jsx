@@ -196,8 +196,6 @@ const OrderManagementPage = () => {
             </table>
           </div>
         )}
-
-        {/* Pagination */}
        {/* Pagination */}
 <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
   <div className="text-xs md:text-sm text-gray-600">

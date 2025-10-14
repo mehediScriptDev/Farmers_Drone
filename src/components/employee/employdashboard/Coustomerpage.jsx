@@ -6,7 +6,8 @@ import RegistrationModal from './components/Modal/RegistrationModal';
 import { useTranslation } from 'react-i18next';
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from './components/Modal/AssistProfileSetupModal';
 import axiosInstance from '../../../config/axiosConfig';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { LuEye } from 'react-icons/lu';
 
 
 const Coustomerpage = () => {
@@ -43,8 +44,11 @@ const Coustomerpage = () => {
           '/employee/data/customerManagementData.json'
         );
         const data = response.data;
+        console.log(data.customers[0])
         setActivities(
           data.customers.map((customer) => ({
+            
+            id:customer.id,
             name: customer.serviceName,
             company: customer.company,
             contact: customer.contact,
@@ -221,13 +225,15 @@ const Coustomerpage = () => {
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button
-                      onClick={() => navigate(`/employee/customers/${activity.id}`)}
+                     <Link to={`/employee/customers/${activity.id}`}>
+                     {console.log(activity)}
+                     <button
+                     
                       className="text-gray-600 hover:text-gray-900"
-
                     >
-                      <Eye className="w-4 h-4 md:w-5 md:h-5" />
+                      <LuEye className="w-4 h-4 md:w-5 md:h-5" />
                     </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
