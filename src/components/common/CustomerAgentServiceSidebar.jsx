@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -7,8 +6,7 @@ import { RiDashboardLine } from "react-icons/ri";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegCreditCard } from "react-icons/fa";
-import { LuHeadset } from "react-icons/lu";
-import { LuMessageCircle } from "react-icons/lu";
+import { LuHeadset, LuMessageCircle } from "react-icons/lu";
 
 const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -18,20 +16,19 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const menuItems = [
     {
-    id: "dashboard",
-    label: t("sidebar.employee.dashboard"),
-    icon: RiDashboardLine,
-    path: "",
-    matchPaths: ["/employee", "/employee/", "customers/:customerId", "order/:id"], 
-  },
-  {
-    id: "customer",
-    label: t("sidebar.employee.customer"),
-    icon: PiUsersThreeBold,
-    path: "customerspage",
-    
-    matchPaths: ["customerspage", "report-analysis"], 
-  },
+      id: "dashboard",
+      label: t("sidebar.employee.dashboard"),
+      icon: RiDashboardLine,
+      path: "",
+      matchPaths: ["/employee", "/employee/", "customers/:customerId", "order/:id"],
+    },
+    {
+      id: "customer",
+      label: t("sidebar.employee.customer"),
+      icon: PiUsersThreeBold,
+      path: "customerspage",
+      matchPaths: ["customerspage", "report-analysis"],
+    },
     {
       id: "orders",
       label: t("sidebar.employee.orders"),
@@ -62,52 +59,46 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     },
   ];
 
-useEffect(() => {
-  const pathname = location.pathname;
+  useEffect(() => {
+    const pathname = location.pathname;
 
-  // 1. ড্যাশবোর্ডের সাথে সম্পর্কিত সমস্ত ডিটেইলস রুটগুলির জন্য একটি কাস্টম চেক
-  // এই রুটগুলি Dashboard-এর মতোই activeMenu সেট করবে।
-  const isDashboardRelatedDetailRoute = 
-    pathname.includes("/customers/") || // /employee/customers/123
-    pathname.includes("/order/"); // /employee/customers/123/order/456
+    //  Priority: activeMenu from navigation state
+    if (location.state?.activeMenu) {
+      setActiveMenu(location.state.activeMenu);
+      return;
+    }
 
-  if (
-    pathname === "/employee" || 
-    pathname === "/employee/" || 
-    pathname.endsWith("/employee") ||
-    isDashboardRelatedDetailRoute // <-- নতুন চেক
-  ) {
-    console.log("Setting active to dashboard or related detail route");
-    setActiveMenu("dashboard");
-    return;
-  }
+    // Dashboard related detail route fallback
+    const isDashboardRelatedDetailRoute =
+      pathname.includes("/customers/") || pathname.includes("/order/");
 
-  // 2. অন্যান্য মূল রুটগুলির জন্য স্বাভাবিক চেক 
-  // এই লজিক এখন শুধুমাত্র মূল রুটগুলি (/customerspage, /orders) খুঁজবে, ডিটেইলস নয়।
-  let foundActiveMenu = "";
+    if (
+      pathname === "/employee" ||
+      pathname === "/employee/" ||
+      pathname.endsWith("/employee") ||
+      isDashboardRelatedDetailRoute
+    ) {
+      setActiveMenu("dashboard");
+      return;
+    }
 
-  for (const item of menuItems) {
-    if (item.id === "dashboard") continue; 
-
-    if (item.matchPaths) {
-      const isMatched = item.matchPaths.some(
-        (matchPath) =>
-          // আমরা চাই যেন এটি শুধুমাত্র পুরো পাথের অংশগুলির সাথে মেলে
-          pathname.endsWith(matchPath) || 
-          pathname.includes(`/${matchPath}/`) // /orders/12345 match করার জন্য
-      );
-      
-      if (isMatched) {
-        console.log("Found match:", item.id);
-        foundActiveMenu = item.id;
-        break;
+    // Normal route matching
+    let foundActiveMenu = "";
+    for (const item of menuItems) {
+      if (item.id === "dashboard") continue;
+      if (item.matchPaths) {
+        const isMatched = item.matchPaths.some(
+          (matchPath) =>
+            pathname.endsWith(matchPath) || pathname.includes(`/${matchPath}/`)
+        );
+        if (isMatched) {
+          foundActiveMenu = item.id;
+          break;
+        }
       }
     }
-  }
-
-  console.log("Setting active to:", foundActiveMenu || "none");
-  setActiveMenu(foundActiveMenu);
-}, [location.pathname]);
+    setActiveMenu(foundActiveMenu);
+  }, [location.pathname, location.state]);
 
   const handleMenuClick = (item) => {
     setActiveMenu(item.id);
@@ -159,14 +150,12 @@ useEffect(() => {
                   onClick={() => handleMenuClick(item)}
                   className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-300 ${
                     isActive
-                      ? "bg-white border-l-4 border-green-600 font-semibold shadow-sm"
-                      : "text-black hover:bg-gray-50 border-l-4 border-transparent"
+                      ? "bg-white border-l-4 border-[#28A844] font-semibold shadow-sm"
+                      : "text-[#002244] hover:bg-gray-50 border-l-4 border-transparent"
                   }`}
                 >
                   <Icon
-                    className={`w-5 h-5 ${
-                      isActive ? "text-green-600" : "text-gray-500"
-                    }`}
+                    className={`w-5 h-5 ${isActive ? "text-[#002244]" : "text-gray-500"}`}
                   />
                   <span>{item.label}</span>
                 </button>

@@ -152,11 +152,7 @@ function DashBoard() {
     currentPage * itemsPerPage
   );
 
-  const handlePrevious = () => setCurrentPage(prev => Math.max(prev - 1, 1));
-  const handleNext = () => setCurrentPage(prev => Math.min(prev + 1, totalPages));
 
-  const startItem = (currentPage - 1) * itemsPerPage + 1;
-  const endItem = Math.min(currentPage * itemsPerPage, filteredActivities.length);
 
   return (
     <div className="p-4 md:px-12 ">
@@ -216,7 +212,7 @@ function DashBoard() {
 
       {/* Stats */}
       {!loading && !error && (
-        <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 md:gap-6 mb-6 md:mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6 mb-6 md:mb-8">
           {summaryStats.map((stat, index) => {
             const Icon = stat.icon || PiUsersThreeBold;
             return (
@@ -332,8 +328,8 @@ function DashBoard() {
                               );
                             }}
                             className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors whitespace-nowrap ${activity.progress === "In Progress"
-                                ? "bg-[#28A844] text-white"
-                                : "hover:bg-[#28A844] text-gray-700"
+                              ? "bg-[#28A844] text-white"
+                              : "hover:bg-[#28A844] text-gray-700"
                               }`}
                           >
                             In Progress
@@ -350,8 +346,8 @@ function DashBoard() {
                               );
                             }}
                             className={`block w-full text-left px-4 py-2 text-xs md:text-sm transition-colors whitespace-nowrap ${activity.progress === "Completed"
-                                ? "bg-[#28A844] text-white"
-                                : "hover:bg-[#28A844] text-gray-700"
+                              ? "bg-[#28A844] text-white"
+                              : "hover:bg-[#28A844] text-gray-700"
                               }`}
                           >
                             Completed
@@ -381,29 +377,48 @@ function DashBoard() {
           </table>
         </div>
 
-        {/* Updated Pagination */}
-        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-red-600 text-lg">↓</span>
-            <span className="text-xs md:text-sm text-gray-600">
-              Showing {startItem} to {endItem} of {filteredActivities.length} results
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <button 
-              onClick={handlePrevious} 
-              disabled={currentPage === 1} 
-              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <button 
-              onClick={handleNext} 
-              disabled={currentPage === totalPages || totalPages === 0} 
-              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50"
-            >
-              Next
-            </button>
+        {/* Pagination Section */}
+        <div className="py-4 md:py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-200 pt-2 md:pt-3">
+            {/* Showing Text */}
+            <p className="text-sm text-black px-4 md:px-6">
+              Showing {paginatedActivities.length} of {filteredActivities.length} results
+            </p>
+
+            {/* Pagination Buttons */}
+            <div className="flex flex-row flex-wrap items-center gap-0.5 sm:gap-2 px-3 sm:px-4 md:px-6">
+              {/* Previous Button */}
+              <button
+                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Previous
+              </button>
+
+              {/* Dynamic Page Numbers */}
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                <button
+                  key={number}
+                  onClick={() => setCurrentPage(number)}
+                  className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                      ? "bg-[#28A844] text-white font-medium"
+                      : "!bg-gray-100 text-black hover:bg-gray-200"
+                    }`}
+                >
+                  {number}
+                </button>
+              ))}
+
+              {/* Next Button */}
+              <button
+                onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages || totalPages === 0}
+                className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>

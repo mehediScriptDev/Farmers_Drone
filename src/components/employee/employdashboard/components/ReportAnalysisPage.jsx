@@ -1,17 +1,7 @@
-
 import { useEffect, useState } from "react";
-import {
-  TrendingUp,
-  ShoppingCart,
-  Clock,
-  CreditCard,
-  ChevronDown,
-  ChevronUp,
-  Search,
-} from "lucide-react";
+import { FiTrendingUp, FiShoppingCart, FiClock, FiCreditCard, FiChevronDown, FiChevronUp, FiSearch } from "react-icons/fi";
 import axiosInstance from "../../../../config/axiosConfig";
 
-// Custom Dropdown Component
 const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
   const [open, setOpen] = useState(false);
 
@@ -24,7 +14,7 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
         className="w-full flex justify-between items-center px-4 py-2 border border-gray-300 rounded-lg text-sm bg-white transition"
       >
         <span>{value || placeholder}</span>
-        <ChevronDown className={`w-5 h-5 transition-transform ${open ? "rotate-180" : ""}`} />
+        <FiChevronDown className={`w-5 h-5 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open && (
@@ -67,7 +57,6 @@ const ReportAnalysisPage = () => {
   const [summary, setSummary] = useState({});
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [selectedCustomerType, setSelectedCustomerType] = useState("");
   const [selectedServiceCategory, setSelectedServiceCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
@@ -92,7 +81,6 @@ const ReportAnalysisPage = () => {
       const response = await axiosInstance.get("/employee/data/customerManagementData.json");
       const data = response.data;
 
-      // Ensure summary values are primitive types
       setSummary({
         totalCustomers: data.summary?.totalCustomers || 0,
         totalRevenue: data.summary?.totalRevenue || 0,
@@ -117,7 +105,7 @@ const ReportAnalysisPage = () => {
       value: summary.totalCustomers,
       change: "+13% vs last month",
       positive: true,
-      icon: TrendingUp,
+      icon: FiTrendingUp,
       bgColor: "bg-green-50",
     },
     {
@@ -125,7 +113,7 @@ const ReportAnalysisPage = () => {
       value: summary.totalRevenue,
       change: "+8% vs last month",
       positive: true,
-      icon: ShoppingCart,
+      icon: FiShoppingCart,
       bgColor: "bg-blue-50",
     },
     {
@@ -133,7 +121,7 @@ const ReportAnalysisPage = () => {
       value: summary.avgDuration,
       change: "-5% vs last month",
       positive: false,
-      icon: Clock,
+      icon: FiClock,
       bgColor: "bg-orange-50",
     },
     {
@@ -141,7 +129,7 @@ const ReportAnalysisPage = () => {
       value: summary.pendingPayments,
       change: "+12% vs last month",
       positive: true,
-      icon: CreditCard,
+      icon: FiCreditCard,
       bgColor: "bg-purple-50",
     },
   ];
@@ -156,7 +144,7 @@ const ReportAnalysisPage = () => {
       : true;
     const matchesSearch = searchQuery
       ? customer.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        customer.company.toLowerCase().includes(searchQuery.toLowerCase())
+      customer.company.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
     return matchesCustomerType && matchesServiceCategory && matchesSearch;
   });
@@ -175,7 +163,7 @@ const ReportAnalysisPage = () => {
   };
 
   return (
-    <div className="flex-1 p-4 md:px-12 ">
+    <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-6 md:mb-8">
         <h1 className="text-xl md:text-2xl font-bold text-gray-900">Customer Management</h1>
@@ -197,10 +185,10 @@ const ReportAnalysisPage = () => {
               <div className="relative w-52">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2  border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-gray-700  transition-all duration-200"
+                  className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2 border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-gray-700 transition-all duration-200"
                 >
                   {periodOptions.find((p) => p.key === selectedPeriod)?.label}
-                  {dropdownOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  {dropdownOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
                 </button>
                 {dropdownOpen && (
                   <div className="absolute mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-20">
@@ -212,11 +200,10 @@ const ReportAnalysisPage = () => {
                           setDropdownOpen(false);
                           setCurrentPage(1);
                         }}
-                        className={`block w-full text-left px-4 py-2 text-xs md:text-sm hover:bg-gray-100 ${
-                          selectedPeriod === period.key
+                        className={`block w-full text-left px-4 py-2 text-xs md:text-sm hover:bg-gray-100 ${selectedPeriod === period.key
                             ? "bg-gray-50 font-medium text-gray-900"
                             : "text-gray-700"
-                        }`}
+                          }`}
                       >
                         {period.label}
                       </button>
@@ -281,7 +268,7 @@ const ReportAnalysisPage = () => {
           {/* Search Field */}
           <div className="relative w-full md:w-1/2 lg:w-1/3">
             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400 text-xl">
-              <Search className="w-5 h-5" />
+              <FiSearch className="w-5 h-5" />
             </span>
             <input
               type="text"
@@ -348,34 +335,49 @@ const ReportAnalysisPage = () => {
             </div>
 
             {/* Pagination */}
+            {/* Pagination */}
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+              {/* Showing Text */}
               <div className="text-xs md:text-sm text-gray-600">
-                Showing {startIndex + 1}–{Math.min(startIndex + itemsPerPage, filteredCustomers.length)} of{" "}
-                {filteredCustomers.length} results
+                Showing {startIndex + 1}–{Math.min(startIndex + itemsPerPage, filteredCustomers.length)} of {filteredCustomers.length} results
               </div>
-              <div className="flex gap-2">
+
+              {/* Pagination Buttons */}
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+                {/* Previous */}
                 <button
                   onClick={handlePrevPage}
                   disabled={currentPage === 1}
-                  className={`px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm ${
-                    currentPage === 1 ? "text-gray-400 cursor-not-allowed" : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   Previous
                 </button>
+
+                {/* Page Numbers */}
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+                  <button
+                    key={number}
+                    onClick={() => setCurrentPage(number)}
+                    className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                        ? "bg-[#28A844] text-white font-medium"
+                        : "!bg-gray-100 text-black hover:bg-gray-200"
+                      }`}
+                  >
+                    {number}
+                  </button>
+                ))}
+
+                {/* Next */}
                 <button
                   onClick={handleNextPage}
                   disabled={currentPage === totalPages || totalPages === 0}
-                  className={`px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm ${
-                    currentPage === totalPages || totalPages === 0
-                      ? "text-gray-400 cursor-not-allowed"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   Next
                 </button>
               </div>
             </div>
+
           </>
         )}
       </div>

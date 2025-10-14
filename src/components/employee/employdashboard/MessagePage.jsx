@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Send, MoreVertical, ArrowLeft } from 'lucide-react';
+import { FaPaperPlane, FaEllipsisV, FaArrowLeft } from 'react-icons/fa';
 
 const initialChatData = [
   {
@@ -181,7 +181,6 @@ export default function MessagePage() {
     setChats(updatedChats);
     setInputValue('');
 
-    // Scroll only when sending message
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 50);
@@ -197,7 +196,7 @@ export default function MessagePage() {
   };
 
   return (
-    <div className='flex h-screen bg-[#fafffd] overflow-hidden p-4 md:px-12 '>
+    <div className='flex h-screen bg-[#fafffd] overflow-hidden p-4 md:px-12'>
       {/* Left Panel */}
       <div
         className={`${
@@ -209,7 +208,7 @@ export default function MessagePage() {
             Recent Messages
           </h2>
           <button className='text-gray-500 hover:text-gray-700 p-1 rounded-full transition'>
-            <MoreVertical size={18} />
+            <FaEllipsisV size={18} />
           </button>
         </div>
 
@@ -259,7 +258,7 @@ export default function MessagePage() {
               onClick={handleBack}
               className='md:hidden text-gray-600 hover:text-gray-900 p-1 rounded-full transition'
             >
-              <ArrowLeft size={20} />
+              <FaArrowLeft size={20} />
             </button>
             <div
               className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${currentChat.avatar} border-2 border-blue-300 shadow-md flex items-center justify-center text-white font-bold text-xs sm:text-base`}
@@ -274,7 +273,7 @@ export default function MessagePage() {
             </div>
           </div>
           <button className='text-gray-400 hover:text-gray-600 p-1 sm:p-2 rounded-full hover:bg-gray-100 transition'>
-            <MoreVertical size={20} />
+            <FaEllipsisV size={20} />
           </button>
         </div>
 
@@ -333,7 +332,7 @@ export default function MessagePage() {
               onClick={handleSend}
               className='bg-white hover:bg-[#F0F2F5] h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 flex justify-center items-center rounded-full text-blue-500 hover:text-blue-600 shadow-md transition flex-shrink-0'
             >
-              <Send size={18} />
+              <FaPaperPlane size={18} />
             </button>
           </div>
         </div>
