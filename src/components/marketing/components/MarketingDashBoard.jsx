@@ -352,7 +352,7 @@ const MarketingDashBoard = () => {
 
                   <div className={`${stat.iconBg} p-2 rounded-xl`}>
                     {Icon ? (
-                      <Icon className="w-6 h-6 text-gray-500" />
+                      <Icon className="w-6 h-6 " />
                     ) : (
                       <span className="text-gray-400">?</span>
                     )}
@@ -555,7 +555,7 @@ const MarketingDashBoard = () => {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {campaign.description}
                   </p>
-                  <Link to={`campaigns/${campaign.id}`}>
+                  <Link to={`campaigns/seasonal/${campaign.id}`}>
                     <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
                       See Details
                     </button>

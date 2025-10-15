@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { FaRupeeSign, FaAngleUp, FaAngleDown, FaTrophy } from "react-icons/fa";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiUserPlus } from "react-icons/fi";
-import AddCustomerModal from "./AddCustomerModal";
+import AddCustomerModal from "../common/AddCustomerModal";
 import axiosInstance from "../../config/axiosConfig";
 import { FiFilter, FiChevronDown } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
