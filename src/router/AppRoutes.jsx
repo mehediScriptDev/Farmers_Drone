@@ -9,7 +9,6 @@ import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../components/admin/components/AdminDashboard';
 
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
-import { MarketingDashboardLayout } from '../components/marketing/MarketingDashboardLayout';
 
 // Admin Components
 import Complaints from '../components/admin/components/Complaints';
@@ -39,7 +38,6 @@ import {
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
-import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
@@ -55,10 +53,10 @@ import ReportAnalysisPage from '../components/employee/employdashboard/component
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
 import Leads from './../components/marketing/Leads';
-import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
+import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -141,52 +139,53 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
- {
-  path: '/employee',
-  element: (
-    <PrivateEmployeeRoute>
-      <DashboardLayout />
-    </PrivateEmployeeRoute>
-  ),
-  children: [
-    {
-      index: true,
-      element: <Dashboard />,
-    },
-    {
-      path: "customers/:customerId",
-      element: <CoustomerDetailsPage />,
-    },
-    {
-      path: "customers",
-      element: <Coustomerpage />,
-    },
-    
-    {
-      path: "report-analysis",
-      element: <ReportAnalysisPage />,
-    },
-    {
-      path: "orders",
-      element: <OrderManagementPage />,
-    },{
-      path:"orders/:orderId",
-      element:<OrderDetailsPage/>
-    },
-    {
-      path: "payments",
-      element: <PaymentManagement />,
-    },
-    {
-      path: "supports",
-      element: <SupportPage />,
-    },
-    {
-      path: "messages",
-      element: <MessagePage />,
-    },
-  ],
-},
+  {
+    path: '/employee',
+    element: (
+      <PrivateEmployeeRoute>
+        <DashboardLayout />
+      </PrivateEmployeeRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'customers/:customerId',
+        element: <CoustomerDetailsPage />,
+      },
+      {
+        path: 'customers',
+        element: <Coustomerpage />,
+      },
+
+      {
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
+      },
+      {
+        path: 'orders',
+        element: <OrderManagementPage />,
+      },
+      {
+        path: 'orders/:orderId',
+        element: <OrderDetailsPage />,
+      },
+      {
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
+      },
+      {
+        path: 'messages',
+        element: <MessagePage />,
+      },
+    ],
+  },
   {
     path: '/field-agent',
     element: (
@@ -246,12 +245,9 @@ const AppRoutes = createBrowserRouter([
         element: <Leads />,
       },
       {
-        path: "LeadManagment",
-        element : <LeadManagment/>
-      },{
-        path : "analytics",
-        element : <Analytics/>
-      }
+        path: 'LeadManagment',
+        element: <LeadManagment />,
+      },
     ],
   },
   {
