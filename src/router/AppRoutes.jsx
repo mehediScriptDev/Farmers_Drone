@@ -1,32 +1,32 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { Layout } from '../components/common/Layout';
-import { DashboardLayout } from '../components/common/DashboardLayout';
-import LoginPage from '../pages/LoginPage';
-import NotAuthorizedPage from '../pages/NotAuthorizedPage';
-import NotFoundPage from '../pages/NotFoundPage';
+import { createBrowserRouter } from "react-router-dom";
+import { Layout } from "../components/common/Layout";
+import { DashboardLayout } from "../components/common/DashboardLayout";
+import LoginPage from "../pages/LoginPage";
+import NotAuthorizedPage from "../pages/NotAuthorizedPage";
+import NotFoundPage from "../pages/NotFoundPage";
 
 // Dashboard Components
-import AdminDashboard from '../components/admin/components/AdminDashboard';
+import AdminDashboard from "../components/admin/components/AdminDashboard";
 
-import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
+import FieldAgentDashboard from "../components/fieldAgent/FieldAgentDashboard";
 
 // Admin Components
-import Complaints from '../components/admin/components/Complaints';
-import DroneOperator from '../components/admin/components/DroneOperator';
-import EmployeeManagement from '../components/admin/components/EmployeeManagement';
-import FieldAgent from '../components/admin/components/FieldAgent';
-import Jobs from '../components/admin/components/Jobs';
-import PaymentsManagement from '../components/admin/components/PaymentsManagement';
-import Reports from '../components/admin/components/Reports';
-import UserManagement from '../components/admin/components/UserManagement';
+import Complaints from "../components/admin/components/Complaints";
+import DroneOperator from "../components/admin/components/DroneOperator";
+import EmployeeManagement from "../components/admin/components/EmployeeManagement";
+import FieldAgent from "../components/admin/components/FieldAgent";
+import Jobs from "../components/admin/components/Jobs";
+import PaymentsManagement from "../components/admin/components/PaymentsManagement";
+import Reports from "../components/admin/components/Reports";
+import UserManagement from "../components/admin/components/UserManagement";
 
 // Field Agent Components
-import FieldAgentReports from '../components/fieldAgent/Reports';
-import MyAssignments from '../components/fieldAgent/MyAssignments';
-import LocationTracking from '../components/fieldAgent/LocationTracking';
-import PhotoCapture from '../components/fieldAgent/PhotoCapture';
-import RouteOptimization from '../components/fieldAgent/RouteOptimization';
-import VehicleManagement from '../components/fieldAgent/VehicleManagement';
+import FieldAgentReports from "../components/fieldAgent/Reports";
+import MyAssignments from "../components/fieldAgent/MyAssignments";
+import LocationTracking from "../components/fieldAgent/LocationTracking";
+import PhotoCapture from "../components/fieldAgent/PhotoCapture";
+import RouteOptimization from "../components/fieldAgent/RouteOptimization";
+import VehicleManagement from "../components/fieldAgent/VehicleManagement";
 
 // Private Route Components
 import {
@@ -52,16 +52,19 @@ import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
-import Leads from './../components/marketing/Leads';
+
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import Analytics from './../components/marketing/Analytics';
+import axiosInstance from "../config/axiosConfig";
+import SeasonalCampaignDetails from './../components/marketing/components/SeasonalCampaignDetails';
+import LoyalityCampaingnDetails from './../components/marketing/components/LoyalityCampaingnDetails';
 
 const AppRoutes = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -69,29 +72,29 @@ const AppRoutes = createBrowserRouter([
         element: <MainLayout />,
       },
       {
-        path: '/services',
+        path: "/services",
         element: <Services />,
       },
       {
-        path: '/about',
+        path: "/about",
         element: <About />,
       },
       {
-        path: '/blog',
+        path: "/blog",
         element: <Blog />,
       },
       {
-        path: '/contact',
+        path: "/contact",
         element: <Contact />,
       },
       {
-        path: 'login',
+        path: "login",
         element: <LoginPage />,
       },
     ],
   },
   {
-    path: '/admin',
+    path: "/admin",
     element: (
       <PrivateAdminRoute>
         <DashboardLayout />
@@ -103,11 +106,11 @@ const AppRoutes = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: 'complaints',
+        path: "complaints",
         element: <Complaints />,
       },
       {
-        path: 'drone-operators',
+        path: "drone-operators",
         element: <DroneOperator />,
       },
       {
@@ -115,29 +118,29 @@ const AppRoutes = createBrowserRouter([
         element: <EmployeeManagement />,
       },
       {
-        path: 'field-agents',
+        path: "field-agents",
         element: <FieldAgent />,
       },
       {
-        path: 'jobs',
+        path: "jobs",
         element: <Jobs />,
       },
       {
-        path: 'payments',
+        path: "payments",
         element: <PaymentsManagement />,
       },
       {
-        path: 'reports',
+        path: "reports",
         element: <Reports />,
       },
       {
-        path: 'users',
+        path: "users",
         element: <UserManagement />,
       },
     ],
   },
   {
-    path: '/employee',
+    path: "/employee",
     element: (
       <PrivateEmployeeRoute>
         <DashboardLayout />
@@ -149,42 +152,41 @@ const AppRoutes = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: 'customers/:customerId',
+        path: "customers/:customerId",
         element: <CoustomerDetailsPage />,
       },
       {
-        path: 'customers',
-        element: <Coustomerpage />,
-      },
-
-      {
-        path: 'report-analysis',
-        element: <ReportAnalysisPage />,
-      },
-      {
-        path: 'orders',
-        element: <OrderManagementPage />,
-      },
-      {
-        path: 'orders/:orderId',
+        path: "customers/:customerId/order/:id",
         element: <OrderDetailsPage />,
       },
       {
-        path: 'payments',
+        path: "customerspage",
+        element: <Coustomerpage />,
+      },
+      {
+        path: "report-analysis",
+        element: <ReportAnalysisPage />,
+      },
+      {
+        path: "orders",
+        element: <OrderManagementPage />,
+      },
+      {
+        path: "payments",
         element: <PaymentManagement />,
       },
       {
-        path: 'supports',
+        path: "supports",
         element: <SupportPage />,
       },
       {
-        path: 'messages',
+        path: "messages",
         element: <MessagePage />,
       },
     ],
   },
   {
-    path: '/field-agent',
+    path: "/field-agent",
     element: (
       <PrivateFieldAgentRoute>
         <DashboardLayout />
@@ -196,33 +198,33 @@ const AppRoutes = createBrowserRouter([
         element: <FieldAgentDashboard />,
       },
       {
-        path: 'reports',
+        path: "reports",
         element: <FieldAgentReports />,
       },
       {
-        path: 'assignments',
+        path: "assignments",
         element: <MyAssignments />,
       },
       {
-        path: 'location-tracking',
+        path: "location-tracking",
         element: <LocationTracking />,
       },
       {
-        path: 'photo-capture',
+        path: "photo-capture",
         element: <PhotoCapture />,
       },
       {
-        path: 'route-optimization',
+        path: "route-optimization",
         element: <RouteOptimization />,
       },
       {
-        path: 'vehicle-management',
+        path: "vehicle-management",
         element: <VehicleManagement />,
       },
     ],
   },
   {
-    path: '/marketing',
+    path: "/marketing",
     element: (
       <PrivateMarketingRoute>
         <DashboardLayout />
@@ -234,7 +236,23 @@ const AppRoutes = createBrowserRouter([
         element: <MarketingDashBoard />,
       },
       {
-        path: 'campaigns',
+        path: "campaigns/seasonal/:id",
+        element: <SeasonalCampaignDetails />,
+        loader: () =>
+          axiosInstance.get(
+            "/MarketingDashboard/data/marketingLandingPage.json"
+          ),
+      },
+      {
+        path: "campaigns/loyality/:id",
+        element: <LoyalityCampaingnDetails />,
+        loader: () =>
+          axiosInstance.get(
+            "/MarketingDashboard/data/marketingLandingPage.json"
+          ),
+      },
+      {
+        path: "campaigns",
         element: <Campaigns />,
       },
       {
@@ -249,7 +267,7 @@ const AppRoutes = createBrowserRouter([
     ],
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: (
       <PrivateRoute>
         <RoleBasedRedirect />
@@ -257,11 +275,11 @@ const AppRoutes = createBrowserRouter([
     ),
   },
   {
-    path: '/unauthorized',
+    path: "/unauthorized",
     element: <NotAuthorizedPage />,
   },
   {
-    path: '*',
+    path: "*",
     element: <NotFoundPage />,
   },
 ]);
