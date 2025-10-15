@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiTarget } from "react-icons/fi";
 
@@ -58,7 +58,7 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div
         className={`bg-[#EAEDF4] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 xl:pt-3 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
           {/* manual close btn */}
@@ -66,7 +66,7 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                       onClick={() => setSidebarOpen(false)}
                       className="absolute top-4 right-3 rounded-full lg:hidden"
                     >
-                      <HiX className="w-5 h-5 text-gray-700" />
+                      <HiX className="w-7 h-7 text-gray-700" />
                     </button>
           {/* Menu Items */}
           <nav className="flex-1 px-3 py-4 overflow-y-auto">

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import bg from '../images/banner.png';
+import bg from '../../../public/assets/images/banner.png';
 import { useTranslation } from 'react-i18next';
 
 const Hero = () => {

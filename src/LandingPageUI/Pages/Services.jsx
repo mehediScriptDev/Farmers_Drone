@@ -1,4 +1,4 @@
-import Banner from "../images/serviceBanner.jpg";
+import Banner from "../../../public/assets/images/serviceBanner.jpg";
 import { ArrowRight, Sprout, HardHat, Zap, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

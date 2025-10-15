@@ -1,7 +1,7 @@
 import React from "react";
 import CompleteSections from "../Components/CompleteSections";
 import MissionNumbersSection from "../Components/MissionNumbersSection";
-import banner from "../images/aboutBanner.jpg";
+import banner from "../../../public/assets/images/aboutBanner.jpg";
 import { useTranslation } from "react-i18next";
 
 const About = () => {

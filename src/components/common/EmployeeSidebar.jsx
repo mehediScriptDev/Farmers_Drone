@@ -75,6 +75,12 @@ const EmployeeSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       >
         <div className='flex flex-col h-full'>
           {/* manual close btn */}
+                              <button
+                                onClick={() => setSidebarOpen(false)}
+                                className="absolute top-4 right-3 rounded-full lg:hidden"
+                              >
+                                <HiX className="w-7 h-7 text-gray-700" />
+                              </button>
           <button
             onClick={() => setSidebarOpen(false)}
             className='absolute top-4 right-3 rounded-full lg:hidden'

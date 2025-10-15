@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -18,20 +17,25 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const menuItems = [
     {
-    id: "dashboard",
-    label: t("sidebar.employee.dashboard"),
-    icon: RiDashboardLine,
-    path: "",
-    matchPaths: ["/employee", "/employee/", "customers/:customerId", "order/:id"], 
-  },
-  {
-    id: "customer",
-    label: t("sidebar.employee.customer"),
-    icon: PiUsersThreeBold,
-    path: "customerspage",
-    
-    matchPaths: ["customerspage", "report-analysis"], 
-  },
+      id: "dashboard",
+      label: t("sidebar.employee.dashboard"),
+      icon: RiDashboardLine,
+      path: "",
+      matchPaths: [
+        "/employee",
+        "/employee/",
+        "customers/:customerId",
+        "order/:id",
+      ],
+    },
+    {
+      id: "customer",
+      label: t("sidebar.employee.customer"),
+      icon: PiUsersThreeBold,
+      path: "customerspage",
+
+      matchPaths: ["customerspage", "report-analysis"],
+    },
     {
       id: "orders",
       label: t("sidebar.employee.orders"),
@@ -62,52 +66,51 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     },
   ];
 
-useEffect(() => {
-  const pathname = location.pathname;
+  useEffect(() => {
+    const pathname = location.pathname;
 
-  // 1. ড্যাশবোর্ডের সাথে সম্পর্কিত সমস্ত ডিটেইলস রুটগুলির জন্য একটি কাস্টম চেক
-  // এই রুটগুলি Dashboard-এর মতোই activeMenu সেট করবে।
-  const isDashboardRelatedDetailRoute = 
-    pathname.includes("/customers/") || // /employee/customers/123
-    pathname.includes("/order/"); // /employee/customers/123/order/456
+    // 1. ড্যাশবোর্ডের সাথে সম্পর্কিত সমস্ত ডিটেইলস রুটগুলির জন্য একটি কাস্টম চেক
+    // এই রুটগুলি Dashboard-এর মতোই activeMenu সেট করবে।
+    const isDashboardRelatedDetailRoute =
+      pathname.includes("/customers/") || // /employee/customers/123
+      pathname.includes("/order/"); // /employee/customers/123/order/456
 
-  if (
-    pathname === "/employee" || 
-    pathname === "/employee/" || 
-    pathname.endsWith("/employee") ||
-    isDashboardRelatedDetailRoute // <-- নতুন চেক
-  ) {
-    console.log("Setting active to dashboard or related detail route");
-    setActiveMenu("dashboard");
-    return;
-  }
+    if (
+      pathname === "/employee" ||
+      pathname === "/employee/" ||
+      pathname.endsWith("/employee") ||
+      isDashboardRelatedDetailRoute // <-- নতুন চেক
+    ) {
+      console.log("Setting active to dashboard or related detail route");
+      setActiveMenu("dashboard");
+      return;
+    }
 
-  // 2. অন্যান্য মূল রুটগুলির জন্য স্বাভাবিক চেক 
-  // এই লজিক এখন শুধুমাত্র মূল রুটগুলি (/customerspage, /orders) খুঁজবে, ডিটেইলস নয়।
-  let foundActiveMenu = "";
+    // 2. অন্যান্য মূল রুটগুলির জন্য স্বাভাবিক চেক
+    // এই লজিক এখন শুধুমাত্র মূল রুটগুলি (/customerspage, /orders) খুঁজবে, ডিটেইলস নয়।
+    let foundActiveMenu = "";
 
-  for (const item of menuItems) {
-    if (item.id === "dashboard") continue; 
+    for (const item of menuItems) {
+      if (item.id === "dashboard") continue;
 
-    if (item.matchPaths) {
-      const isMatched = item.matchPaths.some(
-        (matchPath) =>
-          // আমরা চাই যেন এটি শুধুমাত্র পুরো পাথের অংশগুলির সাথে মেলে
-          pathname.endsWith(matchPath) || 
-          pathname.includes(`/${matchPath}/`) // /orders/12345 match করার জন্য
-      );
-      
-      if (isMatched) {
-        console.log("Found match:", item.id);
-        foundActiveMenu = item.id;
-        break;
+      if (item.matchPaths) {
+        const isMatched = item.matchPaths.some(
+          (matchPath) =>
+            // আমরা চাই যেন এটি শুধুমাত্র পুরো পাথের অংশগুলির সাথে মেলে
+            pathname.endsWith(matchPath) || pathname.includes(`/${matchPath}/`) // /orders/12345 match করার জন্য
+        );
+
+        if (isMatched) {
+          console.log("Found match:", item.id);
+          foundActiveMenu = item.id;
+          break;
+        }
       }
     }
-  }
 
-  console.log("Setting active to:", foundActiveMenu || "none");
-  setActiveMenu(foundActiveMenu);
-}, [location.pathname]);
+    console.log("Setting active to:", foundActiveMenu || "none");
+    setActiveMenu(foundActiveMenu);
+  }, [location.pathname]);
 
   const handleMenuClick = (item) => {
     setActiveMenu(item.id);
@@ -133,16 +136,16 @@ useEffect(() => {
       <div
         className={`bg-[#F5F7FA] shadow-lg transform ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-2 left-0 z-50 w-[304px] xl:pl-9 overflow-y-auto`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-2 left-0 z-50 w-[304px] xl:pl-9 overflow-y-auto pt-10`}
       >
         <div className="flex flex-col h-full">
           {/* Close Button for Mobile */}
-          <div className="lg:hidden p-4 border-b border-gray-200">
+          <div className="lg:hidden right-3">
             <button
               onClick={() => setSidebarOpen(false)}
-              className="text-gray-600 hover:text-gray-900"
+              className="absolute top-4 right-3 rounded-full lg:hidden"
             >
-              <HiX className="w-6 h-6" />
+              <HiX className="w-7 h-7 text-gray-700" />
             </button>
           </div>
 
