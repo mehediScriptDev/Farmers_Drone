@@ -9,7 +9,6 @@ import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../components/admin/components/AdminDashboard';
 
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
-import { MarketingDashboardLayout } from '../components/marketing/MarketingDashboardLayout';
 
 // Admin Components
 import Complaints from '../components/admin/components/Complaints';
@@ -39,7 +38,6 @@ import {
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
-import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
@@ -58,7 +56,8 @@ import Leads from './../components/marketing/Leads';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
-import Analytics from '../components/marketing/Analytics';
+import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
+import Analytics from './../components/marketing/Analytics';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -112,10 +111,6 @@ const AppRoutes = createBrowserRouter([
         element: <DroneOperator />,
       },
       {
-        path: 'drone-operators/:operatorId',
-        element: <DroneOperatorDetails />,
-      },
-      {
         path: 'employees',
         element: <EmployeeManagement />,
       },
@@ -141,52 +136,53 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
- {
-  path: '/employee',
-  element: (
-    <PrivateEmployeeRoute>
-      <DashboardLayout />
-    </PrivateEmployeeRoute>
-  ),
-  children: [
-    {
-      index: true,
-      element: <Dashboard />,
-    },
-    {
-      path: "customers/:customerId",
-      element: <CoustomerDetailsPage />,
-    },
-    {
-      path: "customers",
-      element: <Coustomerpage />,
-    },
-    
-    {
-      path: "report-analysis",
-      element: <ReportAnalysisPage />,
-    },
-    {
-      path: "orders",
-      element: <OrderManagementPage />,
-    },{
-      path:"orders/:orderId",
-      element:<OrderDetailsPage/>
-    },
-    {
-      path: "payments",
-      element: <PaymentManagement />,
-    },
-    {
-      path: "supports",
-      element: <SupportPage />,
-    },
-    {
-      path: "messages",
-      element: <MessagePage />,
-    },
-  ],
-},
+  {
+    path: '/employee',
+    element: (
+      <PrivateEmployeeRoute>
+        <DashboardLayout />
+      </PrivateEmployeeRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'customers/:customerId',
+        element: <CoustomerDetailsPage />,
+      },
+      {
+        path: 'customers',
+        element: <Coustomerpage />,
+      },
+
+      {
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
+      },
+      {
+        path: 'orders',
+        element: <OrderManagementPage />,
+      },
+      {
+        path: 'orders/:orderId',
+        element: <OrderDetailsPage />,
+      },
+      {
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
+      },
+      {
+        path: 'messages',
+        element: <MessagePage />,
+      },
+    ],
+  },
   {
     path: '/field-agent',
     element: (
@@ -243,15 +239,13 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: 'LeadManagment',
-        element: <Leads />,
+        element: <LeadManagment />,
       },
+
       {
-        path: "LeadManagment",
-        element : <LeadManagment/>
-      },{
-        path : "analytics",
-        element : <Analytics/>
-      }
+        path: 'analytics',
+        element: <Analytics />,
+      },
     ],
   },
   {
