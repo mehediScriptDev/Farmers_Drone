@@ -1,10 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { CiClock1 } from "react-icons/ci";
-// import map from "../../LandingPageUI/images/Map.svg";
-import { FaCircle } from "react-icons/fa";
-import { IoLocationOutline } from "react-icons/io5";
-import { MapPin, Users, ChevronDown } from "lucide-react";
-import MapChart from "./MapChart";
+import { ChevronDown } from "lucide-react";
+
 
 
 // LeadsDropdown Component
@@ -44,7 +41,7 @@ const LeadsDropdown = () => {
     <div className="relative inline-block" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="lg:px-4 lg:py-2 px-3 py-1.5 border pr-8 border-gray-300 rounded-lg text-sm lg:text-lg text-black bg-white leading-tight flex items-center justify-between hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors min-w-[120px]"
+        className="lg:px-4 lg:py-2 px-3 py-1.5 w-full border pr-8 border-gray-300 rounded-lg text-sm lg:text-lg text-black bg-white leading-tight flex items-center justify-between hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors min-w-[120px]"
       >
         <span>{getSelectedLabel()}</span>
         <ChevronDown
@@ -173,7 +170,7 @@ const Leads = () => {
     <div className="">
       <div className="bg-white  rounded-xl shadow border border-gray-100">
         <div className="p-4 border-b border-gray-100">
-          <div className="flex flex-col lg:flex-row items-center justify-between mb-2">
+          <div className="flex flex-col xl:flex-row items-start xl:justify-between mb-2">
             <div>
               <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
                 Lead Management
@@ -182,14 +179,14 @@ const Leads = () => {
                 Track and nurture your marketing leads
               </p>
             </div>
-            <div className="flex flex-wrap py-3 items-center lg:flex-row gap-3">
+            <div className="flex flex-col py-3 items-center lg:flex-row gap-3">
               {/* leadsDropdown */}
               <LeadsDropdown />
               {/* leadsDropDown ends here */}
-              <button className="lg:btn-md xl:btn-lg btn-xs btn bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium shadow-none border-none ">
+              <button className="lg:btn-md xl:btn-lg btn bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium shadow-none border-none ">
                 Export Leads
               </button>
-              <button className="btn lg:btn-md xl:btn-lg btn-xs bg-yellow-400  text-gray-900 px-6 py-2 rounded-lg font-medium border-transparent shadow-none">
+              <button className="btn lg:btn-md xl:btn-lg bg-yellow-400 text-gray-900 px-6 py-2 rounded-lg font-medium border-transparent shadow-none">
                 Automation
               </button>
             </div>
