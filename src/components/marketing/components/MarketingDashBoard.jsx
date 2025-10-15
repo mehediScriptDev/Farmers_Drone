@@ -7,9 +7,10 @@ import { FiTrash2 } from "react-icons/fi";
 import { HiOutlineChevronUp } from "react-icons/hi"; // For the custom dropdown arrow
 
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import axiosInstance from "../../../config/axiosConfig";
 import CampaignModal from "./modals/CampaignModal";
-import { Link, useLocation } from "react-router-dom";
+import SalesSequenceModal from "./modals/SalesSequenceModal";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -26,7 +27,7 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
     { label: "All Leads", value: "All" },
     { label: "Hot", value: "Hot" },
     { label: "Warm", value: "Warm" },
-    { label: "Cold", value: "Cold" },
+    { label: "Cool", value: "Cool" },
   ];
 
   const handleSelect = (value) => {
@@ -115,10 +116,11 @@ const MarketingDashBoard = () => {
   const [leads, setLeads] = useState([]);
   const [allSeasonalCampaigns, setAllSeasonalCampaigns] = useState([]);
   const [allLoyaltyPrograms, setAllLoyaltyPrograms] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState("30");
+  const [selectedPeriod, setSelectedPeriod] = useState("30"); // 30 days default
   const [filteredActivities, setFilteredActivities] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [campaignModal, setCampaignModal] = useState(false);
+  const [clockModalOpen, setClockModalOpen] = useState(false);
   const totalPages = Math.ceil(filteredActivities.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
   const paginatedData = filteredActivities.slice(
@@ -439,14 +441,14 @@ const MarketingDashBoard = () => {
               <tbody className="divide-y divide-gray-200">
                 {paginatedData.map((activity) => (
                   <tr key={activity.id} className="hover:bg-gray-50">
-                    <td className="py-3 px-4">{activity.lead}</td>
-                    <td className="py-3 px-4 whitespace-pre-line">
+                    <td className="py-3 px-4 text-xs md:text-lg">{activity.lead}</td>
+                    <td className="py-3 px-4 whitespace-pre-line text-xs md:text-lg">
                       {activity.contact}
                     </td>
-                    <td className="py-3 px-4">{activity.source}</td>
-                    <td className="py-3 px-4">{activity.location}</td>
+                    <td className="py-3 px-4 text-xs md:text-lg">{activity.source}</td>
+                    <td className="py-3 px-4 text-xs md:text-lg">{activity.location}</td>
                     <td
-                      className={`py-3 px-4 font-semibold ${
+                      className={`py-3 px-4 text-xs md:text-lg font-semibold ${
                         activity.status === "Hot"
                           ? "text-red-600"
                           : activity.status === "Warm"
@@ -454,19 +456,24 @@ const MarketingDashBoard = () => {
                           : "text-green-600"
                       }`}
                     >
-                      {activity.score}
+                      <span className="ml-4">
+                        {activity.score}
+                      </span>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3 px-4 text-xs md:text-lg">
                       <span
-                        className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+                        className={`inline-block px-3 py-1 rounded-full text-xs md:ml-3 font-semibold ${
                           statusStyles[activity.status]
                         }`}
                       >
                         {activity.status}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <button className="rounded-full p-1  text-green-200 transition">
+                    <td className="py-3 px-4 text-xs md:text-lg">
+                      <button
+                        className="rounded-full p-1  text-green-200 transition md:ml-4"
+                        onClick={() => setClockModalOpen(true)}
+                      >
                         <FaRegClock />
                       </button>
                     </td>
@@ -698,6 +705,12 @@ const MarketingDashBoard = () => {
       {campaignModal && (
         <CampaignModal onClose={() => setCampaignModal(false)} />
       )}
+      {
+        <SalesSequenceModal
+          isOpen={clockModalOpen}
+          onClose={() => setClockModalOpen(false)}
+        />
+      }
     </div>
   );
 };

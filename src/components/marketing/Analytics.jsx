@@ -26,7 +26,7 @@ const Analytics = () => {
         </div>
         
         <div>
-          <h1>hello there</h1>
+          <progress value={30}></progress>
         </div>
       </div>
     </div>

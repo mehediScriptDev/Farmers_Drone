@@ -84,7 +84,7 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cold",
+      "status": "Cool",
       "date": "2025-10-04"
     },
     {
@@ -102,7 +102,7 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cold",
+      "status": "Cool",
       "date": "2025-10-20"
     },
     {
@@ -118,9 +118,9 @@
   "statusStyles": {
     "Hot": "bg-red-100 text-red-600",
     "Warm": "bg-yellow-100 text-yellow-600",
-    "Cool": "bg-green-100 text-green-600"
+    "Cool": "bg-green-200 text-green-400"
   },
-  "leads": ["All Lead", "Hot", "Warm", "Cold"],
+  "leads": ["All Lead", "Hot", "Warm", "Cool"],
   "allSeasonalCampaigns": [
     {
       "id": 1,
@@ -175,6 +175,60 @@
       "image": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=300&fit=crop",
       "title": "Irrigation Optimization",
       "description": "Optimize water usage with our smart irrigation monitoring and management solutions."
+    },
+    {
+      "id": 10,
+      "image": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf358?w=500&h=300&fit=crop",
+      "title": "Soil Health Scan",
+      "description": "Get a detailed soil health report using drone-based multispectral imaging to optimize fertilizer use."
+    },
+    {
+      "id": 11,
+      "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500&h=300&fit=crop",
+      "title": "Early Season Crop Insurance",
+      "description": "Secure your investment with drone-verified crop insurance enrollment at planting time."
+    },
+    {
+      "id": 12,
+      "image": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500&h=300&fit=crop",
+      "title": "Drone Mapping for Land Records",
+      "description": "Accurate land boundary and topography mapping using high-resolution drone surveys for legal and planning purposes."
+    },
+    {
+      "id": 13,
+      "image": "https://images.unsplash.com/photo-1600864854296-8a4a0a7d6f2e?w=500&h=300&fit=crop",
+      "title": "Monsoon Readiness Package",
+      "description": "Prepare your fields for heavy rains with drainage planning and erosion monitoring via drone analytics."
+    },
+    {
+      "id": 14,
+      "image": "https://images.unsplash.com/photo-1529429617124-95b109e86bb5?w=500&h=300&fit=crop",
+      "title": "Organic Farming Support",
+      "description": "Tailored drone services for organic farms, including natural pest deterrent mapping and compost distribution planning."
+    },
+    {
+      "id": 15,
+      "image": "https://images.unsplash.com/photo-1533090368676-1fd25485db88?w=500&h=300&fit=crop",
+      "title": "Livestock Monitoring Expansion",
+      "description": "Extend drone capabilities to monitor livestock health, grazing patterns, and pasture conditions."
+    },
+    {
+      "id": 16,
+      "image": "https://images.unsplash.com/photo-1516035069371-29a1b2a5c5f3?w=500&h=300&fit=crop",
+      "title": "Post-Harvest Field Analysis",
+      "description": "Evaluate post-harvest field conditions to plan cover cropping and soil regeneration strategies."
+    },
+    {
+      "id": 17,
+      "image": "https://images.unsplash.com/photo-1593692909680-5d8e7e3f9d5e?w=500&h=300&fit=crop",
+      "title": "Climate Resilience Planning",
+      "description": "Use historical drone data to build climate-resilient farming plans for the upcoming seasons."
+    },
+    {
+      "id": 18,
+      "image": "https://images.unsplash.com/photo-1581578021424-5b6a5a8a4f8e?w=500&h=300&fit=crop",
+      "title": "Agri-Tech Training Workshops",
+      "description": "Hands-on workshops for farmers on using drone data dashboards and interpreting agronomic insights."
     }
   ],
   "allLoyaltyPrograms": [

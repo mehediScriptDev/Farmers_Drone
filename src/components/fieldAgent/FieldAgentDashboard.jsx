@@ -160,8 +160,10 @@ const FieldAgentDashboard = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm]);
-
+  }, [searchTerm, sortKey, sortDir]);
+  useEffect(() => {
+    if (currentPage > totalPages) setCurrentPage(totalPages || 1);
+  }, [currentPage, totalPages]);
   const handleSelect = (item) => {
     console.log("Selected:", item.label);
     setIsOpen(false);
@@ -724,12 +726,16 @@ const FieldAgentDashboard = () => {
           {/* Pagination */}
           <div className="py-4 md:py-6">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-2 md:pb-3">
+              {/* Showing Users */}
               <p className="text-sm text-black px-4 md:px-6">
                 {t("dashboard.fieldAgent.pagination.showing")}{" "}
                 {currentUsers.length} of {totalUsers}{" "}
                 {t("dashboard.fieldAgent.pagination.users")}
               </p>
+
+              {/* Pagination Controls */}
               <div className="flex flex-row flex-wrap items-center gap-0.5 sm:gap-2 px-3 sm:px-4 md:px-6">
+                {/* Previous Button */}
                 <button
                   onClick={() =>
                     setCurrentPage((prev) => Math.max(1, prev - 1))
@@ -740,26 +746,83 @@ const FieldAgentDashboard = () => {
                   {t("dashboard.fieldAgent.pagination.previous")}
                 </button>
 
-                {/* Dynamically create page number buttons */}
-                {pageNumbers.map((number) => (
-                  <button
-                    key={number}
-                    onClick={() => setCurrentPage(number)}
-                    className={`px-3 py-1.5 text-sm rounded transition-colors ${
-                      currentPage === number
-                        ? "bg-[#28A844] text-white font-medium"
-                        : "!bg-gray-100 text-black hover:bg-gray-200"
-                    }`}
-                  >
-                    {number}
-                  </button>
-                ))}
+                {/* Dynamic Page Numbers */}
+                {(() => {
+                  const visiblePages = [];
+                  const totalToShow = 3;
+                  const lastToShow = 3;
 
+                  if (totalPages <= 6) {
+                    // Small number of pages, show all
+                    for (let i = 1; i <= totalPages; i++) visiblePages.push(i);
+                  } else {
+                    // Total pages > 6, use dots logic
+                    if (currentPage <= totalToShow) {
+                      // Beginning
+                      for (let i = 1; i <= totalToShow; i++)
+                        visiblePages.push(i);
+                      visiblePages.push("dots");
+                      for (
+                        let i = totalPages - lastToShow + 1;
+                        i <= totalPages;
+                        i++
+                      )
+                        visiblePages.push(i);
+                    } else if (currentPage > totalPages - lastToShow) {
+                      // End
+                      for (let i = 1; i <= totalToShow; i++)
+                        visiblePages.push(i);
+                      visiblePages.push("dots");
+                      for (
+                        let i = totalPages - lastToShow + 1;
+                        i <= totalPages;
+                        i++
+                      )
+                        visiblePages.push(i);
+                    } else {
+                      // Middle
+                      visiblePages.push(
+                        1,
+                        "dots",
+                        currentPage - 1,
+                        currentPage,
+                        currentPage + 1,
+                        "dots",
+                        totalPages
+                      );
+                    }
+                  }
+
+                  return visiblePages.map((number, index) =>
+                    number === "dots" ? (
+                      <span
+                        key={`dots-${index}`}
+                        className="px-2 text-gray-500"
+                      >
+                        ...
+                      </span>
+                    ) : (
+                      <button
+                        key={number}
+                        onClick={() => setCurrentPage(number)}
+                        className={`px-3 py-1.5 text-sm rounded transition-colors ${
+                          currentPage === number
+                            ? "bg-[#28A844] text-white font-medium"
+                            : "!bg-gray-100 text-black hover:bg-gray-200"
+                        }`}
+                      >
+                        {number}
+                      </button>
+                    )
+                  );
+                })()}
+
+                {/* Next Button */}
                 <button
                   onClick={() =>
                     setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                   }
-                  disabled={currentPage === totalPages}
+                  disabled={currentPage === totalPages || totalPages === 0}
                   className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {t("dashboard.fieldAgent.pagination.next")}

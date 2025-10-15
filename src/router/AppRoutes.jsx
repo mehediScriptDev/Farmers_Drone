@@ -35,31 +35,32 @@ import {
   PrivateEmployeeRoute,
   PrivateFieldAgentRoute,
   PrivateMarketingRoute,
-} from "./PrivateRoute";
-import { RoleBasedRedirect } from "./RoleBasedRedirect";
-import MarketingDashBoard from "../components/marketing/components/MarketingDashBoard";
-import MainLayout from "./../LandingPageUI/Layout/MainLayout";
-import Services from "./../LandingPageUI/Pages/Services";
-import About from "./../LandingPageUI/Pages/About";
-import Blog from "./../LandingPageUI/Pages/Blog";
-import Contact from "./../LandingPageUI/Pages/Contact";
-import Dashboard from "../components/employee/employdashboard/Dashboard";
-import Coustomerpage from "../components/employee/employdashboard/Coustomerpage";
-import OrderManagementPage from "../components/employee/employdashboard/OrderManagementPage";
-import MessagePage from "../components/employee/employdashboard/MessagePage";
-import PaymentManagement from "../components/employee/employdashboard/PaymentManagement";
-import SupportPage from "../components/employee/employdashboard/SupportPage";
-import ReportAnalysisPage from "../components/employee/employdashboard/components/ReportAnalysisPage";
-import CoustomerDetailsPage from "../components/employee/employdashboard/components/CoustomerDetailsPage";
+} from './PrivateRoute';
+import { RoleBasedRedirect } from './RoleBasedRedirect';
+import LeadManagment from '../components/marketing/components/LeadManagment';
+import MainLayout from './../LandingPageUI/Layout/MainLayout';
+import Services from './../LandingPageUI/Pages/Services';
+import About from './../LandingPageUI/Pages/About';
+import Blog from './../LandingPageUI/Pages/Blog';
+import Contact from './../LandingPageUI/Pages/Contact';
+import Dashboard from '../components/employee/employdashboard/Dashboard';
+import Coustomerpage from '../components/employee/employdashboard/Coustomerpage';
+import OrderManagementPage from '../components/employee/employdashboard/OrderManagementPage';
+import MessagePage from '../components/employee/employdashboard/MessagePage';
+import PaymentManagement from '../components/employee/employdashboard/PaymentManagement';
+import SupportPage from '../components/employee/employdashboard/SupportPage';
+import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
+import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
-import Leads from "./../components/marketing/Leads";
-import Campaigns from "./../components/marketing/Campaigns";
-import OrderDetailsPage from "../components/employee/employdashboard/components/OrderDetailsPage";
-import CampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
-import Analytics from "../components/marketing/Analytics";
+import Leads from './../components/marketing/Leads';
+import Campaigns from './../components/marketing/Campaigns';
+import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
+import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
+import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
+import Analytics from './../components/marketing/Analytics';
 import axiosInstance from "../config/axiosConfig";
-import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
-import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
+import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails"
+import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails"
 
 const AppRoutes = createBrowserRouter([
   {
@@ -113,7 +114,7 @@ const AppRoutes = createBrowserRouter([
         element: <DroneOperator />,
       },
       {
-        path: "employees",
+        path: 'employees',
         element: <EmployeeManagement />,
       },
       {
@@ -135,6 +136,53 @@ const AppRoutes = createBrowserRouter([
       {
         path: "users",
         element: <UserManagement />,
+      },
+    ],
+  },
+  {
+    path: '/employee',
+    element: (
+      <PrivateEmployeeRoute>
+        <DashboardLayout />
+      </PrivateEmployeeRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'customers/:customerId',
+        element: <CoustomerDetailsPage />,
+      },
+      {
+        path: 'customers',
+        element: <Coustomerpage />,
+      },
+
+      {
+        path: 'report-analysis',
+        element: <ReportAnalysisPage />,
+      },
+      {
+        path: 'orders',
+        element: <OrderManagementPage />,
+      },
+      {
+        path: 'orders/:orderId',
+        element: <OrderDetailsPage />,
+      },
+      {
+        path: 'payments',
+        element: <PaymentManagement />,
+      },
+      {
+        path: 'supports',
+        element: <SupportPage />,
+      },
+      {
+        path: 'messages',
+        element: <MessagePage />,
       },
     ],
   },
@@ -255,13 +303,14 @@ const AppRoutes = createBrowserRouter([
         element: <Campaigns />,
       },
       {
-        path: "LeadManagment",
-        element: <Leads />,
+        path: 'LeadManagment',
+        element: <LeadManagment />,
       },
-      // {
-      //   path: "analytics",
-      //   element: <Anylytics />,
-      // },
+
+      {
+        path: 'analytics',
+        element: <Analytics />,
+      },
     ],
   },
   {
