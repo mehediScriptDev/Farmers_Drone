@@ -8,6 +8,7 @@ import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, Veri
 import axiosInstance from '../../../config/axiosConfig';
 import { Link, useNavigate } from 'react-router-dom';
 import { LuEye } from 'react-icons/lu';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 
 const Coustomerpage = () => {
@@ -15,6 +16,7 @@ const Coustomerpage = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -47,8 +49,8 @@ const Coustomerpage = () => {
         console.log(data.customers[0])
         setActivities(
           data.customers.map((customer) => ({
-            
-            id:customer.id,
+
+            id: customer.id,
             name: customer.serviceName,
             company: customer.company,
             contact: customer.contact,
@@ -200,39 +202,52 @@ const Coustomerpage = () => {
                   <td className="px-3 md:px-6 py-4">
                     <span
                       className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${activity.server === 'Unassigned'
-                          ? 'bg-red-100 text-red-700'
-                          : 'bg-green-100 text-green-700'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-green-100 text-green-700'
                         }`}
                     >
                       {activity.server}
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <select className="px-2 md:px-3 py-1 bg-[#394C6B] text-white rounded text-xs md:text-sm">
-                      <option>{activity.progress}</option>
-                    </select>
+                    <div className="relative mb-4 md:mb-6 w-40">
+                      <select
+                        className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-[#394C6B] text-xs md:text-base 
+        text-[#FFFFFF] appearance-none cursor-pointer"
+                        onFocus={() => setIsOpen(true)}
+                        onBlur={() => setIsOpen(false)}
+                      >
+                        <option>In Progress</option>
+                        <option>Complete</option>
+                        <option>Last 90 Days</option>
+                      </select>
+
+                      <div
+                        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 "
+                      >
+                        <FaChevronDown className="text-[#FFFFFF]" />
+                      </div>
+                    </div>
                   </td>
                   <td className="px-3 md:px-6 py-4">
                     <span
                       className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High'
-                          ? 'text-red-600'
-                          : activity.priority === 'Medium'
-                            ? 'text-yellow-600'
-                            : 'text-green-600'
+                        ? 'text-red-600'
+                        : activity.priority === 'Medium'
+                          ? 'text-yellow-600'
+                          : 'text-green-600'
                         }`}
                     >
                       {activity.priority}
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                     <Link to={`/employee/customers/${activity.id}`}>
-                     {console.log(activity)}
-                     <button
-                     
-                      className="text-gray-600 hover:text-gray-900"
-                    >
-                      <LuEye className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
+                    <Link to={`/employee/customers/${activity.id}`}>
+                      <button
+                        className="text-gray-600 hover:text-gray-900"
+                      >
+                        <LuEye className="w-4 h-4 md:w-5 md:h-5" />
+                      </button>
                     </Link>
                   </td>
                 </tr>
@@ -265,8 +280,8 @@ const Coustomerpage = () => {
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                    ? "bg-[#28A844] text-white font-medium"
-                    : "!bg-gray-100 text-black hover:bg-gray-200"
+                  ? "bg-[#28A844] text-white font-medium"
+                  : "!bg-gray-100 text-black hover:bg-gray-200"
                   }`}
               >
                 {number}
@@ -316,3 +331,4 @@ const Coustomerpage = () => {
 };
 
 export default Coustomerpage;
+ 

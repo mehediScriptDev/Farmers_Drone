@@ -358,14 +358,14 @@ function DashBoard() {
                   </td>
                   <td className="px-3 md:px-6 py-4">
                     <Link to={`/employee/customers/${activity.id}`}>
-                     <button
-                     
-                      className="text-gray-600 hover:text-gray-900"
-                    >
-                      <LuEye className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
+                      <button
+
+                        className="text-gray-600 hover:text-gray-900"
+                      >
+                        <LuEye className="w-4 h-4 md:w-5 md:h-5" />
+                      </button>
                     </Link>
-                   
+
                   </td>
                 </tr>
               ))}
@@ -399,8 +399,8 @@ function DashBoard() {
                   key={number}
                   onClick={() => setCurrentPage(number)}
                   className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                      ? "bg-[#28A844] text-white font-medium"
-                      : "!bg-gray-100 text-black hover:bg-gray-200"
+                    ? "bg-[#28A844] text-white font-medium"
+                    : "!bg-gray-100 text-black hover:bg-gray-200"
                     }`}
                 >
                   {number}

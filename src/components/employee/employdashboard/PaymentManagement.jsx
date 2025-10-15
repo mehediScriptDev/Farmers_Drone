@@ -202,15 +202,14 @@ const PaymentManagement = () => {
                   <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">{txn.outstanding}</td>
                   <td className="px-3 md:px-6 py-4">
                     <span
-                      className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${
-                        txn.progress === 'Completed'
+                      className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${txn.progress === 'Completed'
                           ? 'bg-green-100 text-green-700'
                           : txn.progress === 'Processed'
-                          ? 'bg-blue-100 text-blue-700'
-                          : txn.progress === 'Pending'
-                          ? 'bg-yellow-100 text-yellow-700'
-                          : 'bg-gray-100 text-gray-700'
-                      }`}
+                            ? 'bg-blue-100 text-blue-700'
+                            : txn.progress === 'Pending'
+                              ? 'bg-yellow-100 text-yellow-700'
+                              : 'bg-gray-100 text-gray-700'
+                        }`}
                     >
                       {txn.progress}
                     </span>
@@ -222,47 +221,46 @@ const PaymentManagement = () => {
         </div>
 
         {/* Pagination */}
-      {/* Pagination */}
-<div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-  <div className="text-xs md:text-sm text-gray-600">
-    Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
-  </div>
+        {/* Pagination */}
+        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs md:text-sm text-gray-600">
+            Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
+          </div>
 
-  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-    {/* Previous */}
-    <button
-      onClick={handlePrevious}
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      disabled={currentPage === 1}
-    >
-      Previous
-    </button>
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+            {/* Previous */}
+            <button
+              onClick={handlePrevious}
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
 
-    {/* Page Numbers */}
-    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-      <button
-        key={number}
-        onClick={() => setCurrentPage(number)}
-        className={`px-3 py-1.5 text-sm rounded transition-colors ${
-          currentPage === number
-            ? 'bg-[#28A844] text-white font-medium'
-            : 'bg-gray-100 text-black hover:bg-gray-200'
-        }`}
-      >
-        {number}
-      </button>
-    ))}
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                    ? 'bg-[#28A844] text-white font-medium'
+                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
 
-    {/* Next */}
-    <button
-      onClick={handleNext}
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      disabled={currentPage === totalPages || totalPages === 0}
-    >
-      Next
-    </button>
-  </div>
-</div>
+            {/* Next */}
+            <button
+              onClick={handleNext}
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={currentPage === totalPages || totalPages === 0}
+            >
+              Next
+            </button>
+          </div>
+        </div>
 
       </div>
 

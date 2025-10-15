@@ -1,12 +1,12 @@
 import { AiOutlineClose } from "react-icons/ai";
- 
+
 import { useState, useCallback, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { HiLocationMarker } from "react-icons/hi";
 import { FiUpload } from "react-icons/fi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
- 
+
 const INITIAL_FORM = {
   firstName: "",
   middleName: "",
@@ -31,16 +31,14 @@ const INITIAL_FORM = {
   lat3: "",
   acres: "",
 };
- 
+
 export default function RegistrationModal({ isOpen, onClose }) {
   const [modalStep, setModalStep] = useState(1);
   const [validationError, setValidationError] = useState("");
   const [formData, setFormData] = useState(INITIAL_FORM);
   const { t } = useTranslation();
- 
-  // NEW: ref for the inner modal panel to detect outside clicks [web:2][web:5]
-  const panelRef = useRef(null); // [web:2][web:5]
- 
+  const panelRef = useRef(null);
+
   const handleInputChange = useCallback(
     (e) => {
       const { name, value, files, type } = e.target;
@@ -52,14 +50,14 @@ export default function RegistrationModal({ isOpen, onClose }) {
     },
     [validationError]
   );
- 
+
   const handleClose = useCallback(() => {
     setModalStep(1);
     setValidationError("");
     setFormData(INITIAL_FORM);
     onClose();
   }, [onClose]);
- 
+
   const validateStep = useCallback(() => {
     const requiredFieldsByStep = {
       1: ["firstName", "lastName", "phone", "geoLocation", "registeredBy"],
@@ -73,10 +71,10 @@ export default function RegistrationModal({ isOpen, onClose }) {
         "kycDocument",
       ],
     };
- 
+
     const missingFields =
       requiredFieldsByStep[modalStep]?.filter((key) => !formData[key]) || [];
- 
+
     if (missingFields.length > 0) {
       return t(
         modalStep === 1
@@ -84,92 +82,90 @@ export default function RegistrationModal({ isOpen, onClose }) {
           : "Please fill all required fields in Address Details (* marked)."
       );
     }
- 
+
     return "";
   }, [formData, modalStep, t]);
- 
+
   const nextStep = useCallback(() => {
     const error = validateStep();
     if (error) return setValidationError(error);
     setModalStep((prev) => Math.min(prev + 1, 3));
   }, [validateStep]);
- 
+
   const prevStep = useCallback(() => {
     setModalStep((prev) => Math.max(prev - 1, 1));
     setValidationError("");
   }, []);
- 
+
   const handleConfirm = useCallback(() => {
-    // In real production app: Send formData to backend (FormData for file upload)
-    console.log("✅ Final Form Submitted:", formData);
+    console.log(" Final Form Submitted:", formData);
     handleClose();
   }, [formData, handleClose]);
- 
-  // NEW: window/document event to close modal when clicking outside the panel [web:2][web:5]
   useEffect(() => {
-    if (!isOpen) return; // only attach when open [web:5]
- 
+    if (!isOpen) return; 
+
     const handleOutsideClick = (e) => {
-      // If click target is not inside the modal panel, close it [web:2][web:5]
       if (panelRef.current && !panelRef.current.contains(e.target)) {
-        handleClose(); // close via the provided close logic [web:5]
+        handleClose();
       }
     };
- 
-    // Use mousedown for more responsive interactions [web:2][web:5]
-    window.addEventListener("mousedown", handleOutsideClick); // [web:2][web:5]
+
+    window.addEventListener("mousedown", handleOutsideClick); 
     return () => {
-      window.removeEventListener("mousedown", handleOutsideClick); // cleanup [web:5]
+      window.removeEventListener("mousedown", handleOutsideClick); 
     };
-  }, [isOpen, handleClose]); // [web:5]
- 
+  }, [isOpen, handleClose]); 
+
   if (!isOpen) return null;
- 
+
   const stepTitles = [
     t("dashboard.fieldAgent.FirstModal.customerInfo"),
     t("dashboard.fieldAgent.SecondModal.addressDetails"),
     t("dashboard.fieldAgent.ThirdModal.serviceLocations"),
   ];
- 
+
   return (
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center
       bg-black/60 transition-opacity duration-300
       ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
     >
-      {/* NEW: attach ref to the inner container to preserve layout and detect outside clicks [web:2][web:5] */}
       <div
-        ref={panelRef} // NEW [web:2][web:5]
-        className={`bg-white w-full max-w-2xl mx-4 md:mx-6 rounded-lg shadow-lg max-h-[90vh] flex flex-col
-        transform transition-transform duration-300 px-2 md:px-4 lg:px-12
+        ref={panelRef}
+        className={`bg-white w-full max-w-xl mx-4 md:mx-6 rounded-lg shadow-lg max-h-[80vh] flex flex-col
+        transform transition-transform duration-300 px-2 
         ${isOpen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
       >
         {/* Header */}
         <div className="sticky top-0 bg-white border-b rounded-t-2xl border-gray-200 px-2 py-2 md:py-4 flex items-center gap-4 z-10">
-          <button
-            onClick={modalStep > 1 ? prevStep : handleClose}
-            className="bg-gray-200 hover:bg-gray-300  rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
-          >
-            <FaChevronLeft className="w-4 h-4" />
-          </button>
-          <h2 className="text-lg md:text-4xl font-semibold text-center flex-1">
-            {t("dashboard.fieldAgent.FirstModal.addCustomer")}
+          {/* STEP 1: No Back Button */}
+          {modalStep > 1 && (
+            <button
+              onClick={prevStep}
+              className="bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center"
+            >
+              <FaChevronLeft className="w-4 h-4" />
+            </button>
+          )}
+          <h2 className="text-lg md:text-2xl lg:text-3xl font-semibold  flex-1">
+            {stepTitles[modalStep - 1]}
           </h2>
-          <button
-            onClick={handleClose} 
-            aria-label="Close"
-            className=" text-gray-600 transition w-10 h-10 flex justify-center items-center"
-          >
-            <AiOutlineClose className="w-6 h-6" />
-          </button>
+          {/* STEP 2 & 3: No Cross Button */}
+          {modalStep === 1 && (
+            <button
+              onClick={handleClose}
+              aria-label="Close"
+              className=" text-gray-600 transition w-10 h-10 flex justify-center items-center"
+            >
+              <AiOutlineClose className="w-6 h-6" />
+            </button>
+          )}
         </div>
- 
+
         {/* Scrollable Body */}
         <div className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4">
-          <h3 className="text-base md:text-lg lg:text-3xl font-semibold">
-            {stepTitles[modalStep - 1]}
-          </h3>
- 
+
+
           {/* Step 1 - Customer Info */}
           {modalStep === 1 && (
             <div className="space-y-2.5 md:space-y-3">
@@ -221,7 +217,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   />
                 </div>
               ))}
- 
+
               {/* Geo Location */}
               <div>
                 <label className="block text-sm md:text-base font-medium">
@@ -242,7 +238,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   <HiLocationMarker className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 </div>
               </div>
- 
+
               {/* District / Mandal / Village */}
               {["district", "mandal", "village"].map((key) => (
                 <div key={key}>
@@ -255,15 +251,14 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     value={formData[key]}
                     onChange={handleInputChange}
                     placeholder={t(
-                      `dashboard.fieldAgent.FirstModal.enter${
-                        key.charAt(0).toUpperCase() + key.slice(1)
+                      `dashboard.fieldAgent.FirstModal.enter${key.charAt(0).toUpperCase() + key.slice(1)
                       }`
                     )}
-                    className="mt-1 w-full border border-gray-300 rounded-md px-3 py-2 text-sm md:text-base focus:ring-blue-500 focus:outline-none"
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-green-500"
                   />
                 </div>
               ))}
- 
+
               {/* Registered By */}
               <div>
                 <label className="block text-sm font-medium mb-1">
@@ -286,7 +281,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
               </div>
             </div>
           )}
- 
+
           {/* Step 2 - Address */}
           {modalStep === 2 && (
             <div className="space-y-4">
@@ -305,7 +300,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   <FiUpload className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
                 </div>
               </div>
- 
+
               {/* Street */}
               <div>
                 <label className="block text-sm font-medium mb-1">
@@ -323,7 +318,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   className="w-full px-4 py-2 border rounded-lg focus:ring-green-500"
                 />
               </div>
- 
+
               {/* City / State */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {["city", "state"].map((field) => (
@@ -345,7 +340,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   </div>
                 ))}
               </div>
- 
+
               {/* Postal / Country */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {["postalCode", "country"].map((field) => (
@@ -369,7 +364,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   </div>
                 ))}
               </div>
- 
+
               {/* Industry */}
               <div>
                 <label className="block text-sm font-medium mb-1">
@@ -395,7 +390,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
               </div>
             </div>
           )}
- 
+
           {/* Step 3 - Service Locations */}
           {modalStep === 3 && (
             <div className="space-y-4">
@@ -403,13 +398,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
                 <div key={key}>
                   <label className="block text-sm font-medium mb-1 flex justify-between">
                     {t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          "firstLatLong",
-                          "secondLatLong",
-                          "thirdLatLongPlus",
-                          "numberOfAcres",
-                        ][idx]
+                      `dashboard.fieldAgent.ThirdModal.${[
+                        "firstLatLong",
+                        "secondLatLong",
+                        "thirdLatLongPlus",
+                        "numberOfAcres",
+                      ][idx]
                       }`
                     )}
                     {key === "lat3" && (
@@ -424,13 +418,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     value={formData[key]}
                     onChange={handleInputChange}
                     placeholder={t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          "firstLatLongValue",
-                          "secondLatLongValue",
-                          "thirdLatLongPlusValue",
-                          "landAreaInAcres",
-                        ][idx]
+                      `dashboard.fieldAgent.ThirdModal.${[
+                        "firstLatLongValue",
+                        "secondLatLongValue",
+                        "thirdLatLongPlusValue",
+                        "landAreaInAcres",
+                      ][idx]
                       }`
                     )}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-green-500"
@@ -446,7 +439,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
             </div>
           )}
         </div>
- 
+
         {/* Footer */}
         <div className="sticky bottom-0 bg-white border-t border-gray-200 rounded-b-2xl px-6 py-4 z-10">
           {modalStep < 3 ? (
@@ -469,5 +462,3 @@ export default function RegistrationModal({ isOpen, onClose }) {
     </div>
   );
 }
- 
- 

@@ -152,13 +152,12 @@ const SupportPage = () => {
               </div>
               {bottomContent && (
                 <div
-                  className={`text-xs md:text-sm flex items-center gap-1 ${
-                    stat.change
+                  className={`text-xs md:text-sm flex items-center gap-1 ${stat.change
                       ? stat.trend === 'up'
                         ? 'text-green-600'
                         : 'text-red-600'
                       : 'text-gray-500'
-                  }`}
+                    }`}
                 >
                   {stat.change && stat.trend === 'up' && (
                     <TrendingUp className='w-4 h-4' />
@@ -261,9 +260,8 @@ const SupportPage = () => {
                           className='text-2xl'
                         >
                           <BiChevronDown
-                            className={`transition-transform duration-200 ${
-                              activeDropdown === index ? 'rotate-180' : ''
-                            }`}
+                            className={`transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
+                              }`}
                           />
                         </button>
                         {activeDropdown === index && (
@@ -299,52 +297,51 @@ const SupportPage = () => {
 
         {/* Pagination */}
         {/* Pagination */}
-<div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-  <div className="text-xs md:text-sm text-gray-600">
-    Showing{' '}
-    {paginatedData.length === 0
-      ? 0
-      : (currentPage - 1) * ITEMS_PER_PAGE + 1}{' '}
-    to{' '}
-    {(currentPage - 1) * ITEMS_PER_PAGE + paginatedData.length} of{' '}
-    {filteredData.length} results
-  </div>
+        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs md:text-sm text-gray-600">
+            Showing{' '}
+            {paginatedData.length === 0
+              ? 0
+              : (currentPage - 1) * ITEMS_PER_PAGE + 1}{' '}
+            to{' '}
+            {(currentPage - 1) * ITEMS_PER_PAGE + paginatedData.length} of{' '}
+            {filteredData.length} results
+          </div>
 
-  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-    {/* Previous Button */}
-    <button
-      onClick={handlePrevious}
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      disabled={currentPage === 1}
-    >
-      Previous
-    </button>
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+            {/* Previous Button */}
+            <button
+              onClick={handlePrevious}
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
 
-    {/* Page Numbers */}
-    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-      <button
-        key={number}
-        onClick={() => setCurrentPage(number)}
-        className={`px-3 py-1.5 text-sm rounded transition-colors ${
-          currentPage === number
-            ? 'bg-[#28A844] text-white font-medium'
-            : 'bg-gray-100 text-black hover:bg-gray-200'
-        }`}
-      >
-        {number}
-      </button>
-    ))}
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                    ? 'bg-[#28A844] text-white font-medium'
+                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
 
-    {/* Next Button */}
-    <button
-      onClick={handleNext}
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      disabled={currentPage === totalPages || totalPages === 0}
-    >
-      Next
-    </button>
-  </div>
-</div>
+            {/* Next Button */}
+            <button
+              onClick={handleNext}
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={currentPage === totalPages || totalPages === 0}
+            >
+              Next
+            </button>
+          </div>
+        </div>
 
       </div>
 

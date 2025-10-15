@@ -377,7 +377,6 @@ const ReportAnalysisPage = () => {
                 </button>
               </div>
             </div>
-
           </>
         )}
       </div>

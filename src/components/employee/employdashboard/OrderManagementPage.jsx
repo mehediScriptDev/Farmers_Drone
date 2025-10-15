@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { FiEye, FiPlus, FiCalendar, FiX } from 'react-icons/fi'; 
+import { FiEye, FiPlus, FiCalendar, FiX } from 'react-icons/fi';
 import ServiceRequestModal from './components/Modal/ServiceRequestModal';
 import ResheduleServiceModal from './components/Modal/ResheduleServiceModal';
 import CancleModal from './components/Modal/CancleModal';
 import { useTranslation } from 'react-i18next';
 import { CiSearch } from "react-icons/ci";
 import axiosInstance from '../../../config/axiosConfig';
+import { Link } from 'react-router-dom';
 
 const OrderManagementPage = () => {
   const [activities, setActivities] = useState([]);
@@ -170,18 +171,19 @@ const OrderManagementPage = () => {
                       </select>
                     </td>
                     <td className="px-3 md:px-6 py-4">
-                      <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${
-                        activity.priority === 'High' ? 'text-red-600' :
+                      <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High' ? 'text-red-600' :
                         activity.priority === 'Medium' ? 'text-yellow-600' :
-                        'text-green-600'
+                          'text-green-600'
                         }`}>
                         {activity.priority}
                       </span>
                     </td>
                     <td className="px-3 md:px-6 py-4">
-                      <button className="text-gray-600 hover:text-gray-900">
-                        <FiEye className="w-4 h-4 md:w-5 md:h-5" />
-                      </button>
+                      <Link to={`/employee/customers/${activity.id}`}>
+                        <button className="text-gray-600 hover:text-gray-900">
+                          <FiEye className="w-4 h-4 md:w-5 md:h-5" />
+                        </button>
+                      </Link>
                     </td>
                   </tr>
                 ))}
@@ -196,47 +198,46 @@ const OrderManagementPage = () => {
             </table>
           </div>
         )}
-       {/* Pagination */}
-<div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-  <div className="text-xs md:text-sm text-gray-600">
-    Showing {currentActivities.length > 0 ? indexOfFirstItem + 1 : 0} to {indexOfFirstItem + currentActivities.length} of {filteredActivities.length} results
-  </div>
+        {/* Pagination */}
+        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs md:text-sm text-gray-600">
+            Showing {currentActivities.length > 0 ? indexOfFirstItem + 1 : 0} to {indexOfFirstItem + currentActivities.length} of {filteredActivities.length} results
+          </div>
 
-  <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-    {/* Previous */}
-    <button
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-      disabled={currentPage === 1}
-    >
-      Previous
-    </button>
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+            {/* Previous */}
+            <button
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
 
-    {/* Page Numbers */}
-    {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-      <button
-        key={number}
-        onClick={() => setCurrentPage(number)}
-        className={`px-3 py-1.5 text-sm rounded transition-colors ${
-          currentPage === number
-            ? 'bg-[#28A844] text-white font-medium'
-            : 'bg-gray-100 text-black hover:bg-gray-200'
-        }`}
-      >
-        {number}
-      </button>
-    ))}
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                  ? 'bg-[#28A844] text-white font-medium'
+                  : 'bg-gray-100 text-black hover:bg-gray-200'
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
 
-    {/* Next */}
-    <button
-      className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-      disabled={currentPage === totalPages || totalPages === 0}
-    >
-      Next
-    </button>
-  </div>
-</div>
+            {/* Next */}
+            <button
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages || totalPages === 0}
+            >
+              Next
+            </button>
+          </div>
+        </div>
 
       </div>
 
