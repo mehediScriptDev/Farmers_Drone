@@ -29,8 +29,6 @@ import PhotoCapture from '../components/fieldAgent/PhotoCapture';
 import RouteOptimization from '../components/fieldAgent/RouteOptimization';
 import VehicleManagement from '../components/fieldAgent/VehicleManagement';
 
-
-
 // Private Route Components
 import {
   PrivateRoute,
@@ -60,7 +58,7 @@ import Leads from './../components/marketing/Leads';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
-import Analytics from '../components/marketing/Analytics';
+import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 
 const AppRoutes = createBrowserRouter([
   {
@@ -112,6 +110,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'drone-operators',
         element: <DroneOperator />,
+      },
+      {
+        path: 'drone-operators/:operatorId',
+        element: <DroneOperatorDetails />,
       },
       {
         path: 'employees',
@@ -233,11 +235,15 @@ const AppRoutes = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MarketingDashBoard/>
+        element: <MarketingDashBoard />,
       },
       {
-        path :"campaigns",
-        element : <Campaigns/>
+        path: 'campaigns',
+        element: <Campaigns />,
+      },
+      {
+        path: 'LeadManagment',
+        element: <Leads />,
       },
       {
         path: "LeadManagment",
