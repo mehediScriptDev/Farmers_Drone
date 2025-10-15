@@ -7,43 +7,44 @@ import {
   HiTicket,
 } from 'react-icons/hi';
 
-const getIcon = (iconName) => {
-  const icons = {
-    users: HiOutlineUsers,
-    briefcase: HiOutlineBriefcase,
-    dollar: HiOutlineCurrencyDollar,
-    warning: HiOutlineExclamation,
-    ticket: HiTicket,
-  };
-  return icons[iconName] || HiOutlineUsers;
-};
-
-const getIconBgColor = (iconName) => {
-  const colors = {
-    users: 'bg-blue-100',
-    briefcase: 'bg-green-100',
-    dollar: 'bg-emerald-100',
-    warning: 'bg-red-100',
-    ticket: 'bg-purple-100',
-  };
-  return colors[iconName] || 'bg-gray-100';
-};
-
-const getIconColor = (iconName) => {
-  const colors = {
-    users: 'text-blue-600',
-    briefcase: 'text-green-600',
-    dollar: 'text-emerald-600',
-    warning: 'text-red-600',
-    ticket: 'text-purple-600',
-  };
-  return colors[iconName] || 'text-gray-600';
+// Consolidated configuration object for icons and their styles
+const iconConfig = {
+  users: {
+    Icon: HiOutlineUsers,
+    bgColor: 'bg-blue-100',
+    iconColor: 'text-blue-600',
+  },
+  briefcase: {
+    Icon: HiOutlineBriefcase,
+    bgColor: 'bg-green-100',
+    iconColor: 'text-green-600',
+  },
+  dollar: {
+    Icon: HiOutlineCurrencyDollar,
+    bgColor: 'bg-emerald-100',
+    iconColor: 'text-emerald-600',
+  },
+  warning: {
+    Icon: HiOutlineExclamation,
+    bgColor: 'bg-red-100',
+    iconColor: 'text-red-600',
+  },
+  ticket: {
+    Icon: HiTicket,
+    bgColor: 'bg-purple-100',
+    iconColor: 'text-purple-600',
+  },
+  default: {
+    Icon: HiOutlineUsers,
+    bgColor: 'bg-gray-100',
+    iconColor: 'text-gray-600',
+  },
 };
 
 const StatsCard = ({ stat }) => {
-  const Icon = getIcon(stat.icon);
-  const bgColor = getIconBgColor(stat.icon);
-  const iconColor = getIconColor(stat.icon);
+  // Destructure styles and the Icon component from the config object
+  const { Icon, bgColor, iconColor } =
+    iconConfig[stat.icon] || iconConfig.default;
 
   return (
     <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200'>

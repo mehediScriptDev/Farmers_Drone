@@ -2,9 +2,9 @@ import React, { useMemo } from "react";
 import { ArrowLeft, Eye, MousePointer, Users, TrendingUp } from "lucide-react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
+import MapAudience from "../MapAudience";
 
 const ChannelCard = ({
-  platform,
   leads,
   budget,
   engagement,
@@ -177,7 +177,7 @@ const SeasonalCampaignDetails = () => {
               <div>
                 <p className="text-sm text-black md:mb-1">Campaign Name</p>
                 <p className="font-semibold text-black">
-                  {currentCampaign?.name ??
+                  {currentCampaign?.title ??
                     "Luxury Real Estate Drone Photography Campaign"}
                 </p>
               </div>
@@ -280,6 +280,9 @@ const SeasonalCampaignDetails = () => {
         </div>
 
         {/* map start */}
+
+
+        <MapAudience/>
         {/* map end */}
         {/* social */}
         <div className=" bg-white p-4 sm:p-6 lg:p-8 mt-3 md:mt-6 lg:mt-10 rounded-xl">

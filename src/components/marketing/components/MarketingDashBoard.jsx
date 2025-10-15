@@ -148,7 +148,7 @@ const MarketingDashBoard = () => {
     const fetchAgentData = async () => {
       try {
         const data = await axiosInstance.get(
-          "/MarketingDeshboard/data/marketingLandingPage.json"
+          "/MarketingDashboard/data/marketingLandingPage.json"
         );
         // Original setActivities
         setActivities(data.data.activities);
@@ -300,8 +300,8 @@ const MarketingDashBoard = () => {
   const loyaltyTotalPages = getTotalPages(allLoyaltyPrograms);
 
   return (
-    <div className="bg-[#F9FAFB] p-4 md:px-12">
-      <div className="flex-1  bg-gray-50 mt-2">
+    <div className="bg-[#fafffd] p-4 lg:pt-5 md:px-12">
+      <div className="flex-1  mt-2">
         <div className="mb-1 md:mb-6 flex flex-col md:flex-row justify-between">
           <div>
             <h1 className="!text-xl md:!text-4xl font-bold text-[#002244]">
@@ -602,7 +602,7 @@ const MarketingDashBoard = () => {
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {program.description}
                   </p>
-                  <Link to={`campaign/${program.id}`}>
+                  <Link to={`campaigns/loyality/${program.id}`}>
                     <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
                       See Details
                     </button>

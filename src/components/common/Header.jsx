@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { HiFire } from "react-icons/hi";
 import { APP_NAME, ROUTES } from "../../constants/app";
-import logo from "../assets/images/logo.png";
+import logo from "../../../public/assets/images/logo.png";
 import { FiBell } from "react-icons/fi";
 import { FiSettings } from "react-icons/fi";
 import { useAuth } from "../../hooks/useAuth";
@@ -23,7 +23,7 @@ export const Header = () => {
         } mx-auto h-20 flex justify-between items-center`}
       >
         <Link to={"/"} className="flex items-center space-x-2">
-          <span className={`text-xs ${user?.role === 'field_agent' ? '' : 'ml-14 sm:ml-12 lg:ml-0'}  w-24 lg:w-32 font-bold text-gray-800`}>
+          <span className={`text-xs ${user?.role === 'field_agent' ? '' : 'ml-16 sm:ml-14 lg:ml-0'}  w-28 sm:w-30 lg:w-32 font-bold text-gray-800`}>
             <img src={logo} alt="logo" />
           </span>
         </Link>

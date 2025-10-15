@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Send, MoreVertical, ArrowLeft } from 'lucide-react';
+import { FaPaperPlane, FaEllipsisV, FaArrowLeft } from 'react-icons/fa';
 
 const initialChatData = [
   {
@@ -181,7 +181,6 @@ export default function MessagePage() {
     setChats(updatedChats);
     setInputValue('');
 
-    // Scroll only when sending message
     setTimeout(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 50);
@@ -197,19 +196,18 @@ export default function MessagePage() {
   };
 
   return (
-    <div className='flex h-screen bg-[#fafffd] overflow-hidden p-4 md:px-12 '>
+    <div className='flex h-screen bg-[#fafffd] overflow-hidden p-4 md:px-12'>
       {/* Left Panel */}
       <div
-        className={`${
-          showChat ? 'hidden' : 'flex'
-        } md:flex w-full md:w-80 flex-col bg-white border-r border-gray-200 shadow-sm flex-shrink-0`}
+        className={`${showChat ? 'hidden' : 'flex'
+          } md:flex w-full md:w-80 flex-col bg-white border-r border-gray-200 shadow-sm flex-shrink-0`}
       >
         <div className='p-3 sm:p-4 border-b border-gray-200 bg-[#EEEEEE] flex items-center justify-between'>
           <h2 className='text-base sm:text-lg font-bold text-gray-900'>
             Recent Messages
           </h2>
           <button className='text-gray-500 hover:text-gray-700 p-1 rounded-full transition'>
-            <MoreVertical size={18} />
+            <FaEllipsisV size={18} />
           </button>
         </div>
 
@@ -218,9 +216,8 @@ export default function MessagePage() {
             <div
               key={chat.id}
               onClick={() => handleSelectChat(index)}
-              className={`px-3 sm:px-4 py-3 cursor-pointer transition-all duration-200 ${
-                selectedChatIndex === index ? 'bg-white' : 'hover:bg-gray-100'
-              }`}
+              className={`px-3 sm:px-4 py-3 cursor-pointer transition-all duration-200 ${selectedChatIndex === index ? 'bg-white' : 'hover:bg-gray-100'
+                }`}
             >
               <div className='flex gap-3'>
                 <div
@@ -249,9 +246,8 @@ export default function MessagePage() {
 
       {/* Right Panel */}
       <div
-        className={`${
-          showChat ? 'flex' : 'hidden'
-        } md:flex flex-1 flex-col bg-[#F8F8F8] min-h-0 w-full`}
+        className={`${showChat ? 'flex' : 'hidden'
+          } md:flex flex-1 flex-col bg-[#F8F8F8] min-h-0 w-full`}
       >
         <div className='px-3 sm:px-4 md:px-6 py-[10px] border-b border-gray-200 bg-[#EEEEEE] flex items-center justify-between shadow-sm'>
           <div className='flex items-center gap-3 flex-1'>
@@ -259,7 +255,7 @@ export default function MessagePage() {
               onClick={handleBack}
               className='md:hidden text-gray-600 hover:text-gray-900 p-1 rounded-full transition'
             >
-              <ArrowLeft size={20} />
+              <FaArrowLeft size={20} />
             </button>
             <div
               className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full ${currentChat.avatar} border-2 border-blue-300 shadow-md flex items-center justify-center text-white font-bold text-xs sm:text-base`}
@@ -274,7 +270,7 @@ export default function MessagePage() {
             </div>
           </div>
           <button className='text-gray-400 hover:text-gray-600 p-1 sm:p-2 rounded-full hover:bg-gray-100 transition'>
-            <MoreVertical size={20} />
+            <FaEllipsisV size={20} />
           </button>
         </div>
 
@@ -284,13 +280,11 @@ export default function MessagePage() {
               Thursday, Jan 4 • 6:21 PM
             </p>
           </div>
-
           {currentMessages.map((msg) => (
             <div
               key={msg.id}
-              className={`flex ${
-                msg.sent ? 'justify-end' : 'justify-start'
-              } gap-2 sm:gap-3`}
+              className={`flex ${msg.sent ? 'justify-end' : 'justify-start'
+                } gap-2 sm:gap-3`}
             >
               {!msg.sent && (
                 <div
@@ -300,11 +294,10 @@ export default function MessagePage() {
                 </div>
               )}
               <div
-                className={`max-w-[70%] sm:max-w-sm px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl shadow-sm ${
-                  msg.sent
+                className={`max-w-[70%] sm:max-w-sm px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl shadow-sm ${msg.sent
                     ? 'bg-[#D4E4FC] text-gray-900 rounded-br-none'
                     : 'bg-[#E4E7EC] text-gray-800 rounded-bl-none'
-                }`}
+                  }`}
               >
                 <p className='text-xs sm:text-sm break-words'>{msg.text}</p>
                 <span className='block text-[10px] sm:text-xs text-gray-500 mt-1 text-right'>
@@ -315,7 +308,6 @@ export default function MessagePage() {
           ))}
           <div ref={messagesEndRef} />
         </div>
-
         <div className='px-3 sm:px-4 md:px-6 py-3 md:py-4 border-t border-gray-200 bg-[#F8F8F8]'>
           <div className='flex items-center gap-2 sm:gap-3'>
             <div className='flex-1 flex gap-2 sm:gap-3 items-center bg-[#FFFFFF] rounded-full px-3 sm:px-4 py-2 border border-gray-200 focus-within:border-blue-400 focus-within:ring-1 focus-within:ring-blue-200 transition'>
@@ -333,7 +325,7 @@ export default function MessagePage() {
               onClick={handleSend}
               className='bg-white hover:bg-[#F0F2F5] h-9 w-9 sm:h-10 sm:w-10 md:h-12 md:w-12 flex justify-center items-center rounded-full text-blue-500 hover:text-blue-600 shadow-md transition flex-shrink-0'
             >
-              <Send size={18} />
+              <FaPaperPlane size={18} />
             </button>
           </div>
         </div>

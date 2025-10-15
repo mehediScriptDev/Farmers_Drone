@@ -1,8 +1,3 @@
-
-
-
-
-
 import { Eye } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -11,7 +6,9 @@ import RegistrationModal from './components/Modal/RegistrationModal';
 import { useTranslation } from 'react-i18next';
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from './components/Modal/AssistProfileSetupModal';
 import axiosInstance from '../../../config/axiosConfig';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { LuEye } from 'react-icons/lu';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 
 
 const Coustomerpage = () => {
@@ -19,24 +16,25 @@ const Coustomerpage = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-   const navigate = useNavigate();
-  
-   const [mainModalOpen, setMainModalOpen] = useState(false);
-    const [subModalType, setSubModalType] = useState(null);
-    const [customerEmail, setCustomerEmail] = useState("");
-  
-    const handleOpenSubModal = useCallback((setupType, email) => {
-      setCustomerEmail(email);
-      setSubModalType(setupType);
-      setMainModalOpen(false);
-    }, []);
-  
-    const handleCloseSubModal = useCallback(() => {
-      setSubModalType(null);
-      setMainModalOpen(true);
-    }, []);
+  const navigate = useNavigate();
+
+  const [mainModalOpen, setMainModalOpen] = useState(false);
+  const [subModalType, setSubModalType] = useState(null);
+  const [customerEmail, setCustomerEmail] = useState("");
+
+  const handleOpenSubModal = useCallback((setupType, email) => {
+    setCustomerEmail(email);
+    setSubModalType(setupType);
+    setMainModalOpen(false);
+  }, []);
+
+  const handleCloseSubModal = useCallback(() => {
+    setSubModalType(null);
+    setMainModalOpen(true);
+  }, []);
   const itemsPerPage = 6;
   const totalPages = Math.ceil(activities.length / itemsPerPage);
 
@@ -44,12 +42,15 @@ const Coustomerpage = () => {
     const fetchCustomerData = async () => {
       try {
         setLoading(true);
-          const response = await axiosInstance.get(
+        const response = await axiosInstance.get(
           '/employee/data/customerManagementData.json'
         );
         const data = response.data;
+        console.log(data.customers[0])
         setActivities(
           data.customers.map((customer) => ({
+
+            id: customer.id,
             name: customer.serviceName,
             company: customer.company,
             contact: customer.contact,
@@ -122,19 +123,19 @@ const Coustomerpage = () => {
             <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
               <button
                 onClick={() => setOpen(true)}
-                className="px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.registerNewCustomer')}
               </button>
               <button
                 onClick={() => setMainModalOpen(true)}
-                className="px-4 md:px-6 py-2 bg-yellow-400 text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.assistProfile')}
               </button>
               <button
                 onClick={() => navigate("/employee/report-analysis")}
-                className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base"
+                className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.reportAnalysis')}
               </button>
@@ -144,7 +145,7 @@ const Coustomerpage = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-gray-50 border-b border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b border-gray-200">
               <tr>
                 <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.serviceName')}
@@ -200,40 +201,54 @@ const Coustomerpage = () => {
                   </td>
                   <td className="px-3 md:px-6 py-4">
                     <span
-                      className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${
-                        activity.server === 'Unassigned'
-                          ? 'bg-red-100 text-red-700'
-                          : 'bg-green-100 text-green-700'
-                      }`}
+                      className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${activity.server === 'Unassigned'
+                        ? 'bg-red-100 text-red-700'
+                        : 'bg-green-100 text-green-700'
+                        }`}
                     >
                       {activity.server}
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <select className="px-2 md:px-3 py-1 bg-[#394C6B] text-white rounded text-xs md:text-sm">
-                      <option>{activity.progress}</option>
-                    </select>
+                    <div className="relative mb-4 md:mb-6 w-40">
+                      <select
+                        className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-[#394C6B] text-xs md:text-base 
+        text-[#FFFFFF] appearance-none cursor-pointer"
+                        onFocus={() => setIsOpen(true)}
+                        onBlur={() => setIsOpen(false)}
+                      >
+                        <option>In Progress</option>
+                        <option>Complete</option>
+                        <option>Last 90 Days</option>
+                      </select>
+
+                      <div
+                        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 "
+                      >
+                        <FaChevronDown className="text-[#FFFFFF]" />
+                      </div>
+                    </div>
                   </td>
                   <td className="px-3 md:px-6 py-4">
                     <span
-                      className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${
-                        activity.priority === 'High'
-                          ? 'text-red-600'
-                          : activity.priority === 'Medium'
+                      className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High'
+                        ? 'text-red-600'
+                        : activity.priority === 'Medium'
                           ? 'text-yellow-600'
                           : 'text-green-600'
-                      }`}
+                        }`}
                     >
                       {activity.priority}
                     </span>
                   </td>
                   <td className="px-3 md:px-6 py-4">
-                    <button
-                      className="text-gray-600 hover:text-gray-900"
-                      
-                    >
-                      <Eye className="w-4 h-4 md:w-5 md:h-5" />
-                    </button>
+                    <Link to={`/employee/customers/${activity.id}`}>
+                      <button
+                        className="text-gray-600 hover:text-gray-900"
+                      >
+                        <LuEye className="w-4 h-4 md:w-5 md:h-5" />
+                      </button>
+                    </Link>
                   </td>
                 </tr>
               ))}
@@ -241,35 +256,54 @@ const Coustomerpage = () => {
           </table>
         </div>
 
+        {/* Pagination Section */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Showing Text */}
           <div className="text-xs md:text-sm text-gray-600">
-            Showing{' '}
-            {paginatedActivities.length > 0 ? startIndex + 1 : 0} to{' '}
-            {startIndex + paginatedActivities.length} of {activities.length}{' '}
-            results
+            Showing {paginatedActivities.length > 0 ? startIndex + 1 : 0} to {startIndex + paginatedActivities.length} of {activities.length} results
           </div>
-          <div className="flex gap-2">
+
+          {/* Pagination Buttons */}
+          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
+            {/* Previous Button */}
             <button
               onClick={handlePrevious}
               disabled={currentPage === 1}
-              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Previous
             </button>
+
+            {/* Page Numbers */}
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+              <button
+                key={number}
+                onClick={() => setCurrentPage(number)}
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                  ? "bg-[#28A844] text-white font-medium"
+                  : "!bg-gray-100 text-black hover:bg-gray-200"
+                  }`}
+              >
+                {number}
+              </button>
+            ))}
+
+            {/* Next Button */}
             <button
               onClick={handleNext}
-              disabled={currentPage === totalPages}
-              className="px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={currentPage === totalPages || totalPages === 0}
+              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               Next
             </button>
           </div>
         </div>
+
       </div>
 
-       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
+      <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
       {/* <AssistProfileSetupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
-        <AssistProfileSetupModal2
+      <AssistProfileSetupModal2
         isOpen={mainModalOpen}
         onClose={() => setMainModalOpen(false)}
         onOpenSubModal={handleOpenSubModal}
@@ -294,6 +328,7 @@ const Coustomerpage = () => {
       />
     </div>
   );
-};  
+};
 
 export default Coustomerpage;
+ 

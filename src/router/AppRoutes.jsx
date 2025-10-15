@@ -9,7 +9,6 @@ import NotFoundPage from "../pages/NotFoundPage";
 import AdminDashboard from "../components/admin/components/AdminDashboard";
 
 import FieldAgentDashboard from "../components/fieldAgent/FieldAgentDashboard";
-import { MarketingDashboardLayout } from "../components/marketing/MarketingDashboardLayout";
 
 // Admin Components
 import Complaints from "../components/admin/components/Complaints";
@@ -38,8 +37,6 @@ import {
   PrivateMarketingRoute,
 } from "./PrivateRoute";
 import { RoleBasedRedirect } from "./RoleBasedRedirect";
-import LeadManagment from "../components/marketing/components/LeadManagment";
-import Anylytics from "../components/marketing/components/Anylytics";
 import MarketingDashBoard from "../components/marketing/components/MarketingDashBoard";
 import MainLayout from "./../LandingPageUI/Layout/MainLayout";
 import Services from "./../LandingPageUI/Pages/Services";
@@ -56,12 +53,13 @@ import ReportAnalysisPage from "../components/employee/employdashboard/component
 import CoustomerDetailsPage from "../components/employee/employdashboard/components/CoustomerDetailsPage";
 
 import Leads from "./../components/marketing/Leads";
-import MarketingDashboard from "./../components/marketing/MarketingDashboard";
 import Campaigns from "./../components/marketing/Campaigns";
 import OrderDetailsPage from "../components/employee/employdashboard/components/OrderDetailsPage";
 import CampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
-import axios from "axios";
+import Analytics from "../components/marketing/Analytics";
 import axiosInstance from "../config/axiosConfig";
+import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
+import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -238,10 +236,18 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "campaigns/seasonal/:id",
-        element: <CampaignDetails />,
+        element: <SeasonalCampaignDetails />,
         loader: () =>
           axiosInstance.get(
-            "/MarketingDeshboard/data/marketingLandingPage.json"
+            "/MarketingDashboard/data/marketingLandingPage.json"
+          ),
+      },
+      {
+        path: "campaigns/loyality/:id",
+        element: <LoyalityCampaingnDetails />,
+        loader: () =>
+          axiosInstance.get(
+            "/MarketingDashboard/data/marketingLandingPage.json"
           ),
       },
       {
@@ -252,10 +258,10 @@ const AppRoutes = createBrowserRouter([
         path: "LeadManagment",
         element: <Leads />,
       },
-      {
-        path: "analytics",
-        element: <Anylytics />,
-      },
+      // {
+      //   path: "analytics",
+      //   element: <Anylytics />,
+      // },
     ],
   },
   {
