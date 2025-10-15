@@ -20,10 +20,70 @@
   "dashboard": {
     "admin": {
       "title": "एडमिन डैशबोर्ड",
+      "subtitle": "अपने प्लेटफॉर्म के प्रदर्शन और मुख्य मेट्रिक्स की निगरानी करें",
       "welcome": "वापसी पर स्वागत है, प्रशासक",
       "fullAccess": "पूर्ण पहुंच",
       "overview": "अवलोकन",
-      "overviewDescription": "आपके एडमिन डैशबोर्ड में आपका स्वागत है। विभिन्न अनुभागों के बीच नेविगेट करने के लिए साइडबार का उपयोग करें।"
+      "overviewDescription": "आपके एडमिन डैशबोर्ड में आपका स्वागत है। विभिन्न अनुभागों के बीच नेविगेट करने के लिए साइडबार का उपयोग करें।",
+      "stats": {
+        "active-users": {
+          "label": "सक्रिय उपयोगकर्ता",
+          "change": "पिछले महीने से +8.2%"
+        },
+        "total-jobs": {
+          "label": "कुल कार्य",
+          "change": "पिछले महीने से +12%"
+        },
+        "revenue": {
+          "label": "राजस्व",
+          "change": "पिछले महीने से +7%"
+        },
+        "complaints": {
+          "label": "शिकायतें",
+          "change": "पिछले महीने से -4%"
+        },
+        "tickets": {
+          "label": "टिकट",
+          "change": "पिछले महीने से +8.2%"
+        }
+      },
+      "revenueChart": {
+        "title": "पिछले 7 दिनों का राजस्व"
+      },
+      "userActivity": {
+        "title": "हाल की उपयोगकर्ता गतिविधि",
+        "headers": {
+          "user": "उपयोगकर्ता",
+          "role": "भूमिका",
+          "jobTitle": "कार्य शीर्षक",
+          "status": "स्थिति",
+          "lastActive": "अंतिम सक्रिय",
+          "actions": "क्रियाएं"
+        },
+        "pagination": {
+          "showing": "{{total}} उपयोगकर्ताओं में से {{current}} दिखा रहे हैं"
+        }
+      },
+      "droneOperator": {
+        "title": "उपयोगकर्ता प्रबंधन",
+        "tabOperator": "ऑपरेटर",
+        "tabCustomer": "ग्राहक",
+        "tabEmployee": "कर्मचारी",
+        "tabFieldAgent": "फील्ड एजेंट",
+        "subTabAll": "सभी ड्रोन ऑपरेटर",
+        "subTabPending": "लंबित",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "dateTime": "तिथि/समय",
+          "name": "नाम",
+          "location": "स्थान",
+          "registrationId": "पंजीकरण आईडी",
+          "actions": "कार्रवाई"
+        },
+        "seeDetails": "विवरण देखें",
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहा है",
+        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला"
+      }
     },
     "employee": {
       "title": {

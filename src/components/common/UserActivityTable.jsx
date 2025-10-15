@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { HiDotsVertical, HiUser } from 'react-icons/hi';
 import Pagination from './Pagination';
 
@@ -13,16 +14,17 @@ const getStatusColor = (statusType) => {
 };
 
 const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentData, setCurrentData] = useState([]);
-
   const itemsPerPage = 5;
 
-  useEffect(() => {
-    if (!data?.data) return;
+  // Use useMemo to calculate the data for the current page.
+  // This avoids re-calculating on every render unless dependencies change.
+  const currentData = useMemo(() => {
+    if (!data?.data) return [];
     const startIdx = (currentPage - 1) * itemsPerPage;
     const endIdx = startIdx + itemsPerPage;
-    setCurrentData(data.data.slice(startIdx, endIdx));
+    return data.data.slice(startIdx, endIdx);
   }, [currentPage, data]);
 
   if (!data || !data.data?.length) {
@@ -39,12 +41,12 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   const handlePageChange = (page) => setCurrentPage(page);
 
   const translatedHeaders = [
-    'User',
-    'Role',
-    'Job Title',
-    'Status',
-    'Last Active',
-    'Actions',
+    t('dashboard.admin.userActivity.headers.user'),
+    t('dashboard.admin.userActivity.headers.role'),
+    t('dashboard.admin.userActivity.headers.jobTitle'),
+    t('dashboard.admin.userActivity.headers.status'),
+    t('dashboard.admin.userActivity.headers.lastActive'),
+    t('dashboard.admin.userActivity.headers.actions'),
   ];
 
   return (
@@ -107,7 +109,10 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
                   {row.lastActive}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-center'>
-                  <button className='text-gray-400 hover:text-gray-600 p-1'>
+                  <button
+                    aria-label='Actions'
+                    className='text-gray-400 hover:text-gray-600 p-1'
+                  >
                     <HiDotsVertical className='h-5 w-5 mx-auto' />
                   </button>
                 </td>
