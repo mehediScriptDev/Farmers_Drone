@@ -64,7 +64,7 @@ const Campaigns = () => {
     totalItems,
     createClick,
   }) => (
-    <div className="md:px-12 mx-auto mb-8 p-4">
+    <div className="md:px-12 mx-auto p-4">
       <div className="bg-white rounded-lg shadow">
         <div className="flex flex-col sm:flex-row p-6 justify-between items-center ">
           <h2 className="text-xl lg:text-3xl font-bold text-center lg:text-left text-gray-900">
@@ -126,6 +126,7 @@ const Campaigns = () => {
           </table>
         </div>
 
+        {/* pagination */}
         <div className=" flex items-center flex-col sm:flex-row space-y-1.5 p-6 justify-between">
           <div className="lg:text-sm text-xs text-sky-500">
             Page {currentPage} of {totalPages} (Total: {totalItems} results)
