@@ -1,12 +1,22 @@
+// src/components/utility/ScrollToTop.js
+
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const ScrollToTop = () => {
+// <<< 1. Accept the ref as a prop
+const ScrollToTop = ({ mainContentRef }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0,0);
-  }, [pathname]);
+    // <<< 2. Check if the ref was provided
+    if (mainContentRef && mainContentRef.current) {
+      // <<< 3. If so, scroll that specific element
+      mainContentRef.current.scrollTop = 0;
+    } else {
+      // <<< 4. Otherwise, scroll the whole window (for your normal Layout)
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, mainContentRef]);
 
   return null;
 };

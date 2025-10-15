@@ -1,32 +1,30 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import Sidebar from './Sidebar';
-import { Header } from './Header';
-import { useAuth } from '../../hooks/useAuth';
-import MarketingSidebar from './MarketingSidebar';
-import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
-import ScrollToTop from './../utility/ScrollToTop';
-
+import React, { useRef, useState } from "react";
+import { Outlet } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import { Header } from "./Header";
+import { useAuth } from "../../hooks/useAuth";
+import MarketingSidebar from "./MarketingSidebar";
+import CustomerAgentServiceSidebar from "./CustomerAgentServiceSidebar";
+import ScrollToTop from "./../utility/ScrollToTop";
 
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuth();
-
+  const mainContentRef = useRef(null);
   return (
-    <div className='flex flex-col h-screen '>
-      <ScrollToTop/>
+    <div className="flex flex-col h-screen ">
       <Header /> {/* Navbar at the top */}
-      <div className='flex flex-1 overflow-hidden'>
-        {user?.role === 'admin' && (
+      <div className="flex flex-1 overflow-hidden">
+        {user?.role === "admin" && (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         )}
-        {user?.role === 'marketing' && (
+        {user?.role === "marketing" && (
           <MarketingSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
           />
         )}
-        {user?.role === 'employee' && (
+        {user?.role === "employee" && (
           <CustomerAgentServiceSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
@@ -36,12 +34,14 @@ export const DashboardLayout = () => {
         {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
-    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]">
-      <div className="w-full ">
-        <Outlet />
+
+        <main ref={mainContentRef} className="flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]">
+          <ScrollToTop mainContentRef={mainContentRef} />
+          <div className="w-full ">
+            <Outlet />
+          </div>
+        </main>
       </div>
-    </main>
-  </div>
-</div>
+    </div>
   );
 };

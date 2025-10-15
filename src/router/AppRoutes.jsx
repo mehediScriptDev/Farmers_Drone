@@ -61,6 +61,7 @@ import Analytics from './../components/marketing/Analytics';
 import axiosInstance from "../config/axiosConfig";
 import SeasonalCampaignDetails from './../components/marketing/components/SeasonalCampaignDetails';
 import LoyalityCampaingnDetails from './../components/marketing/components/LoyalityCampaingnDetails';
+import ScrollToTop from "../components/utility/ScrollToTop";
 
 const AppRoutes = createBrowserRouter([
   {
