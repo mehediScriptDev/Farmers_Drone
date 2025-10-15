@@ -33,7 +33,7 @@ const MapChart = () => {
       <svg
         width="auto"
         // height="417"
-        className="lg:h-[417px] h-auto"
+        className="lg:h-[417px] lg:w-[403] h-auto"
         viewBox="0 0 405 417"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

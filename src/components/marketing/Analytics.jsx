@@ -1,11 +1,12 @@
 import React from "react";
 import MapChart from "./MapChart";
+import HighDemandRegions from "./components/HighDemandRegions";
 
 const Analytics = () => {
   return (
     <div className="md:px-12 mx-auto my-5 py-6 px-4">
-      <div className="flex justify-center">
-        <div>
+      <div className="grid xl:grid-cols-2 gap-y-5 gap-5 bg-white shadow-md rounded-lg p-8">
+        <div className="">
           <h1 className="font-semibold text-3xl text-gray-900 mb-7">Heatmap</h1>
 
           <div className="flex gap-6 mb-6">
@@ -25,8 +26,8 @@ const Analytics = () => {
           <MapChart />
         </div>
         
-        <div>
-          <progress value={30}></progress>
+        <div className="">
+          <HighDemandRegions/>
         </div>
       </div>
     </div>
