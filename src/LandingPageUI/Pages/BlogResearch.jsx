@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import card from "../images/card1.png";
-import card1 from "../images/card2.jpg";
+import card from "../../../public/assets/images/card1.png";
+import card1 from "../../../public/assets/images/card2.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 

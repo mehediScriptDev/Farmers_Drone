@@ -41,7 +41,6 @@ import {
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
-import Anylytics from '../components/marketing/components/Anylytics';
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
@@ -61,6 +60,7 @@ import Leads from './../components/marketing/Leads';
 import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
+import Analytics from '../components/marketing/Analytics';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -241,10 +241,10 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "LeadManagment",
-        element : <Leads/>
+        element : <LeadManagment/>
       },{
         path : "analytics",
-        element : <Anylytics/>
+        element : <Analytics/>
       }
     ],
   },

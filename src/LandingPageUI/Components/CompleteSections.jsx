@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import cardimage from "../images/aboutcard.png"
-import cardimage1 from "../images/aboutcard1.png"
-import cardimage2 from '../images/aboutcard2.jpg'
-import cardimage3 from '../images/aboutcard3.jpg'
+import cardimage from "../../../public/assets/images/aboutcard.png"
+import cardimage1 from "../../../public/assets/images/aboutcard1.png"
+import cardimage2 from "../../../public/assets/images/aboutcard2.jpg"
+import cardimage3 from "../../../public/assets/images/aboutcard3.jpg"
 
 export default function CompleteSections() {
   const { t } = useTranslation();

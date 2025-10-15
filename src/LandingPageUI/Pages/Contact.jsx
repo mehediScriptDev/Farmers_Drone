@@ -1,5 +1,5 @@
 import CForm from "../Components/Form/CForm";
-import banner from "../images/aboutBanner.jpg";
+import banner from "../../../public/assets/images/aboutBanner.jpg";
 import { useTranslation } from "react-i18next";
 
 const Contact = () => {

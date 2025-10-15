@@ -149,7 +149,7 @@ function DashBoard() {
 
 
   return (
-    <div className="p-4 md:px-12 ">
+    <div className="p-4 lg:pt-6 md:px-12 ">
       {/* Header */}
       <div className="mb-3 md:mb-6">
         <h1 className="text-2xl md:text-3xl font-bold text-[#002244] mb-2 text-left">{t('dashboard.employee.title.dashPageTitle')}</h1>

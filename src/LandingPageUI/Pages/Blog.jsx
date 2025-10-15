@@ -1,11 +1,11 @@
 import React from 'react';
 import { Calendar, ArrowRight } from 'lucide-react';
 import CForm from "../Components/Form/CForm";
-import banner from "../images/aboutBanner.jpg";
-import card from "../images/blogCard.png"
-import card1 from "../images/blogCard1.png"
-import card2 from "../images/card1.png"
-import card3 from "../images/card2.jpg"
+import banner from "../../../public/assets/images/aboutBanner.jpg";
+import card from "../../../public/assets/images/blogCard.png";
+import card1 from "../../../public/assets/images/blogCard1.png";
+import card2 from "../../../public/assets/images/card1.png";
+import card3 from "../../../public/assets/images/card2.jpg";
 import { useTranslation } from "react-i18next";
 
 const BlogCardComponent = ({ image, category, title, description, date }) => (

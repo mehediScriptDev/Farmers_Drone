@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import banner1 from '../images/banner1.png';
-import banner2 from '../images/banner2.jpg';
-import banner3 from '../images/banner3.jpg';
+import banner1 from '../../../public/assets/images/banner1.png';
+import banner2 from '../../../public/assets/images/banner2.jpg';
+import banner3 from '../../../public/assets/images/banner3.jpg';
 import { Link } from 'react-router';
 
 const Gallery = () => {
