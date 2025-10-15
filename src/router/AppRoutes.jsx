@@ -9,7 +9,6 @@ import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../components/admin/components/AdminDashboard';
 
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
-import { MarketingDashboardLayout } from '../components/marketing/MarketingDashboardLayout';
 
 // Admin Components
 import Complaints from '../components/admin/components/Complaints';
@@ -39,7 +38,6 @@ import {
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
-import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
 import About from './../LandingPageUI/Pages/About';
@@ -55,11 +53,11 @@ import ReportAnalysisPage from '../components/employee/employdashboard/component
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
 import Leads from './../components/marketing/Leads';
-import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
-import Analytics from '../components/marketing/Analytics';
+import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
+import Analytics from './../components/marketing/Analytics';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -111,10 +109,6 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'drone-operators',
         element: <DroneOperator />,
-      },
-      {
-        path: 'drone-operators/:operatorId',
-        element: <DroneOperatorDetails />,
       },
       {
         path: 'employees',
@@ -245,12 +239,9 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: 'LeadManagment',
-        element: <Leads />,
-      },
-      {
-        path: 'LeadManagment',
         element: <LeadManagment />,
       },
+
       {
         path: 'analytics',
         element: <Analytics />,

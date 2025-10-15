@@ -1,15 +1,15 @@
-import { FaPlus, FaRegClock } from "react-icons/fa";
-import { HiCursorClick } from "react-icons/hi";
-import { FaArrowTrendUp, FaDollarSign } from "react-icons/fa6";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { MdClose } from "react-icons/md";
-import { FiTrash2 } from "react-icons/fi";
-import { HiOutlineChevronUp } from "react-icons/hi"; // For the custom dropdown arrow
+import { FaPlus, FaRegClock } from 'react-icons/fa';
+import { HiCursorClick } from 'react-icons/hi';
+import { FaArrowTrendUp, FaDollarSign } from 'react-icons/fa6';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import { MdClose } from 'react-icons/md';
+import { FiTrash2 } from 'react-icons/fi';
+import { HiOutlineChevronUp } from 'react-icons/hi'; // For the custom dropdown arrow
 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../../../config/axiosConfig";
-import CampaignModal from "./modals/CampaignModal";
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../../config/axiosConfig';
+import CampaignModal from './modals/CampaignModal';
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -23,10 +23,10 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
 
   // Changed "Cool" to "Cold" to match your original image.
   const options = [
-    { label: "All Leads", value: "All" },
-    { label: "Hot", value: "Hot" },
-    { label: "Warm", value: "Warm" },
-    { label: "Cold", value: "Cold" },
+    { label: 'All Leads', value: 'All' },
+    { label: 'Hot', value: 'Hot' },
+    { label: 'Warm', value: 'Warm' },
+    { label: 'Cold', value: 'Cold' },
   ];
 
   const handleSelect = (value) => {
@@ -35,39 +35,39 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   };
 
   // The active background color, matching the bright green in your image
-  const activeBg = "bg-lime-400";
+  const activeBg = 'bg-lime-400';
 
   return (
     <div
-      className="relative inline-block text-left"
+      className='relative inline-block text-left'
       onClick={() => setIsOpen(!isOpen)}
     >
       {/* Button/Display for the Dropdown */}
       <button
-        type="button"
-        className="w-full justify-between items-center inline-flex px-2 md:px-4 py-1.5 md:py-2 border border-gray-300 rounded-lg text-xs md:text-base text-gray-700 bg-white shadow-sm hover:bg-gray-50 transition-colors"
-        id="options-menu"
-        aria-haspopup="true"
+        type='button'
+        className='w-full justify-between items-center inline-flex px-2 md:px-4 py-1.5 md:py-2 border border-gray-300 rounded-lg text-xs md:text-base text-gray-700 bg-white shadow-sm hover:bg-gray-50 transition-colors'
+        id='options-menu'
+        aria-haspopup='true'
         aria-expanded={isOpen}
       >
         {options.find((opt) => opt.value === selectedStatus)?.label}
         <HiOutlineChevronUp
           className={`-mr-1 ml-2 h-5 w-5 transition-transform duration-200 ${
-            isOpen ? "rotate-0" : "rotate-180"
+            isOpen ? 'rotate-0' : 'rotate-180'
           }`}
-          aria-hidden="true"
+          aria-hidden='true'
         />
       </button>
 
       {/* Dropdown Options List */}
       {isOpen && (
         <div
-          className="origin-top-right absolute right-0 mt-2 w-full min-w-[150px] rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="options-menu"
+          className='origin-top-right absolute right-0 mt-2 w-full min-w-[150px] rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+          role='menu'
+          aria-orientation='vertical'
+          aria-labelledby='options-menu'
         >
-          <div className="py-1">
+          <div className='py-1'>
             {options.map((option) => (
               <div
                 key={option.value}
@@ -82,7 +82,7 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
                         `text-gray-700 hover:${activeBg}/70`
                   }
                 `}
-                role="menuitem"
+                role='menuitem'
               >
                 {option.label}
               </div>
@@ -110,16 +110,16 @@ const MarketingDashBoard = () => {
   const rowsPerPage = 4;
   const navigate = useNavigate();
 
-  const [automationSettings, setAutomationSettings] = useState("");
+  const [automationSettings, setAutomationSettings] = useState('');
   const [stats, setStats] = useState([]);
   const [activities, setActivities] = useState([]);
   const [statusStyles, setStatusStyles] = useState({});
   const [leads, setLeads] = useState([]);
   const [allSeasonalCampaigns, setAllSeasonalCampaigns] = useState([]);
   const [allLoyaltyPrograms, setAllLoyaltyPrograms] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState("30"); // 30 days default
+  const [selectedPeriod, setSelectedPeriod] = useState('30'); // 30 days default
   const [filteredActivities, setFilteredActivities] = useState([]);
-  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState('All');
   const [campaignModal, setCampaignModal] = useState(false);
   const totalPages = Math.ceil(filteredActivities.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
@@ -141,15 +141,15 @@ const MarketingDashBoard = () => {
     };
 
     updateCardsPerPage();
-    window.addEventListener("resize", updateCardsPerPage);
-    return () => window.removeEventListener("resize", updateCardsPerPage);
+    window.addEventListener('resize', updateCardsPerPage);
+    return () => window.removeEventListener('resize', updateCardsPerPage);
   }, []);
 
   useEffect(() => {
     const fetchAgentData = async () => {
       try {
         const data = await axiosInstance.get(
-          "/MarketingDeshboard/data/marketingLandingPage.json"
+          "MarketingDashboard/data/marketingLandingPage.json"
         );
         // Original setActivities
         setActivities(data.data.activities);
@@ -177,7 +177,7 @@ const MarketingDashBoard = () => {
 
       const matchDays = diffDays <= days;
       const matchStatus =
-        selectedStatus === "All" || item.status === selectedStatus;
+        selectedStatus === 'All' || item.status === selectedStatus;
 
       return matchDays && matchStatus;
     });
@@ -227,8 +227,8 @@ const MarketingDashBoard = () => {
       ...prev,
       {
         id: newId,
-        title: "Automation Settings",
-        subtext: "3 of 4 rules active",
+        title: 'Automation Settings',
+        subtext: '3 of 4 rules active',
         enabled: false,
       },
     ]);
@@ -243,22 +243,22 @@ const MarketingDashBoard = () => {
         }
       } else {
         if (currentPage <= 3) {
-          pages.push(1, 2, 3, "...", totalPages);
+          pages.push(1, 2, 3, '...', totalPages);
         } else if (currentPage >= totalPages - 2) {
-          pages.push(1, "...", totalPages - 2, totalPages - 1, totalPages);
+          pages.push(1, '...', totalPages - 2, totalPages - 1, totalPages);
         } else {
-          pages.push(1, "...", currentPage, "...", totalPages);
+          pages.push(1, '...', currentPage, '...', totalPages);
         }
       }
       return pages;
     };
 
     return (
-      <div className="flex items-center justify-center gap-2 mt-6">
+      <div className='flex items-center justify-center gap-2 mt-6'>
         <button
           onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
-          className="p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className='p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed'
         >
           <IoIosArrowBack size={20} />
         </button>
@@ -266,14 +266,14 @@ const MarketingDashBoard = () => {
         {getPageNumbers().map((page, idx) => (
           <button
             key={idx}
-            onClick={() => typeof page === "number" && setCurrentPage(page)}
-            disabled={page === "..."}
+            onClick={() => typeof page === 'number' && setCurrentPage(page)}
+            disabled={page === '...'}
             className={`w-8 h-8 rounded ${
               page === currentPage
-                ? "bg-yellow-400 text-white font-semibold"
-                : page === "..."
-                ? "cursor-default"
-                : "hover:bg-gray-100"
+                ? 'bg-yellow-400 text-white font-semibold'
+                : page === '...'
+                ? 'cursor-default'
+                : 'hover:bg-gray-100'
             }`}
           >
             {page}
@@ -283,7 +283,7 @@ const MarketingDashBoard = () => {
         <button
           onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
-          className="p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className='p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed'
         >
           <IoIosArrowForward size={20} />
         </button>
@@ -301,21 +301,21 @@ const MarketingDashBoard = () => {
   const loyaltyTotalPages = getTotalPages(allLoyaltyPrograms);
 
   return (
-    <div className="bg-[#fafffd] p-4 lg:pt-5 md:px-12">
-      <div className="flex-1  mt-2">
-        <div className="mb-1 md:mb-6 flex flex-col md:flex-row justify-between">
+    <div className='bg-[#fafffd] p-4 lg:pt-5 md:px-12'>
+      <div className='flex-1  mt-2'>
+        <div className='mb-1 md:mb-6 flex flex-col md:flex-row justify-between'>
           <div>
-            <h1 className="!text-xl md:!text-4xl font-bold text-[#002244]">
+            <h1 className='!text-xl md:!text-4xl font-bold text-[#002244]'>
               Marketing Dashboard
             </h1>
-            <p className="text-xs md:text-base text-[#464646]">
+            <p className='text-xs md:text-base text-[#464646]'>
               Monitor your customer service performance
             </p>
           </div>
-          <div className="mt-3 flex gap-2">
+          <div className='mt-3 flex gap-2'>
             <button
               onClick={() => setCampaignModal(true)}
-              className="px-4 md:px-6 py-2 bg-[#28A844] text-[#1A202C] rounded-sm hover:bg-green-400 font-medium text-[14px] md:text-base flex items-center gap-1"
+              className='px-4 md:px-6 py-2 bg-[#28A844] text-[#1A202C] rounded-sm hover:bg-green-400 font-medium text-[14px] md:text-base flex items-center gap-1'
             >
               <FaPlus />
               Create Campain
@@ -323,57 +323,57 @@ const MarketingDashBoard = () => {
           </div>
         </div>
 
-        <div className="pb-3 md:pb-5">
-          <h2 className="text-sm md:!text-xl font-normal text-gray-700">
+        <div className='pb-3 md:pb-5'>
+          <h2 className='text-sm md:!text-xl font-normal text-gray-700'>
             Last 30 days overview
           </h2>
         </div>
 
-        <div className="mb-4 md:mb-6 flex">
+        <div className='mb-4 md:mb-6 flex'>
           <select
-            className="px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A]"
+            className='px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A]'
             value={selectedPeriod}
             onChange={(e) => setSelectedPeriod(e.target.value)}
           >
-            <option value="7">Last 7 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="90">Last 90 days</option>
+            <option value='7'>Last 7 days</option>
+            <option value='30'>Last 30 days</option>
+            <option value='90'>Last 90 days</option>
           </select>
         </div>
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8'>
           {stats.map((stat, index) => {
             const Icon = iconMap[stat.icon]; // convert string to component
             return (
               <div
                 key={index}
-                className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between gap-3"
+                className='bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between gap-3'
               >
-                <div className="text-gray-500 text-sm font-medium">
+                <div className='text-gray-500 text-sm font-medium'>
                   {stat.label}
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl md:text-3xl font-semibold text-gray-900">
+                <div className='flex items-center justify-between'>
+                  <span className='text-2xl md:text-3xl font-semibold text-gray-900'>
                     {stat.value}
                   </span>
 
                   <div className={`${stat.iconBg} p-2 rounded-xl`}>
                     {Icon ? (
-                      <Icon className="w-6 h-6 text-gray-500" />
+                      <Icon className='w-6 h-6 text-gray-500' />
                     ) : (
-                      <span className="text-gray-400">?</span>
+                      <span className='text-gray-400'>?</span>
                     )}
                   </div>
                 </div>
 
                 <div
                   className={`text-xs md:text-sm ${
-                    stat.trend === "up"
-                      ? "text-green-500"
-                      : stat.trend === "down"
-                      ? "text-red-500"
-                      : "text-gray-500"
+                    stat.trend === 'up'
+                      ? 'text-green-500'
+                      : stat.trend === 'down'
+                      ? 'text-red-500'
+                      : 'text-gray-500'
                   }`}
                 >
                   {stat.change}
@@ -383,18 +383,18 @@ const MarketingDashBoard = () => {
           })}
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-          <div className="p-4 md:p-6 border-b border-gray-200">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-              <div className="md:text-center lg:text-left">
-                <h2 className="text-lg md:text-2xl font-bold text-[#464646]">
+        <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+          <div className='p-4 md:p-6 border-b border-gray-200'>
+            <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4'>
+              <div className='md:text-center lg:text-left'>
+                <h2 className='text-lg md:text-2xl font-bold text-[#464646]'>
                   Lead Management
                 </h2>
-                <h3 className="text-[#464646] ">
+                <h3 className='text-[#464646] '>
                   Truck and nuture your marketing leads
                 </h3>
               </div>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 md:mx-auto lg:mx-0">
+              <div className='flex flex-col sm:flex-row gap-3 md:gap-4 md:mx-auto lg:mx-0'>
                 {/* --- REPLACED CODE BLOCK START --- */}
                 <LeadStatusDropdown
                   selectedStatus={selectedStatus}
@@ -403,13 +403,13 @@ const MarketingDashBoard = () => {
                 {/* --- REPLACED CODE BLOCK END --- */}
                 <button
                   onClick={() => setOpen(true)}
-                  className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
+                  className='px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base'
                 >
                   Export Leads
                 </button>
                 <button
                   onClick={() => setIsAutomationModalOpen(true)}
-                  className="px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center gap-1 "
+                  className='px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center gap-1 '
                 >
                   Automation
                 </button>
@@ -417,54 +417,54 @@ const MarketingDashBoard = () => {
             </div>
           </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-max">
-              <thead className="bg-gray-50 border-b border-gray-200">
+          <div className='overflow-x-auto'>
+            <table className='w-full min-w-max'>
+              <thead className='bg-gray-50 border-b border-gray-200'>
                 <tr>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Lead
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Contact
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Source
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Location
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Score
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Status
                   </th>
-                  <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap">
+                  <th className='px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black  whitespace-nowrap'>
                     Action
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className='divide-y divide-gray-200'>
                 {paginatedData.map((activity) => (
-                  <tr key={activity.id} className="hover:bg-gray-50">
-                    <td className="py-3 px-4">{activity.lead}</td>
-                    <td className="py-3 px-4 whitespace-pre-line">
+                  <tr key={activity.id} className='hover:bg-gray-50'>
+                    <td className='py-3 px-4'>{activity.lead}</td>
+                    <td className='py-3 px-4 whitespace-pre-line'>
                       {activity.contact}
                     </td>
-                    <td className="py-3 px-4">{activity.source}</td>
-                    <td className="py-3 px-4">{activity.location}</td>
+                    <td className='py-3 px-4'>{activity.source}</td>
+                    <td className='py-3 px-4'>{activity.location}</td>
                     <td
                       className={`py-3 px-4 font-semibold ${
-                        activity.status === "Hot"
-                          ? "text-red-600"
-                          : activity.status === "Warm"
-                          ? "text-yellow-600"
-                          : "text-green-600"
+                        activity.status === 'Hot'
+                          ? 'text-red-600'
+                          : activity.status === 'Warm'
+                          ? 'text-yellow-600'
+                          : 'text-green-600'
                       }`}
                     >
                       {activity.score}
                     </td>
-                    <td className="py-3 px-4">
+                    <td className='py-3 px-4'>
                       <span
                         className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
                           statusStyles[activity.status]
@@ -473,8 +473,8 @@ const MarketingDashBoard = () => {
                         {activity.status}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
-                      <button className="rounded-full p-1  text-green-200 transition">
+                    <td className='py-3 px-4'>
+                      <button className='rounded-full p-1  text-green-200 transition'>
                         <FaRegClock />
                       </button>
                     </td>
@@ -482,7 +482,7 @@ const MarketingDashBoard = () => {
                 ))}
                 {paginatedData.length === 0 && (
                   <tr>
-                    <td colSpan="7" className="text-center py-4 text-gray-500">
+                    <td colSpan='7' className='text-center py-4 text-gray-500'>
                       No activities in this period
                     </td>
                   </tr>
@@ -491,27 +491,27 @@ const MarketingDashBoard = () => {
             </table>
           </div>
 
-          <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-xs md:text-sm text-gray-600">
-              Showing {startIndex + 1} to{" "}
-              {Math.min(startIndex + rowsPerPage, activities.length)} of{" "}
+          <div className='px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4'>
+            <div className='text-xs md:text-sm text-gray-600'>
+              Showing {startIndex + 1} to{' '}
+              {Math.min(startIndex + rowsPerPage, activities.length)} of{' '}
               {activities.length} results
             </div>
 
-            <div className="flex gap-2 items-center">
+            <div className='flex gap-2 items-center'>
               <button
                 onClick={handlePrevious}
                 disabled={currentPage === 1}
                 className={`px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm ${
                   currentPage === 1
-                    ? "text-gray-400 cursor-not-allowed"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? 'text-gray-400 cursor-not-allowed'
+                    : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
                 Previous
               </button>
 
-              <span className="text-gray-600 text-xs md:text-sm">
+              <span className='text-gray-600 text-xs md:text-sm'>
                 Page {currentPage} of {totalPages}
               </span>
 
@@ -520,8 +520,8 @@ const MarketingDashBoard = () => {
                 disabled={currentPage === totalPages}
                 className={`px-3 md:px-4 py-2 border border-gray-300 rounded-lg text-xs md:text-sm ${
                   currentPage === totalPages
-                    ? "text-gray-400 cursor-not-allowed"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? 'text-gray-400 cursor-not-allowed'
+                    : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
                 Next
@@ -531,40 +531,40 @@ const MarketingDashBoard = () => {
         </div>
 
         {/* Seasonal Campaigns Section */}
-        <div className="my-4 md:my-12 bg-white p-3 md:p-6 rounded-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
+        <div className='my-4 md:my-12 bg-white p-3 md:p-6 rounded-2xl'>
+          <div className='flex items-center justify-between mb-6'>
+            <h2 className='text-xl md:text-2xl font-bold text-gray-800 w-1/2'>
               Seasonal campaigns
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 ">
+            <button className='bg-green-500 hover:opacity-90 text-white font- md:font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 '>
               <FaPlus size={20} />
               Create Campaign
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {seasonalCampaigns.map((campaign, idx) => (
               <div
                 key={idx}
-                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103"
+                className='bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103'
               >
                 <img
                   src={campaign.image}
                   alt={campaign.title}
-                  className="w-full h-72 object-cover"
+                  className='w-full h-72 object-cover'
                 />
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-gray-800">
+                <div className='p-4'>
+                  <h3 className='font-semibold text-lg mb-2 text-gray-800'>
                     {campaign.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                  <p className='text-sm text-gray-600 mb-4 line-clamp-3'>
                     {campaign.description}
                   </p>
                   <button
                     onClick={() =>
                       alert(`Viewing details for: ${campaign.title}`)
                     }
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
+                    className='w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors'
                   >
                     See Details
                   </button>
@@ -577,40 +577,40 @@ const MarketingDashBoard = () => {
         </div>
 
         {/* Loyalty Programs Section */}
-        <div className="my-4 md:my-6 bg-white p-3 md:p-6 rounded-2xl">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
+        <div className='my-4 md:my-6 bg-white p-3 md:p-6 rounded-2xl'>
+          <div className='flex items-center justify-between mb-6'>
+            <h2 className='text-xl md:text-2xl font-bold text-gray-800 w-1/2'>
               Loyalty programs
             </h2>
-            <button className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2">
+            <button className='bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1  md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2'>
               <FaPlus size={20} />
               Create Campaign
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
             {loyaltyPrograms.map((program, idx) => (
               <div
                 key={idx}
-                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103"
+                className='bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103'
               >
                 <img
                   src={program.image}
                   alt={program.title}
-                  className="w-full h-72 object-cover"
+                  className='w-full h-72 object-cover'
                 />
-                <div className="p-4">
-                  <h3 className="font-semibold text-lg mb-2 text-gray-800">
+                <div className='p-4'>
+                  <h3 className='font-semibold text-lg mb-2 text-gray-800'>
                     {program.title}
                   </h3>
-                  <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                  <p className='text-sm text-gray-600 mb-4 line-clamp-3'>
                     {program.description}
                   </p>
                   <button
                     onClick={() =>
                       alert(`Viewing details for: ${program.title}`)
                     }
-                    className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
+                    className='w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors'
                   >
                     See Details
                   </button>
@@ -625,62 +625,62 @@ const MarketingDashBoard = () => {
 
       {/* Automation Settings Modal */}
       {isAutomationModalOpen && (
-        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-md max-h-[70vh] overflow-hidden flex flex-col">
+        <div className='fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4'>
+          <div className='bg-white rounded-xl w-full max-w-md max-h-[70vh] overflow-hidden flex flex-col'>
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-4 md:p-5 border-gray-200">
+            <div className='flex items-center justify-between p-4 md:p-5 border-gray-200'>
               <div>
-                <h2 className="text-base md:text-lg font-semibold text-gray-900">
+                <h2 className='text-base md:text-lg font-semibold text-gray-900'>
                   if lead is hot
                 </h2>
-                <p className="text-xs md:text-sm text-gray-500 mt-0.5">
+                <p className='text-xs md:text-sm text-gray-500 mt-0.5'>
                   3 of 4 rules active
                 </p>
               </div>
               <button
                 onClick={() => setIsAutomationModalOpen(false)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className='text-gray-400 hover:text-gray-600 transition-colors'
               >
                 <MdClose size={24} />
               </button>
             </div>
 
             {/* Modal Body - Scrollable */}
-            <div className="flex-1 overflow-y-auto p-4 md:p-5">
+            <div className='flex-1 overflow-y-auto p-4 md:p-5'>
               {/* Automation Settings List */}
-              <div className="space-y-3">
+              <div className='space-y-3'>
                 {automationSettings.map((setting) => (
                   <div
                     key={setting.id}
-                    className="bg-gray-50 rounded-lg p-3 md:p-4"
+                    className='bg-gray-50 rounded-lg p-3 md:p-4'
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-sm md:text-base font-medium text-gray-900 mb-1">
+                    <div className='flex items-start justify-between gap-3'>
+                      <div className='flex-1 min-w-0'>
+                        <h3 className='text-sm md:text-base font-medium text-gray-900 mb-1'>
                           {setting.title}
                         </h3>
-                        <p className="text-xs md:text-sm text-gray-500">
+                        <p className='text-xs md:text-sm text-gray-500'>
                           {setting.subtext}
                         </p>
                       </div>
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className='flex items-center gap-2 flex-shrink-0'>
                         {/* Toggle Switch */}
-                        <label className="relative inline-flex items-center cursor-pointer">
+                        <label className='relative inline-flex items-center cursor-pointer'>
                           <input
-                            type="checkbox"
+                            type='checkbox'
                             checked={setting.enabled}
                             onChange={() => handleToggleAutomation(setting.id)}
-                            className="sr-only peer"
+                            className='sr-only peer'
                           />
                           <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
                         </label>
-                        <span className="text-xs md:text-sm text-gray-500 min-w-[60px]">
-                          {setting.enabled ? "Enabled" : "Disabled"}
+                        <span className='text-xs md:text-sm text-gray-500 min-w-[60px]'>
+                          {setting.enabled ? 'Enabled' : 'Disabled'}
                         </span>
                         {/* Delete Button */}
                         <button
                           onClick={() => handleDeleteAutomation(setting.id)}
-                          className="text-red-500 hover:text-red-700 transition-colors"
+                          className='text-red-500 hover:text-red-700 transition-colors'
                         >
                           <FiTrash2 size={18} />
                         </button>
@@ -693,9 +693,9 @@ const MarketingDashBoard = () => {
               {/* Add New Rule Button */}
               <button
                 onClick={handleAddAutomationRule}
-                className="w-full mt-4 py-3 text-gray-700 font-medium text-sm md:text-base flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all"
+                className='w-full mt-4 py-3 text-gray-700 font-medium text-sm md:text-base flex items-center justify-center gap-2 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all'
               >
-                <FaPlus size={14} className="text-gray-600" />
+                <FaPlus size={14} className='text-gray-600' />
                 Add new automation rule
               </button>
             </div>
