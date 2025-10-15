@@ -1,5 +1,5 @@
 import { MapPin, Phone, Mail } from 'lucide-react';
-import logo from '../images/logo1.png';
+import logo from '../../../public/assets/images/logo1.png';
 
 export default function CTAFooter() {
   return (

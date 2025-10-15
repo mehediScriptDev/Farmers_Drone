@@ -5,8 +5,7 @@ import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
 import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
-import FieldAgent from '../admin/components/FieldAgent';
-import FieldSidebar from './FieldSidebar';
+
 
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,12 +34,12 @@ export const DashboardLayout = () => {
         {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
-        <main className='flex-1 overflow-x-hidden overflow-y-auto bg-gray-100'>
-          <div className='w-full bg-[#fafffd]'>
-            <Outlet />
-          </div>
-        </main>
+    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]">
+      <div className="w-full ">
+        <Outlet />
       </div>
-    </div>
+    </main>
+  </div>
+</div>
   );
 };

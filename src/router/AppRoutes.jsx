@@ -39,7 +39,6 @@ import {
 } from './PrivateRoute';
 import { RoleBasedRedirect } from './RoleBasedRedirect';
 import LeadManagment from '../components/marketing/components/LeadManagment';
-import Anylytics from '../components/marketing/components/Anylytics';
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import MainLayout from './../LandingPageUI/Layout/MainLayout';
 import Services from './../LandingPageUI/Pages/Services';
@@ -142,52 +141,52 @@ const AppRoutes = createBrowserRouter([
       },
     ],
   },
-  {
-    path: '/employee',
-    element: (
-      <PrivateEmployeeRoute>
-        <DashboardLayout />
-      </PrivateEmployeeRoute>
-    ),
-    children: [
-      {
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: 'customers/:customerId',
-        element: <CoustomerDetailsPage />,
-      },
-      {
-        path: 'customers/:customerId/order/:id',
-        element: <OrderDetailsPage />,
-      },
-      {
-        path: 'customerspage',
-        element: <Coustomerpage />,
-      },
-      {
-        path: 'report-analysis',
-        element: <ReportAnalysisPage />,
-      },
-      {
-        path: 'orders',
-        element: <OrderManagementPage />,
-      },
-      {
-        path: 'payments',
-        element: <PaymentManagement />,
-      },
-      {
-        path: 'supports',
-        element: <SupportPage />,
-      },
-      {
-        path: 'messages',
-        element: <MessagePage />,
-      },
-    ],
-  },
+ {
+  path: '/employee',
+  element: (
+    <PrivateEmployeeRoute>
+      <DashboardLayout />
+    </PrivateEmployeeRoute>
+  ),
+  children: [
+    {
+      index: true,
+      element: <Dashboard />,
+    },
+    {
+      path: "customers/:customerId",
+      element: <CoustomerDetailsPage />,
+    },
+    {
+      path: "customers",
+      element: <Coustomerpage />,
+    },
+    
+    {
+      path: "report-analysis",
+      element: <ReportAnalysisPage />,
+    },
+    {
+      path: "orders",
+      element: <OrderManagementPage />,
+    },{
+      path:"orders/:orderId",
+      element:<OrderDetailsPage/>
+    },
+    {
+      path: "payments",
+      element: <PaymentManagement />,
+    },
+    {
+      path: "supports",
+      element: <SupportPage />,
+    },
+    {
+      path: "messages",
+      element: <MessagePage />,
+    },
+  ],
+},
   {
     path: '/field-agent',
     element: (
@@ -247,9 +246,12 @@ const AppRoutes = createBrowserRouter([
         element: <Leads />,
       },
       {
-        path: 'analytics',
-        element: <Anylytics />,
-      },
+        path: "LeadManagment",
+        element : <LeadManagment/>
+      },{
+        path : "analytics",
+        element : <Analytics/>
+      }
     ],
   },
   {

@@ -47,7 +47,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             onClick={() => setSidebarOpen(true)}
             className="bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200"
           >
-            <HiMenuAlt3 className="w-5 h-5 text-gray-700" />
+            <HiMenuAlt3 className="w-7 h-7 text-gray-700" />
           </button>
         </div>
       )}

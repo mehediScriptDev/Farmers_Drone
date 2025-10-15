@@ -301,8 +301,8 @@ const MarketingDashBoard = () => {
   const loyaltyTotalPages = getTotalPages(allLoyaltyPrograms);
 
   return (
-    <div className="bg-[#F9FAFB] p-4 md:px-12">
-      <div className="flex-1  bg-gray-50 mt-2">
+    <div className="bg-[#fafffd] p-4 lg:pt-5 md:px-12">
+      <div className="flex-1  mt-2">
         <div className="mb-1 md:mb-6 flex flex-col md:flex-row justify-between">
           <div>
             <h1 className="!text-xl md:!text-4xl font-bold text-[#002244]">

@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo from "../assets/images/logo1.png";
+import logo from "../../../public/assets/images/logo1.png";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
