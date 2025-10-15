@@ -20,18 +20,16 @@ const SupportPage = () => {
   const { t } = useTranslation();
   const ITEMS_PER_PAGE = 4;
 
-  // Fetch data from API or JSON
+  // Fetch data
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Replace this with your actual API endpoint
         const response = await axiosInstance.get('/employee/data/support.json');
         const data = response.data;
 
-        // Add default date if missing
         const supportWithDate = data.supportData.map((item) => ({
           ...item,
-          date: item.date || new Date().toLocaleDateString('en-GB'), // format: dd/mm/yyyy
+          date: item.date || new Date().toLocaleDateString('en-GB'),
         }));
 
         setStats(data.stats);
@@ -44,17 +42,22 @@ const SupportPage = () => {
     fetchData();
   }, []);
 
-  // Filter data based on search
+  // ✅ Improved Search Logic
   const filteredData = useMemo(() => {
     if (!searchQuery.trim()) return supportData;
+
+    const query = searchQuery.toLowerCase();
+
     return supportData.filter(
       (item) =>
-        item.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.issues.toLowerCase().includes(searchQuery.toLowerCase())
+        (item.serviceName && item.serviceName.toLowerCase().includes(query)) ||
+        (item.issues && item.issues.toLowerCase().includes(query)) ||
+        (item.progress && item.progress.toLowerCase().includes(query)) ||
+        (item.priority && item.priority.toLowerCase().includes(query))
     );
   }, [supportData, searchQuery]);
 
-  // Pagination logic
+  // Pagination
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const paginatedData = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -65,12 +68,15 @@ const SupportPage = () => {
   const handlePrevious = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
   const handleNext = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
     setCurrentPage(1);
   };
+
   const toggleDropdown = (index) =>
     setActiveDropdown(activeDropdown === index ? null : index);
+
   const handleManageTicket = () => {
     setShowManageModal(true);
     setActiveDropdown(null);
@@ -108,11 +114,10 @@ const SupportPage = () => {
     <div className='flex-1 p-4 md:px-12 bg-[#fafffd] min-h-screen'>
       {/* Header */}
       <div className='mb-4 md:mb-6'>
-        <h1 className='text-lg md:text-2xl font-bold text-gray-900'>
-          {' '}
+        <h1 className='text-xl md:text-3xl font-bold text-[#002244] mb-2'>
           {t('dashboard.employee.title.supportPageTitle')}
         </h1>
-        <p className='text-xs md:text-base text-gray-600'>
+        <p className='text-xs md:text-base text-[#464646]'>
           {t('dashboard.employee.subTitle.supportpageSub')}
         </p>
       </div>
@@ -152,12 +157,13 @@ const SupportPage = () => {
               </div>
               {bottomContent && (
                 <div
-                  className={`text-xs md:text-sm flex items-center gap-1 ${stat.change
+                  className={`text-xs md:text-sm flex items-center gap-1 ${
+                    stat.change
                       ? stat.trend === 'up'
                         ? 'text-green-600'
                         : 'text-red-600'
                       : 'text-gray-500'
-                    }`}
+                  }`}
                 >
                   {stat.change && stat.trend === 'up' && (
                     <TrendingUp className='w-4 h-4' />
@@ -185,18 +191,15 @@ const SupportPage = () => {
             </span>
             <input
               type='text'
-              placeholder='Search by service name or issue...'
+              placeholder='Search by service name, issue, progress or priority...'
               value={searchQuery}
               onChange={handleSearch}
               className='w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black/30 text-base'
             />
           </div>
         </div>
-        <div>
-          
-        </div>
-        <div className='overflow-x-auto overflow-y-visible'>
-          <table className='w-full table-fixed'>
+        <div className='overflow-x-auto'> 
+          <table className='min-w-full table-fixed'>
             <thead className='bg-gray-50 border-b border-gray-200'>
               <tr>
                 <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
@@ -256,18 +259,25 @@ const SupportPage = () => {
                       </span>
                     </td>
                     <td className='px-3 md:px-6 py-4 text-xs md:text-sm relative'>
-                      <div className='relative inline-block w-full'>
+                      <div className='relative inline-block'>
                         <button
                           onClick={() => toggleDropdown(index)}
                           className='text-2xl'
                         >
                           <BiChevronDown
-                            className={`transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
-                              }`}
+                            className={`transition-transform duration-200 ${
+                              activeDropdown === index ? 'rotate-180' : ''
+                            }`}
                           />
                         </button>
                         {activeDropdown === index && (
-                          <div className='absolute right-40 top-full  w-48 bg-white border border-gray-200 rounded shadow-lg z-50'>
+                          <div
+                            className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 ${
+                              index >= ITEMS_PER_PAGE - 1
+                                ? 'bottom-full mb-1'
+                                : 'top-full mt-1'
+                            }`}
+                          >
                             <button
                               onClick={handleManageTicket}
                               className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors'
@@ -296,6 +306,7 @@ const SupportPage = () => {
             </tbody>
           </table>
         </div>
+
         {/* Pagination */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs md:text-sm text-gray-600">
@@ -309,7 +320,6 @@ const SupportPage = () => {
           </div>
 
           <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            {/* Previous Button */}
             <button
               onClick={handlePrevious}
               className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
@@ -318,21 +328,20 @@ const SupportPage = () => {
               Previous
             </button>
 
-            {/* Page Numbers */}
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
               <button
                 key={number}
                 onClick={() => setCurrentPage(number)}
-                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${
+                  currentPage === number
                     ? 'bg-[#28A844] text-white font-medium'
                     : 'bg-gray-100 text-black hover:bg-gray-200'
-                  }`}
+                }`}
               >
                 {number}
               </button>
             ))}
 
-            {/* Next Button */}
             <button
               onClick={handleNext}
               className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
@@ -342,14 +351,13 @@ const SupportPage = () => {
             </button>
           </div>
         </div>
-
       </div>
 
       <CreateTicketModal
         isOpen={showCreate}
         onClose={() => setShowCreate(false)}
       />
-      <EscalateTicketModal         
+      <EscalateTicketModal
         isOpen={showEscalate}
         onClose={() => setShowEscalate(false)}
       />

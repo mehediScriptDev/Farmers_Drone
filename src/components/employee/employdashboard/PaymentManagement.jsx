@@ -72,16 +72,21 @@ const PaymentManagement = () => {
   }, [i18n]);
 
   // Search
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    const filtered = recentTransactions.filter(txn =>
-      txn.serviceId.toLowerCase().includes(query) ||
-      txn.customerName.toLowerCase().includes(query)
-    );
-    setFilteredTransactions(filtered);
-    setCurrentPage(1);
-  };
+ // Search
+const handleSearch = (e) => {
+  const query = e.target.value.toLowerCase();
+  setSearchQuery(query);
+
+  const filtered = recentTransactions.filter(txn =>
+    txn.serviceId.toLowerCase().includes(query) ||    // Service
+    txn.customerName.toLowerCase().includes(query) || // Name
+    txn.payment.toString().toLowerCase().includes(query) || // Payment
+    txn.progress.toLowerCase().includes(query)       // Progress
+  );
+
+  setFilteredTransactions(filtered);
+  setCurrentPage(1);
+};
 
   // Pagination
   const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
@@ -95,7 +100,7 @@ const PaymentManagement = () => {
     <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-4 md:mb-6">
-        <h1 className="text-lg md:text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-lg md:text-3xl font-bold text-gray-900 mb-2">
           {t('dashboard.employee.title.paymentPageTitle')}
         </h1>
         <p className="text-xs md:text-base text-gray-600">

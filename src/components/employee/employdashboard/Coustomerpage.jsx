@@ -35,7 +35,7 @@ const Coustomerpage = () => {
     setSubModalType(null);
     setMainModalOpen(true);
   }, []);
-  const itemsPerPage = 6;
+  const itemsPerPage = 4;
   const totalPages = Math.ceil(activities.length / itemsPerPage);
 
   useEffect(() => {
@@ -106,10 +106,10 @@ const Coustomerpage = () => {
   return (
     <div className="flex-1 p-4 md:px-12 ">
       <div className="mb-6 md:mb-8">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-xl md:text-3xl font-bold text-[#002244] mb-2">
           {t('dashboard.employee.title.customPageTitle')}
         </h1>
-        <p className="text-sm md:text-base text-gray-600">
+        <p className="text-sm md:text-base text-[#464646]">
           {t('dashboard.employee.subTitle.custompageSub')}
         </p>
       </div>
@@ -133,12 +133,14 @@ const Coustomerpage = () => {
               >
                 {t('dashboard.employee.button.assistProfile')}
               </button>
+             <Link to="/employee/customers/report-analysis">
               <button
-                onClick={() => navigate("/employee/report-analysis")}
+               
                 className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base"
               >
                 {t('dashboard.employee.button.reportAnalysis')}
               </button>
+             </Link>
             </div>
           </div>
         </div>

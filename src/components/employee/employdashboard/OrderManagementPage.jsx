@@ -67,7 +67,7 @@ const OrderManagementPage = () => {
   return (
     <div className="flex-1 p-4 md:px-12">
       <div className="mb-2 md:mb-4">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-xl md:text-3xl font-bold text-gray-900 mb-2">
           {t('dashboard.employee.title.orderPageTitle')}
         </h1>
         <p className="text-sm md:text-base text-gray-600 pt-2">

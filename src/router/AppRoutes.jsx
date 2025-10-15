@@ -158,7 +158,7 @@ const AppRoutes = createBrowserRouter([
       },
 
       {
-        path: 'report-analysis',
+        path: 'customers/report-analysis',
         element: <ReportAnalysisPage />,
       },
       {
