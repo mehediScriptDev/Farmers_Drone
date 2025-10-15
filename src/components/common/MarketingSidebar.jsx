@@ -79,7 +79,7 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   className={({ isActive }) =>
                     `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
                       isActive
-                        ? "bg-white border-green-600 font-semibold shadow-sm"
+                        ? "bg-white border-green-600 text-green-600 font-semibold shadow-sm"
                         : "border-transparent text-black hover:bg-gray-50"
                     }`
                   }

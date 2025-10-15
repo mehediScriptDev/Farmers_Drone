@@ -5,6 +5,7 @@ import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
 import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
+import ScrollToTop from './../utility/ScrollToTop';
 
 
 export const DashboardLayout = () => {
@@ -13,6 +14,7 @@ export const DashboardLayout = () => {
 
   return (
     <div className='flex flex-col h-screen '>
+      <ScrollToTop/>
       <Header /> {/* Navbar at the top */}
       <div className='flex flex-1 overflow-hidden'>
         {user?.role === 'admin' && (
