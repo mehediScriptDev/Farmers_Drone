@@ -349,7 +349,7 @@ const SupportPage = () => {
         isOpen={showCreate}
         onClose={() => setShowCreate(false)}
       />
-      <EscalateTicketModal
+      <EscalateTicketModal         
         isOpen={showEscalate}
         onClose={() => setShowEscalate(false)}
       />

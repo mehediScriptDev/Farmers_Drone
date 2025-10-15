@@ -55,10 +55,10 @@ import ReportAnalysisPage from '../components/employee/employdashboard/component
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
 import Leads from './../components/marketing/Leads';
-import MarketingDashboard from './../components/marketing/MarketingDashboard';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
+import Analytics from '../components/marketing/Analytics';
 
 const AppRoutes = createBrowserRouter([
   {
