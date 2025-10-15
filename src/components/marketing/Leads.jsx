@@ -6,6 +6,7 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MapPin, Users, ChevronDown } from "lucide-react";
 import MapChart from "./MapChart";
 
+
 // LeadsDropdown Component
 const LeadsDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -166,19 +167,11 @@ const Leads = () => {
     return "text-green-600";
   };
 
-  const locations = [
-    "Gujrat",
-    "Chennai",
-    "Lucknow",
-    "Hydrabad",
-    "Mumbai",
-    "Rajhasthan",
-    "Delhi",
-  ];
+  
 
   return (
-    <div className="md:px-12  mx-auto my-6 p-6">
-      <div className="bg-white  rounded-xl shadow-sm border border-gray-100">
+    <div className="">
+      <div className="bg-white  rounded-xl shadow border border-gray-100">
         <div className="p-4 border-b border-gray-100">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-2">
             <div>
@@ -326,81 +319,7 @@ const Leads = () => {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6 mt-5">
-        {/* Heatmap Card */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h1 className="font-semibold text-2xl text-gray-900 mb-4">Heatmap</h1>
-
-          <div className="flex gap-6 mb-6">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <span className="text-sm text-gray-700">High</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <span className="text-sm text-gray-700">Medium</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
-              <span className="text-sm text-gray-700">Low</span>
-            </div>
-          </div>
-
-          {/* India Map SVG */}
-          <div className="w-full h-auto flex items-center justify-center">
-            <MapChart/>
-          </div>
-        </div>
-
-        {/* Targeted Audience Card */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          <h1 className="font-semibold text-3xl text-gray-900 mb-6">
-            Targeted Audience
-          </h1>
-
-          {/* Location Section */}
-          <div className="mb-6">
-            <div className="flex items-center gap-2 mb-3">
-              <MapPin className="w-5 h-5 text-gray-700" />
-              <span className="font-medium text-gray-900">Location</span>
-            </div>
-            <div className="flex flex-wrap gap-5">
-              {locations.map((location, index) => (
-                <span
-                  key={index}
-                  className="px-3 xl:px-6 border-none shadow-none py-1 btn btn-sm lg:btn-md xl:btn-lg font-semibold p-2.5 bg-red-100 rounded text-[16px] text-gray-700"
-                >
-                  {location}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Demographics Section */}
-          <div className="mb-6  *:text-[16px]">
-            <div className="flex items-center gap-2 mb-3">
-              <Users className="w-5 h-5 text-gray-700" />
-              <span className="font-medium text-gray-900">Demographics</span>
-            </div>
-            <div className="space-y-2">
-              <p className="text-gray-600 text-2xl font-medium">
-                <span className="">Age:</span> 22 - 55
-              </p>
-              <p className="text-gray-600 text-2xl font-medium">
-                <span className="">Income:</span> $75k+
-              </p>
-            </div>
-          </div>
-
-          {/* Audience Type Section */}
-          <div>
-            <h3 className=" text-gray-600 mb-2 font-medium">Audience Type</h3>
-            <p className="text-gray-600 font-medium text-2xl">
-              Real estate developers & investor
-            </p>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 };

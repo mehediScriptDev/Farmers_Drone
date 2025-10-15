@@ -64,10 +64,10 @@ const Campaigns = () => {
     totalItems,
     createClick,
   }) => (
-    <div className="md:px-12  mx-auto mb-8 p-4">
+    <div className="md:px-12 mx-auto mb-8 p-4">
       <div className="bg-white rounded-lg shadow">
         <div className="flex flex-col sm:flex-row p-6 justify-between items-center ">
-          <h2 className="text-xl lg:text-3xl  font-bold text-center lg:text-left text-gray-900">
+          <h2 className="text-xl lg:text-3xl font-bold text-center lg:text-left text-gray-900">
             {title}
           </h2>
           <button

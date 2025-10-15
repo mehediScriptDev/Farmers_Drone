@@ -241,7 +241,7 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "LeadManagment",
-        element : <Leads/>
+        element : <LeadManagment/>
       },{
         path : "analytics",
         element : <Anylytics/>
