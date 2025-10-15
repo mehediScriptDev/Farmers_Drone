@@ -156,13 +156,10 @@ const AppRoutes = createBrowserRouter([
       element: <CoustomerDetailsPage />,
     },
     {
-      path: "customers/:customerId/order/:id",
-      element: <OrderDetailsPage />,
-    },
-    {
-      path: "customerspage",
+      path: "customers",
       element: <Coustomerpage />,
     },
+    
     {
       path: "report-analysis",
       element: <ReportAnalysisPage />,
@@ -170,6 +167,9 @@ const AppRoutes = createBrowserRouter([
     {
       path: "orders",
       element: <OrderManagementPage />,
+    },{
+      path:"orders/:orderId",
+      element:<OrderDetailsPage/>
     },
     {
       path: "payments",

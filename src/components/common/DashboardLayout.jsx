@@ -5,8 +5,7 @@ import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
 import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
-import FieldAgent from '../admin/components/FieldAgent';
-import FieldSidebar from './FieldSidebar';
+
 
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

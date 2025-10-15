@@ -1,133 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate, useLocation } from "react-router-dom";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { RiDashboardLine } from "react-icons/ri";
-import { PiUsersThreeBold } from "react-icons/pi";
-import { FiShoppingCart } from "react-icons/fi";
-import { FaRegCreditCard } from "react-icons/fa";
-import { LuHeadset } from "react-icons/lu";
-import { LuMessageCircle } from "react-icons/lu";
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { PiUsersThreeBold } from 'react-icons/pi';
+import { FiShoppingCart } from 'react-icons/fi';
+import { FaRegCreditCard } from 'react-icons/fa';
+import { LuHeadset, LuMessageCircle } from 'react-icons/lu';
+import { BiGridAlt } from 'react-icons/bi';
 
 const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [activeMenu, setActiveMenu] = useState("");
 
   const menuItems = [
     {
-      id: "dashboard",
-      label: t("sidebar.employee.dashboard"),
-      icon: RiDashboardLine,
-      path: "",
-      matchPaths: [
-        "/employee",
-        "/employee/",
-        "customers/:customerId",
-        "order/:id",
-      ],
+      id: 'dashboard',
+      label: t('sidebar.employee.dashboard'),
+      icon: BiGridAlt,
+      path: '',
     },
     {
-      id: "customer",
-      label: t("sidebar.employee.customer"),
+      id: 'customer',
+      label: t('sidebar.employee.customer'),
       icon: PiUsersThreeBold,
-      path: "customerspage",
-
-      matchPaths: ["customerspage", "report-analysis"],
+      path: 'customers',
     },
     {
-      id: "orders",
-      label: t("sidebar.employee.orders"),
+      id: 'orders',
+      label: t('sidebar.employee.orders'),
       icon: FiShoppingCart,
-      path: "orders",
-      matchPaths: ["orders"],
+      path: 'orders',
     },
     {
-      id: "payments",
-      label: t("sidebar.employee.payments"),
+      id: 'payments',
+      label: t('sidebar.employee.payments'),
       icon: FaRegCreditCard,
-      path: "payments",
-      matchPaths: ["payments"],
+      path: 'payments',
     },
     {
-      id: "support",
-      label: t("sidebar.employee.support"),
+      id: 'support',
+      label: t('sidebar.employee.support'),
       icon: LuHeadset,
-      path: "supports",
-      matchPaths: ["supports"],
+      path: 'supports',
     },
     {
-      id: "message",
-      label: "Message",
+      id: 'message',
+      label: 'Message',
       icon: LuMessageCircle,
-      path: "messages",
-      matchPaths: ["messages"],
+      path: 'messages',
     },
   ];
-
-  useEffect(() => {
-    const pathname = location.pathname;
-
-    // 1. ড্যাশবোর্ডের সাথে সম্পর্কিত সমস্ত ডিটেইলস রুটগুলির জন্য একটি কাস্টম চেক
-    // এই রুটগুলি Dashboard-এর মতোই activeMenu সেট করবে।
-    const isDashboardRelatedDetailRoute =
-      pathname.includes("/customers/") || // /employee/customers/123
-      pathname.includes("/order/"); // /employee/customers/123/order/456
-
-    if (
-      pathname === "/employee" ||
-      pathname === "/employee/" ||
-      pathname.endsWith("/employee") ||
-      isDashboardRelatedDetailRoute // <-- নতুন চেক
-    ) {
-      console.log("Setting active to dashboard or related detail route");
-      setActiveMenu("dashboard");
-      return;
-    }
-
-    // 2. অন্যান্য মূল রুটগুলির জন্য স্বাভাবিক চেক
-    // এই লজিক এখন শুধুমাত্র মূল রুটগুলি (/customerspage, /orders) খুঁজবে, ডিটেইলস নয়।
-    let foundActiveMenu = "";
-
-    for (const item of menuItems) {
-      if (item.id === "dashboard") continue;
-
-      if (item.matchPaths) {
-        const isMatched = item.matchPaths.some(
-          (matchPath) =>
-            // আমরা চাই যেন এটি শুধুমাত্র পুরো পাথের অংশগুলির সাথে মেলে
-            pathname.endsWith(matchPath) || pathname.includes(`/${matchPath}/`) // /orders/12345 match করার জন্য
-        );
-
-        if (isMatched) {
-          console.log("Found match:", item.id);
-          foundActiveMenu = item.id;
-          break;
-        }
-      }
-    }
-
-    console.log("Setting active to:", foundActiveMenu || "none");
-    setActiveMenu(foundActiveMenu);
-  }, [location.pathname]);
-
-  const handleMenuClick = (item) => {
-    setActiveMenu(item.id);
-    navigate(item.path);
-    setSidebarOpen(false);
-  };
 
   return (
     <>
       {/* Mobile Menu Button */}
       {!sidebarOpen && (
-        <div className="lg:hidden fixed top-4 left-4 z-50">
+        <div className='lg:hidden fixed top-4 left-4 z-50'>
           <button
             onClick={() => setSidebarOpen(true)}
-            className="bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200"
+            className='bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200'
           >
-            <HiMenuAlt3 className="w-5 h-5 text-gray-700" />
+            <HiMenuAlt3 className='w-5 h-5 text-gray-700' />
           </button>
         </div>
       )}
@@ -135,44 +66,43 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Sidebar */}
       <div
         className={`bg-[#F5F7FA] shadow-lg transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-2 left-0 z-50 w-[304px] xl:pl-9 overflow-y-auto pt-10`}
       >
-        <div className="flex flex-col h-full">
+        <div className='flex flex-col h-full'>
           {/* Close Button for Mobile */}
-          <div className="lg:hidden right-3">
+          <div className='lg:hidden right-3'>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="absolute top-4 right-3 rounded-full lg:hidden"
+              className='absolute top-4 right-3 rounded-full lg:hidden'
             >
-              <HiX className="w-7 h-7 text-gray-700" />
+              <HiX className='w-7 h-7 text-gray-700' />
             </button>
           </div>
 
           {/* Menu Items */}
-          <nav className="flex-1 px-3 py-4 overflow-y-auto">
+          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeMenu === item.id;
-
               return (
-                <button
+                <NavLink
                   key={item.id}
-                  type="button"
-                  onClick={() => handleMenuClick(item)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 transition-all duration-300 ${
-                    isActive
-                      ? "bg-white border-l-4 border-green-600 font-semibold shadow-sm"
-                      : "text-black hover:bg-gray-50 border-l-4 border-transparent"
-                  }`}
+                  to={item.path}
+                  end={item.path === ''}
+                  className={({ isActive }) =>
+                    `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
+                      isActive
+                        ? 'bg-white border-green-600 font-semibold shadow-sm'
+                        : 'border-transparent text-black hover:bg-gray-50'
+                    }`
+                  }
+                  onClick={() => setSidebarOpen(false)}
                 >
                   <Icon
-                    className={`w-5 h-5 ${
-                      isActive ? "text-green-600" : "text-gray-500"
-                    }`}
+                    className={`w-5 h-5 ${/* isActive handled above */ ''}`}
                   />
                   <span>{item.label}</span>
-                </button>
+                </NavLink>
               );
             })}
           </nav>
@@ -182,7 +112,7 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-30 bg-black/40 lg:hidden"
+          className='fixed inset-0 z-30 bg-black/40 lg:hidden'
           onClick={() => setSidebarOpen(false)}
         />
       )}
