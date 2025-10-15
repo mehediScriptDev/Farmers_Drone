@@ -149,7 +149,11 @@ const MarketingDashBoard = () => {
     const fetchAgentData = async () => {
       try {
         const data = await axiosInstance.get(
+<<<<<<< HEAD
           '/MarketingDeshboard/data/marketingLandingPage.json'
+=======
+          "/MarketingDashboard/data/marketingLandingPage.json"
+>>>>>>> 9b950d996a3ae1a49c0be493c25f8d46fde3075f
         );
         // Original setActivities
         setActivities(data.data.activities);

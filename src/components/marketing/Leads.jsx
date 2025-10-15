@@ -175,7 +175,7 @@ const Leads = () => {
         <div className="p-4 border-b border-gray-100">
           <div className="flex flex-col lg:flex-row items-center justify-between mb-2">
             <div>
-              <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-2">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
                 Lead Management
               </h2>
               <p className="text-sm lg:text-[16px] text-gray-600">
