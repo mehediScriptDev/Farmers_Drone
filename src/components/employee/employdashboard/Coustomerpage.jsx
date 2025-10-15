@@ -214,12 +214,12 @@ const Coustomerpage = () => {
                       <select
                         className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-[#394C6B] text-xs md:text-base 
         text-[#FFFFFF] appearance-none cursor-pointer"
-                        onFocus={() => setIsOpen(true)}
+                        onClick={() => setIsOpen(true)}
                         onBlur={() => setIsOpen(false)}
                       >
-                        <option>In Progress</option>
-                        <option>Complete</option>
-                        <option>Last 90 Days</option>
+                        <option onClick={() => setIsOpen(false)}>In Progress</option>
+                        <option onClick={() => setIsOpen(false)}>Complete</option>
+                       
                       </select>
 
                       <div
