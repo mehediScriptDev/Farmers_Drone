@@ -36,18 +36,18 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       icon: Users,
       path: 'users',
     },
-    {
-      id: 'employees',
-      label: t('sidebar.admin.employeeManagement'),
-      icon: UserCheck,
-      path: 'employees',
-    },
-    {
-      id: 'field-agents',
-      label: t('sidebar.admin.fieldAgent'),
-      icon: MapPin,
-      path: 'field-agents',
-    },
+    // {
+    //   id: 'employees',
+    //   label: t('sidebar.admin.employeeManagement'),
+    //   icon: UserCheck,
+    //   path: 'employees',
+    // },
+    // {
+    //   id: 'field-agents',
+    //   label: t('sidebar.admin.fieldAgent'),
+    //   icon: MapPin,
+    //   path: 'field-agents',
+    // },
     {
       id: 'jobs',
       label: t('sidebar.admin.jobs'),
@@ -71,6 +71,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       label: t('sidebar.admin.complaints'),
       icon: AlertTriangle,
       path: 'complaints',
+    },
+    {
+      id: 'services',
+      label: t('sidebar.admin.services'),
+      icon: AlertTriangle,
+      path: 'services',
     },
   ];
 

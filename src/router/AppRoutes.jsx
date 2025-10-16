@@ -11,10 +11,9 @@ import AdminDashboard from '../components/admin/components/AdminDashboard';
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
 
 // Admin Components
-import Complaints from '../components/admin/components/Complaints';
 import DroneOperator from '../components/admin/components/DroneOperator';
-import EmployeeManagement from '../components/admin/components/EmployeeManagement';
-import FieldAgent from '../components/admin/components/FieldAgent';
+// import EmployeeManagement from '../components/admin/components/EmployeeManagement';
+// import FieldAgent from '../components/admin/components/FieldAgent';
 import Jobs from '../components/admin/components/Jobs';
 import PaymentsManagement from '../components/admin/components/PaymentsManagement';
 import Reports from '../components/admin/components/Reports';
@@ -103,21 +102,21 @@ const AppRoutes = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: 'complaints',
-        element: <Complaints />,
-      },
-      {
         path: 'drone-operators',
         element: <DroneOperator />,
       },
       {
-        path: 'employees',
-        element: <EmployeeManagement />,
+        path: 'users',
+        element: <UserManagement />,
       },
-      {
-        path: 'field-agents',
-        element: <FieldAgent />,
-      },
+      // {
+      //   path: 'employees',
+      //   element: <EmployeeManagement />,
+      // },
+      // {
+      //   path: 'field-agents',
+      //   element: <FieldAgent />,
+      // },
       {
         path: 'jobs',
         element: <Jobs />,
@@ -129,10 +128,6 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'reports',
         element: <Reports />,
-      },
-      {
-        path: 'users',
-        element: <UserManagement />,
       },
     ],
   },
