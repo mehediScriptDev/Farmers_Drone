@@ -52,6 +52,13 @@ const DroneOperator = () => {
     fetchData();
   }, []);
 
+  // Fix: Reset to page 1 whenever search term changes
+  useEffect(() => {
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
+  }, [searchTerm]);
+
   const handleApproveOperator = (operatorId) => {
     setData((prevData) =>
       prevData.map((op) =>
@@ -172,7 +179,6 @@ const DroneOperator = () => {
             </div>
           ) : (
             <>
-              {/* Added a wrapper with min-height to fix layout shift */}
               <div className='min-h-[448px]'>
                 <DroneOperatorTable
                   operators={paginatedData}
@@ -183,7 +189,6 @@ const DroneOperator = () => {
                 />
               </div>
 
-              {/* Pagination is NOT centered anymore */}
               <Pagination
                 currentPage={currentPage}
                 totalItems={filteredData.length}
