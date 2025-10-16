@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react'; // Removed useRef
 import { TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { GrUserSettings } from 'react-icons/gr';
 import { CiSearch } from 'react-icons/ci';
@@ -19,6 +19,10 @@ const SupportPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
   const ITEMS_PER_PAGE = 4;
+
+  // *** REMOVED: dropdownRef = useRef(null) ***
+
+  // *** REMOVED: useEffect for click outside logic ***
 
   // Fetch data
   useEffect(() => {
@@ -42,7 +46,7 @@ const SupportPage = () => {
     fetchData();
   }, []);
 
-  // ✅ Improved Search Logic
+  // Improved Search Logic
   const filteredData = useMemo(() => {
     if (!searchQuery.trim()) return supportData;
 
@@ -74,8 +78,10 @@ const SupportPage = () => {
     setCurrentPage(1);
   };
 
-  const toggleDropdown = (index) =>
-    setActiveDropdown(activeDropdown === index ? null : index);
+  const toggleDropdown = (index) => {
+    setActiveDropdown((prev) => (prev === index ? null : index));
+  };
+
 
   const handleManageTicket = () => {
     setShowManageModal(true);
@@ -110,6 +116,33 @@ const SupportPage = () => {
     }
   };
 
+  // New useEffect to close dropdown on ALL clicks outside the table
+  // This is a more appropriate global listener for multiple dropdowns
+  useEffect(() => {
+    const handleGlobalClick = (event) => {
+      // Find the closest parent that is the table container
+      const tableContainer = document.getElementById('support-table-container');
+
+      if (activeDropdown !== null) {
+        // If an element is clicked and it's outside the main table container (e.g., in a modal or page background), close the dropdown
+        // This is a failsafe. A better approach is to check if the clicked element is *not* the button that opened the dropdown and *not* the dropdown itself.
+        // A simpler solution for most cases is often enough: just close if we click something outside the control/menu
+        const isTableClick = tableContainer && tableContainer.contains(event.target);
+        const isDropdownButton = event.target.closest('.dropdown-toggle-button');
+        const isDropdownMenu = event.target.closest('.dropdown-menu-content');
+
+        if (!isDropdownButton && !isDropdownMenu) {
+             // To prevent closing when we click on the button of a DIFFERENT row
+            setActiveDropdown(null);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleGlobalClick);
+    return () => document.removeEventListener('mousedown', handleGlobalClick);
+  }, [activeDropdown]);
+
+
   return (
     <div className='flex-1 p-4 md:px-12 bg-[#fafffd] min-h-screen'>
       {/* Header */}
@@ -138,8 +171,9 @@ const SupportPage = () => {
         </button>
       </div>
 
-      {/* Stats */}
+      {/* Stats (omitted for brevity) */}
       <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6'>
+        {/* ... Stats rendering ... */}
         {stats.map((stat, index) => {
           const bottomContent = stat.change || stat.subtext;
           return (
@@ -157,13 +191,12 @@ const SupportPage = () => {
               </div>
               {bottomContent && (
                 <div
-                  className={`text-xs md:text-sm flex items-center gap-1 ${
-                    stat.change
+                  className={`text-xs md:text-sm flex items-center gap-1 ${stat.change
                       ? stat.trend === 'up'
                         ? 'text-green-600'
                         : 'text-red-600'
                       : 'text-gray-500'
-                  }`}
+                    }`}
                 >
                   {stat.change && stat.trend === 'up' && (
                     <TrendingUp className='w-4 h-4' />
@@ -180,7 +213,7 @@ const SupportPage = () => {
       </div>
 
       {/* Table */}
-      <div className='bg-white rounded-lg shadow-sm border border-gray-200'>
+      <div className='bg-white rounded-lg shadow-sm border border-gray-200' id="support-table-container">
         <div className='p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4'>
           <h2 className='text-lg md:text-xl font-bold text-gray-900'>
             Customer Support Activity
@@ -198,7 +231,7 @@ const SupportPage = () => {
             />
           </div>
         </div>
-        <div className='overflow-x-auto'> 
+        <div className='overflow-x-auto'>
           <table className='min-w-full table-fixed'>
             <thead className='bg-gray-50 border-b border-gray-200'>
               <tr>
@@ -224,78 +257,92 @@ const SupportPage = () => {
             </thead>
             <tbody className='divide-y divide-gray-200'>
               {paginatedData.length > 0 ? (
-                paginatedData.map((item, index) => (
-                  <tr key={index} className='hover:bg-gray-50'>
-                    <td className='px-3 md:px-6 py-4'>
-                      <div className='font-medium text-gray-900 text-sm md:text-base'>
-                        {item.serviceName}
-                      </div>
-                      <div className='text-xs md:text-sm text-gray-500'>
-                        {item.name}
-                      </div>
-                    </td>
-                    <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900'>
-                      {item.issues}
-                    </td>
-                    <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900 whitespace-nowrap'>
-                      {item.date}
-                    </td>
-                    <td className='px-3 md:px-6 py-4'>
-                      <span
-                        className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm ${getProgressColor(
-                          item.progress
-                        )}`}
-                      >
-                        {item.progress}
-                      </span>
-                    </td>
-                    <td className='px-3 md:px-6 py-4 text-xs md:text-sm whitespace-nowrap'>
-                      <span
-                        className={`font-medium ${getPriorityColor(
-                          item.priority
-                        )}`}
-                      >
-                        {item.priority}
-                      </span>
-                    </td>
-                    <td className='px-3 md:px-6 py-4 text-xs md:text-sm relative'>
-                      <div className='relative inline-block'>
-                        <button
-                          onClick={() => toggleDropdown(index)}
-                          className='text-2xl'
+                paginatedData.map((item, index) => {
+                  // Use the calculated global index for state management if needed, 
+                  // but local `index` is fine for pagination if you reset state on page change.
+                  // For simplicity with pagination, we'll use the local index here
+                  const dropdownIndex = index; 
+                  
+                  // Calculate if the dropdown is near the bottom of the visible items
+                  const isNearBottom = dropdownIndex >= ITEMS_PER_PAGE - 2; 
+
+                  return (
+                    <tr key={dropdownIndex} className='hover:bg-gray-50'>
+                      <td className='px-3 md:px-6 py-4'>
+                        <div className='font-medium text-gray-900 text-sm md:text-base'>
+                          {item.serviceName}
+                        </div>
+                        <div className='text-xs md:text-sm text-gray-500'>
+                          {item.name}
+                        </div>
+                      </td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900'>
+                        {item.issues}
+                      </td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900 whitespace-nowrap'>
+                        {item.date}
+                      </td>
+                      <td className='px-3 md:px-6 py-4'>
+                        <span
+                          className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm ${getProgressColor(
+                            item.progress
+                          )}`}
                         >
-                          <BiChevronDown
-                            className={`transition-transform duration-200 ${
-                              activeDropdown === index ? 'rotate-180' : ''
-                            }`}
-                          />
-                        </button>
-                        {activeDropdown === index && (
-                          <div
-                            className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 ${
-                              index >= ITEMS_PER_PAGE - 1
-                                ? 'bottom-full mb-1'
-                                : 'top-full mt-1'
-                            }`}
+                          {item.progress}
+                        </span>
+                      </td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-sm whitespace-nowrap'>
+                        <span
+                          className={`font-medium ${getPriorityColor(
+                            item.priority
+                          )}`}
+                        >
+                          {item.priority}
+                        </span>
+                      </td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-sm relative'>
+                        <div className='relative inline-block'>
+                          <button
+                            onClick={() => toggleDropdown(dropdownIndex)}
+                            className='text-2xl dropdown-toggle-button'
                           >
-                            <button
-                              onClick={handleManageTicket}
-                              className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors'
+                            <BiChevronDown
+                              className={`transition-transform duration-200 ${
+                                activeDropdown === dropdownIndex ? 'rotate-180' : ''
+                              }`}
+                            />
+                          </button>
+
+                          {activeDropdown === dropdownIndex && (
+                            <div
+                              // Added className for global click listener to identify the menu
+                              className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 dropdown-menu-content ${
+                                // Adjusted positioning logic
+                                isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'
+                              }`}
                             >
-                              Manage Ticket
-                            </button>
-                            <button
-                              onClick={() => handleManageTicket()}
-                              className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors border-t border-gray-100'
-                            >
-                              Escalate
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                              <button
+                                onClick={handleManageTicket}
+                                className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors'
+                              >
+                                Manage Ticket
+                              </button>
+                              <button
+                                onClick={() => {
+                                    setShowEscalate(true);
+                                    setActiveDropdown(null); // Close dropdown when opening modal
+                                }}
+                                className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors border-t border-gray-100'
+                              >
+                                Escalate
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td colSpan='6' className='text-center py-6 text-gray-500'>
@@ -307,7 +354,7 @@ const SupportPage = () => {
           </table>
         </div>
 
-        {/* Pagination */}
+        {/* Pagination (omitted for brevity) */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs md:text-sm text-gray-600">
             Showing{' '}
@@ -332,11 +379,10 @@ const SupportPage = () => {
               <button
                 key={number}
                 onClick={() => setCurrentPage(number)}
-                className={`px-3 py-1.5 text-sm rounded transition-colors ${
-                  currentPage === number
+                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
                     ? 'bg-[#28A844] text-white font-medium'
                     : 'bg-gray-100 text-black hover:bg-gray-200'
-                }`}
+                  }`}
               >
                 {number}
               </button>
