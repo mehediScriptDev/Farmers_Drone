@@ -260,6 +260,19 @@
           "previous": "Previous",
           "next": "Next"
         }
+      },
+
+      "assignJob": {
+        "title": "Assign new job",
+        "clientName": "Client full name",
+        "clientNamePlaceholder": "Enter your first name",
+        "phoneNumber": "Phone number",
+        "email": "Email",
+        "orderId": "Oder ID",
+        "city": "City",
+        "postalCode": "Postal code",
+        "street": "Street",
+        "assignButton": "Assign"
       }
     },
     "employee": {

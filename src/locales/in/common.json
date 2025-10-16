@@ -260,6 +260,19 @@
           "previous": "पिछला",
           "next": "अगला"
         }
+      },
+
+      "assignJob": {
+        "title": "नया कार्य सौंपें",
+        "clientName": "क्लाइंट का पूरा नाम",
+        "clientNamePlaceholder": "अपना पहला नाम दर्ज करें",
+        "phoneNumber": "फ़ोन नंबर",
+        "email": "ईमेल",
+        "orderId": "ऑर्डर आईडी",
+        "city": "शहर",
+        "postalCode": "पोस्टल कोड",
+        "street": "गली",
+        "assignButton": "सौंपें"
       }
     },
     "employee": {

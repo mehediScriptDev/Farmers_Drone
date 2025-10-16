@@ -5,6 +5,7 @@ import { FiLayers } from 'react-icons/fi';
 import axiosInstance from '../../../config/axiosConfig';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 import Pagination from '../../common/Pagination';
+import AssignJobModal from '../../common/AssignJobModal';
 
 const Jobs = () => {
   const { t } = useTranslation();
@@ -13,6 +14,8 @@ const Jobs = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
+  const [selectedOperator, setSelectedOperator] = useState(null);
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -56,6 +59,16 @@ const Jobs = () => {
     if (progress >= 50) return 'bg-blue-500';
     if (progress >= 25) return 'bg-yellow-500';
     return 'bg-red-500';
+  };
+
+  const handleAssignJob = (operator) => {
+    setSelectedOperator(operator);
+    setIsAssignModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsAssignModalOpen(false);
+    setSelectedOperator(null);
   };
 
   if (loading) {
@@ -218,7 +231,10 @@ const Jobs = () => {
                   </td>
                   <td className='px-6 py-4 whitespace-nowrap'>
                     <div className='flex items-center gap-3'>
-                      <button className='text-green-600 hover:text-green-800 transition-colors'>
+                      <button
+                        onClick={() => handleAssignJob(operator)}
+                        className='text-green-600 hover:text-green-800 transition-colors'
+                      >
                         <FiLayers className='w-5 h-5' />
                       </button>
                       <button className='text-gray-600 hover:text-gray-800 transition-colors'>
@@ -244,6 +260,13 @@ const Jobs = () => {
           })}
         />
       </div>
+
+      {/* Assign Job Modal */}
+      <AssignJobModal
+        isOpen={isAssignModalOpen}
+        onClose={handleCloseModal}
+        operator={selectedOperator}
+      />
     </div>
   );
 };
