@@ -82,7 +82,17 @@
         },
         "seeDetails": "विवरण देखें",
         "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहा है",
-        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला"
+        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला",
+        "modal": {
+          "aboutTitle": "इस ड्रोन ऑपरेटर के बारे में",
+          "fullName": "पूरा नाम:",
+          "phoneNumber": "फ़ोन नंबर:",
+          "email": "ईमेल:",
+          "latLong": "अक्षांश/देशांतर:",
+          "industry": "उद्योग:",
+          "approveButton": "अनुमोदित",
+          "cancelButton": "रद्द"
+        }
       }
     },
     "employee": {

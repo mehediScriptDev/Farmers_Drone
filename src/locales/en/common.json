@@ -82,7 +82,17 @@
         },
         "seeDetails": "See Details",
         "showing": "Showing {{count}} of {{total}} Users",
-        "noOperatorsFound": "No Drone Operators Found"
+        "noOperatorsFound": "No Drone Operators Found",
+        "modal": {
+          "aboutTitle": "About this Drone Operator",
+          "fullName": "Full Name:",
+          "phoneNumber": "Phone number:",
+          "email": "Email:",
+          "latLong": "Latitude/Longitude:",
+          "industry": "Industry:",
+          "approveButton": "Approved",
+          "cancelButton": "Cancelled"
+        }
       }
     },
     "employee": {
