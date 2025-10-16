@@ -10,6 +10,7 @@ import EmployeeManagementTable from './EmployeeManagementTable';
 import UserDetailsModal from '../../common/UserDetailsModal';
 import CustomerDetailsModal from './CustomerDetailsModal';
 import EmployeeDetailsModal from './EmployeeDetailsModal';
+import AddEmployeeModal from '../../common/AddEmployeeModal';
 
 const TABS = [
   { id: 'user', labelKey: 'tabUser' },
@@ -37,6 +38,7 @@ const UserManagement = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isAddEmployeeModalOpen, setIsAddEmployeeModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -231,10 +233,7 @@ const UserManagement = () => {
             {/* Add employees button - only show on employee tab */}
             {activeTab === 'employee' && (
               <button
-                onClick={() => {
-                  // TODO: Implement add employee modal
-                  console.log('Add employee clicked');
-                }}
+                onClick={() => setIsAddEmployeeModalOpen(true)}
                 className='px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 font-medium'
               >
                 <svg
@@ -341,6 +340,17 @@ const UserManagement = () => {
           onReject={handleRejectUser}
         />
       )}
+
+      {/* Add Employee Modal */}
+      <AddEmployeeModal
+        isOpen={isAddEmployeeModalOpen}
+        onClose={() => setIsAddEmployeeModalOpen(false)}
+        onSubmit={(formData) => {
+          console.log('Employee data submitted:', formData);
+          // TODO: Add API call to create employee
+          // You can add the employee to the data array or refetch data
+        }}
+      />
     </>
   );
 };
