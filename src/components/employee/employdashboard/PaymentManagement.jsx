@@ -95,6 +95,7 @@ const handleSearch = (e) => {
 
   const handlePrevious = () => { if (currentPage > 1) setCurrentPage(prev => prev - 1); };
   const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); };
+  
 
   return (
     <div className="flex-1 p-4 md:px-12">

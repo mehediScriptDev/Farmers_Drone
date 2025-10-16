@@ -116,24 +116,20 @@ const SupportPage = () => {
     }
   };
 
-  // New useEffect to close dropdown on ALL clicks outside the table
-  // This is a more appropriate global listener for multiple dropdowns
+
   useEffect(() => {
     const handleGlobalClick = (event) => {
-      // Find the closest parent that is the table container
       const tableContainer = document.getElementById('support-table-container');
 
       if (activeDropdown !== null) {
-        // If an element is clicked and it's outside the main table container (e.g., in a modal or page background), close the dropdown
-        // This is a failsafe. A better approach is to check if the clicked element is *not* the button that opened the dropdown and *not* the dropdown itself.
-        // A simpler solution for most cases is often enough: just close if we click something outside the control/menu
+
+        // eslint-disable-next-line no-unused-vars
         const isTableClick = tableContainer && tableContainer.contains(event.target);
         const isDropdownButton = event.target.closest('.dropdown-toggle-button');
         const isDropdownMenu = event.target.closest('.dropdown-menu-content');
 
         if (!isDropdownButton && !isDropdownMenu) {
-             // To prevent closing when we click on the button of a DIFFERENT row
-            setActiveDropdown(null);
+          setActiveDropdown(null);
         }
       }
     };
@@ -192,10 +188,10 @@ const SupportPage = () => {
               {bottomContent && (
                 <div
                   className={`text-xs md:text-sm flex items-center gap-1 ${stat.change
-                      ? stat.trend === 'up'
-                        ? 'text-green-600'
-                        : 'text-red-600'
-                      : 'text-gray-500'
+                    ? stat.trend === 'up'
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                    : 'text-gray-500'
                     }`}
                 >
                   {stat.change && stat.trend === 'up' && (
@@ -258,13 +254,10 @@ const SupportPage = () => {
             <tbody className='divide-y divide-gray-200'>
               {paginatedData.length > 0 ? (
                 paginatedData.map((item, index) => {
-                  // Use the calculated global index for state management if needed, 
-                  // but local `index` is fine for pagination if you reset state on page change.
-                  // For simplicity with pagination, we'll use the local index here
-                  const dropdownIndex = index; 
-                  
+                  const dropdownIndex = index;
+
                   // Calculate if the dropdown is near the bottom of the visible items
-                  const isNearBottom = dropdownIndex >= ITEMS_PER_PAGE - 2; 
+                  const isNearBottom = dropdownIndex >= ITEMS_PER_PAGE - 2;
 
                   return (
                     <tr key={dropdownIndex} className='hover:bg-gray-50'>
@@ -307,9 +300,8 @@ const SupportPage = () => {
                             className='text-2xl dropdown-toggle-button'
                           >
                             <BiChevronDown
-                              className={`transition-transform duration-200 ${
-                                activeDropdown === dropdownIndex ? 'rotate-180' : ''
-                              }`}
+                              className={`transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''
+                                }`}
                             />
                           </button>
 
@@ -319,7 +311,7 @@ const SupportPage = () => {
                               className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 dropdown-menu-content ${
                                 // Adjusted positioning logic
                                 isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'
-                              }`}
+                                }`}
                             >
                               <button
                                 onClick={handleManageTicket}
@@ -329,8 +321,8 @@ const SupportPage = () => {
                               </button>
                               <button
                                 onClick={() => {
-                                    setShowEscalate(true);
-                                    setActiveDropdown(null); // Close dropdown when opening modal
+                                  setShowEscalate(true);
+                                  setActiveDropdown(null); // Close dropdown when opening modal
                                 }}
                                 className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors border-t border-gray-100'
                               >
@@ -380,8 +372,8 @@ const SupportPage = () => {
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                    ? 'bg-[#28A844] text-white font-medium'
-                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                  ? 'bg-[#28A844] text-white font-medium'
+                  : 'bg-gray-100 text-black hover:bg-gray-200'
                   }`}
               >
                 {number}
