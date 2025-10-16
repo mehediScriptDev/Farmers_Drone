@@ -20,10 +20,6 @@ const SupportPage = () => {
   const { t } = useTranslation();
   const ITEMS_PER_PAGE = 4;
 
-  // *** REMOVED: dropdownRef = useRef(null) ***
-
-  // *** REMOVED: useEffect for click outside logic ***
-
   // Fetch data
   useEffect(() => {
     const fetchData = async () => {
