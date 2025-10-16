@@ -67,7 +67,7 @@ const Campaigns = () => {
     <div className="md:px-12 mx-auto p-5">
       <div className="bg-white rounded-xl shadow border border-gray-100">
         <div className="flex flex-col lg:flex-row p-6 justify-between items-start ">
-          <h2 className="text-xl sm:text-2xl xl:text-3xl font-bold lg:text-left text-gray-900">
+          <h2 className="text-2xl xl:text-3xl font-bold lg:text-left text-gray-900 mb-3 lg:mb-0">
             {title}
           </h2>
           <button
@@ -164,7 +164,7 @@ const Campaigns = () => {
 
   return (
     <div className="min-h-screen bg-[#fafffd]  w-full">
-      <div className="w-full py-6">
+      <div className="w-full py-3 xl:py-6">
         {/* Seasonal Campaign Table */}
         <CampaignTable
           title="Seasonal Campaign Overview"
