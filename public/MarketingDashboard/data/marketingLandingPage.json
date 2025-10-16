@@ -113,6 +113,60 @@
       "score": 85,
       "status": "Hot",
       "date": "2025-09-25"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 95,
+      "status": "Hot",
+      "date": "2025-10-13"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 75,
+      "status": "Warm",
+      "date": "2025-10-08"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 65,
+      "status": "Cool",
+      "date": "2025-10-04"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 85,
+      "status": "Hot",
+      "date": "2025-09-30"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 65,
+      "status": "Cool",
+      "date": "2025-10-20"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 85,
+      "status": "Hot",
+      "date": "2025-09-25"
     }
   ],
   "statusStyles": {
