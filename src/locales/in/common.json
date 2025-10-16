@@ -301,6 +301,21 @@
         "noRating": "अभी कोई रेटिंग नहीं",
         "outOfRating": "5 में से",
         "showing": "{{total}} कार्यों में से {{count}} दिखा रहे हैं"
+      },
+
+      "paymentsManagement": {
+        "title": "भुगतान प्रबंधन",
+        "subtitle": "ग्राहकों और ड्रोन ऑपरेटरों के लिए भुगतान विधियों को कॉन्फ़िगर और प्रबंधित करें",
+        "tabs": {
+          "overview": "अवलोकन",
+          "customerPayments": "ग्राहक भुगतान",
+          "operatorPayments": "ऑपरेटर भुगतान"
+        },
+        "stats": {
+          "revenue": "राजस्व",
+          "activeIntegrations": "सक्रिय एकीकरण",
+          "paymentMethods": "भुगतान विधियाँ"
+        }
       }
     },
     "employee": {

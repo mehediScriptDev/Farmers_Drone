@@ -301,6 +301,21 @@
         "noRating": "No rating now",
         "outOfRating": "out of 5",
         "showing": "Showing {{count}} of {{total}} jobs"
+      },
+
+      "paymentsManagement": {
+        "title": "Payment Management",
+        "subtitle": "Configure and manage payment methods for customers and drone operators",
+        "tabs": {
+          "overview": "Overview",
+          "customerPayments": "Customer payments",
+          "operatorPayments": "Operator Payments"
+        },
+        "stats": {
+          "revenue": "Revenue",
+          "activeIntegrations": "Active Integrations",
+          "paymentMethods": "Payment Methods"
+        }
       }
     },
     "employee": {
