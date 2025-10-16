@@ -273,6 +273,34 @@
         "postalCode": "पोस्टल कोड",
         "street": "गली",
         "assignButton": "सौंपें"
+      },
+
+      "orderDetails": {
+        "title": "ऑर्डर जानकारी",
+        "subtitle": "कार्य समीक्षा करें जो सौंपे गए हैं",
+        "totalActiveJobs": "कुल सक्रिय कार्य",
+        "totalCompleteJob": "कुल पूर्ण कार्य",
+        "averageRating": "औसत रेटिंग",
+        "totalDrone": "कुल ड्रोन",
+        "outOf5": "5 में से",
+        "active": "सक्रिय",
+        "tableHeaders": {
+          "service": "सेवा",
+          "status": "स्थिति",
+          "rating": "रेटिंग",
+          "progress": "प्रगति",
+          "orderId": "ऑर्डर आईडी",
+          "location": "स्थान",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "inProgress": "प्रगति में",
+          "notStarted": "शुरू नहीं हुआ",
+          "completed": "पूर्ण"
+        },
+        "noRating": "अभी कोई रेटिंग नहीं",
+        "outOfRating": "5 में से",
+        "showing": "{{total}} कार्यों में से {{count}} दिखा रहे हैं"
       }
     },
     "employee": {

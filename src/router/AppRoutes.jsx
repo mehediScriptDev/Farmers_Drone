@@ -18,6 +18,7 @@ import UserManagement from '../components/admin/components/UserManagement';
 import UserManagementDetails from '../components/admin/components/UserManagementDetails';
 import Complaints from '../components/admin/components/Complaints';
 import AdminServices from '../components/admin/components/Services';
+import OrderDetails from '../components/admin/components/OrderDetails';
 
 // Field Agent Components
 import FieldAgentReports from '../components/fieldAgent/Reports';
@@ -111,6 +112,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'jobs',
         element: <Jobs />,
+      },
+      {
+        path: 'order-details/:operatorId',
+        element: <OrderDetails />,
       },
       {
         path: 'payments',

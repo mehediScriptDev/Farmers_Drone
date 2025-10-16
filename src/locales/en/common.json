@@ -273,6 +273,34 @@
         "postalCode": "Postal code",
         "street": "Street",
         "assignButton": "Assign"
+      },
+
+      "orderDetails": {
+        "title": "Orders info",
+        "subtitle": "Review the tasks assigned to",
+        "totalActiveJobs": "Total active Jobs",
+        "totalCompleteJob": "Total complete job",
+        "averageRating": "Average rating",
+        "totalDrone": "Total drone",
+        "outOf5": "Out of 5",
+        "active": "Active",
+        "tableHeaders": {
+          "service": "Service",
+          "status": "Status",
+          "rating": "Rating",
+          "progress": "Progress",
+          "orderId": "Order ID",
+          "location": "Location",
+          "actions": "Actions"
+        },
+        "status": {
+          "inProgress": "In progress",
+          "notStarted": "Not started",
+          "completed": "Completed"
+        },
+        "noRating": "No rating now",
+        "outOfRating": "out of 5",
+        "showing": "Showing {{count}} of {{total}} jobs"
       }
     },
     "employee": {

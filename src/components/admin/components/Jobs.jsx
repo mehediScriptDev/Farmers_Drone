@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { HiOutlineInformationCircle } from 'react-icons/hi';
 import { FiLayers } from 'react-icons/fi';
 import axiosInstance from '../../../config/axiosConfig';
@@ -9,6 +10,7 @@ import AssignJobModal from '../../common/AssignJobModal';
 
 const Jobs = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [jobsData, setJobsData] = useState(null);
   const [operators, setOperators] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -64,6 +66,10 @@ const Jobs = () => {
   const handleAssignJob = (operator) => {
     setSelectedOperator(operator);
     setIsAssignModalOpen(true);
+  };
+
+  const handleViewOrderDetails = (operator) => {
+    navigate(`/admin/order-details/${operator.id}`);
   };
 
   const handleCloseModal = () => {
@@ -237,7 +243,10 @@ const Jobs = () => {
                       >
                         <FiLayers className='w-5 h-5' />
                       </button>
-                      <button className='text-gray-600 hover:text-gray-800 transition-colors'>
+                      <button
+                        onClick={() => handleViewOrderDetails(operator)}
+                        className='text-gray-600 hover:text-gray-800 transition-colors'
+                      >
                         <HiOutlineInformationCircle className='w-5 h-5' />
                       </button>
                     </div>

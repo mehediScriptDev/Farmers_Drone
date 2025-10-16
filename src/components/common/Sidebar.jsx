@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import {
   LayoutDashboard,
@@ -14,6 +14,7 @@ import {
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
+  const location = useLocation();
 
   const menuItems = [
     {
@@ -92,14 +93,20 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           <nav className='flex-1 px-3 py-4 overflow-y-auto'>
             {menuItems.map((item) => {
               const Icon = item.icon;
+              // Check if current path matches this menu item or its sub-routes
+              const isActiveRoute =
+                (item.path === '' && location.pathname === '/admin') ||
+                (item.path !== '' &&
+                  location.pathname.includes(`/admin/${item.path}`));
+
               return (
                 <NavLink
                   key={item.id}
                   to={item.path}
                   end={item.path === ''}
-                  className={({ isActive }) =>
+                  className={() =>
                     `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
-                      isActive
+                      isActiveRoute
                         ? 'bg-white border-green-600 font-semibold shadow-sm'
                         : 'border-transparent text-black hover:bg-gray-50'
                     }`
