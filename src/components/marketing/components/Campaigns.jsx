@@ -64,15 +64,15 @@ const Campaigns = () => {
     totalItems,
     createClick,
   }) => (
-    <div className="md:px-12 mx-auto p-4">
-      <div className="bg-white rounded-lg shadow">
-        <div className="flex flex-col sm:flex-row p-6 justify-between items-center ">
-          <h2 className="text-xl lg:text-3xl font-bold text-center lg:text-left text-gray-900">
+    <div className="md:px-12 mx-auto p-5">
+      <div className="bg-white rounded-xl shadow border border-gray-100">
+        <div className="flex flex-col lg:flex-row p-6 justify-between items-start ">
+          <h2 className="text-xl sm:text-2xl xl:text-3xl font-bold lg:text-left text-gray-900">
             {title}
           </h2>
           <button
             onClick={createClick}
-            className="bg-green-500 mt-2 hover:bg-green-600 text-gray-900 px-4 py-2 rounded text-sm font-medium flex items-center"
+            className="bg-green-500 mt-2 hover:bg-green-600 text-gray-900 xl: lg:px-4 py-2 px-3 rounded text-xs lg:text-[16px] font-medium flex items-center"
           >
             <span className="mr-1">+</span> Create Campaign
           </button>
@@ -82,19 +82,19 @@ const Campaigns = () => {
           <table className="w-full lg:table-auto">
             <thead className="sticky top-0 bg-gray-100 z-10">
               <tr className="border border-gray-200">
-                <th className="px-4 py-3 w-1/4 text-left text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 w-1/4 text-left text-[16px] whitespace-nowrap font-medium text-gray-600">
                   Campaign Name
                 </th>
-                <th className="px-4 py-3 w-1/4 text-left text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 w-1/4 text-left text-[16px] whitespace-nowrap font-medium text-gray-600">
                   Campaign Type
                 </th>
-                <th className="px-4 py-3 w-1/6 text-left text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 w-1/6 text-left text-[16px] whitespace-nowrap font-medium text-gray-600">
                   Leads
                 </th>
-                <th className="px-4 py-3 w-1/6 text-left text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 w-1/6 text-left text-[16px] whitespace-nowrap font-medium text-gray-600">
                   ROI
                 </th>
-                <th className="px-4 py-3 w-1/6 text-right text-sm font-medium text-gray-600">
+                <th className="px-4 py-3 w-1/6 text-right text-[16px] whitespace-nowrap font-medium text-gray-600">
                   ACTIONS
                 </th>
               </tr>
@@ -163,7 +163,7 @@ const Campaigns = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#fafffd] w-full">
+    <div className="min-h-screen bg-[#fafffd]  w-full">
       <div className="w-full py-6">
         {/* Seasonal Campaign Table */}
         <CampaignTable

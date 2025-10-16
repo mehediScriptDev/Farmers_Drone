@@ -6,8 +6,8 @@ import Campaigns from "./Campaigns";
 const Analytics = () => {
   return (
     <div>
-      <div className="md:px-12 mx-auto my-5 py-6 px-4">
-        <div className="grid xl:grid-cols-2 gap-y-5 gap-5 bg-white shadow-md rounded-lg p-8">
+      <div className="md:px-12 mx-auto pt-5 lg:mt-6 px-4">
+        <div className="grid xl:grid-cols-2 gap-y-5  gap-5 bg-white shadow border border-gray-100 rounded-xl p-8">
           <div className="">
             <h1 className="font-semibold text-3xl text-gray-900 mb-7">
               Heatmap
@@ -29,7 +29,6 @@ const Analytics = () => {
             </div>
             <MapChart />
           </div>
-
           <div className="">
             <HighDemandRegions />
           </div>
@@ -37,6 +36,7 @@ const Analytics = () => {
       </div>
       <Campaigns />
     </div>
+    
   );
 };
 

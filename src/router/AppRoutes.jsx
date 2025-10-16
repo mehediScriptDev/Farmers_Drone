@@ -53,15 +53,18 @@ import ReportAnalysisPage from '../components/employee/employdashboard/component
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
 
-import Campaigns from './../components/marketing/Campaigns';
+
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
-import Analytics from './../components/marketing/Analytics';
+
 import axiosInstance from "../config/axiosConfig";
 import SeasonalCampaignDetails from './../components/marketing/components/SeasonalCampaignDetails';
 import LoyalityCampaingnDetails from './../components/marketing/components/LoyalityCampaingnDetails';
-import ScrollToTop from "../components/utility/ScrollToTop";
+import Campaigns from "../components/marketing/components/Campaigns";
+import Analytics from "../components/marketing/components/Analytics";
+
+
 
 const AppRoutes = createBrowserRouter([
   {
@@ -161,7 +164,7 @@ const AppRoutes = createBrowserRouter([
         element: <OrderDetailsPage />,
       },
       {
-        path: "customerspage",
+        path: "customers",
         element: <Coustomerpage />,
       },
       {

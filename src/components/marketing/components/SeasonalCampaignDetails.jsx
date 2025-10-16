@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import { ArrowLeft, Eye, MousePointer, Users, TrendingUp } from "lucide-react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
-import MapAudience from "../MapAudience";
+import MapAudience from "./MapAudience";
 
 const ChannelCard = ({
   leads,
