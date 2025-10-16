@@ -375,10 +375,12 @@
       "Showing": "दिखा रहा है",
       "Previous": "पिछला",
       "Next": "अगला",
+      "Confirm": "पुष्टि करें",
       "seasonalCampaings": "मौसमी अभियान",
       "CreateCampaign": "अभियान बनाएँ",
       "SeeDetails": "विवरण देखें",
       "LoyaltyPrograms": "निष्ठा कार्यक्रम",
+      "LaunchCampaign": "अभियान लॉन्च करें",
       "CampaignDetails": {
         "CampaignOverview": "अभियान अवलोकन",
         "Back": "वापस",
@@ -395,6 +397,53 @@
         "LeadGeneration": "लीड जनरेशन",
         "ConversionsRate": "रूपांतरण दर",
         "RIO": "आरआईओ"
+      },
+      "CampaignModal": {
+        "step_1": {
+          "CreateNewCampaign": "नया अभियान बनाएँ",
+          "Step": "चरण",
+          "Progress25Percent": "25%",
+          "SetCampaignType": "अभियान प्रकार सेट करें",
+          "BrandAwareness": "ब्रांड जागरूकता",
+          "BrandAwarenessDescription": "ब्रांड की दृश्यता और पहचान फैलाएँ",
+          "CustomerAcquisition": "ग्राहक अधिग्रहण",
+          "CustomerAcquisitionDescription": "नए ग्राहकों और लीड्स को आकर्षित करें",
+          "Retargeting": "रीटार्गेटिंग",
+          "RetargetingDescription": "मौजूदा विज़िटर्स और ग्राहकों को पुनः संलग्न करें",
+          "ReferralProgram": "रेफ़रल प्रोग्राम",
+          "ReferralProgramDescription": "विकास के लिए मौजूदा ग्राहकों की संख्या बढ़ाएँ",
+          "DefineTargetSegment": "लक्षित सेगमेंट निर्धारित करें",
+          "Operator": "ऑपरेटर",
+          "Customers": "ग्राहक",
+          "SelectTargetSegment": "लक्षित सेगमेंट चुनें"
+        },
+        "step_2": {
+          "SetCampaignGoals": "अभियान लक्ष्य सेट करें",
+          "Signups": "साइनअप्स",
+          "Bookings": "बुकिंग्स",
+          "Downloads": "डाउनलोड्स",
+          "Engagement": "सक्रियता",
+          "CampaignBudget": "अभियान बजट",
+          "EnterBudgetAmount": "बजट राशि दर्ज करें"
+        },
+        "step_3": {
+          "CampaignTitle": "अभियान शीर्षक",
+          "EnterCampaignTitle": "अभियान शीर्षक दर्ज करें",
+          "Description": "विवरण",
+          "EnterCampaignDetails": "अभियान विवरण दर्ज करें",
+          "TargetedAudience": "लक्षित दर्शक",
+          "SelectTargetSegment": "लक्षित सेगमेंट चुनें",
+          "UploadCampaignImages": "अभियान चित्र अपलोड करें",
+          "Previous": "पिछला"
+          
+        },
+        "step_4": {
+          "ChooseMarketingChannels": "मार्केटिंग चैनल चुनें",
+          "Email": "ईमेल",
+          "SMS": "एसएमएस",
+          "PushNotification": "पुश सूचनाएँ",
+          "SocialMedia": "सोशल मीडिया"
+        }
       }
     }
   },

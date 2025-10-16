@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   FaBullhorn,
   FaRetweet,
@@ -12,6 +13,7 @@ import {
 import { IoClose, IoMail, IoNotificationsOutline } from "react-icons/io5";
 
 export default function CampaignModal({ onClose }) {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [campaignType, setCampaignType] = useState("");
   const [selectedSegment, setSelectedSegment] = useState("");
@@ -28,31 +30,52 @@ export default function CampaignModal({ onClose }) {
   const objectives = [
     {
       icon: <FaBullhorn className="w-5 h-5 text-black" />,
-      title: "Brand Awareness",
-      description: "Spread brand visibility and recognition",
+      title: t("dashboard.marketing.CampaignModal.step_1.BrandAwareness"),
+      description: t(
+        "dashboard.marketing.CampaignModal.step_1.BrandAwarenessDescription"
+      ),
     },
     {
       icon: <FaUserFriends className="w-5 h-5 text-black" />,
-      title: "Customer Acquisition",
-      description: "Attract new customers and leads",
+      title: t("dashboard.marketing.CampaignModal.step_1.CustomerAcquisition"),
+      description: t(
+        "dashboard.marketing.CampaignModal.step_1.CustomerAcquisitionDescription"
+      ),
     },
     {
       icon: <FaRetweet className="w-5 h-5 text-black" />,
-      title: "Retargeting",
-      description: "Re-engage existing visitors and customers",
+      title: t("dashboard.marketing.CampaignModal.step_1.Retargeting"),
+
+      description: t(
+        "dashboard.marketing.CampaignModal.step_1.RetargetingDescription"
+      ),
     },
     {
       icon: <FaShare className="w-5 h-5 text-black" />,
-      title: "Referral Program",
-      description: "Increase existing customers for growth",
+      title: t("dashboard.marketing.CampaignModal.step_1.ReferralProgram"),
+      description: t(
+        "dashboard.marketing.CampaignModal.step_1.ReferralProgramDescription"
+      ),
     },
   ];
 
   const goals = [
-    { id: "signups", label: "Signups" },
-    { id: "bookings", label: "Bookings" },
-    { id: "downloads", label: "Downloads" },
-    { id: "engagement", label: "Engagement" },
+    {
+      id: "signups",
+      label: t("dashboard.marketing.CampaignModal.step_2.Signups"),
+    },
+    {
+      id: "bookings",
+      label: t("dashboard.marketing.CampaignModal.step_2.Bookings"),
+    },
+    {
+      id: "downloads",
+      label: t("dashboard.marketing.CampaignModal.step_2.Downloads"),
+    },
+    {
+      id: "engagement",
+      label: t("dashboard.marketing.CampaignModal.step_2.Engagement"),
+    },
   ];
   const toggleChannel = (channel) => {
     setSelectedChannels((prev) =>
@@ -134,7 +157,9 @@ export default function CampaignModal({ onClose }) {
             {/* Header */}
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold text-black">
-                Create New Campaign
+                {t(
+                  "dashboard.marketing.CampaignModal.step_1.CreateNewCampaign"
+                )}
               </h2>
               <button
                 onClick={handleClose}
@@ -153,15 +178,21 @@ export default function CampaignModal({ onClose }) {
                 ></div>
               </div>
               <div className="flex justify-between mt-2 text-xs">
-                <span>Step 1 of 4</span>
-                <span>25%</span>
+                <span>
+                  {t("dashboard.marketing.CampaignModal.step_1.Step")} 1 of 4
+                </span>
+                <span>
+                  {t(
+                    "dashboard.marketing.CampaignModal.step_1.Progress25Percent"
+                  )}
+                </span>
               </div>
             </div>
 
             {/* Content */}
             <div className="p-4">
               <h3 className="font-semibold mb-4 text-base md:text-lg">
-                Set Campaign Type
+                {t("dashboard.marketing.CampaignModal.step_1.SetCampaignType")}
               </h3>
               <div className="grid grid-cols-2 gap-3 mb-6">
                 {objectives.map((obj, i) => (
@@ -186,7 +217,9 @@ export default function CampaignModal({ onClose }) {
               {/* Target Segment */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Define Target Segment
+                  {t(
+                    "dashboard.marketing.CampaignModal.step_1.DefineTargetSegment"
+                  )}
                 </label>
                 <div className="relative">
                   <select
@@ -194,9 +227,17 @@ export default function CampaignModal({ onClose }) {
                     onChange={(e) => setSelectedSegment(e.target.value)}
                     className="w-full px-3 py-2 border rounded-lg text-sm appearance-none"
                   >
-                    <option value="">Select target segment</option>
-                    <option value="Customers">Customers</option>
-                    <option value="Operator">Operator</option>
+                    <option value="">
+                      {t(
+                        "dashboard.marketing.CampaignModal.step_1.SelectTargetSegment"
+                      )}
+                    </option>
+                    <option value="Customers">
+                      {t("dashboard.marketing.CampaignModal.step_1.Operator")}
+                    </option>
+                    <option value="Operator">
+                      {t("dashboard.marketing.CampaignModal.step_1.Customers")}
+                    </option>
                   </select>
                   <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ">
                     <FaChevronDown />
@@ -212,7 +253,7 @@ export default function CampaignModal({ onClose }) {
                 onClick={handleNext}
                 className="px-6 py-2 text-sm font-medium text-white bg-[#FFC107] rounded-lg hover:bg-yellow-500"
               >
-                Next
+                {t("dashboard.marketing.Next")}
               </button>
             </div>
           </div>
@@ -224,7 +265,9 @@ export default function CampaignModal({ onClose }) {
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
-                Create New Campaign
+                {t(
+                  "dashboard.marketing.CampaignModal.step_1.DefineTargetSegment"
+                )}
               </h2>
               <button
                 onClick={handleClose}
@@ -243,7 +286,9 @@ export default function CampaignModal({ onClose }) {
                 ></div>
               </div>
               <div className="flex justify-between mt-2 text-sm">
-                <span>Step 2 of 4</span>
+                <span>
+                  {t("dashboard.marketing.CampaignModal.step_1.Step")} 2 of 4
+                </span>
                 <span className="text-base">50%</span>
               </div>
             </div>
@@ -251,7 +296,7 @@ export default function CampaignModal({ onClose }) {
             {/* Content */}
             <div className="p-4">
               <h3 className="font-semibold text-base md:text-lg mb-4">
-                Set campaign Goals
+                {t("dashboard.marketing.CampaignModal.step_2.SetCampaignGoals")}
               </h3>
 
               <div className="grid grid-cols-2 gap-3 mb-6">
@@ -272,13 +317,15 @@ export default function CampaignModal({ onClose }) {
 
               <div>
                 <label className="block text-sm font-semibold mb-2">
-                  Campaign Budget
+                  {t("dashboard.marketing.CampaignModal.step_2.CampaignBudget")}
                 </label>
                 <input
                   type="text"
                   value={budget}
                   onChange={(e) => setBudget(e.target.value)}
-                  placeholder="Enter budget amount"
+                  placeholder={t(
+                    "dashboard.marketing.CampaignModal.step_2.EnterBudgetAmount"
+                  )}
                   className="w-full px-3 py-2 border rounded-lg text-sm "
                 />
               </div>
@@ -292,13 +339,13 @@ export default function CampaignModal({ onClose }) {
                 onClick={handlePrevious}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 flex justify-center items-center gap-1"
               >
-                <FaAngleLeft /> <span>Previous</span>
+                <FaAngleLeft /> <span>{t("dashboard.marketing.Previous")}</span>
               </button>
               <button
                 onClick={handleNext}
                 className="px-6 py-2 text-sm font-medium text-gray-900 bg-yellow-400 rounded-lg hover:bg-yellow-500"
               >
-                Next
+                {t("dashboard.marketing.Next")}
               </button>
             </div>
           </div>
@@ -310,7 +357,9 @@ export default function CampaignModal({ onClose }) {
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
-                Create New Campaign
+                {t(
+                  "dashboard.marketing.CampaignModal.step_1.CreateNewCampaign"
+                )}
               </h2>
               <button
                 onClick={handleClose}
@@ -329,7 +378,9 @@ export default function CampaignModal({ onClose }) {
                 ></div>
               </div>
               <div className="flex justify-between mt-2 text-sm">
-                <span>Step 3 of 4</span>
+                <span>
+                  {t("dashboard.marketing.CampaignModal.step_1.Step")} 3 of 4
+                </span>
                 <span className="text-base lg:text-lg">75%</span>
               </div>
             </div>
@@ -338,7 +389,7 @@ export default function CampaignModal({ onClose }) {
             <div className="p-4">
               {/* Campaign Title */}
               <h3 className="font-semibold text-base md:text-lg mb-2">
-                Campaign Title
+                {t("dashboard.marketing.CampaignModal.step_3.CampaignTitle")}
               </h3>
               <input
                 type="text"
@@ -347,7 +398,9 @@ export default function CampaignModal({ onClose }) {
                   setCampaignTitle(e.target.value);
                   setError("");
                 }}
-                placeholder="Enter campaign title"
+                placeholder={t(
+                  "dashboard.marketing.CampaignModal.step_3.EnterCampaignTitle"
+                )}
                 className="w-full px-3 py-2 border rounded-lg text-sm mb-2 bg-[#FAFAFA]"
               />
               {error.includes("title") && (
@@ -356,7 +409,7 @@ export default function CampaignModal({ onClose }) {
 
               {/* Description */}
               <h3 className="font-semibold text-base md:text-lg mb-2">
-                Description
+                {t("dashboard.marketing.CampaignModal.step_3.Description")}
               </h3>
               <textarea
                 value={description}
@@ -364,7 +417,9 @@ export default function CampaignModal({ onClose }) {
                   setDescription(e.target.value);
                   setError("");
                 }}
-                placeholder="Enter campaign details"
+                placeholder={t(
+                  "dashboard.marketing.CampaignModal.step_3.EnterCampaignDetails"
+                )}
                 rows="4"
                 className="w-full px-3 py-2 border rounded-lg text-sm resize-none mb-2 bg-[#FAFAFA]"
               ></textarea>
@@ -374,7 +429,7 @@ export default function CampaignModal({ onClose }) {
 
               {/* Target Audience */}
               <h3 className="font-semibold text-base md:text-lg mb-2">
-                Targeted Audience
+                {t("dashboard.marketing.CampaignModal.step_3.TargetedAudience")}
               </h3>
               <div className="relative mb-2">
                 <select
@@ -385,9 +440,17 @@ export default function CampaignModal({ onClose }) {
                   }}
                   className="w-full px-3 py-2 border rounded-lg text-sm appearance-none"
                 >
-                  <option value="">Select target segment</option>
-                  <option value="Customers">Customers</option>
-                  <option value="Operator">Operator</option>
+                  <option value="">
+                    {t(
+                      "dashboard.marketing.CampaignModal.step_3.SelectTargetSegment"
+                    )}
+                  </option>
+                  <option value="Customers">
+                    {t("dashboard.marketing.CampaignModal.step_1.Operator")}
+                  </option>
+                  <option value="Operator">
+                    {t("dashboard.marketing.CampaignModal.step_1.Customers")}
+                  </option>
                 </select>
                 <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                   <FaChevronDown />
@@ -425,7 +488,9 @@ export default function CampaignModal({ onClose }) {
                         <FaCamera />
                       </div>
                       <p className="text-xs text-gray-600">
-                        Upload campaign images
+                        {t(
+                          "dashboard.marketing.CampaignModal.step_3.UploadCampaignImages"
+                        )}
                       </p>
                     </label>
                     {campaignImages[num - 1] && (
@@ -449,13 +514,13 @@ export default function CampaignModal({ onClose }) {
                 onClick={handlePrevious}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 flex justify-center items-center gap-1"
               >
-                <FaAngleLeft /> <span>Previous</span>
+                <FaAngleLeft /> <span>{t("dashboard.marketing.Previous")}</span>
               </button>
               <button
                 onClick={handleNext}
                 className="px-6 py-2 text-sm font-medium text-gray-900 bg-yellow-400 rounded-lg hover:bg-yellow-500"
               >
-                Confirm
+                {t("dashboard.marketing.Confirm")}
               </button>
             </div>
           </div>
@@ -467,7 +532,9 @@ export default function CampaignModal({ onClose }) {
           <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
-                Create New Campaign
+                {t(
+                  "dashboard.marketing.CampaignModal.step_1.CreateNewCampaign"
+                )}
               </h2>
               <button
                 onClick={handleClose}
@@ -486,7 +553,9 @@ export default function CampaignModal({ onClose }) {
                 ></div>
               </div>
               <div className="flex justify-between mt-2 text-sm">
-                <span>Step 4 of 4</span>
+                <span>
+                  {t("dashboard.marketing.CampaignModal.step_1.Step")} 4 of 4
+                </span>
                 <span className="text-base lg:text-lg">100%</span>
               </div>
             </div>
@@ -494,7 +563,9 @@ export default function CampaignModal({ onClose }) {
             {/* Content */}
             <div className="p-4">
               <h3 className="font-semibold text-base md:text-lg mb-4">
-                Choose Marketing Channels
+                {t(
+                  "dashboard.marketing.CampaignModal.step_4.ChooseMarketingChannels"
+                )}
               </h3>
 
               <div className="grid grid-cols-2 gap-3">
@@ -508,7 +579,9 @@ export default function CampaignModal({ onClose }) {
                   }`}
                 >
                   <IoMail className="w-6 h-6" />
-                  <span className="text-sm font-medium">Email</span>
+                  <span className="text-sm font-medium">
+                    {t("dashboard.marketing.CampaignModal.step_4.Email")}
+                  </span>
                 </button>
 
                 {/* SMS */}
@@ -521,7 +594,9 @@ export default function CampaignModal({ onClose }) {
                   }`}
                 >
                   <FaSms className="w-6 h-6" />
-                  <span className="text-sm font-medium">SMS</span>
+                  <span className="text-sm font-medium">
+                    {t("dashboard.marketing.CampaignModal.step_4.SMS")}
+                  </span>
                 </button>
 
                 {/* Push Notification */}
@@ -534,7 +609,11 @@ export default function CampaignModal({ onClose }) {
                   }`}
                 >
                   <IoNotificationsOutline className="w-6 h-6" />
-                  <span className="text-sm font-medium">Push Notification</span>
+                  <span className="text-sm font-medium">
+                    {t(
+                      "dashboard.marketing.CampaignModal.step_4.PushNotification"
+                    )}
+                  </span>
                 </button>
 
                 {/* Social Media */}
@@ -547,7 +626,9 @@ export default function CampaignModal({ onClose }) {
                   }`}
                 >
                   <FaShare className="w-6 h-6" />
-                  <span className="text-sm font-medium">Social Media</span>
+                  <span className="text-sm font-medium">
+                    {t("dashboard.marketing.CampaignModal.step_4.SocialMedia")}
+                  </span>
                 </button>
               </div>
 
@@ -560,13 +641,16 @@ export default function CampaignModal({ onClose }) {
                 onClick={handlePrevious}
                 className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 flex justify-center items-center gap-1"
               >
-                <FaAngleLeft /> <span>Previous</span>
+                <FaAngleLeft />{" "}
+                <span>
+                  {t("dashboard.marketing.Previous")}
+                </span>
               </button>
               <button
                 onClick={handleLaunchCampaign}
                 className="px-6 py-2 text-sm font-medium text-gray-900 bg-yellow-400 rounded-lg hover:bg-yellow-500 flex items-center gap-2"
               >
-                <span>Launch Campaign</span>
+                <span>{t("dashboard.marketing.LaunchCampaign")}</span>
                 <span>→</span>
               </button>
             </div>
