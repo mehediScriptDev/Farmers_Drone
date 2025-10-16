@@ -2,6 +2,7 @@
 import { MdClose } from "react-icons/md";
 import { FiTrash2 } from "react-icons/fi";
 import { FaPlus } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const AutomationModal = ({
   isOpen,
@@ -10,9 +11,10 @@ const AutomationModal = ({
   onToggle,
   onDelete,
   onAddRule,
-  headerTitle = "if lead is hot",
-  headerSubtext = "3 of 4 rules active",
 }) => {
+  const { t } = useTranslation();
+  // Avoid calling `t` in default props (it's undefined during parameter initialization)
+
   if (!isOpen) return null;
 
   return (
@@ -22,10 +24,10 @@ const AutomationModal = ({
         <div className="flex items-center justify-between p-4 md:p-5 border-gray-200">
           <div>
             <h2 className="text-base md:text-lg font-semibold text-gray-900">
-              {headerTitle}
+              {t("dashboard.marketing.AutomationModal.IfLeadIsHot")}
             </h2>
             <p className="text-xs md:text-sm text-gray-500 mt-0.5">
-              {headerSubtext}
+              {t("dashboard.marketing.AutomationModal.ThreeOfFourRulesActive")}
             </p>
           </div>
           <button
@@ -36,6 +38,7 @@ const AutomationModal = ({
             <MdClose size={24} />
           </button>
         </div>
+        {console.log(automationSettings)}
 
         {/* Body */}
         <div className="flex-1 overflow-y-auto p-4 md:p-5">
@@ -48,10 +51,14 @@ const AutomationModal = ({
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-sm md:text-base font-medium text-gray-900 mb-1">
-                      {setting.title}
+                      {t(
+                        "dashboard.marketing.AutomationModal.AutomationSettings"
+                      )}
                     </h3>
                     <p className="text-xs md:text-sm text-gray-500">
-                      {setting.subtext}
+                      {t(
+                        "dashboard.marketing.AutomationModal.ThreeOfFourRulesActive"
+                      )}
                     </p>
                   </div>
 
@@ -67,7 +74,9 @@ const AutomationModal = ({
                       <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-500"></div>
                     </label>
                     <span className="text-xs md:text-sm text-gray-500 min-w-[60px]">
-                      {setting.enabled ? "Enabled" : "Disabled"}
+                      {setting.enabled
+                        ? t("dashboard.marketing.AutomationModal.Enabled")
+                        : t("dashboard.marketing.AutomationModal.Disabled")}
                     </span>
 
                     {/* Delete */}

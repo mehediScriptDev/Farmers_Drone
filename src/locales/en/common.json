@@ -387,6 +387,13 @@
         "ConversionsRate": "Conversions Rate",
         "RIO": "RIO"
       },
+      "AutomationModal": {
+        "Enabled": "Enabled",
+        "ThreeOfFourRulesActive": "3 of 4 rules active",
+        "IfLeadIsHot": "if lead is hot",
+        "Disabled": "Disabled",
+        "AutomationSettings": "Automation Settings"
+      },
       "CampaignModal": {
         "step_1": {
           "CreateNewCampaign": "Create New Campaign",

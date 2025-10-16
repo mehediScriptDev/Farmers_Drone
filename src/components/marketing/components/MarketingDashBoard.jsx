@@ -10,7 +10,7 @@ import SalesSequenceModal from "./modals/SalesSequenceModal";
 // NEW: extracted components
 import LeadStatusDropdown from "./LeadStatusDropdown";
 import LeadsTable from "./LeadsTable";
-import Pagination from "../../common/Pagination";
+import Pagination from "./Pagination";
 import AutomationModal from "./modals/AutomationModal ";
 import { useTranslation } from "react-i18next";
 

@@ -398,6 +398,13 @@
         "ConversionsRate": "रूपांतरण दर",
         "RIO": "आरआईओ"
       },
+      "AutomationModal": {
+        "Enabled": "सक्रिय",
+        "ThreeOfFourRulesActive": "4 में से 3 नियम सक्रिय हैं",
+        "IfLeadIsHot": "यदि लीड गरम है",
+        "Disabled": "असक्रिय",
+        "AutomationSettings": "स्वचालन सेटिंग्स"
+      },
       "CampaignModal": {
         "step_1": {
           "CreateNewCampaign": "नया अभियान बनाएँ",
@@ -435,7 +442,6 @@
           "SelectTargetSegment": "लक्षित सेगमेंट चुनें",
           "UploadCampaignImages": "अभियान चित्र अपलोड करें",
           "Previous": "पिछला"
-          
         },
         "step_4": {
           "ChooseMarketingChannels": "मार्केटिंग चैनल चुनें",

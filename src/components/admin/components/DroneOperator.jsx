@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { HiOutlineSearch } from 'react-icons/hi';
 import axiosInstance from '../../../config/axiosConfig';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
-import Pagination from '../../common/Pagination';
+import Pagination from '../../marketing/components/Pagination';
 import DroneOperatorTable from './DroneOperatorTable';
 
 const TABS = [
