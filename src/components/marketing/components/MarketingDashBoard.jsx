@@ -11,6 +11,7 @@ import SalesSequenceModal from "./modals/SalesSequenceModal";
 import LeadStatusDropdown from "./LeadStatusDropdown";
 import LeadsTable from "./LeadsTable";
 import Pagination from "./Pagination";
+import AutomationModal from "./modals/AutomationModal ";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -47,7 +48,6 @@ const MarketingDashBoard = () => {
     startIndex,
     startIndex + rowsPerPage
   );
-  const location = useLocation();
 
   useEffect(() => {
     const updateCardsPerPage = () => {
@@ -67,7 +67,9 @@ const MarketingDashBoard = () => {
           "/MarketingDashboard/data/marketingLandingPage.json"
         );
         setActivities(data.activities);
-        setAutomationSettings(data.automationSettings);
+        setAutomationSettings(
+          Array.isArray(data.automationSettings) ? data.automationSettings : []
+        );
         setStats(data.stats);
         setStatusStyles(data.statusStyles);
         setLeads(data.leads);
@@ -106,6 +108,33 @@ const MarketingDashBoard = () => {
   };
 
   const getTotalPages = (data) => Math.ceil(data.length / cardsPerPage);
+
+  // Automation function
+  const handleToggleAutomation = (id) => {
+    setAutomationSettings((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, enabled: !s.enabled } : s))
+    );
+  };
+
+  const handleDeleteAutomation = (id) => {
+    setAutomationSettings((prev) => prev.filter((s) => s.id !== id));
+  };
+
+  const handleAddAutomationRule = () => {
+    const nextId =
+      automationSettings.length > 0
+        ? Math.max(...automationSettings.map((s) => s.id)) + 1
+        : 1;
+    setAutomationSettings((prev) => [
+      ...prev,
+      {
+        id: nextId,
+        title: "Automation Settings",
+        subtext: "3 of 4 rules active",
+        enabled: false,
+      },
+    ]);
+  };
 
   const seasonalCampaigns = getPaginatedData(
     allSeasonalCampaigns,
@@ -261,9 +290,9 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-4 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
             >
-              <FaPlus size={20} />
+              <FaPlus size={16} />
               Create Campaign
             </button>
           </div>
@@ -312,9 +341,9 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-4 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
             >
-              <FaPlus size={20} />
+              <FaPlus size={16} />
               Create Campaign
             </button>
           </div>
@@ -355,7 +384,16 @@ const MarketingDashBoard = () => {
           />
         </div>
       </div>
-
+      <AutomationModal
+        isOpen={isAutomationModalOpen}
+        onClose={() => setIsAutomationModalOpen(false)}
+        automationSettings={automationSettings}
+        onToggle={handleToggleAutomation}
+        onDelete={handleDeleteAutomation}
+        onAddRule={handleAddAutomationRule}
+        headerTitle="if lead is hot"
+        headerSubtext="3 of 4 rules active"
+      />
       {campaignModal && (
         <CampaignModal onClose={() => setCampaignModal(false)} />
       )}
