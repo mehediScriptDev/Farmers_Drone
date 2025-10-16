@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { HiOutlineChevronUp } from "react-icons/hi";
 
 const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const options = [
-    { label: "All Leads", value: "All" },
-    { label: "Hot", value: "Hot" },
-    { label: "Warm", value: "Warm" },
-    { label: "Cool", value: "Cool" },
+    { label: t("dashboard.marketing.AllLeads"), value: "All" },
+    { label: t("dashboard.marketing.Hot"), value: "Hot" },
+    { label: t("dashboard.marketing.Warm"), value: "Warm" },
+    { label: t("dashboard.marketing.Cool"), value: "Cool" },
   ];
 
   const handleSelect = (value) => {

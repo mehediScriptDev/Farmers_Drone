@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaChevronDown, FaPlus } from "react-icons/fa";
 import { HiCursorClick } from "react-icons/hi";
 import { FaArrowTrendUp, FaDollarSign } from "react-icons/fa6";
@@ -12,6 +12,7 @@ import LeadStatusDropdown from "./LeadStatusDropdown";
 import LeadsTable from "./LeadsTable";
 import Pagination from "./Pagination";
 import AutomationModal from "./modals/AutomationModal ";
+import { useTranslation } from "react-i18next";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -20,6 +21,8 @@ const iconMap = {
 };
 
 const MarketingDashBoard = () => {
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const [isAutomationModalOpen, setIsAutomationModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -48,7 +51,12 @@ const MarketingDashBoard = () => {
     startIndex,
     startIndex + rowsPerPage
   );
-
+  const statstTitle = [
+    t("dashboard.marketing.clickRate"),
+    t("dashboard.marketing.ConversionRate"),
+    t("dashboard.marketing.CustomerAcquisitionCost"),
+    t("dashboard.marketing.RIO"),
+  ];
   useEffect(() => {
     const updateCardsPerPage = () => {
       if (window.innerWidth < 768) setCardsPerPage(1);
@@ -151,17 +159,15 @@ const MarketingDashBoard = () => {
         <div className="mb-1 md:mb-6 flex flex-col md:flex-row justify-between">
           <div>
             <h1 className="!text-xl md:!text-4xl font-bold text-[#002244]">
-              Marketing Dashboard
+              {t("dashboard.marketing.title")}
             </h1>
-            <p className="text-xs md:text-base text-[#464646]">
-              Monitor your customer service performance
-            </p>
+            <p className="text-xs md:text-base text-[#464646]"></p>
           </div>
         </div>
 
         <div className="pb-3 md:pb-5">
           <h2 className="text-sm md:!text-xl font-normal text-gray-700">
-            Last 30 days overview
+            {t("dashboard.marketing.daysOverview")}
           </h2>
         </div>
 
@@ -171,9 +177,9 @@ const MarketingDashBoard = () => {
             onChange={(e) => setSelectedPeriod(e.target.value)}
             className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A] appearance-none"
           >
-            <option value="7">Last 7 days</option>
-            <option value="30">Last 30 days</option>
-            <option value="90">Last 90 days</option>
+            <option value="7">{t("dashboard.marketing.last_7_days")}</option>
+            <option value="30">{t("dashboard.marketing.last_30_days")}</option>
+            <option value="90">{t("dashboard.marketing.last_90_days")}</option>
           </select>
           <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
             <FaChevronDown />
@@ -190,7 +196,7 @@ const MarketingDashBoard = () => {
                 className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between gap-3"
               >
                 <div className="text-gray-500 text-sm font-medium">
-                  {stat.label}
+                  {statstTitle[index]}
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-2xl md:text-3xl font-semibold text-gray-900">
@@ -226,10 +232,10 @@ const MarketingDashBoard = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <div className="md:text-center lg:text-left">
                 <h2 className="text-lg md:text-2xl font-bold text-[#464646]">
-                  Lead Management
+                  {t("dashboard.marketing.LeadManagement")},
                 </h2>
                 <h3 className="text-[#464646]">
-                  Track and nurture your marketing leads
+                  {t("dashboard.marketing.TrackAndNurtureYourMarketingLeads")},
                 </h3>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 md:mx-auto lg:mx-0">
@@ -241,13 +247,13 @@ const MarketingDashBoard = () => {
                   onClick={() => setOpen(true)}
                   className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
                 >
-                  Export Leads
+                  {t("dashboard.marketing.ExportLeads")}
                 </button>
                 <button
                   onClick={() => setIsAutomationModalOpen(true)}
                   className="px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center gap-1"
                 >
-                  Automation
+                  {t("dashboard.marketing.Automation")}
                 </button>
               </div>
             </div>
@@ -263,9 +269,9 @@ const MarketingDashBoard = () => {
           {/* Footer */}
           <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-xs md:text-sm text-gray-600">
-              Showing {startIndex + 1} to{" "}
+              {t("dashboard.marketing.Showing")} {startIndex + 1} to{" "}
               {Math.min(startIndex + rowsPerPage, filteredActivities.length)} of{" "}
-              {filteredActivities.length} results
+              {filteredActivities.length} {t("dashboard.marketing.Results")}
             </div>
             <Pagination
               variant="ellipsis"
@@ -285,15 +291,15 @@ const MarketingDashBoard = () => {
         {/* Seasonal Campaigns */}
         <div className="my-4 md:my-12 bg-white p-3 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
-              Seasonal campaigns
+            <h2 className="text-lg md:text-2xl font-bold text-gray-800 w-1/2">
+              {t("dashboard.marketing.seasonalCampaings")}
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
               className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
-              Create Campaign
+              {t("dashboard.marketing.CreateCampaign")}
             </button>
           </div>
 
@@ -317,7 +323,7 @@ const MarketingDashBoard = () => {
                   </p>
                   <Link to={`campaigns/seasonal/${campaign.id}`}>
                     <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
-                      See Details
+                      {t("dashboard.marketing.SeeDetails")}
                     </button>
                   </Link>
                 </div>
@@ -336,15 +342,15 @@ const MarketingDashBoard = () => {
         {/* Loyalty Programs */}
         <div className="my-4 md:my-6 bg-white p-3 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-bold text-gray-800 w-1/2">
-              Loyalty programs
+            <h2 className="text-lg   md:text-2xl font-bold text-gray-800 w-1/2">
+              {t("dashboard.marketing.LoyaltyPrograms")}
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
               className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
-              Create Campaign
+              {t("dashboard.marketing.CreateCampaign")}
             </button>
           </div>
 
@@ -368,7 +374,7 @@ const MarketingDashBoard = () => {
                   </p>
                   <Link to={`campaigns/loyality/${program.id}`}>
                     <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
-                      See Details
+                      {t("dashboard.marketing.SeeDetails")}
                     </button>
                   </Link>
                 </div>

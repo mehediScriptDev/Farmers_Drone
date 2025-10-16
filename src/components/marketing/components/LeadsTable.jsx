@@ -1,31 +1,33 @@
+import { useTranslation } from "react-i18next";
 import { FaRegClock } from "react-icons/fa";
 
 const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
+  const { t } = useTranslation();
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-max">
         <thead className="bg-gray-50 border-b border-gray-200">
           <tr>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Lead
+              {t("dashboard.marketing.Lead")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Contact
+              {t("dashboard.marketing.Contact")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Source
+              {t("dashboard.marketing.Source")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Location
+              {t("dashboard.marketing.Location")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Score
+              {t("dashboard.marketing.Score")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Status
+              {t("dashboard.marketing.Status")}
             </th>
             <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
-              Action
+              {t("dashboard.marketing.Action")}
             </th>
           </tr>
         </thead>

@@ -1,4 +1,5 @@
 // src/components/ui/Pagination.jsx
+import { useTranslation } from "react-i18next";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const Pagination = ({
@@ -6,10 +7,17 @@ const Pagination = ({
   totalPages = 0,
   onPageChange = () => {},
   variant = "ellipsis", // "ellipsis" | "full" | "simple"
-  labels = { prev: "Previous", next: "Next" },
+  labels = {},
   showCount, // optional: { current: number, total: number, prefix?: string, label?: string }
   className = "",
 }) => {
+  const { t } = useTranslation();
+  const mergedLabels = {
+    prev: t("dashboard.marketing.Previous"),
+    next: t("dashboard.marketing.Next", "Next"),
+    ...labels,
+  };
+
   const getPageNumbersFull = () => {
     const pages = [];
     if (totalPages <= 5) {
@@ -98,7 +106,7 @@ const Pagination = ({
         disabled={currentPage === 1}
         className={btnClass}
       >
-        {labels.prev}
+        {mergedLabels.prev}
       </button>
       {pagesUI}
       <button
@@ -106,20 +114,17 @@ const Pagination = ({
         disabled={currentPage === totalPages || totalPages === 0}
         className={btnClass}
       >
-        {labels.next}
+        {mergedLabels.next}
       </button>
     </div>
   );
 
   // Layout wrapper with optional "Showing" text (Field Agent style)
   const Layout = ({ children }) => (
-    <div className={`py-4 md:py-6 ${className}`}>
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-b border-gray-200 pb-2 md:pb-3">
+    <div className={` md:py-6 ${className}`}>
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-1 md:gap-3 lg:gap-4  border-gray-200 pb-2 md:pb-3">
         {showCount ? (
-          <p className="text-sm text-black px-4 md:px-6">
-            {showCount.prefix || "Showing"} {showCount.current} of{" "}
-            {showCount.total} {showCount.label || "results"}
-          </p>
+          <p className="text-sm text-black px-4 md:px-6"></p>
         ) : (
           <span className="sr-only">pagination</span>
         )}
@@ -163,7 +168,7 @@ const Pagination = ({
         <button
           onClick={goPrev}
           disabled={currentPage === 1}
-          className="p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-1 bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <IoIosArrowBack size={20} />
         </button>
@@ -176,7 +181,7 @@ const Pagination = ({
         <button
           onClick={goNext}
           disabled={currentPage === totalPages}
-          className="p-1 hover:bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
+          className="p-1 bg-gray-100 rounded disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <IoIosArrowForward size={20} />
         </button>
