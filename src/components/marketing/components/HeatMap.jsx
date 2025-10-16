@@ -1,5 +1,5 @@
 import React from 'react';
-import MapChart from '../MapChart';
+import MapChart from './MapChart';
 
 const HeatMap = () => {
     return (

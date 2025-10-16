@@ -1,6 +1,6 @@
 import React from "react";
 import MapChart from "./MapChart";
-import HighDemandRegions from "./components/HighDemandRegions";
+import HighDemandRegions from "./HighDemandRegions";
 import Campaigns from "./Campaigns";
 
 const Analytics = () => {

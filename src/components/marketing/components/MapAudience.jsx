@@ -1,5 +1,5 @@
-import HeatMap from "./components/HeatMap";
-import TargetedAudience from "./components/TargetedAudience";
+import HeatMap from "./HeatMap";
+import TargetedAudience from "./TargetedAudience";
 
 const MapAudience = () => {
     return (

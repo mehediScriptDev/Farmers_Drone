@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from '../common/Header';
-import Sidebar from './SideBar';
+import { Header } from '../../common/Header';
+import Sidebar from '../SideBar';
 
 
 export const MarketingDashboardLayout = () => {
