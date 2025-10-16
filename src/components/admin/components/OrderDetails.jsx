@@ -86,7 +86,7 @@ const OrderDetails = () => {
 
   return (
     <div className='min-h-screen bg-[#fafffd] w-full overflow-auto'>
-      <div className='max-w-[1400px] mx-auto px-8 py-8'>
+      <div className='w-full px-6 xl:px-11 py-3 lg:py-6'>
         {/* Back Button */}
         <div className='w-full mb-8'>
           <button
@@ -102,10 +102,10 @@ const OrderDetails = () => {
           {orderData?.stats.map((stat, index) => (
             <div
               key={index}
-              className='p-5 bg-white rounded-lg border border-zinc-100 inline-flex flex-col justify-center items-center gap-2.5'
+              className='p-6 bg-white rounded-lg border border-zinc-100 inline-flex flex-col justify-center items-center gap-3'
             >
-              <div className='w-32 inline-flex flex-col justify-center items-center gap-2'>
-                <div className='self-stretch text-center text-gray-800 text-xs font-normal font-["Lato"] leading-none'>
+              <div className='w-full inline-flex flex-col justify-center items-center gap-2'>
+                <div className='self-stretch text-center text-gray-700 text-sm font-medium font-["Lato"] leading-tight'>
                   {t(
                     `dashboard.admin.orderDetails.${stat.label.replace(
                       / /g,
@@ -113,10 +113,10 @@ const OrderDetails = () => {
                     )}`
                   )}
                 </div>
-                <div className='self-stretch text-center text-gray-800 text-2xl font-semibold font-["Poppins"] leading-9'>
+                <div className='self-stretch text-center text-gray-900 text-3xl font-semibold font-["Poppins"] leading-tight'>
                   {stat.value}
                 </div>
-                <div className='text-center text-green-500 text-xs font-normal font-["Lato"] leading-none'>
+                <div className='text-center text-green-500 text-sm font-normal font-["Lato"] leading-tight'>
                   {stat.change}
                 </div>
               </div>
@@ -125,7 +125,7 @@ const OrderDetails = () => {
         </div>
 
         {/* Orders Table */}
-        <div className='w-full flex flex-col gap-10'>
+        <div className='w-full flex flex-col gap-6'>
           <div className='flex flex-col gap-1'>
             <div className='text-neutral-950 text-2xl font-semibold font-["Poppins"] leading-9'>
               {t('dashboard.admin.orderDetails.title')}
@@ -140,154 +140,124 @@ const OrderDetails = () => {
             </div>
           </div>
 
-          <div className='w-full py-10 bg-white rounded-lg border border-zinc-100'>
-            <div className='self-stretch flex flex-col justify-start items-center gap-8'>
-              <div className='w-full flex flex-col'>
-                {/* Table Header */}
-                <div className='w-full h-14 px-4 bg-gray-50 border-t border-b border-gray-100 flex justify-between items-center'>
-                  <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+          <div className='bg-white rounded-lg shadow-sm'>
+            <div className='overflow-x-auto'>
+              <table className='w-full table-fixed'>
+                <thead className='bg-gray-50'>
+                  <tr>
+                    <th
+                      scope='col'
+                      className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.service')}
-                    </div>
-                  </div>
-                  <div className='w-28 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[12%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.status')}
-                    </div>
-                  </div>
-                  <div className='w-36 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[13%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.rating')}
-                    </div>
-                  </div>
-                  <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[17%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.progress')}
-                    </div>
-                  </div>
-                  <div className='w-36 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[13%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.orderId')}
-                    </div>
-                  </div>
-                  <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.location')}
-                    </div>
-                  </div>
-                  <div className='w-44 px-3 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                    </th>
+                    <th
+                      scope='col'
+                      className='w-[10%] px-6 py-3 text-center text-sm font-bold text-gray-700 uppercase tracking-wider'
+                    >
                       {t('dashboard.admin.orderDetails.tableHeaders.actions')}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Table Rows */}
-                {paginatedOrders.map((order) => (
-                  <div
-                    key={order.id}
-                    className='w-full h-14 px-4 border-b border-gray-100 flex justify-between items-center'
-                  >
-                    {/* Service */}
-                    <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div className='text-neutral-950 text-sm font-normal font-["Lato"] leading-snug'>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className='divide-y divide-gray-200'>
+                  {paginatedOrders.map((order) => (
+                    <tr key={order.id} className='hover:bg-gray-50'>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
                         {order.service}
-                      </div>
-                    </div>
-
-                    {/* Status */}
-                    <div className='w-28 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div
-                        className={`h-4 p-3 rounded-lg flex justify-center items-center gap-2.5 ${getStatusBadgeClass(
-                          order.status
-                        )}`}
-                      >
-                        <div className='text-[10px] font-normal font-["Lato"] leading-none'>
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap'>
+                        <span
+                          className={`inline-flex px-3 py-1 text-xs font-medium rounded-lg ${getStatusBadgeClass(
+                            order.status
+                          )}`}
+                        >
                           {order.status}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Rating */}
-                    <div className='w-36 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      {order.rating ? (
-                        <div className='flex justify-start items-center gap-2'>
-                          <div className='w-6 h-6 relative'>
-                            <AiFillStar className='w-5 h-5 absolute left-[2px] top-[2.50px] text-yellow-400' />
+                        </span>
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        {order.rating ? (
+                          <div className='flex items-center gap-1'>
+                            <AiFillStar className='w-5 h-5 text-yellow-400' />
+                            <span>{order.rating} out of 5</span>
                           </div>
-                          <div className='text-neutral-950 text-sm font-normal font-["Lato"] leading-snug'>
-                            {order.rating}{' '}
-                            {t('dashboard.admin.orderDetails.outOfRating')}
+                        ) : (
+                          <span className='text-rose-600'>No rating now</span>
+                        )}
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap'>
+                        <div className='flex items-center gap-2'>
+                          <div className='flex-1 h-2 bg-gray-200 rounded-full overflow-hidden'>
+                            <div
+                              className={`h-full rounded-full ${getProgressBarColor(
+                                order.progress
+                              )}`}
+                              style={{ width: `${order.progress}%` }}
+                            />
                           </div>
+                          <span className='text-sm font-medium text-gray-700 min-w-[40px]'>
+                            {order.progress}%
+                          </span>
                         </div>
-                      ) : (
-                        <div className='text-rose-600 text-sm font-normal font-["Lato"] leading-snug'>
-                          {t('dashboard.admin.orderDetails.noRating')}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Progress */}
-                    <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div className='flex-1 flex justify-start items-center gap-2'>
-                        <div className='w-28 h-1.5 bg-green-50 rounded-[50px] relative overflow-hidden'>
-                          <div
-                            className={`h-1.5 rounded-[50px] ${getProgressBarColor(
-                              order.progress
-                            )}`}
-                            style={{ width: `${order.progress}%` }}
-                          />
-                        </div>
-                        <div className='text-black text-sm font-normal font-["Plus_Jakarta_Sans"] leading-tight'>
-                          {order.progress}%
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Order ID */}
-                    <div className='w-36 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div className='text-neutral-950 text-sm font-normal font-["Lato"] leading-snug'>
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                         {order.orderId}
-                      </div>
-                    </div>
-
-                    {/* Location */}
-                    <div className='flex-1 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div className='text-neutral-950 text-sm font-normal font-["Lato"] leading-snug'>
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                         {order.location}
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className='w-44 px-3 py-4 flex justify-start items-center gap-2.5'>
-                      <div className='flex justify-start items-center gap-6'>
-                        <button className='w-6 h-6 relative text-green-500 hover:text-green-700 transition-colors'>
-                          <FiLayers className='w-6 h-6' />
+                      </td>
+                      <td className='px-6 py-4 whitespace-nowrap text-center'>
+                        <button className='text-green-500 hover:text-green-700 transition-colors'>
+                          <FiLayers className='w-5 h-5 mx-auto' />
                         </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-                {/* Pagination */}
-                <div className='w-full h-14 px-4 border-b border-gray-100 flex justify-between items-center'>
-                  <div className='px-10 py-4 flex justify-start items-center gap-2.5'>
-                    <div className='text-gray-800 text-sm font-normal font-["Lato"] leading-snug'>
-                      {t('dashboard.admin.orderDetails.showing', {
-                        count: paginatedOrders.length,
-                        total: orderData?.orders.length || 0,
-                      })}
-                    </div>
-                  </div>
-                  <Pagination
-                    currentPage={currentPage}
-                    totalItems={orderData?.orders.length || 0}
-                    itemsPerPage={itemsPerPage}
-                    onPageChange={(page) => setCurrentPage(page)}
-                    showingText=''
-                  />
-                </div>
+            <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
+              <div className='text-sm text-gray-700'>
+                Showing {paginatedOrders.length} of{' '}
+                {orderData?.orders.length || 0} jobs
               </div>
+              <Pagination
+                currentPage={currentPage}
+                totalItems={orderData?.orders.length || 0}
+                itemsPerPage={itemsPerPage}
+                onPageChange={(page) => setCurrentPage(page)}
+                showingText=''
+              />
             </div>
           </div>
         </div>

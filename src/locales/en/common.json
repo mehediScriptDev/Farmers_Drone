@@ -278,10 +278,10 @@
       "orderDetails": {
         "title": "Orders info",
         "subtitle": "Review the tasks assigned to",
-        "totalActiveJobs": "Total active Jobs",
-        "totalCompleteJob": "Total complete job",
-        "averageRating": "Average rating",
-        "totalDrone": "Total drone",
+        "TotalactiveJobs": "Total active Jobs",
+        "Totalcompletejob": "Total complete job",
+        "Averagerating": "Average rating",
+        "Totaldrone": "Total drone",
         "outOf5": "Out of 5",
         "active": "Active",
         "tableHeaders": {
