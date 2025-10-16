@@ -315,6 +315,20 @@
           "revenue": "राजस्व",
           "activeIntegrations": "सक्रिय एकीकरण",
           "paymentMethods": "भुगतान विधियाँ"
+        },
+        "customerPayments": {
+          "tableHeaders": {
+            "userName": "उपयोगकर्ता नाम",
+            "paymentMethod": "भुगतान विधि",
+            "status": "स्थिति",
+            "transactions": "लेन-देन",
+            "dateTime": "दिनांक और समय"
+          },
+          "status": {
+            "done": "पूर्ण",
+            "failed": "विफल"
+          },
+          "showing": "{{total}} ग्राहक लेन-देन में से {{count}} दिखा रहे हैं"
         }
       }
     },

@@ -315,6 +315,20 @@
           "revenue": "Revenue",
           "activeIntegrations": "Active Integrations",
           "paymentMethods": "Payment Methods"
+        },
+        "customerPayments": {
+          "tableHeaders": {
+            "userName": "User name",
+            "paymentMethod": "Payment method",
+            "status": "Status",
+            "transactions": "Transactions",
+            "dateTime": "Date & Time"
+          },
+          "status": {
+            "done": "Done",
+            "failed": "Failed"
+          },
+          "showing": "Showing {{count}} of {{total}} customer transactions"
         }
       }
     },
