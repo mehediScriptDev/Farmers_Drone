@@ -14,10 +14,12 @@ const PaymentsManagement = () => {
   const { t } = useTranslation();
   const [paymentsData, setPaymentsData] = useState(null);
   const [customerPaymentsData, setCustomerPaymentsData] = useState([]);
+  const [operatorPaymentsData, setOperatorPaymentsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [currentPage, setCurrentPage] = useState(1);
+  const [operatorCurrentPage, setOperatorCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
   useEffect(() => {
@@ -51,6 +53,19 @@ const PaymentsManagement = () => {
         }
       };
       fetchCustomerPayments();
+    } else if (activeTab === 'operatorPayments') {
+      setOperatorCurrentPage(1); // Reset to page 1 when switching to this tab
+      const fetchOperatorPayments = async () => {
+        try {
+          const response = await axiosInstance.get(
+            '/admin/data/operatorPayments.json'
+          );
+          setOperatorPaymentsData(response.data.transactions || []);
+        } catch (err) {
+          console.error('Error fetching operator payments:', err);
+        }
+      };
+      fetchOperatorPayments();
     }
   }, [activeTab]);
 
@@ -58,6 +73,11 @@ const PaymentsManagement = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     return customerPaymentsData.slice(startIndex, startIndex + itemsPerPage);
   }, [customerPaymentsData, currentPage, itemsPerPage]);
+
+  const paginatedOperatorTransactions = useMemo(() => {
+    const startIndex = (operatorCurrentPage - 1) * itemsPerPage;
+    return operatorPaymentsData.slice(startIndex, startIndex + itemsPerPage);
+  }, [operatorPaymentsData, operatorCurrentPage, itemsPerPage]);
 
   const getStatusBadgeClass = (status) => {
     if (status === 'Done') {
@@ -383,13 +403,166 @@ const PaymentsManagement = () => {
 
         {/* Operator Payments Tab Content */}
         {activeTab === 'operatorPayments' && (
-          <div className='bg-white rounded-lg border border-zinc-100 p-8'>
-            <h3 className='text-xl font-semibold font-["Poppins"] text-neutral-950 mb-4'>
-              Operator Payments
-            </h3>
-            <p className='text-gray-600 font-["Lato"]'>
-              Operator payment details will be displayed here.
-            </p>
+          <div className='bg-white rounded-lg border border-zinc-100'>
+            {operatorPaymentsData.length === 0 ? (
+              <div className='p-8 text-center text-gray-600'>
+                Loading operator payment data...
+              </div>
+            ) : (
+              <>
+                <div className='overflow-x-auto'>
+                  <table className='w-full table-fixed'>
+                    <thead className='bg-gray-50'>
+                      <tr>
+                        <th
+                          scope='col'
+                          className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                        >
+                          {t(
+                            'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.serviceProvider'
+                          )}
+                        </th>
+                        <th
+                          scope='col'
+                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                        >
+                          {t(
+                            'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.paymentMethod'
+                          )}
+                        </th>
+                        <th
+                          scope='col'
+                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                        >
+                          {t(
+                            'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.status'
+                          )}
+                        </th>
+                        <th
+                          scope='col'
+                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                        >
+                          {t(
+                            'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.payouts'
+                          )}
+                        </th>
+                        <th
+                          scope='col'
+                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                        >
+                          {t(
+                            'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.dateTime'
+                          )}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className='divide-y divide-gray-200'>
+                      {paginatedOperatorTransactions.map((transaction) => (
+                        <tr key={transaction.id} className='hover:bg-gray-50'>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                            {transaction.serviceProvider}
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap'>
+                            <div className='flex flex-col gap-1'>
+                              <span className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                                {transaction.paymentMethod}{' '}
+                                <span className='text-green-500 text-xs font-normal font-["Lato"] leading-none'>
+                                  ({transaction.paymentType})
+                                </span>
+                              </span>
+                            </div>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap'>
+                            <span
+                              className={`inline-flex px-3 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
+                                transaction.status
+                              )}`}
+                            >
+                              {transaction.status}
+                            </span>
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                            {transaction.payouts}
+                          </td>
+                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                            {transaction.dateTime}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
+                  <div className='text-sm text-gray-700 font-["Lato"]'>
+                    {t(
+                      'dashboard.admin.paymentsManagement.operatorPayments.showing',
+                      {
+                        count: paginatedOperatorTransactions.length,
+                        total: operatorPaymentsData.length,
+                      }
+                    )}
+                  </div>
+                  <div className='flex items-center space-x-1'>
+                    <button
+                      onClick={() =>
+                        operatorCurrentPage > 1 &&
+                        setOperatorCurrentPage(operatorCurrentPage - 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={operatorCurrentPage === 1}
+                    >
+                      Previous
+                    </button>
+
+                    {Array.from(
+                      {
+                        length: Math.ceil(
+                          operatorPaymentsData.length / itemsPerPage
+                        ),
+                      },
+                      (_, i) => i + 1
+                    )
+                      .slice(
+                        Math.max(0, operatorCurrentPage - 1),
+                        Math.min(
+                          operatorCurrentPage + 1,
+                          Math.ceil(operatorPaymentsData.length / itemsPerPage)
+                        )
+                      )
+                      .map((page) => (
+                        <button
+                          key={page}
+                          className={`px-3 py-2 text-sm font-medium rounded ${
+                            operatorCurrentPage === page
+                              ? 'bg-green-500 text-white'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                          onClick={() => setOperatorCurrentPage(page)}
+                        >
+                          {page}
+                        </button>
+                      ))}
+
+                    <button
+                      onClick={() =>
+                        operatorCurrentPage <
+                          Math.ceil(
+                            operatorPaymentsData.length / itemsPerPage
+                          ) && setOperatorCurrentPage(operatorCurrentPage + 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={
+                        operatorCurrentPage ===
+                        Math.ceil(operatorPaymentsData.length / itemsPerPage)
+                      }
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>

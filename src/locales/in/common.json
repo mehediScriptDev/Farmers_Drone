@@ -329,6 +329,20 @@
             "failed": "विफल"
           },
           "showing": "{{total}} ग्राहक लेन-देन में से {{count}} दिखा रहे हैं"
+        },
+        "operatorPayments": {
+          "tableHeaders": {
+            "serviceProvider": "सेवा प्रदाता",
+            "paymentMethod": "भुगतान विधि",
+            "status": "स्थिति",
+            "payouts": "भुगतान",
+            "dateTime": "दिनांक और समय"
+          },
+          "status": {
+            "done": "पूर्ण",
+            "failed": "विफल"
+          },
+          "showing": "{{total}} ग्राहक लेन-देन में से {{count}} दिखा रहे हैं"
         }
       }
     },

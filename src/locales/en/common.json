@@ -329,6 +329,20 @@
             "failed": "Failed"
           },
           "showing": "Showing {{count}} of {{total}} customer transactions"
+        },
+        "operatorPayments": {
+          "tableHeaders": {
+            "serviceProvider": "Service Provider",
+            "paymentMethod": "Payment method",
+            "status": "Status",
+            "payouts": "PAYOUTS",
+            "dateTime": "Date & Time"
+          },
+          "status": {
+            "done": "Done",
+            "failed": "Failed"
+          },
+          "showing": "Showing {{count}} of {{total}} customer transactions"
         }
       }
     },
