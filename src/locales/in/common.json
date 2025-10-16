@@ -64,13 +64,14 @@
           "showing": "{{total}} उपयोगकर्ताओं में से {{current}} दिखा रहे हैं"
         }
       },
-      "droneOperator": {
+
+      "userManagement": {
         "title": "उपयोगकर्ता प्रबंधन",
-        "tabOperator": "ऑपरेटर",
+        "tabUser": "उपयोगकर्ता",
         "tabCustomer": "ग्राहक",
         "tabEmployee": "कर्मचारी",
         "tabFieldAgent": "फील्ड एजेंट",
-        "subTabAll": "सभी ड्रोन ऑपरेटर",
+        "subTabAll": "सभी उपयोगकर्ता",
         "subTabPending": "लंबित",
         "searchPlaceholder": "खोजें",
         "tableHeaders": {
@@ -82,9 +83,9 @@
         },
         "seeDetails": "विवरण देखें",
         "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहा है",
-        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला",
+        "noUsersFound": "कोई उपयोगकर्ता नहीं मिला",
         "modal": {
-          "aboutTitle": "इस ड्रोन ऑपरेटर के बारे में",
+          "aboutTitle": "इस उपयोगकर्ता के बारे में",
           "fullName": "पूरा नाम:",
           "phoneNumber": "फ़ोन नंबर:",
           "email": "ईमेल:",
@@ -92,6 +93,51 @@
           "industry": "उद्योग:",
           "approveButton": "अनुमोदित",
           "cancelButton": "रद्द"
+        }
+      },
+
+      "customerManagement": {
+        "title": "ग्राहक प्रबंधन",
+        "tabOperator": "संचालक",
+        "tabCustomer": "ग्राहक",
+        "tabEmployee": "कर्मचारी",
+        "tabFieldAgent": "फील्ड एजेंट",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "customer": "ग्राहक",
+          "status": "स्थिति",
+          "totalOrder": "कुल आदेश",
+          "lastActive": "अंतिम सक्रिय",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "suspended": "निलंबित"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "suspend": "उपयोगकर्ता निलंबित करें",
+          "activate": "उपयोगकर्ता सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noCustomersFound": "कोई ग्राहक नहीं मिला",
+        "fetchError": "ग्राहक डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "ग्राहक विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "totalOrders": "कुल आदेश",
+          "registrationDate": "पंजीकरण तिथि",
+          "lastActive": "अंतिम सक्रिय",
+          "customerId": "ग्राहक आईडी",
+          "close": "बंद करें",
+          "suspend": "ग्राहक निलंबित करें",
+          "activate": "ग्राहक सक्रिय करें"
         }
       }
     },

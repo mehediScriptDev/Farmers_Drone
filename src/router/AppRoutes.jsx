@@ -11,13 +11,13 @@ import AdminDashboard from '../components/admin/components/AdminDashboard';
 import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
 
 // Admin Components
-import DroneOperator from '../components/admin/components/DroneOperator';
-// import EmployeeManagement from '../components/admin/components/EmployeeManagement';
-// import FieldAgent from '../components/admin/components/FieldAgent';
 import Jobs from '../components/admin/components/Jobs';
 import PaymentsManagement from '../components/admin/components/PaymentsManagement';
 import Reports from '../components/admin/components/Reports';
 import UserManagement from '../components/admin/components/UserManagement';
+import UserManagementDetails from '../components/admin/components/UserManagementDetails';
+import Complaints from '../components/admin/components/Complaints';
+import AdminServices from '../components/admin/components/Services';
 
 // Field Agent Components
 import FieldAgentReports from '../components/fieldAgent/Reports';
@@ -54,7 +54,6 @@ import CoustomerDetailsPage from '../components/employee/employdashboard/compone
 import Leads from './../components/marketing/Leads';
 import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
-import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import Analytics from './../components/marketing/Analytics';
 
@@ -102,21 +101,13 @@ const AppRoutes = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: 'drone-operators',
-        element: <DroneOperator />,
-      },
-      {
         path: 'users',
         element: <UserManagement />,
       },
-      // {
-      //   path: 'employees',
-      //   element: <EmployeeManagement />,
-      // },
-      // {
-      //   path: 'field-agents',
-      //   element: <FieldAgent />,
-      // },
+      {
+        path: 'users/:userId',
+        element: <UserManagementDetails />,
+      },
       {
         path: 'jobs',
         element: <Jobs />,
@@ -128,6 +119,14 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'reports',
         element: <Reports />,
+      },
+      {
+        path: 'complaints',
+        element: <Complaints />,
+      },
+      {
+        path: 'services',
+        element: <AdminServices />,
       },
     ],
   },

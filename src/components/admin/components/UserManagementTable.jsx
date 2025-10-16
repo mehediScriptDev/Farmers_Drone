@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiCheck, HiX } from 'react-icons/hi';
 
-const DroneOperatorTable = ({
-  operators,
+const UserManagementTable = ({
+  users,
   activeSubTab,
   onShowDetails,
   onApprove,
@@ -21,41 +21,41 @@ const DroneOperatorTable = ({
               scope='col'
               className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
             >
-              {t('dashboard.admin.droneOperator.tableHeaders.dateTime')}
+              {t('dashboard.admin.userManagement.tableHeaders.dateTime')}
             </th>
             <th
               scope='col'
               className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
             >
-              {t('dashboard.admin.droneOperator.tableHeaders.name')}
+              {t('dashboard.admin.userManagement.tableHeaders.name')}
             </th>
             <th
               scope='col'
               className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
             >
-              {t('dashboard.admin.droneOperator.tableHeaders.location')}
+              {t('dashboard.admin.userManagement.tableHeaders.location')}
             </th>
             <th
               scope='col'
               className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
             >
-              {t('dashboard.admin.droneOperator.tableHeaders.registrationId')}
+              {t('dashboard.admin.userManagement.tableHeaders.registrationId')}
             </th>
             {/* Change 2: Set header text to center to match its content */}
             <th
               scope='col'
               className='w-[20%] px-6 py-3 text-center text-sm font-bold text-gray-700 uppercase tracking-wider'
             >
-              {t('dashboard.admin.droneOperator.tableHeaders.actions')}
+              {t('dashboard.admin.userManagement.tableHeaders.actions')}
             </th>
           </tr>
         </thead>
         <tbody className='divide-y divide-gray-200'>
-          {operators.length > 0 ? (
-            operators.map((operator) => (
-              <tr key={operator.id} className='hover:bg-gray-50'>
+          {users.length > 0 ? (
+            users.map((user) => (
+              <tr key={user.id} className='hover:bg-gray-50'>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                  {new Date(operator.registrationDate).toLocaleString([], {
+                  {new Date(user.registrationDate).toLocaleString([], {
                     year: 'numeric',
                     month: 'short',
                     day: 'numeric',
@@ -64,27 +64,27 @@ const DroneOperatorTable = ({
                   })}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
-                  {operator.name}
+                  {user.name}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                  {operator.location}
+                  {user.location}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                  {operator.registrationId}
+                  {user.registrationId}
                 </td>
                 <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
                   <div className='flex items-center justify-center space-x-4'>
                     {activeSubTab === 'pending' && (
                       <>
                         <button
-                          onClick={() => onReject(operator.id)}
+                          onClick={() => onReject(user.id)}
                           className='text-red-600 hover:text-red-900'
                           title='Reject'
                         >
                           <HiX className='w-5 h-5' />
                         </button>
                         <button
-                          onClick={() => onApprove(operator.id)}
+                          onClick={() => onApprove(user.id)}
                           className='text-green-600 hover:text-green-900'
                           title='Approve'
                         >
@@ -93,10 +93,10 @@ const DroneOperatorTable = ({
                       </>
                     )}
                     <button
-                      onClick={() => onShowDetails(operator)}
+                      onClick={() => onShowDetails(user)}
                       className='px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded-md hover:bg-green-700 transition'
                     >
-                      {t('dashboard.admin.droneOperator.seeDetails')}
+                      {t('dashboard.admin.userManagement.seeDetails')}
                     </button>
                   </div>
                 </td>
@@ -106,7 +106,7 @@ const DroneOperatorTable = ({
             // Kept min-height on this empty state to prevent jump
             <tr className='min-h-[408px]'>
               <td colSpan={5} className='text-center py-10 text-gray-500'>
-                {t('dashboard.admin.droneOperator.noOperatorsFound')}
+                {t('dashboard.admin.userManagement.noUsersFound')}
               </td>
             </tr>
           )}
@@ -116,4 +116,4 @@ const DroneOperatorTable = ({
   );
 };
 
-export default DroneOperatorTable;
+export default UserManagementTable;

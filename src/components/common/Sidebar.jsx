@@ -4,14 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import {
   LayoutDashboard,
-  Plane,
   Users,
-  UserCheck,
-  MapPin,
   Briefcase,
   CreditCard,
   BarChart3,
   AlertTriangle,
+  Settings,
 } from 'lucide-react';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
@@ -25,29 +23,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       path: '', // This will be the index route
     },
     {
-      id: 'drone-operators',
-      label: t('sidebar.admin.droneOperator'),
-      icon: Plane,
-      path: 'drone-operators',
-    },
-    {
       id: 'users',
       label: t('sidebar.admin.userManagement'),
       icon: Users,
       path: 'users',
     },
-    // {
-    //   id: 'employees',
-    //   label: t('sidebar.admin.employeeManagement'),
-    //   icon: UserCheck,
-    //   path: 'employees',
-    // },
-    // {
-    //   id: 'field-agents',
-    //   label: t('sidebar.admin.fieldAgent'),
-    //   icon: MapPin,
-    //   path: 'field-agents',
-    // },
     {
       id: 'jobs',
       label: t('sidebar.admin.jobs'),
@@ -75,7 +55,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     {
       id: 'services',
       label: t('sidebar.admin.services'),
-      icon: AlertTriangle,
+      icon: Settings,
       path: 'services',
     },
   ];

@@ -64,13 +64,14 @@
           "showing": "Showing {{current}} of {{total}} Users"
         }
       },
-      "droneOperator": {
+
+      "userManagement": {
         "title": "User Management",
-        "tabOperator": "Operator",
+        "tabUser": "User",
         "tabCustomer": "Customer",
         "tabEmployee": "Employee",
         "tabFieldAgent": "Field agent",
-        "subTabAll": "All Drone Operator",
+        "subTabAll": "All Users",
         "subTabPending": "Pending",
         "searchPlaceholder": "Search",
         "tableHeaders": {
@@ -82,9 +83,9 @@
         },
         "seeDetails": "See Details",
         "showing": "Showing {{count}} of {{total}} Users",
-        "noOperatorsFound": "No Drone Operators Found",
+        "noUsersFound": "No Users Found",
         "modal": {
-          "aboutTitle": "About this Drone Operator",
+          "aboutTitle": "About this User",
           "fullName": "Full Name:",
           "phoneNumber": "Phone number:",
           "email": "Email:",
@@ -92,6 +93,51 @@
           "industry": "Industry:",
           "approveButton": "Approved",
           "cancelButton": "Cancelled"
+        }
+      },
+
+      "customerManagement": {
+        "title": "Customer Management",
+        "tabOperator": "Operator",
+        "tabCustomer": "Customer",
+        "tabEmployee": "Employee",
+        "tabFieldAgent": "Field agent",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "customer": "Customer",
+          "status": "Status",
+          "totalOrder": "Total order",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "suspended": "Suspended"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "suspend": "Suspend User",
+          "activate": "Activate User"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noCustomersFound": "No Customers Found",
+        "fetchError": "Failed to fetch customer data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Customer Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "totalOrders": "Total Orders",
+          "registrationDate": "Registration Date",
+          "lastActive": "Last Active",
+          "customerId": "Customer ID",
+          "close": "Close",
+          "suspend": "Suspend Customer",
+          "activate": "Activate Customer"
         }
       }
     },
