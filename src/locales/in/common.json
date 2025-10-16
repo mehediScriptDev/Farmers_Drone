@@ -189,6 +189,51 @@
           "deactivate": "कर्मचारी निष्क्रिय करें",
           "activate": "कर्मचारी सक्रिय करें"
         }
+      },
+
+      "fieldAgentManagement": {
+        "title": "फील्ड एजेंट प्रबंधन",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "fieldAgent": "फील्ड एजेंट",
+          "totalAddCustomer": "कुल ग्राहक जोड़े",
+          "totalAddOperator": "कुल ऑपरेटर जोड़े",
+          "totalBookOrders": "कुल बुक ऑर्डर",
+          "status": "स्थिति",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "suspended": "निलंबित"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "suspend": "एजेंट निलंबित करें",
+          "activate": "एजेंट सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noFieldAgentsFound": "कोई फील्ड एजेंट नहीं मिला",
+        "fetchError": "फील्ड एजेंट डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "फील्ड एजेंट विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "totalAddCustomer": "कुल ग्राहक जोड़े",
+          "totalAddOperator": "कुल ऑपरेटर जोड़े",
+          "totalBookOrders": "कुल बुक ऑर्डर",
+          "joinDate": "शामिल होने की तिथि",
+          "area": "क्षेत्र",
+          "vehicleNumber": "वाहन नंबर",
+          "agentId": "एजेंट आईडी",
+          "close": "बंद करें",
+          "suspend": "एजेंट निलंबित करें",
+          "activate": "एजेंट सक्रिय करें"
+        }
       }
     },
     "employee": {

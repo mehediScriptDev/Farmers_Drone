@@ -189,6 +189,51 @@
           "deactivate": "Deactivate Employee",
           "activate": "Activate Employee"
         }
+      },
+
+      "fieldAgentManagement": {
+        "title": "Field Agent Management",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "fieldAgent": "Field agent",
+          "totalAddCustomer": "Total add customer",
+          "totalAddOperator": "Total add operator",
+          "totalBookOrders": "Total book orders",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "suspended": "Suspended"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "suspend": "Suspend Agent",
+          "activate": "Activate Agent"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noFieldAgentsFound": "No Field Agents Found",
+        "fetchError": "Failed to fetch field agent data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Field Agent Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "totalAddCustomer": "Total Add Customer",
+          "totalAddOperator": "Total Add Operator",
+          "totalBookOrders": "Total Book Orders",
+          "joinDate": "Join Date",
+          "area": "Area",
+          "vehicleNumber": "Vehicle Number",
+          "agentId": "Agent ID",
+          "close": "Close",
+          "suspend": "Suspend Agent",
+          "activate": "Activate Agent"
+        }
       }
     },
     "employee": {

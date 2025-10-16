@@ -7,9 +7,11 @@ import Pagination from '../../common/Pagination';
 import UserManagementTable from './UserManagementTable';
 import CustomerManagementTable from './CustomerManagementTable';
 import EmployeeManagementTable from './EmployeeManagementTable';
+import FieldAgentManagementTable from './FieldAgentManagementTable';
 import UserDetailsModal from '../../common/UserDetailsModal';
 import CustomerDetailsModal from './CustomerDetailsModal';
 import EmployeeDetailsModal from './EmployeeDetailsModal';
+import FieldAgentDetailsModal from './FieldAgentDetailsModal';
 import AddEmployeeModal from '../../common/AddEmployeeModal';
 
 const TABS = [
@@ -50,6 +52,8 @@ const UserManagement = () => {
           endpoint = '/admin/data/customerManagement.json';
         } else if (activeTab === 'employee') {
           endpoint = '/admin/data/employees.json';
+        } else if (activeTab === 'fieldAgent') {
+          endpoint = '/admin/data/fieldAgents.json';
         }
 
         const response = await axiosInstance.get(endpoint);
@@ -121,16 +125,34 @@ const UserManagement = () => {
     );
   };
 
+  const handleSuspendFieldAgent = (agentId) => {
+    setData((prev) =>
+      prev.map((agent) =>
+        agent.id === agentId ? { ...agent, status: 'Suspended' } : agent
+      )
+    );
+  };
+
+  const handleActivateFieldAgent = (agentId) => {
+    setData((prev) =>
+      prev.map((agent) =>
+        agent.id === agentId ? { ...agent, status: 'Active' } : agent
+      )
+    );
+  };
+
   const filteredData = useMemo(() => {
     let users = [];
 
-    // For Customer tab - show all active customers (no sub-tabs)
+    // For Customer, Employee, and Field Agent tabs - show all (no sub-tabs)
     if (activeTab === 'customer') {
       users = data; // Show all customers
     } else if (activeTab === 'employee') {
       users = data; // Show all employees
+    } else if (activeTab === 'fieldAgent') {
+      users = data; // Show all field agents
     } else {
-      // For other tabs (User, Field Agent)
+      // For other tabs (User)
       if (activeSubTab === 'all') {
         users = data.filter((user) => user.status === 'approved');
       } else if (activeSubTab === 'pending') {
@@ -200,34 +222,36 @@ const UserManagement = () => {
         </div>
 
         <div className='mt-8 bg-white rounded-lg shadow-sm'>
-          {/* Show sub-tabs only for non-customer and non-employee tabs */}
-          {activeTab !== 'customer' && activeTab !== 'employee' && (
-            <div className='px-6 pt-4 border-b border-gray-200'>
-              <nav className='-mb-px flex space-x-8' aria-label='Sub Tabs'>
-                {SUB_TABS.map((subTab) => (
-                  <button
-                    key={subTab.id}
-                    onClick={() => {
-                      setActiveSubTab(subTab.id);
-                      setCurrentPage(1);
-                    }}
-                    className={`${
-                      activeSubTab === subTab.id
-                        ? 'border-green-500 text-green-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                    } whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm flex items-center gap-2`}
-                  >
-                    <span>
-                      {t(`dashboard.admin.userManagement.${subTab.labelKey}`)}
-                    </span>
-                    <span className='bg-yellow-400 text-gray-800 text-xs font-semibold px-2 py-0.5 rounded-full'>
-                      {subTabCounts[subTab.id]}
-                    </span>
-                  </button>
-                ))}
-              </nav>
-            </div>
-          )}
+          {/* Show sub-tabs only for non-customer, non-employee, and non-fieldAgent tabs */}
+          {activeTab !== 'customer' &&
+            activeTab !== 'employee' &&
+            activeTab !== 'fieldAgent' && (
+              <div className='px-6 pt-4 border-b border-gray-200'>
+                <nav className='-mb-px flex space-x-8' aria-label='Sub Tabs'>
+                  {SUB_TABS.map((subTab) => (
+                    <button
+                      key={subTab.id}
+                      onClick={() => {
+                        setActiveSubTab(subTab.id);
+                        setCurrentPage(1);
+                      }}
+                      className={`${
+                        activeSubTab === subTab.id
+                          ? 'border-green-500 text-green-600'
+                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      } whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm flex items-center gap-2`}
+                    >
+                      <span>
+                        {t(`dashboard.admin.userManagement.${subTab.labelKey}`)}
+                      </span>
+                      <span className='bg-yellow-400 text-gray-800 text-xs font-semibold px-2 py-0.5 rounded-full'>
+                        {subTabCounts[subTab.id]}
+                      </span>
+                    </button>
+                  ))}
+                </nav>
+              </div>
+            )}
 
           <div className='p-4 border-b border-gray-200 flex justify-between items-center'>
             {/* Add employees button - only show on employee tab */}
@@ -289,6 +313,11 @@ const UserManagement = () => {
                     employees={paginatedData}
                     onShowDetails={handleShowDetails}
                   />
+                ) : activeTab === 'fieldAgent' ? (
+                  <FieldAgentManagementTable
+                    fieldAgents={paginatedData}
+                    onShowDetails={handleShowDetails}
+                  />
                 ) : (
                   <UserManagementTable
                     users={paginatedData}
@@ -330,6 +359,14 @@ const UserManagement = () => {
           employee={selectedUser}
           onActivate={handleActivateEmployee}
           onDeactivate={handleDeactivateEmployee}
+        />
+      ) : activeTab === 'fieldAgent' ? (
+        <FieldAgentDetailsModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          fieldAgent={selectedUser}
+          onSuspend={handleSuspendFieldAgent}
+          onActivate={handleActivateFieldAgent}
         />
       ) : (
         <UserDetailsModal
