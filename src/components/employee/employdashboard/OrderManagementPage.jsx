@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { FiEye, FiPlus, FiCalendar, FiX } from 'react-icons/fi';
+import { FiPlus, FiCalendar, FiX } from 'react-icons/fi';
 import ServiceRequestModal from './components/Modal/ServiceRequestModal';
 import ResheduleServiceModal from './components/Modal/ResheduleServiceModal';
 import CancleModal from './components/Modal/CancleModal';
@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 
 const OrderManagementPage = () => {
   const [activities, setActivities] = useState([]);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isResheduleModalOpen, setIsResheduleModalOpen] = useState(false);
   const [cancleModal, setCancleModal] = useState(false);
@@ -20,11 +19,11 @@ const OrderManagementPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeActionDropdown, setActiveActionDropdown] = useState(null);
-  const { t } = useTranslation();
-
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 4;
+  const { t } = useTranslation();
 
+  //handle modals
   const handleCreateServiceModal = (formdata) => {
     console.log('Form data received in parent (Create):', formdata);
   };
@@ -35,7 +34,7 @@ const OrderManagementPage = () => {
     console.log('Form data received in parent (Cancel):', formdata);
   };
 
-
+  //handle active colors
   const getProgressColor = (progress) => {
     if (!progress) return 'bg-gray-100 text-gray-700';
 
@@ -105,13 +104,16 @@ const OrderManagementPage = () => {
     const query = searchQuery.toLowerCase();
 
     return activities.filter(activity =>
-      activity.customerName.toLowerCase().includes(query) ||
       String(activity.orderId).toLowerCase().includes(query) ||
+      activity.customerName.toLowerCase().includes(query) ||
       activity.serviceName.toLowerCase().includes(query) ||
       activity.location.toLowerCase().includes(query) ||
-      activity.progress.toLowerCase().includes(query)
+      activity.progress.toLowerCase().includes(query) ||
+      activity.assignTo.toLowerCase().includes(query) ||
+      activity.priority.toLowerCase().includes(query)
     );
   }, [searchQuery, activities]);
+
 
   // Pagination Logic
   const totalPages = Math.ceil(filteredActivities.length / ITEMS_PER_PAGE);
@@ -132,6 +134,7 @@ const OrderManagementPage = () => {
   const handleNext = () =>
     setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
+  //handle out side  click 
   useEffect(() => {
     const handleGlobalClick = (event) => {
       // Check for Progress Dropdown
@@ -153,7 +156,7 @@ const OrderManagementPage = () => {
           setActiveActionDropdown(null);
         }
       }
-    };
+    }; 
 
     document.addEventListener('mousedown', handleGlobalClick);
     return () => document.removeEventListener('mousedown', handleGlobalClick);
@@ -172,7 +175,7 @@ const OrderManagementPage = () => {
       </div>
 
       {/* Buttons (Create, Reschedule, Cancel Modals) */}
-      <div className="flex flex-wrap sm:flex-nowrap gap-2 md:gap-3 mb-2 md:mb-4">
+      <div className="flex flex-wrap sm:flex-nowrap gap-2 md:gap-3 mb-2 md:mb-8">
         <button
           onClick={() => setIsModalOpen(true)}
           className="flex items-center justify-center w-full sm:w-auto px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base"
@@ -198,7 +201,7 @@ const OrderManagementPage = () => {
       </div>
 
       {/* Table Card */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200" id="order-table-container">
+      <div className="bg-white  rounded-lg shadow-sm border border-gray-200" id="order-table-container">
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">
             {t('dashboard.employee.table.recentCustomer')}
@@ -224,7 +227,7 @@ const OrderManagementPage = () => {
         {!loading && !error && (
           <div className="overflow-x-auto">
             <table className="w-full min-w-max">
-              <thead className="bg-gray-50 border-b border-gray-200">
+              <thead className="bg-gray-50 border-b h-16 border-gray-200">
                 <tr>
                   <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.orderIdName')}</th>
                   <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
@@ -266,7 +269,7 @@ const OrderManagementPage = () => {
                           </span>
                         </td>
 
-                        {/* ✅ PROGRESS Dropdown Logic (STATUS CHANGE ONLY) */}
+                        {/* PROGRESS Dropdown Logic*/}
                         <td className="px-3 md:px-6 py-4 relative">
                           <div className='relative inline-block w-40'>
                             <button
@@ -275,7 +278,7 @@ const OrderManagementPage = () => {
                             >
                               <span>{activity.progress}</span>
                               <BiChevronDown
-                                className={`ml-1 w-4 h-4 transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''
+                                className={`ml-1 w-6 h-6 transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''
                                   }`}
                               />
                             </button>
@@ -304,24 +307,23 @@ const OrderManagementPage = () => {
                         {/* End Progress Dropdown Logic */}
 
                         <td className="px-3 md:px-6 py-4">
-                          <span className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High' ? 'text-red-600' :
-                            activity.priority === 'Medium' ? 'text-yellow-600' :
-                              'text-green-600'
+                          <span className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High' ? 'text-[#DC3545] bg-[#FCEBEC]' :
+                            activity.priority === 'Medium' ? 'text-[#FFC107] bg-[#FFF9E6]' :
+                              'text-[#28A844] bg-[#EAF6EC]'
                             }`}>
                             {activity.priority}
                           </span>
                         </td>
 
-                        {/* ✅ ACTION Dropdown Logic (for Modals) */}
+                        {/*  ACTION Dropdown Logic */}
                         <td className="px-3 md:px-6 py-4 text-xs md:text-sm relative">
                           <div className="relative inline-block">
-                            {/* More Actions Dropdown (BiChevronDown) */}
                             <button
                               onClick={() => toggleActionDropdown(dropdownIndex)}
                               className="text-gray-600 hover:text-gray-900 text-2xl action-dropdown-toggle"
                             >
                               <BiChevronDown
-                                className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-200 ${activeActionDropdown === dropdownIndex ? 'rotate-180' : ''
+                                className={`w-5 h-5  md:w-8 md:h-7 transition-transform duration-200 ${activeActionDropdown === dropdownIndex ? 'rotate-180' : ''
                                   }`}
                               />
                             </button>
@@ -333,19 +335,19 @@ const OrderManagementPage = () => {
                               >
 
                                 <Link to={`/employee/customers/${activity.id}`}>
-                                  <button className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] transition-colors border-t border-gray-100">
+                                  <button className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] hover:text-[#FFFFFF] transition-colors border-t border-gray-100">
                                     See details
                                   </button>
                                 </Link>
                                 <button
                                   onClick={() => { setIsResheduleModalOpen(true); setActiveActionDropdown(null); }}
-                                  className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844]  transition-colors border-t border-gray-100"
+                                  className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] hover:text-[#FFFFFF]  transition-colors border-t border-gray-100"
                                 >
                                   Reschedule
                                 </button>
                                 <button
                                   onClick={() => { setCancleModal(true); setActiveActionDropdown(null); }}
-                                  className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844]  transition-colors border-t border-gray-100"
+                                  className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] hover:text-[#FFFFFF] transition-colors border-t border-gray-100"
                                 >
                                   Cancel
                                 </button>
@@ -373,9 +375,7 @@ const OrderManagementPage = () => {
           <div className="text-xs md:text-sm text-gray-600">
             Showing {paginatedActivities.length > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0} to {(currentPage - 1) * ITEMS_PER_PAGE + paginatedActivities.length} of {filteredActivities.length} results
           </div>
-
           <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            {/* Previous */}
             <button
               className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handlePrevious}
@@ -383,8 +383,6 @@ const OrderManagementPage = () => {
             >
               Previous
             </button>
-
-            {/* Page Numbers */}
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
               <button
                 key={number}
@@ -397,8 +395,6 @@ const OrderManagementPage = () => {
                 {number}
               </button>
             ))}
-
-            {/* Next */}
             <button
               className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleNext}

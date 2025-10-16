@@ -10,7 +10,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     preferredTime: '',
     specialInstruction: ''
   });
- const { t, i18n } = useTranslation();
+ const { t } = useTranslation();
   const handleSubmit = () => {
     console.log('Form submitted:', formData);
     if (onSubmit) {
@@ -31,7 +31,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
 
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg shadow-2xl w-full max-w-md md:max-w-lg lg:max-w-xl relative">
+      <div className="bg-white rounded-lg shadow-2xl w-full max-w-md md:max-w-lg lg:max-w-2xl relative">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg md:text-xl font-semibold text-gray-800">{t('dashboard.employee.pages.order.modal.createServiceRequest')}</h2>
