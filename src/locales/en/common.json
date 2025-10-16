@@ -234,6 +234,32 @@
           "suspend": "Suspend Agent",
           "activate": "Activate Agent"
         }
+      },
+
+      "orderManagement": {
+        "title": "Order Management",
+        "subtitle": "Track and manage all platform jobs",
+        "scheduled": "Scheduled",
+        "inProgress": "In progress",
+        "complete": "Complete",
+        "jobs": "jobs",
+        "tableHeaders": {
+          "droneOperator": "Drone operator",
+          "status": "Status",
+          "job": "Job",
+          "progress": "Progress",
+          "actions": "Actions"
+        },
+        "status": {
+          "inProgress": "In progress",
+          "notStarted": "Not started",
+          "suspended": "Suspended"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        }
       }
     },
     "employee": {

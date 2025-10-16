@@ -234,6 +234,32 @@
           "suspend": "एजेंट निलंबित करें",
           "activate": "एजेंट सक्रिय करें"
         }
+      },
+
+      "orderManagement": {
+        "title": "ऑर्डर प्रबंधन",
+        "subtitle": "सभी प्लेटफॉर्म कार्यों को ट्रैक और प्रबंधित करें",
+        "scheduled": "निर्धारित",
+        "inProgress": "प्रगति में",
+        "complete": "पूर्ण",
+        "jobs": "कार्य",
+        "tableHeaders": {
+          "droneOperator": "ड्रोन ऑपरेटर",
+          "status": "स्थिति",
+          "job": "कार्य",
+          "progress": "प्रगति",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "inProgress": "प्रगति में",
+          "notStarted": "शुरू नहीं हुआ",
+          "suspended": "निलंबित"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        }
       }
     },
     "employee": {
