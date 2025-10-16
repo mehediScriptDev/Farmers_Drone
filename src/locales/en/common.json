@@ -139,6 +139,56 @@
           "suspend": "Suspend Customer",
           "activate": "Activate Customer"
         }
+      },
+
+      "employeeManagement": {
+        "title": "Employee Management",
+        "addEmployees": "Add employees",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "employees": "Employees",
+          "role": "Role",
+          "roleCode": "Role Code",
+          "startDate": "End Date",
+          "endDate": "End Date",
+          "annualSalary": "Annual salary",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "edit": "Edit Employee",
+          "deactivate": "Deactivate Employee",
+          "activate": "Activate Employee"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noEmployeesFound": "No Employees Found",
+        "fetchError": "Failed to fetch employee data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Employee Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "role": "Role",
+          "roleCode": "Role Code",
+          "department": "Department",
+          "startDate": "Start Date",
+          "endDate": "End Date",
+          "annualSalary": "Annual Salary",
+          "lastActive": "Last Active",
+          "employeeId": "Employee ID",
+          "close": "Close",
+          "deactivate": "Deactivate Employee",
+          "activate": "Activate Employee"
+        }
       }
     },
     "employee": {

@@ -6,8 +6,10 @@ import { LoadingSpinner } from '../../common/LoadingSpinner';
 import Pagination from '../../common/Pagination';
 import UserManagementTable from './UserManagementTable';
 import CustomerManagementTable from './CustomerManagementTable';
+import EmployeeManagementTable from './EmployeeManagementTable';
 import UserDetailsModal from '../../common/UserDetailsModal';
 import CustomerDetailsModal from './CustomerDetailsModal';
+import EmployeeDetailsModal from './EmployeeDetailsModal';
 
 const TABS = [
   { id: 'user', labelKey: 'tabUser' },
@@ -44,6 +46,8 @@ const UserManagement = () => {
         let endpoint = '/admin/data/userManagement.json';
         if (activeTab === 'customer') {
           endpoint = '/admin/data/customerManagement.json';
+        } else if (activeTab === 'employee') {
+          endpoint = '/admin/data/employees.json';
         }
 
         const response = await axiosInstance.get(endpoint);
@@ -95,14 +99,36 @@ const UserManagement = () => {
     );
   };
 
+  const handleActivateEmployee = (employeeId) => {
+    setData((prev) =>
+      prev.map((employee) =>
+        employee.id === employeeId
+          ? { ...employee, status: 'active' }
+          : employee
+      )
+    );
+  };
+
+  const handleDeactivateEmployee = (employeeId) => {
+    setData((prev) =>
+      prev.map((employee) =>
+        employee.id === employeeId
+          ? { ...employee, status: 'inactive' }
+          : employee
+      )
+    );
+  };
+
   const filteredData = useMemo(() => {
     let users = [];
 
     // For Customer tab - show all active customers (no sub-tabs)
     if (activeTab === 'customer') {
       users = data; // Show all customers
+    } else if (activeTab === 'employee') {
+      users = data; // Show all employees
     } else {
-      // For other tabs (User, Employee, Field Agent)
+      // For other tabs (User, Field Agent)
       if (activeSubTab === 'all') {
         users = data.filter((user) => user.status === 'approved');
       } else if (activeSubTab === 'pending') {
@@ -172,8 +198,8 @@ const UserManagement = () => {
         </div>
 
         <div className='mt-8 bg-white rounded-lg shadow-sm'>
-          {/* Show sub-tabs only for non-customer tabs */}
-          {activeTab !== 'customer' && (
+          {/* Show sub-tabs only for non-customer and non-employee tabs */}
+          {activeTab !== 'customer' && activeTab !== 'employee' && (
             <div className='px-6 pt-4 border-b border-gray-200'>
               <nav className='-mb-px flex space-x-8' aria-label='Sub Tabs'>
                 {SUB_TABS.map((subTab) => (
@@ -201,7 +227,36 @@ const UserManagement = () => {
             </div>
           )}
 
-          <div className='p-4 border-b border-gray-200 flex justify-end'>
+          <div className='p-4 border-b border-gray-200 flex justify-between items-center'>
+            {/* Add employees button - only show on employee tab */}
+            {activeTab === 'employee' && (
+              <button
+                onClick={() => {
+                  // TODO: Implement add employee modal
+                  console.log('Add employee clicked');
+                }}
+                className='px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2 font-medium'
+              >
+                <svg
+                  className='w-6 h-6'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth={2}
+                    d='M12 4v16m8-8H4'
+                  />
+                </svg>
+                {t('dashboard.admin.employeeManagement.addEmployees')}
+              </button>
+            )}
+
+            {/* Spacer for non-employee tabs */}
+            {activeTab !== 'employee' && <div></div>}
+
             <div className='relative'>
               <input
                 type='text'
@@ -229,6 +284,11 @@ const UserManagement = () => {
                     onShowDetails={handleShowDetails}
                     onSuspend={handleSuspendCustomer}
                     onActivate={handleActivateCustomer}
+                  />
+                ) : activeTab === 'employee' ? (
+                  <EmployeeManagementTable
+                    employees={paginatedData}
+                    onShowDetails={handleShowDetails}
                   />
                 ) : (
                   <UserManagementTable
@@ -263,6 +323,14 @@ const UserManagement = () => {
           customer={selectedUser}
           onSuspend={handleSuspendCustomer}
           onActivate={handleActivateCustomer}
+        />
+      ) : activeTab === 'employee' ? (
+        <EmployeeDetailsModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          employee={selectedUser}
+          onActivate={handleActivateEmployee}
+          onDeactivate={handleDeactivateEmployee}
         />
       ) : (
         <UserDetailsModal

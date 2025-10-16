@@ -139,6 +139,56 @@
           "suspend": "ग्राहक निलंबित करें",
           "activate": "ग्राहक सक्रिय करें"
         }
+      },
+
+      "employeeManagement": {
+        "title": "कर्मचारी प्रबंधन",
+        "addEmployees": "कर्मचारी जोड़ें",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "employees": "कर्मचारी",
+          "role": "भूमिका",
+          "roleCode": "भूमिका कोड",
+          "startDate": "समाप्ति तिथि",
+          "endDate": "समाप्ति तिथि",
+          "annualSalary": "वार्षिक वेतन",
+          "lastActive": "अंतिम सक्रिय",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "inactive": "निष्क्रिय"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "edit": "कर्मचारी संपादित करें",
+          "deactivate": "कर्मचारी निष्क्रिय करें",
+          "activate": "कर्मचारी सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noEmployeesFound": "कोई कर्मचारी नहीं मिला",
+        "fetchError": "कर्मचारी डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "कर्मचारी विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "role": "भूमिका",
+          "roleCode": "भूमिका कोड",
+          "department": "विभाग",
+          "startDate": "आरंभ तिथि",
+          "endDate": "समाप्ति तिथि",
+          "annualSalary": "वार्षिक वेतन",
+          "lastActive": "अंतिम सक्रिय",
+          "employeeId": "कर्मचारी आईडी",
+          "close": "बंद करें",
+          "deactivate": "कर्मचारी निष्क्रिय करें",
+          "activate": "कर्मचारी सक्रिय करें"
+        }
       }
     },
     "employee": {
