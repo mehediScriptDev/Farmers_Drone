@@ -1,65 +1,66 @@
-import React from 'react';
-import { HiOutlineChartBar } from 'react-icons/hi';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import axiosInstance from '../../../config/axiosConfig';
+import LoadingSpinner from '../../common/LoadingSpinner';
+import RevenueChart from '../charts/RevenueChart';
+import BarChart from '../charts/BarChart';
 
 const Reports = () => {
+  const { t } = useTranslation();
+  const [reportsData, setReportsData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchReportsData = async () => {
+      try {
+        const response = await axiosInstance.get('/admin/data/reports.json');
+        setReportsData(response.data);
+      } catch (error) {
+        console.error('Error fetching reports data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchReportsData();
+  }, []);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div className='min-h-screen bg-[#fafffd] w-full'>
-      <div className='w-full px-4 sm:px-6 lg:px-8 py-6'>
-        {/* Header Section */}
-        <div className='bg-white rounded-xl shadow-sm p-6 sm:p-8 mb-8'>
-          <div className='flex items-center justify-between flex-wrap gap-4'>
-            <div className='flex items-center'>
-              <div className='bg-indigo-100 p-3 rounded-lg mr-4'>
-                <HiOutlineChartBar className='w-8 h-8 text-indigo-600' />
-              </div>
-              <div>
-                <h1 className='text-2xl sm:text-3xl font-bold text-gray-900'>
-                  Reports
-                </h1>
-                <p className='text-gray-600 mt-1'>
-                  View analytics and generate reports
-                </p>
-              </div>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <span className='bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium'>
-                Active
-              </span>
-            </div>
+      <div className='w-full px-6 xl:px-11 py-3 lg:py-6'>
+        {/* Page Header */}
+        <div className='w-[482px] inline-flex flex-col justify-start items-start gap-1 mb-8'>
+          <div className="self-stretch justify-start text-White-950 text-2xl font-semibold font-['Poppins'] leading-9">
+            {t('reports.title')}
+          </div>
+          <div className="self-stretch justify-start text-White-800 text-base font-normal font-['Lato'] leading-normal">
+            {t('reports.subtitle')}
           </div>
         </div>
 
-        {/* Content Area */}
-        <div className='bg-white rounded-xl shadow-sm p-6'>
-          <h2 className='text-xl font-bold text-gray-900 mb-4'>
-            Reports Dashboard
-          </h2>
-          <p className='text-gray-600 mb-6'>
-            This page will contain reporting and analytics functionality.
-          </p>
-
-          {/* Demo Content */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>
-                Monthly Reports
-              </h3>
-              <p className='text-2xl font-bold text-blue-600'>24</p>
-            </div>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>
-                Generated Today
-              </h3>
-              <p className='text-2xl font-bold text-green-600'>5</p>
-            </div>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>
-                Custom Reports
-              </h3>
-              <p className='text-2xl font-bold text-purple-600'>18</p>
-            </div>
+        {/* Last 7 Days Revenue Chart */}
+        {reportsData?.last7DaysRevenue && (
+          <div className='mb-8'>
+            <RevenueChart
+              data={reportsData.last7DaysRevenue}
+              title={t('reports.last7DaysRevenue')}
+            />
           </div>
-        </div>
+        )}
+
+        {/* Monthly Revenue Chart */}
+        {reportsData?.monthlyRevenue && (
+          <div>
+            <BarChart
+              data={reportsData.monthlyRevenue}
+              title={t('reports.monthlyRevenue')}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

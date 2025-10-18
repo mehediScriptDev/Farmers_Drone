@@ -982,5 +982,11 @@
     "title": "Blog & Research",
     "subtitle": "Industry insights, success stories, and research from India's leading drone service provider.",
     "description": "Explore industry insights, learn from real success stories, and gain in-depth knowledge through our expert whitepapers."
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "Configure and manage payment methods for customers and drone operators",
+    "last7DaysRevenue": "Last 7 days revenue",
+    "monthlyRevenue": "Monthly revenue"
   }
 }
