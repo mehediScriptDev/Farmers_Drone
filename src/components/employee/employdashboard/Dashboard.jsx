@@ -174,7 +174,7 @@ function DashBoard() {
 
       {/* Period Select */}
       <div className="mb-4 md:mb-6 flex flex-col items-start gap-2 relative">
-        <h2 className="text-lg md:text-xl font-normal text-gray-700">{periodOptions.find(p => p.key === selectedPeriod)?.label || t("dashboard.employee.pages.dashboard.dropDown.last30days")} {t("dashboard.employee.pages.dashboard.dropDown.overview")}</h2>
+        <h2 className="text-lg  font-normal text-gray-700">{periodOptions.find(p => p.key === selectedPeriod)?.label || t("dashboard.employee.pages.dashboard.dropDown.last30days")} {t("dashboard.employee.pages.dashboard.dropDown.overview")}</h2>
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}

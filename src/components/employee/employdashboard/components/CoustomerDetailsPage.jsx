@@ -42,12 +42,12 @@ function CustomerDetailsPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex-1 p-4 md:px-12">
+      <div className="flex-1 p-6 md:px-12">
         {/* Back Button */}
         <button
             onClick={() => navigate(-1)}
           aria-label="Back"
-          className="mb-4 text-2xl flex items-center gap-2 p-3 sm:p-4 bg-white border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+          className="mb-2 text-xl flex items-center p-1 sm:p-2  border border-gray-300 rounded-xl text-gray-700  font-medium transition-colors"
         >
           <IoArrowBack className="w-5 h-5" />
         </button>

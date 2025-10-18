@@ -105,7 +105,7 @@ export default function OrderDetailsPage() {
 
     <main className="p-4 md:px-12 ">
       <div className="max-w-8xl mx-auto rounded bg-white">
-        <div className="p-6 md:p-12 bg-[#F4F9FF]">
+        <div className="p-2 md:p-5 bg-[#F4F9FF]">
           {/* ✅ Back Button */}
           <button
             onClick={() => navigate(-1)}
