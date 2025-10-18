@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import { FaRupeeSign, FaAngleUp, FaAngleDown, FaTrophy } from "react-icons/fa";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiUserPlus } from "react-icons/fi";
-import AddCustomerModal from "../common/AddCustomerModal";
-import axiosInstance from "../../config/axiosConfig";
+import AddCustomerModal from "../../common/AddCustomerModal";
+import axiosInstance from "../../../config/axiosConfig";
 import { FiFilter, FiChevronDown } from "react-icons/fi";
 import { CiSearch } from "react-icons/ci";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
+import FieldAgentCreateServiceModal from "./modals/FieldAgentCreateServiceModal";
 
 const FieldAgentDashboard = () => {
   const { user } = useAuth();
@@ -19,10 +20,14 @@ const FieldAgentDashboard = () => {
   const [tableData, setTableData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [creatServiceshowModal, setCreatServiceshowModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const [selectedFilterValue, setSelectedFilterValue] =
+    useState("customerList");
+  console.log(selectedFilterValue);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
@@ -56,11 +61,11 @@ const FieldAgentDashboard = () => {
   };
 
   const menuItems = [
-    { label: "User", value: "user" },
+    { label: "User", value: "customerList" },
     { label: "Role", value: "role" },
-    { label: "Registration Commission", value: "registration" },
-    { label: "First Order Commission", value: "first-order" },
-    { label: "Effective Date", value: "effective-date" },
+    { label: "Registration Commission", value: "registrationCommission" },
+    { label: "First Order Commission", value: "firstOrderCommission" },
+    { label: "Effective Date", value: "effectiveDate" },
   ];
 
   const staticCardHeaders = [
@@ -96,6 +101,12 @@ const FieldAgentDashboard = () => {
     setSortKey(key);
     setSortDir(next);
     setCurrentPage(1);
+  };
+
+  const handleSubmit = (formData) => {
+    console.log("Form data:", formData);
+    // API call or state update korte paren
+    setCreatServiceshowModal(false);
   };
 
   const sortedData = useMemo(() => {
@@ -166,6 +177,7 @@ const FieldAgentDashboard = () => {
   }, [currentPage, totalPages]);
   const handleSelect = (item) => {
     console.log("Selected:", item.label);
+    setSelectedFilterValue(item.value);
     setIsOpen(false);
   };
 
@@ -249,7 +261,7 @@ const FieldAgentDashboard = () => {
             </p>
           </div>
           <div className="bg-white p-8 sm:p-12 rounded-2xl  w-full max-w-xl border border-gray-100">
-            <input type="file" name="" id="" />
+            <button onClick={() => setCreatServiceshowModal(true)}>Create Service</button>
           </div>
         </div>
 
@@ -295,35 +307,36 @@ const FieldAgentDashboard = () => {
 
                   {isOpen && (
                     <div
-                      className="absolute left-0 mt-2 w-64 origin-top-right rounded-lg bg-white shadow-lg "
+                      className="absolute left-0 mt-2 w-64 origin-top-right rounded-lg bg-white shadow-lg text-black"
                       role="menu"
                       aria-orientation="vertical"
                     >
                       <div className="py-1" role="none">
-                        {menuItems.map((item, index) => (
-                          <a
-                            key={index}
-                            onClick={() => handleSelect(item)}
-                            className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-green-600 transition duration-150 ease-in-out cursor-pointer"
-                            role="menuitem" // Accessibility attribute
-                          >
-                            {item.label === "User" && (
-                              <div className="w-1 h-5 mr-3 rounded-sm bg-green-500"></div>
-                            )}
-                            {item.label !== "User" && (
-                              <div className="w-1 h-5 mr-3 bg-transparent"></div>
-                            )}
-
-                            {/* The Label Text */}
-                            <span
-                              className={
-                                item.label === "User" ? "font-semibold" : ""
-                              }
+                        {menuItems.map((item, index) => {
+                          const isSelected = item.value === selectedFilterValue; // <--- নতুন শর্ত
+                          return (
+                            <a
+                              key={index}
+                              onClick={() => handleSelect(item)}
+                              className={`flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-150 ease-in-out cursor-pointer ${
+                                isSelected ? "text-green-600 bg-gray-50" : ""
+                              }`}
+                              role="menuitem"
                             >
-                              {item.label}
-                            </span>
-                          </a>
-                        ))}
+                              <div
+                                className={`w-1 h-5 mr-3 rounded-sm ${
+                                  isSelected ? "bg-green-500" : "bg-transparent"
+                                }`}
+                              ></div>
+                              <span
+                                className={isSelected ? "font-semibold" : ""}
+                              >
+                                {" "}
+                                {item.label}
+                              </span>
+                            </a>
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -345,7 +358,7 @@ const FieldAgentDashboard = () => {
                 <tr>
                   {/* Always visible columns */}
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "customerList"
                         ? sortDir === "asc"
@@ -364,14 +377,14 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
+                          className={`h-4.5 w-4.5 ${
                             sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
+                          className={`h-4.5 w-4.5 -mt-1 ${
                             sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
@@ -398,15 +411,15 @@ const FieldAgentDashboard = () => {
                       <span>{t("dashboard.fieldAgent.tableHeader.Role")}</span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "role" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "role" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -415,7 +428,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-sm md:text-base whitespace-nowrap px-4 py-2 text-left font-semibold text-black"
                     aria-sort={
                       sortKey === "registrationCommission"
                         ? sortDir === "asc"
@@ -436,17 +449,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "registrationCommission" &&
-                            sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "registrationCommission" &&
-                            sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -455,7 +466,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base whitespace-nowrap font-semibold text-black px-6 py-4"
                     aria-sort={
                       sortKey === "firstOrderCommission"
                         ? sortDir === "asc"
@@ -476,17 +487,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "firstOrderCommission" &&
-                            sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "firstOrderCommission" &&
-                            sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -495,7 +504,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "effectiveDate"
                         ? sortDir === "asc"
@@ -514,15 +523,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "effectiveDate" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "effectiveDate" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -533,7 +542,7 @@ const FieldAgentDashboard = () => {
 
                   {/* Scrollable columns */}
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "registrationDate"
                         ? sortDir === "asc"
@@ -552,15 +561,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "registrationDate" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "registrationDate" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -569,7 +578,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "customerType"
                         ? sortDir === "asc"
@@ -588,15 +597,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "customerType" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "customerType" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -605,7 +614,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "nextFollowUpDate"
                         ? sortDir === "asc"
@@ -624,15 +633,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "nextFollowUpDate" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "nextFollowUpDate" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -641,7 +650,7 @@ const FieldAgentDashboard = () => {
                     </button>
                   </th>
                   <th
-                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4"
+                    className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap"
                     aria-sort={
                       sortKey === "serviceInterest"
                         ? sortDir === "asc"
@@ -660,15 +669,15 @@ const FieldAgentDashboard = () => {
                       </span>
                       <span className="flex flex-col leading-none -space-y-1 text-slate-500">
                         <FaAngleUp
-                          className={`h-3.5 w-3.5 ${
-                            sortKey === "serviceInterest" && sortDir === "asc"
+                          className={`h-4.5 w-4.5 ${
+                            sortKey === "customerList" && sortDir === "asc"
                               ? "text-slate-900"
                               : ""
                           }`}
                         />
                         <FaAngleDown
-                          className={`h-3.5 w-3.5 -mt-1 ${
-                            sortKey === "serviceInterest" && sortDir === "desc"
+                          className={`h-4.5 w-4.5 -mt-1 ${
+                            sortKey === "customerList" && sortDir === "desc"
                               ? "text-slate-900"
                               : ""
                           }`}
@@ -676,7 +685,7 @@ const FieldAgentDashboard = () => {
                       </span>
                     </button>
                   </th>
-                  <th className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4">
+                  <th className="w-64 text-left text-sm md:text-base font-semibold text-black px-6 py-4 whitespace-nowrap">
                     {t("dashboard.fieldAgent.tableHeader.QuickActions")}
                   </th>
                 </tr>
@@ -691,10 +700,10 @@ const FieldAgentDashboard = () => {
                       {row.customerList}
                     </td>
                     <td className="py-4 px-6 text-sm text-black">{row.role}</td>
-                    <td className="py-4 px-6 text-sm text-black lg:text-center">
+                    <td className="py-4 px-6 text-sm text-black ">
                       {row.registrationCommission}
                     </td>
-                    <td className="py-4 px-6 text-sm text-black lg:text-center">
+                    <td className="py-4 px-6 text-sm text-black ">
                       {row.firstOrderCommission}
                     </td>
                     <td className="py-4 px-6 text-sm text-black">
@@ -711,7 +720,7 @@ const FieldAgentDashboard = () => {
                     <td className="py-4 px-6 text-sm text-black">
                       {row.nextFollowUpDate}
                     </td>
-                    <td className="py-4 px-6 text-sm text-black lg:text-center">
+                    <td className="py-4 px-6 text-sm text-black r">
                       {row.serviceInterest}
                     </td>
                     <td className="py-4 px-6 text-sm text-black">
@@ -836,6 +845,11 @@ const FieldAgentDashboard = () => {
       <AddCustomerModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
+      />
+      <FieldAgentCreateServiceModal
+        isOpen={creatServiceshowModal}
+        onClose={() => setCreatServiceshowModal(false)}
+        onSubmit={handleSubmit}
       />
     </div>
   );

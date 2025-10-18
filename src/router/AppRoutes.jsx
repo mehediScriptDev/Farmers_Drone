@@ -8,7 +8,6 @@ import NotFoundPage from "../pages/NotFoundPage";
 // Dashboard Components
 import AdminDashboard from "../components/admin/components/AdminDashboard";
 
-import FieldAgentDashboard from "../components/fieldAgent/FieldAgentDashboard";
 
 // Admin Components
 import Complaints from "../components/admin/components/Complaints";
@@ -21,12 +20,13 @@ import Reports from "../components/admin/components/Reports";
 import UserManagement from "../components/admin/components/UserManagement";
 
 // Field Agent Components
-import FieldAgentReports from "../components/fieldAgent/Reports";
-import MyAssignments from "../components/fieldAgent/MyAssignments";
-import LocationTracking from "../components/fieldAgent/LocationTracking";
-import PhotoCapture from "../components/fieldAgent/PhotoCapture";
-import RouteOptimization from "../components/fieldAgent/RouteOptimization";
-import VehicleManagement from "../components/fieldAgent/VehicleManagement";
+import FieldAgentDashboard from "../components/fieldAgent/components/FieldAgentDashboard"
+// import FieldAgentReports from "../components/fieldAgent/Reports";
+// import MyAssignments from "../components/fieldAgent/MyAssignments";
+// import LocationTracking from "../components/fieldAgent/LocationTracking";
+// import PhotoCapture from "../components/fieldAgent/PhotoCapture";
+// import RouteOptimization from "../components/fieldAgent/RouteOptimization";
+// import VehicleManagement from "../components/fieldAgent/VehicleManagement";
 
 // Private Route Components
 import {
@@ -244,30 +244,30 @@ const AppRoutes = createBrowserRouter([
         index: true,
         element: <FieldAgentDashboard />,
       },
-      {
-        path: "reports",
-        element: <FieldAgentReports />,
-      },
-      {
-        path: "assignments",
-        element: <MyAssignments />,
-      },
-      {
-        path: "location-tracking",
-        element: <LocationTracking />,
-      },
-      {
-        path: "photo-capture",
-        element: <PhotoCapture />,
-      },
-      {
-        path: "route-optimization",
-        element: <RouteOptimization />,
-      },
-      {
-        path: "vehicle-management",
-        element: <VehicleManagement />,
-      },
+      // {
+      //   path: "reports",
+      //   element: <FieldAgentReports />,
+      // },
+      // {
+      //   path: "assignments",
+      //   element: <MyAssignments />,
+      // },
+      // {
+      //   path: "location-tracking",
+      //   element: <LocationTracking />,
+      // },
+      // {
+      //   path: "photo-capture",
+      //   element: <PhotoCapture />,
+      // },
+      // {
+      //   path: "route-optimization",
+      //   element: <RouteOptimization />,
+      // },
+      // {
+      //   path: "vehicle-management",
+      //   element: <VehicleManagement />,
+      // },
     ],
   },
   {
