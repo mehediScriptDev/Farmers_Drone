@@ -81,6 +81,12 @@ const BarChart = ({ data, title = 'Bar Chart' }) => {
           max: 80000,
         },
       },
+      datasets: {
+        bar: {
+          barPercentage: 0.5,
+          categoryPercentage: 0.7,
+        },
+      },
       interaction: {
         intersect: false,
         mode: 'index',
