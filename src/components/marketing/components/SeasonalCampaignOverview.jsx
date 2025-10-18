@@ -93,7 +93,7 @@ export default function SeasonalCampaignOverview() {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white rounded-b-lg shadow overflow-hidden">
           {campaigns.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500">No campaigns found</p>
@@ -141,7 +141,7 @@ export default function SeasonalCampaignOverview() {
                       <td className="px-6 py-4 text-right">
                         <Link
                           to={`${url}/${campaign.id}`}
-                          className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
+                          className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-black font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
                           See details
                         </Link>

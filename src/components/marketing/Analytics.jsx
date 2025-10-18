@@ -4,7 +4,7 @@ import SeasonalCampaignOverview from "./components/SeasonalCampaignOverview";
 
 const Analytics = () => {
   return (
-    <div className="md:px-12 mx-auto my-5 py-6 px-4">
+    <div className="md:px-12 mx-auto  px-4">
       <div className="flex flex-col gap-10">
         <RegionalDemandOverview />
         <SeasonalCampaignOverview />

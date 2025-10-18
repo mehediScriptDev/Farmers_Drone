@@ -170,7 +170,7 @@ const LoyalityCampaingnDetails = () => {
   ];
 
   return (
-    <div className="bg-[#F9FAFB] p-4 md:px-12">
+    <div className="bg-[#F9FFFD] p-4 md:px-12">
       <div>
         {/* Header */}
         <div className="mb-2 md:mb-4 lg:mb-8">

@@ -168,12 +168,12 @@ const SeasonalCampaignDetails = () => {
   ];
 
   return (
-    <div className="bg-[#F9FAFB] p-4 md:px-12">
+    <div className="bg-[#F9FFFD] p-4 md:px-12">
       <div>
         {/* Header */}
         <div className="mb-2 md:mb-4 lg:mb-8">
           <div className="">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-0 md:mt-4">
               <button
                 className="flex items-center text-black hover:text-gray-900 cursor-pointer"
                 onClick={() => navigate(-1)}

@@ -8,25 +8,25 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
       <table className="w-full min-w-max">
         <thead className="bg-gray-50 border-b border-gray-200">
           <tr>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Lead")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Contact")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Source")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Location")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Score")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Status")}
             </th>
-            <th className="px-3 md:px-6 py-3 text-left text-xs md:text-lg font-medium text-black whitespace-nowrap">
+            <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Action")}
             </th>
           </tr>
@@ -34,18 +34,18 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
         <tbody className="divide-y divide-gray-200">
           {data.map((activity) => (
             <tr key={activity.id} className="hover:bg-gray-50">
-              <td className="py-3 px-4 text-xs md:text-lg">{activity.lead}</td>
-              <td className="py-3 px-4 whitespace-pre-line text-xs md:text-lg">
+              <td className="py-3 px-4 text-base md:text-lg">{activity.lead}</td>
+              <td className="py-3 px-4 whitespace-pre-line text-base md:text-lg">
                 {activity.contact}
               </td>
-              <td className="py-3 px-4 text-xs md:text-lg">
+              <td className="py-3 px-4 text-base md:text-lg">
                 {activity.source}
               </td>
-              <td className="py-3 px-4 text-xs md:text-lg">
+              <td className="py-3 px-4 text-base md:text-lg">
                 {activity.location}
               </td>
               <td
-                className={`py-3 px-4 text-xs md:text-lg font-semibold ${
+                className={`py-3 px-4 text-base md:text-lg font-semibold ${
                   activity.status === "Hot"
                     ? "text-red-600"
                     : activity.status === "Warm"
@@ -55,7 +55,7 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
               >
                 <span className="ml-4">{activity.score}</span>
               </td>
-              <td className="py-3 px-4 text-xs md:text-lg">
+              <td className="py-3 px-4 text-base md:text-lg">
                 <span
                   className={`inline-block px-3 py-1 rounded-full text-xs md:ml-3 font-semibold ${
                     statusStyles[activity.status]
@@ -64,7 +64,7 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
                   {activity.status}
                 </span>
               </td>
-              <td className="py-3 px-4 text-xs md:text-lg">
+              <td className="py-3 px-4 text-base md:text-lg">
                 <button
                   className="rounded-full p-1 text-green-200 transition md:ml-4"
                   onClick={onOpenClock}

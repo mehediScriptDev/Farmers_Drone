@@ -141,7 +141,7 @@ export default function LoyalityCampaingnOverview() {
                       <td className="px-6 py-4 text-right">
                         <Link
                           to={`${url}/${campaign.id}`}
-                          className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
+                          className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-black font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
                           See details
                         </Link>

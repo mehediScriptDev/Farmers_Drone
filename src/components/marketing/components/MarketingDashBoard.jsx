@@ -343,7 +343,7 @@ const MarketingDashBoard = () => {
         <div className="my-4 md:my-6 bg-white p-3 md:p-6 rounded-2xl">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg   md:text-2xl font-bold text-gray-800 w-1/2">
-              {t("dashboard.marketing.LoyaltyPrograms")}
+              {t("dashboard.marketing.Loyaltyprograms")}
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
