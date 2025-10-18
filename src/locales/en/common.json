@@ -74,6 +74,22 @@
         "status": {
           "testing": "Testing",
           "active": "Active"
+        },
+        "modal": {
+          "title": "Add new payment methods",
+          "apiKeyLabel": "API Key",
+          "apiKeyPlaceholder": "***********",
+          "urlLabel": "URL",
+          "urlPlaceholder": "https://api.droneplatform.com/webhooks/payments",
+          "saveButton": "Save Configuration"
+        },
+        "configModal": {
+          "title": "Payment Management",
+          "apiKeyLabel": "API Key",
+          "statusLabel": "Status",
+          "webhookUrlLabel": "Webhook URL",
+          "saveButton": "Save Configuration",
+          "cancelButton": "Cancel"
         }
       },
 

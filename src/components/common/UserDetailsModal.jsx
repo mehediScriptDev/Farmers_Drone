@@ -21,7 +21,7 @@ const UserDetailsModal = ({ isOpen, onClose, user, onApprove, onReject }) => {
 
   return (
     <div
-      className='fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4'
+      className='fixed inset-0 bg-black/70 bg-opacity-70 flex justify-center items-center z-50 p-4'
       onClick={onClose}
     >
       <div

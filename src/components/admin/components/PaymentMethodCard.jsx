@@ -1,7 +1,8 @@
 import React from 'react';
 import PaymentMethodItem from './PaymentMethodItem';
 
-const PaymentMethodCard = ({ title, methods }) => {
+// Add onSettingsClick to the props destructuring
+const PaymentMethodCard = ({ title, methods, onSettingsClick }) => {
   return (
     <div className='flex-1 rounded-lg border border-gray-200 flex flex-col'>
       <div className='self-stretch px-6 py-3.5 border-b border-gray-200'>
@@ -11,7 +12,12 @@ const PaymentMethodCard = ({ title, methods }) => {
       </div>
       <div className='self-stretch flex flex-col justify-center items-start'>
         {methods.map((method, index) => (
-          <PaymentMethodItem key={index} method={method} />
+          <PaymentMethodItem
+            key={method.id || index} // Use a unique key like method.id if available
+            method={method}
+            // Pass the onSettingsClick function down to each item
+            onSettingsClick={onSettingsClick}
+          />
         ))}
       </div>
     </div>

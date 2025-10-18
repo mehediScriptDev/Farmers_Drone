@@ -74,6 +74,22 @@
         "status": {
           "testing": "परीक्षण",
           "active": "सक्रिय"
+        },
+        "modal": {
+          "title": "नई भुगतान विधियाँ जोड़ें",
+          "apiKeyLabel": "एपीआई कुंजी",
+          "apiKeyPlaceholder": "***********",
+          "urlLabel": "यूआरएल",
+          "urlPlaceholder": "https://api.droneplatform.com/webhooks/payments",
+          "saveButton": "कॉन्फ़िगरेशन सहेजें"
+        },
+        "configModal": {
+          "title": "भुगतान प्रबंधन",
+          "apiKeyLabel": "एपीआई कुंजी",
+          "statusLabel": "स्थिति",
+          "webhookUrlLabel": "वेबहूक यूआरएल",
+          "saveButton": "कॉन्फ़िगरेशन सहेजें",
+          "cancelButton": "रद्द करें"
         }
       },
 
