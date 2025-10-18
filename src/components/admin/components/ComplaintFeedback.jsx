@@ -68,63 +68,63 @@ const ComplaintFeedback = () => {
           {/* Top Section - Ticket Description and Details */}
           <div className='w-full flex gap-6'>
             {/* Ticket Description */}
-            <div className='flex-1 p-5 bg-white rounded-lg border border-zinc-100 flex flex-col gap-5'>
-              <div className="text-neutral-800 text-2xl font-semibold font-['Poppins'] leading-9">
+            <div className='flex-1 p-6 bg-white rounded-lg border border-gray-200 shadow-sm flex flex-col gap-5'>
+              <div className="text-gray-900 text-xl font-semibold font-['Poppins'] leading-7">
                 Ticket description
               </div>
-              <div className="text-neutral-500 text-base font-normal font-['Lato'] leading-normal whitespace-pre-line">
+              <div className="text-gray-600 text-sm font-normal font-['Lato'] leading-relaxed whitespace-pre-line">
                 {complaint.description}
               </div>
             </div>
 
             {/* Ticket Details */}
-            <div className='flex-1 p-5 bg-white rounded-lg border border-zinc-100 flex flex-col gap-5'>
-              <div className="text-White-950 text-2xl font-semibold font-['Poppins'] leading-9">
+            <div className='flex-1 p-6 bg-white rounded-lg border border-gray-200 shadow-sm flex flex-col gap-5'>
+              <div className="text-gray-900 text-xl font-semibold font-['Poppins'] leading-7">
                 Ticket details
               </div>
-              <div className='flex flex-col gap-3'>
+              <div className='flex flex-col gap-4'>
                 <div className='flex items-center gap-2'>
-                  <div className="text-neutral-800 text-xl font-medium font-['Poppins'] leading-loose">
+                  <div className="text-gray-700 text-sm font-semibold font-['Poppins'] leading-tight min-w-[120px]">
                     ID:
                   </div>
-                  <div className="text-White-950 text-sm font-normal font-['Lato'] leading-snug">
+                  <div className="text-gray-600 text-sm font-normal font-['Lato'] leading-tight">
                     {complaint.ticketId}
                   </div>
                 </div>
                 <div className='flex items-start gap-2'>
-                  <div className="text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
+                  <div className="text-gray-700 text-sm font-semibold font-['Poppins'] leading-tight min-w-[120px]">
                     Subject:
                   </div>
-                  <div className="flex-1 text-White-950 text-sm font-normal font-['Lato'] leading-snug">
+                  <div className="flex-1 text-gray-600 text-sm font-normal font-['Lato'] leading-tight">
                     {complaint.subject}
                   </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <div className="text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
+                  <div className="text-gray-700 text-sm font-semibold font-['Poppins'] leading-tight min-w-[120px]">
                     Requester type:
                   </div>
-                  <div className="flex-1 text-White-950 text-sm font-normal font-['Lato'] leading-snug">
+                  <div className="flex-1 text-gray-600 text-sm font-normal font-['Lato'] leading-tight">
                     Customer account
                   </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <div className="text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
+                  <div className="text-gray-700 text-sm font-semibold font-['Poppins'] leading-tight min-w-[120px]">
                     Created on:
                   </div>
                   <div className='flex-1'>
-                    <span className="text-White-950 text-sm font-normal font-['Lato'] leading-snug">
+                    <span className="text-gray-600 text-sm font-normal font-['Lato'] leading-tight">
                       Sep 06, 2025{' '}
                     </span>
-                    <span className="text-White-500 text-xs font-normal font-['Lato'] leading-none">
+                    <span className="text-gray-400 text-xs font-normal font-['Lato'] leading-none">
                       20:44:58
                     </span>
                   </div>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <div className="text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
+                  <div className="text-gray-700 text-sm font-semibold font-['Poppins'] leading-tight min-w-[120px]">
                     Contact:
                   </div>
-                  <div className="flex-1 text-White-950 text-sm font-normal font-['Lato'] leading-snug">
+                  <div className="flex-1 text-gray-600 text-sm font-normal font-['Lato'] leading-tight">
                     example@gmail.com
                   </div>
                 </div>
