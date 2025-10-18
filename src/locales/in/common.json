@@ -621,7 +621,8 @@
       "jobs": "नौकरियां",
       "paymentsManagement": "भुगतान प्रबंधन",
       "reports": "रिपोर्ट",
-      "complaints": "शिकायतें"
+      "complaints": "शिकायतें",
+      "services": "सेवाएं"
     },
     "employee": {
       "dashboard": "डैशबोर्ड",

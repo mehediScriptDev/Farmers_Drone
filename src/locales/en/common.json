@@ -610,7 +610,8 @@
       "jobs": "Jobs",
       "paymentsManagement": "Payments management",
       "reports": "Reports",
-      "complaints": "Complaints"
+      "complaints": "Complaints",
+      "services": "Services"
     },
     "employee": {
       "dashboard": "Dashboard",
