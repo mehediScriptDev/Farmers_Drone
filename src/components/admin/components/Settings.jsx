@@ -1,70 +1,77 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IoArrowBack, IoSettingsOutline } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
+import { IoArrowBack } from 'react-icons/io5';
+import PaymentMethodCard from './PaymentMethodCard';
 import { Header } from '../../common/Header';
 
 const Settings = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const paymentMethods = {
     indianSystems1: [
       {
         name: 'UPI Gateway',
         status: 'UPI Gateway',
-        statusColor: 'text-White-950',
+        statusColor: 'text-gray-900',
       },
-      { name: 'BBPS', status: 'Testing', statusColor: 'text-Dark-Gray-400' },
-      { name: 'AePS', status: 'UPI Gateway', statusColor: 'text-White-950' },
+      {
+        name: 'BBPS',
+        status: t('dashboard.admin.settings.status.testing'),
+        statusColor: 'text-gray-400',
+      },
+      { name: 'AePS', status: 'UPI Gateway', statusColor: 'text-gray-900' },
       {
         name: 'RuPAY',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
       {
         name: 'IMPS',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
     ],
     international: [
       {
         name: 'PayPal',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
       {
         name: 'Stripe',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
     ],
     indianSystems2: [
       {
         name: 'Razorpay',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
       {
         name: 'PayU',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
     ],
     walletServices: [
       {
         name: 'Paytm',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
       {
         name: 'PhonePe',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
       {
         name: 'Google Pay',
-        status: 'Active',
-        statusColor: 'text-Lime-Green-500-Raw',
+        status: t('dashboard.admin.settings.status.active'),
+        statusColor: 'text-green-500',
       },
     ],
   };
@@ -72,163 +79,53 @@ const Settings = () => {
   return (
     <>
       <Header />
-      <div className='w-[1440px] min-h-screen mx-auto relative bg-white'>
-        {/* Back Button */}
-        <div className='w-[1200px] h-12 mx-auto absolute left-[120px] top-[120px]'>
-          <button
-            onClick={() => navigate('/admin')}
-            className='flex justify-start items-center gap-3'
-          >
-            <IoArrowBack className='w-5 h-5 text-neutral-800' />
-          </button>
-        </div>
-
-        {/* Main Content */}
-        <div className='w-[1064px] absolute left-[188px] top-[200px] flex flex-col justify-start items-start gap-10'>
-          {/* Header Section */}
-          <div className='self-stretch flex justify-between items-center'>
-            <div className='w-[482px] flex flex-col justify-start items-start gap-1'>
-              <div className="self-stretch justify-start text-White-950 text-2xl font-semibold font-['Poppins'] leading-9">
-                Backend Integrations
-              </div>
-              <div className="self-stretch justify-start text-White-800 text-base font-normal font-['Lato'] leading-normal">
-                Manage payment gateway connections and API configurations
-              </div>
-            </div>
-            <div className='px-6 py-3 bg-Lime-Green-500-Raw rounded flex justify-center items-center gap-2'>
-              <div className="justify-start text-white text-base font-medium font-['Poppins'] leading-normal">
-                Add payment methods
-              </div>
-            </div>
+      <div className='w-full min-h-screen bg-[#FAFFFD] p-6 md:p-10 lg:p-12'>
+        <div className='max-w-6xl mx-auto'>
+          {/* Back Button */}
+          <div className='mb-8'>
+            <button
+              onClick={() => navigate(-1)} // Navigates to the previous page
+              className='flex items-center gap-3 text-gray-800 hover:text-black'
+            >
+              <IoArrowBack className='w-6 h-6' />
+            </button>
           </div>
 
-          {/* First Row: Indian Systems & International */}
-          <div className='self-stretch flex justify-start items-start gap-6'>
-            {/* Indian Systems Card */}
-            <div className='flex-1 pb-3 rounded-lg border border-White-200 flex flex-col justify-start items-start gap-8'>
-              <div className='self-stretch px-6 py-3.5 border-b border-White-200 flex justify-start items-center gap-2'>
-                <div className="justify-start text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
-                  Indian Systems
-                </div>
+          {/* Main Content */}
+          <div className='flex flex-col justify-start items-start gap-10'>
+            {/* Header Section */}
+            <div className='self-stretch flex flex-col md:flex-row justify-between items-start md:items-center gap-4'>
+              <div className='flex-1'>
+                <h1 className="text-gray-900 text-2xl font-semibold font-['Poppins'] leading-9">
+                  {t('dashboard.admin.settings.title')}
+                </h1>
+                <p className="text-gray-500 text-base font-normal font-['Lato'] leading-normal mt-1">
+                  {t('dashboard.admin.settings.subtitle')}
+                </p>
               </div>
-              <div className='self-stretch flex flex-col justify-center items-start'>
-                {paymentMethods.indianSystems1.map((method, index) => (
-                  <div
-                    key={index}
-                    className='self-stretch px-6 py-3 flex justify-between items-center'
-                  >
-                    <div className='flex flex-col justify-center items-start gap-2'>
-                      <div className="justify-start text-White-950 text-base font-medium font-['Poppins'] leading-normal">
-                        {method.name}
-                      </div>
-                      <div
-                        className={`justify-start text-xs font-normal font-['Lato'] leading-none ${method.statusColor}`}
-                      >
-                        {method.status}
-                      </div>
-                    </div>
-                    <button className='w-6 h-6 relative flex items-center justify-center'>
-                      <IoSettingsOutline className='w-5 h-5 text-Dark-Gray-400' />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <button className="px-6 py-3 bg-green-600 rounded text-white text-base font-medium font-['Poppins'] leading-normal hover:bg-green-700 transition">
+                {t('dashboard.admin.settings.addPaymentButton')}
+              </button>
             </div>
 
-            {/* International Card */}
-            <div className='flex-1 pb-3 rounded-lg border border-White-200 flex flex-col justify-start items-start gap-8'>
-              <div className='self-stretch px-6 py-3.5 border-b border-White-200 flex justify-start items-center gap-2'>
-                <div className="justify-start text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
-                  International
-                </div>
-              </div>
-              <div className='self-stretch flex flex-col justify-center items-start'>
-                {paymentMethods.international.map((method, index) => (
-                  <div
-                    key={index}
-                    className='self-stretch px-6 py-3 flex justify-between items-center'
-                  >
-                    <div className='flex flex-col justify-center items-start gap-2'>
-                      <div className="justify-start text-White-950 text-base font-medium font-['Poppins'] leading-normal">
-                        {method.name}
-                      </div>
-                      <div
-                        className={`justify-start text-xs font-normal font-['Lato'] leading-none ${method.statusColor}`}
-                      >
-                        {method.status}
-                      </div>
-                    </div>
-                    <button className='w-6 h-6 relative flex items-center justify-center'>
-                      <IoSettingsOutline className='w-5 h-5 text-Dark-Gray-400' />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Second Row: Indian Systems & Wallet Services */}
-          <div className='self-stretch flex justify-start items-start gap-6'>
-            {/* Indian Systems Card */}
-            <div className='flex-1 pb-3 rounded-lg border border-White-200 flex flex-col justify-start items-start gap-8'>
-              <div className='self-stretch px-6 py-3.5 border-b border-White-200 flex justify-start items-center gap-2'>
-                <div className="justify-start text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
-                  Indian Systems
-                </div>
-              </div>
-              <div className='self-stretch flex flex-col justify-center items-start'>
-                {paymentMethods.indianSystems2.map((method, index) => (
-                  <div
-                    key={index}
-                    className='self-stretch px-6 py-3 flex justify-between items-center'
-                  >
-                    <div className='flex flex-col justify-center items-start gap-2'>
-                      <div className="justify-start text-White-950 text-base font-medium font-['Poppins'] leading-normal">
-                        {method.name}
-                      </div>
-                      <div
-                        className={`justify-start text-xs font-normal font-['Lato'] leading-none ${method.statusColor}`}
-                      >
-                        {method.status}
-                      </div>
-                    </div>
-                    <button className='w-6 h-6 relative flex items-center justify-center'>
-                      <IoSettingsOutline className='w-5 h-5 text-Dark-Gray-400' />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Wallet Services Card */}
-            <div className='flex-1 pb-3 rounded-lg border border-White-200 flex flex-col justify-start items-start gap-8'>
-              <div className='self-stretch px-6 py-3.5 border-b border-White-200 flex justify-start items-center gap-2'>
-                <div className="justify-start text-White-950 text-xl font-medium font-['Poppins'] leading-loose">
-                  Wallet Services
-                </div>
-              </div>
-              <div className='self-stretch flex flex-col justify-center items-start'>
-                {paymentMethods.walletServices.map((method, index) => (
-                  <div
-                    key={index}
-                    className='self-stretch px-6 py-3 flex justify-between items-center'
-                  >
-                    <div className='flex flex-col justify-center items-start gap-2'>
-                      <div className="justify-start text-White-950 text-base font-medium font-['Poppins'] leading-normal">
-                        {method.name}
-                      </div>
-                      <div
-                        className={`justify-start text-xs font-normal font-['Lato'] leading-none ${method.statusColor}`}
-                      >
-                        {method.status}
-                      </div>
-                    </div>
-                    <button className='w-6 h-6 relative flex items-center justify-center'>
-                      <IoSettingsOutline className='w-5 h-5 text-Dark-Gray-400' />
-                    </button>
-                  </div>
-                ))}
-              </div>
+            {/* Cards Grid */}
+            <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6'>
+              <PaymentMethodCard
+                title={t('dashboard.admin.settings.indianSystems')}
+                methods={paymentMethods.indianSystems1}
+              />
+              <PaymentMethodCard
+                title={t('dashboard.admin.settings.international')}
+                methods={paymentMethods.international}
+              />
+              <PaymentMethodCard
+                title={t('dashboard.admin.settings.indianSystems')}
+                methods={paymentMethods.indianSystems2}
+              />
+              <PaymentMethodCard
+                title={t('dashboard.admin.settings.walletServices')}
+                methods={paymentMethods.walletServices}
+              />
             </div>
           </div>
         </div>

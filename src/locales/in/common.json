@@ -64,6 +64,18 @@
           "showing": "{{total}} उपयोगकर्ताओं में से {{current}} दिखा रहे हैं"
         }
       },
+      "settings": {
+        "title": "बैकएंड इंटीग्रेशन",
+        "subtitle": "पेमेंट गेटवे कनेक्शन और एपीआई कॉन्फ़िगरेशन प्रबंधित करें",
+        "addPaymentButton": "भुगतान विधियाँ जोड़ें",
+        "indianSystems": "भारतीय सिस्टम",
+        "international": "अंतर्राष्ट्रीय",
+        "walletServices": "वॉलेट सेवाएं",
+        "status": {
+          "testing": "परीक्षण",
+          "active": "सक्रिय"
+        }
+      },
 
       "userManagement": {
         "title": "उपयोगकर्ता प्रबंधन",

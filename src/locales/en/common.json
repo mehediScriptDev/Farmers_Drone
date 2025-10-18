@@ -64,6 +64,18 @@
           "showing": "Showing {{current}} of {{total}} Users"
         }
       },
+      "settings": {
+        "title": "Backend Integrations",
+        "subtitle": "Manage payment gateway connections and API configurations",
+        "addPaymentButton": "Add payment methods",
+        "indianSystems": "Indian Systems",
+        "international": "International",
+        "walletServices": "Wallet Services",
+        "status": {
+          "testing": "Testing",
+          "active": "Active"
+        }
+      },
 
       "userManagement": {
         "title": "User Management",
