@@ -294,6 +294,24 @@
         "previous": "पिछला",
         "next": "अगला"
       },
+      "createServiceModal": {
+        "CreateService": "सेवा बनाएँ",
+        "ServiceTitle": "सेवा का शीर्षक",
+        "AquaDomoService": "Aqua Domo Service",
+        "ServicePrice": "सेवा की कीमत",
+        "PriceValue": "$130 / एकड़",
+        "Industry": "उद्योग",
+        "IndustryValue": "मैपिंग और सर्वेक्षण",
+        "Agriculture": "कृषि",
+        "Construction": "निर्माण",
+        "Environmental": "पर्यावरण",
+        "SubCategory": "उप श्रेणी",
+        "SubCategoryValue": "डोमो मैपिंग और सर्वेक्षण (MMD1)",
+        "ServiceDetails": "सेवा विवरण",
+        "DescribeYourService": "अपनी सेवा का वर्णन करें",
+        "ServiceLocation": "सेवा स्थान",
+        "ServiceLocationValue": "डोमो मैपिंग और सर्वेक्षण (MMD1)"
+      },
       "FirstModal": {
         "addCustomer": "ग्राहक जोड़ें",
         "customerInfo": "ग्राहक जानकारी",

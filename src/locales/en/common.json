@@ -282,6 +282,24 @@
         "previous": "Previous",
         "next": "Next"
       },
+      "createServiceModal": {
+        "CreateService": "Create Service",
+        "ServiceTitle": "Service Title",
+        "AquaDomoService": "Aqua Domo Service",
+        "ServicePrice": "Service Price",
+        "PriceValue": "$130 / Acre",
+        "Industry": "Industry",
+        "IndustryValue": "Mapping & Surveying",
+        "Agriculture": "Agriculture",
+        "Construction": "Construction",
+        "Environmental": "Environmental",
+        "SubCategory": "Sub category",
+        "SubCategoryValue": "Domo Mapping & Surveying (MMD1)",
+        "ServiceDetails": "Service Details",
+        "DescribeYourService": "Describe your Service",
+        "ServiceLocation": "Service location",
+        "ServiceLocationValue": "Domo Mapping & Surveying (MMD1)"
+      },
       "FirstModal": {
         "addCustomer": "Add Customer",
         "customerInfo": "Customer Info",

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IoChevronDown, IoArrowBack } from "react-icons/io5";
 
 export default function FieldAgentCreateServiceModal({
@@ -6,13 +7,16 @@ export default function FieldAgentCreateServiceModal({
   onClose,
   onSubmit,
 }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
-    serviceTitle: "Aqua Domo Service",
-    servicePrice: "$130 / Acre",
+    serviceTitle: t("dashboard.fieldAgent.createServiceModal.AquaDomoService"),
+    servicePrice: t("dashboard.fieldAgent.createServiceModal.PriceValue"),
     industry: "Mapping & Surveying",
     subCategory: "Domo Mapping & Surveying (MMD1)",
     serviceDetails: "",
-    serviceLocation: "Domo Mapping & Surveying (MMD1)",
+    serviceLocation: t(
+      "dashboard.fieldAgent.createServiceModal.ServiceLocationValue"
+    ),
   });
 
   const handleSubmit = () => {
@@ -37,7 +41,7 @@ export default function FieldAgentCreateServiceModal({
             <IoArrowBack size={20} />
           </button>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#002244] text-center w-full mr-8">
-            Create Service
+            {t("dashboard.fieldAgent.createServiceModal.CreateService")}
           </h2>
         </div>
 
@@ -46,7 +50,7 @@ export default function FieldAgentCreateServiceModal({
           {/* Service Title */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Service Title
+              {t("dashboard.fieldAgent.createServiceModal.ServiceTitle")}
             </label>
             <input
               type="text"
@@ -61,7 +65,7 @@ export default function FieldAgentCreateServiceModal({
           {/* Service Price */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Service Price
+              {t("dashboard.fieldAgent.createServiceModal.ServicePrice")}
             </label>
             <div className="relative">
               <input
@@ -78,7 +82,7 @@ export default function FieldAgentCreateServiceModal({
           {/* Industry */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Industry
+              {t("dashboard.fieldAgent.createServiceModal.Industry")}
             </label>
             <div className="relative">
               <select
@@ -88,10 +92,12 @@ export default function FieldAgentCreateServiceModal({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2  appearance-none bg-white text-sm"
               >
-                <option>Mapping & Surveying</option>
-                <option>Agriculture</option>
-                <option>Construction</option>
-                <option>Environmental</option>
+                <option>
+                  {t("dashboard.fieldAgent.createServiceModal.IndustryValue")}
+                </option>
+                <option>
+                  {t("dashboard.fieldAgent.createServiceModal.Agriculture")}
+                </option>
               </select>
               <IoChevronDown
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
@@ -103,7 +109,7 @@ export default function FieldAgentCreateServiceModal({
           {/* Sub category */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Sub category
+              {t("dashboard.fieldAgent.createServiceModal.SubCategory")}
             </label>
             <div className="relative">
               <select
@@ -113,10 +119,11 @@ export default function FieldAgentCreateServiceModal({
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2  appearance-none bg-white text-sm"
               >
-                <option>Domo Mapping & Surveying (MMD1)</option>
-                <option>Aerial Surveying</option>
-                <option>Land Surveying</option>
-                <option>3D Mapping</option>
+                <option>
+                  {t(
+                    "dashboard.fieldAgent.createServiceModal.SubCategoryValue"
+                  )}
+                </option>
               </select>
               <IoChevronDown
                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
@@ -128,14 +135,16 @@ export default function FieldAgentCreateServiceModal({
           {/* Service Details */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Service Details
+              {t("dashboard.fieldAgent.createServiceModal.ServiceDetails")}
             </label>
             <textarea
               value={formData.serviceDetails}
               onChange={(e) =>
                 setFormData({ ...formData, serviceDetails: e.target.value })
               }
-              placeholder="Describe your Service"
+              placeholder={t(
+                "dashboard.fieldAgent.createServiceModal.DescribeYourService"
+              )}
               rows="4"
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2  resize-none bg-white text-sm"
             />
@@ -144,7 +153,7 @@ export default function FieldAgentCreateServiceModal({
           {/* Service location */}
           <div>
             <label className="block text-sm md:text-base font-medium text-[#002244] mb-2">
-              Service location
+              {t("dashboard.fieldAgent.createServiceModal.ServiceDetails")}
             </label>
             <input
               type="text"
