@@ -102,11 +102,11 @@ const SupportPage = () => {
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'High':
-        return 'text-red-600';
+        return 'text-[#DC3545] bg-[#FCEBEC]';
       case 'Medium':
-        return 'text-orange-500';
+        return 'text-[#FFC107] bg-[#FFF9E6]';
       case 'Low':
-        return 'text-green-600';
+        return 'text-[#28A844] bg-[#EAF6EC]';
       default:
         return 'text-gray-600';
     }
@@ -282,7 +282,7 @@ const SupportPage = () => {
                       </td>
                       <td className='px-3 md:px-6 py-4 text-xs md:text-sm whitespace-nowrap'>
                         <span
-                          className={`font-medium ${getPriorityColor(
+                          className={`font-medium inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${getPriorityColor(
                             item.priority
                           )}`}
                         >

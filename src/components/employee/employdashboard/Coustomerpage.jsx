@@ -1,29 +1,33 @@
-import { Eye } from 'lucide-react';
-import { useCallback, useEffect, useState } from 'react';
-
-import RegistrationModal from './components/Modal/RegistrationModal';
-
-import { useTranslation } from 'react-i18next';
-import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from './components/Modal/AssistProfileSetupModal';
-import axiosInstance from '../../../config/axiosConfig';
-import { Link, useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useState, useRef } from 'react';
+import { BiChevronDown } from 'react-icons/bi';
 import { LuEye } from 'react-icons/lu';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-
+import { Link } from 'react-router-dom';
+import axiosInstance from '../../../config/axiosConfig';
+import { useTranslation } from 'react-i18next';
+import RegistrationModal from './components/Modal/RegistrationModal';
+import {
+  AssistProfileSetupModal2,
+  PersonalInfoModal,
+  ServiceLocationModal,
+  VerificationModal,
+} from './components/Modal/AssistProfileSetupModal';
 
 const Coustomerpage = () => {
   const [open, setOpen] = useState(false);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const navigate = useNavigate();
-
   const [mainModalOpen, setMainModalOpen] = useState(false);
   const [subModalType, setSubModalType] = useState(null);
-  const [customerEmail, setCustomerEmail] = useState("");
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownPositions, setDropdownPositions] = useState({});
+  const buttonRefs = useRef({}); 
+
+  const { t } = useTranslation();
+  const itemsPerPage = 4;
+  const totalPages = Math.ceil(activities.length / itemsPerPage);
 
   const handleOpenSubModal = useCallback((setupType, email) => {
     setCustomerEmail(email);
@@ -35,8 +39,6 @@ const Coustomerpage = () => {
     setSubModalType(null);
     setMainModalOpen(true);
   }, []);
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(activities.length / itemsPerPage);
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -46,10 +48,8 @@ const Coustomerpage = () => {
           '/employee/data/customerManagementData.json'
         );
         const data = response.data;
-        console.log(data.customers[0])
         setActivities(
           data.customers.map((customer) => ({
-
             id: customer.id,
             name: customer.serviceName,
             company: customer.company,
@@ -67,7 +67,6 @@ const Coustomerpage = () => {
           }))
         );
       } catch (err) {
-        console.error('Error fetching customers:', err);
         setError(err.message || 'Failed to load customer data');
       } finally {
         setLoading(false);
@@ -75,6 +74,12 @@ const Coustomerpage = () => {
     };
     fetchCustomerData();
   }, []);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedActivities = activities.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
@@ -84,11 +89,55 @@ const Coustomerpage = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedActivities = activities.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  // Dropdown logic
+  const toggleDropdown = (index) => {
+    if (activeDropdown === index) {
+      setActiveDropdown(null);
+    } else {
+      const shouldOpenUp = index >= paginatedActivities.length - 2; // last 2 open upward
+      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+      setActiveDropdown(index);
+    }
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        activeDropdown !== null &&
+        buttonRefs.current[activeDropdown] &&
+        !buttonRefs.current[activeDropdown].contains(event.target)
+      ) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [activeDropdown]);
+
+  const handleProgressChange = (actualIndex, status) => {
+    setActivities((prev) => {
+      const updated = [...prev];
+      updated[actualIndex].progress = status;
+      return updated;
+    });
+    setActiveDropdown(null);
+  };
+
+  const getProgressColor = (progress) => {
+    switch (progress) {
+      case 'In Progress':
+        return 'bg-[#394C6B] text-white';
+      case 'Completed':
+        return 'bg-[#28A844] text-white';
+      case 'Reschedule':
+        return 'bg-[#FFC107] text-white';
+      default:
+        return 'bg-[#394C6B] text-white';
+    }
+  };
 
   if (loading)
     return (
@@ -98,13 +147,12 @@ const Coustomerpage = () => {
     );
   if (error)
     return (
-      <div className="p-8 text-center text-red-500 font-medium">
-        {error}
-      </div>
+      <div className="p-8 text-center text-red-500 font-medium">{error}</div>
     );
 
   return (
-    <div className="flex-1 p-4 md:px-12 ">
+    <div className="flex-1 p-4 md:px-12">
+      {/* Header */}
       <div className="mb-6 md:mb-8">
         <h1 className="text-xl md:text-3xl font-bold text-[#002244] mb-2">
           {t('dashboard.employee.title.customPageTitle')}
@@ -115,6 +163,7 @@ const Coustomerpage = () => {
       </div>
 
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        {/* Top Buttons */}
         <div className="p-4 md:p-6 border-b border-gray-200">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <h2 className="text-lg md:text-xl font-bold text-gray-900">
@@ -133,18 +182,16 @@ const Coustomerpage = () => {
               >
                 {t('dashboard.employee.button.assistProfile')}
               </button>
-             <Link to="/employee/customers/report-analysis">
-              <button
-               
-                className="px-4 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base"
-              >
-                {t('dashboard.employee.button.reportAnalysis')}
-              </button>
-             </Link>
+              <Link to="/employee/customers/report-analysis">
+                <button className="px-4 w-full md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base">
+                  {t('dashboard.employee.button.reportAnalysis')}
+                </button>
+              </Link>
             </div>
           </div>
         </div>
 
+        {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
             <thead className="bg-[#F5F7FA] border-b border-gray-200">
@@ -173,101 +220,135 @@ const Coustomerpage = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
-              {paginatedActivities.map((activity, index) => (
-                <tr key={index} className="hover:bg-gray-50">
-                  <td className="px-3 md:px-6 py-4">
-                    <div className="flex items-center gap-2 md:gap-3">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-medium text-xs md:text-sm">
-                        {activity.avatar}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="font-medium text-gray-900 text-sm md:text-base whitespace-nowrap">
-                          {activity.name}
+              {paginatedActivities.map((activity, index) => {
+                const actualIndex = activities.findIndex((a) => a.id === activity.id);
+                return (
+                  <tr key={activity.id} className="hover:bg-gray-50">
+                    {/* Service Name */}
+                    <td className="px-3 md:px-6 py-4">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gray-300 flex items-center justify-center text-gray-700 font-medium text-xs md:text-sm">
+                          {activity.avatar}
                         </div>
-                        <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
-                          {activity.company}
+                        <div className="min-w-0">
+                          <div className="font-medium text-gray-900 text-sm md:text-base whitespace-nowrap">
+                            {activity.name}
+                          </div>
+                          <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
+                            {activity.company}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <div className="text-xs md:text-sm text-gray-900 whitespace-nowrap">
-                      {activity.contact}
-                    </div>
-                    <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
-                      {activity.phone}
-                    </div>
-                  </td>
-                  <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">
-                    {activity.location}
-                  </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <span
-                      className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${activity.server === 'Unassigned'
-                        ? 'bg-red-100 text-red-700'
-                        : 'bg-green-100 text-green-700'
-                        }`}
-                    >
-                      {activity.server}
-                    </span>
-                  </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <div className="relative mb-4 md:mb-6 w-40">
-                      <select
-                        className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-[#394C6B] text-xs md:text-base 
-        text-[#FFFFFF] appearance-none cursor-pointer"
-                        onClick={() => setIsOpen(true)}
-                        onBlur={() => setIsOpen(false)}
-                      >
-                        <option onClick={() => setIsOpen(false)}>In Progress</option>
-                        <option onClick={() => setIsOpen(false)}>Complete</option>
-                       
-                      </select>
+                    </td>
 
-                      <div
-                        className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-transform duration-300 "
-                      >
-                        <FaChevronDown className="text-[#FFFFFF]" />
+                    {/* Contact */}
+                    <td className="px-3 md:px-6 py-4">
+                      <div className="text-xs md:text-sm text-gray-900 whitespace-nowrap">
+                        {activity.contact}
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <span
-                      className={`inline-flex px-2 md:px-3 py-1 rounded text-xs md:text-sm font-medium whitespace-nowrap ${activity.priority === 'High'
-                        ? 'text-red-600'
-                        : activity.priority === 'Medium'
-                          ? 'text-yellow-600'
-                          : 'text-green-600'
+                      <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
+                        {activity.phone}
+                      </div>
+                    </td>
+
+                    {/* Location */}
+                    <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">
+                      {activity.location}
+                    </td>
+
+                    {/* Served */}
+                    <td className="px-3 md:px-6 py-4">
+                      <span
+                        className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${
+                          activity.server === 'Unassigned'
+                            ? 'bg-red-100 text-red-700'
+                            : 'bg-green-100 text-green-700'
                         }`}
-                    >
-                      {activity.priority}
-                    </span>
-                  </td>
-                  <td className="px-3 md:px-6 py-4">
-                    <Link to={`/employee/customers/${activity.id}`}>
-                      <button
-                        className="text-gray-600 hover:text-gray-900"
                       >
-                        <LuEye className="w-4 h-4 md:w-5 md:h-5" />
-                      </button>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
+                        {activity.server}
+                      </span>
+                    </td>
+
+                    {/* Progress Dropdown */}
+                    <td className="px-3 md:px-6 py-4 relative">
+                      <div
+                        className="relative inline-block w-40"
+                        ref={(el) => (buttonRefs.current[index] = el)}
+                      >
+                        <button
+                          onClick={() => toggleDropdown(index)}
+                          className={`flex justify-between items-center w-full px-3 py-1.5 rounded-lg text-xs md:text-sm font-medium whitespace-nowrap transition-colors border ${getProgressColor(
+                            activity.progress
+                          )}`}
+                        >
+                          <span>{activity.progress}</span>
+                          <BiChevronDown
+                            className={`ml-1 w-6 h-6 transition-transform duration-200 ${
+                              activeDropdown === index ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+
+                        {activeDropdown === index && (
+                          <div
+                            className={`absolute left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden ${
+                              dropdownPositions[index]
+                                ? 'bottom-full mb-1'
+                                : 'top-full mt-1'
+                            }`}
+                          >
+                            {['In Progress', 'Completed', 'Reschedule'].map(
+                              (status) => (
+                                <button
+                                  key={status}
+                                  onClick={() =>
+                                    handleProgressChange(actualIndex, status)
+                                  }
+                                  className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 ${
+                                    status === activity.progress
+                                      ? 'bg-[#28A844] text-white font-semibold'
+                                      : 'text-gray-700 hover:bg-gray-100'
+                                  }`}
+                                >
+                                  {status}
+                                </button>
+                              )
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+
+                    {/* Priority */}
+                    <td className="px-3 md:px-6 py-4">
+                      <span className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${activity.priority === "High" ? "text-[#DC3545] bg-[#FCEBEC]" : activity.priority === "Medium" ? "text-[#FFC107] bg-[#FFF9E6]" : "text-[#24963E] bg-[#EAF6EC]"}`}>{activity.priority}</span>
+                    </td>
+
+                    {/* Action */}
+                    <td className="px-3 md:px-6 py-4">
+                      <Link to={`/employee/customers/${activity.id}`}>
+                        <button className="text-gray-600 hover:text-gray-900">
+                          <LuEye className="w-4 h-4 md:w-5 md:h-5" />
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
 
-        {/* Pagination Section */}
+        {/* Pagination */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          {/* Showing Text */}
           <div className="text-xs md:text-sm text-gray-600">
-            Showing {paginatedActivities.length > 0 ? startIndex + 1 : 0} to {startIndex + paginatedActivities.length} of {activities.length} results
+            Showing{' '}
+            {paginatedActivities.length > 0 ? startIndex + 1 : 0} to{' '}
+            {startIndex + paginatedActivities.length} of {activities.length}{' '}
+            results
           </div>
 
-          {/* Pagination Buttons */}
           <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            {/* Previous Button */}
             <button
               onClick={handlePrevious}
               disabled={currentPage === 1}
@@ -276,21 +357,22 @@ const Coustomerpage = () => {
               Previous
             </button>
 
-            {/* Page Numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-              <button
-                key={number}
-                onClick={() => setCurrentPage(number)}
-                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                  ? "bg-[#28A844] text-white font-medium"
-                  : "!bg-gray-100 text-black hover:bg-gray-200"
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (number) => (
+                <button
+                  key={number}
+                  onClick={() => setCurrentPage(number)}
+                  className={`px-3 py-1.5 text-sm rounded transition-colors ${
+                    currentPage === number
+                      ? 'bg-[#28A844] text-white font-medium'
+                      : '!bg-gray-100 text-black hover:bg-gray-200'
                   }`}
-              >
-                {number}
-              </button>
-            ))}
+                >
+                  {number}
+                </button>
+              )
+            )}
 
-            {/* Next Button */}
             <button
               onClick={handleNext}
               disabled={currentPage === totalPages || totalPages === 0}
@@ -300,31 +382,27 @@ const Coustomerpage = () => {
             </button>
           </div>
         </div>
-
       </div>
 
+      {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
-      {/* <AssistProfileSetupModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
       <AssistProfileSetupModal2
         isOpen={mainModalOpen}
         onClose={() => setMainModalOpen(false)}
         onOpenSubModal={handleOpenSubModal}
       />
-
       <PersonalInfoModal
-        isOpen={subModalType === "Personal Information"}
+        isOpen={subModalType === 'Personal Information'}
         onClose={handleCloseSubModal}
         email={customerEmail}
       />
-
       <VerificationModal
-        isOpen={subModalType === "Verification Details"}
+        isOpen={subModalType === 'Verification Details'}
         onClose={handleCloseSubModal}
         email={customerEmail}
       />
-
       <ServiceLocationModal
-        isOpen={subModalType === "Service Location"}
+        isOpen={subModalType === 'Service Location'}
         onClose={handleCloseSubModal}
         email={customerEmail}
       />
@@ -333,4 +411,3 @@ const Coustomerpage = () => {
 };
 
 export default Coustomerpage;
- 
