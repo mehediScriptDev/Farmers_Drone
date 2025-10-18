@@ -39,7 +39,9 @@ const Complaints = () => {
   }, [complaintsData, currentPage, itemsPerPage]);
 
   const handleShowDetails = (complaintId) => {
-    navigate(`/admin/complaint-details/${complaintId}`);
+    navigate(`/admin/complaint-details/${complaintId}`, {
+      state: { from: 'complaints' },
+    });
   };
 
   if (error) {

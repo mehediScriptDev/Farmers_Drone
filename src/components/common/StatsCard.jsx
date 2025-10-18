@@ -31,8 +31,8 @@ const iconConfig = {
   },
   ticket: {
     Icon: HiTicket,
-    bgColor: 'bg-purple-100',
-    iconColor: 'text-purple-600',
+    bgColor: 'bg-red-100',
+    iconColor: 'text-red-600',
   },
   default: {
     Icon: HiOutlineUsers,
@@ -41,17 +41,38 @@ const iconConfig = {
   },
 };
 
-const StatsCard = ({ stat }) => {
+const StatsCard = ({ stat, onClick }) => {
   // Destructure styles and the Icon component from the config object
   const { Icon, bgColor, iconColor } =
     iconConfig[stat.icon] || iconConfig.default;
 
+  const isTicket = stat.icon === 'ticket';
+
   return (
-    <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200'>
+    <div
+      className={`bg-white p-6 rounded-xl shadow-sm transition-all duration-200 ${
+        onClick
+          ? 'cursor-pointer hover:shadow-lg hover:scale-[1.02]'
+          : 'hover:shadow-md'
+      }`}
+      onClick={onClick}
+    >
       <div className='flex items-center justify-between'>
         <div className='flex-1'>
-          <p className='text-sm font-medium text-gray-600 mb-1'>{stat.label}</p>
-          <p className='text-2xl font-bold text-gray-900 mb-2'>{stat.value}</p>
+          <p
+            className={`text-sm font-medium mb-1 ${
+              isTicket ? 'text-red-600' : 'text-gray-600'
+            }`}
+          >
+            {stat.label}
+          </p>
+          <p
+            className={`text-2xl font-bold mb-2 ${
+              isTicket ? 'text-red-600' : 'text-gray-900'
+            }`}
+          >
+            {stat.value}
+          </p>
           {stat.change && (
             <p
               className={`text-sm flex items-center ${

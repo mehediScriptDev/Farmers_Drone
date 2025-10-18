@@ -52,6 +52,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       label: t('sidebar.admin.complaints'),
       icon: AlertTriangle,
       path: 'complaints',
+      isRed: true, // Special red styling for complaints
     },
     {
       id: 'services',
@@ -114,7 +115,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   onClick={() => setSidebarOpen(false)}
                 >
                   <Icon
-                    className={`w-5 h-5 ${/* isActive handled above */ ''}`}
+                    className={`w-5 h-5 ${item.isRed ? 'text-red-600' : ''}`}
                   />
                   <span>{item.label}</span>
                 </NavLink>

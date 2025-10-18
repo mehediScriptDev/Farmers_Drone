@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 
 // Import dashboard components
@@ -12,6 +13,7 @@ import axiosInstance from '../../../config/axiosConfig';
 
 const AdminDashboard = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -71,7 +73,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className='w-full bg-[#fafffd] px-4 sm:px-6 lg:px-8 py-6'>
+    <div className='w-full bg-[#fafffd] px-6 xl:px-11 py-3 lg:py-6'>
       {/* Header Section */}
       <div className='mb-6 '>
         <div>
@@ -105,7 +107,21 @@ const AdminDashboard = () => {
               label: t(`dashboard.admin.stats.${stat.id}.label`),
               change: t(`dashboard.admin.stats.${stat.id}.change`),
             };
-            return <StatsCard key={stat.id || index} stat={translatedStat} />;
+            const handleCardClick =
+              stat.id === 'tickets'
+                ? () =>
+                    navigate('/admin/complaint-details/5', {
+                      state: { from: 'dashboard' },
+                    })
+                : undefined;
+
+            return (
+              <StatsCard
+                key={stat.id || index}
+                stat={translatedStat}
+                onClick={handleCardClick}
+              />
+            );
           })}
         </div>
       )}

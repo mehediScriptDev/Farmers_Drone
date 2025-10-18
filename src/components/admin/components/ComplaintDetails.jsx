@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { IoArrowBack } from 'react-icons/io5';
 import axiosInstance from '../../../config/axiosConfig';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
@@ -7,6 +7,7 @@ import { LoadingSpinner } from '../../common/LoadingSpinner';
 const ComplaintDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [complaint, setComplaint] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -28,8 +29,20 @@ const ComplaintDetails = () => {
     fetchComplaintDetails();
   }, [id]);
 
+  const handleBack = () => {
+    // Check if we came from dashboard
+    if (location.state?.from === 'dashboard') {
+      navigate('/admin');
+    } else {
+      // Otherwise go back to complaints page
+      navigate('/admin/complaints');
+    }
+  };
+
   const handleGiveFeedback = () => {
-    navigate(`/admin/complaint-feedback/${id}`);
+    navigate(`/admin/complaint-feedback/${id}`, {
+      state: { from: location.state?.from || 'complaints' },
+    });
   };
 
   if (loading) {
@@ -53,7 +66,7 @@ const ComplaintDetails = () => {
       <div className='w-full px-6 xl:px-11 py-3 lg:py-6'>
         <div className='mb-6'>
           <button
-            onClick={() => navigate('/admin/complaints')}
+            onClick={handleBack}
             className='flex items-center text-gray-600 hover:text-gray-900'
           >
             <IoArrowBack className='w-6 h-6' />
