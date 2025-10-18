@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from '../components/common/Layout';
 import { DashboardLayout } from '../components/common/DashboardLayout';
-import LoginPage from '../pages/LoginPage';
+
 import NotAuthorizedPage from '../pages/NotAuthorizedPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -58,6 +58,9 @@ import OrderDetailsPage from '../components/employee/employdashboard/components/
 import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import Analytics from './../components/marketing/Analytics';
+import ForgotPasswordFlow from '../pages/login/ForgetPasswordFllow';
+import LoginPage from '../pages/login/LoginPage';
+import SignUpFlow from '../pages/signUp/SignUpFllow';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -87,6 +90,14 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'login/forget-password',
+        element: <ForgotPasswordFlow />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpFlow/>,
       },
     ],
   },
