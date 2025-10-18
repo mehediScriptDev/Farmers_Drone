@@ -17,6 +17,8 @@ import Reports from '../components/admin/components/Reports';
 import UserManagement from '../components/admin/components/UserManagement';
 import UserManagementDetails from '../components/admin/components/UserManagementDetails';
 import Complaints from '../components/admin/components/Complaints';
+import ComplaintDetails from '../components/admin/components/ComplaintDetails';
+import ComplaintFeedback from '../components/admin/components/ComplaintFeedback';
 import AdminServices from '../components/admin/components/Services';
 import OrderDetails from '../components/admin/components/OrderDetails';
 
@@ -128,6 +130,14 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'complaints',
         element: <Complaints />,
+      },
+      {
+        path: 'complaint-details/:id',
+        element: <ComplaintDetails />,
+      },
+      {
+        path: 'complaint-feedback/:id',
+        element: <ComplaintFeedback />,
       },
       {
         path: 'services',

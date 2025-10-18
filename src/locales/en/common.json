@@ -988,5 +988,22 @@
     "subtitle": "Configure and manage payment methods for customers and drone operators",
     "last7DaysRevenue": "Last 7 days revenue",
     "monthlyRevenue": "Monthly revenue"
+  },
+  "complaints": {
+    "title": "Complaints",
+    "subtitle": "View which customers have submitted complaints.",
+    "table": {
+      "customer": "Customer",
+      "complainTitle": "Complain title",
+      "ticketId": "Complaints ID/Ticket ID",
+      "rating": "Complain title",
+      "actions": "Actions",
+      "seeDetails": "See details"
+    },
+    "pagination": {
+      "showing": "Showing {{count}} of {{total}} Customer",
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }
