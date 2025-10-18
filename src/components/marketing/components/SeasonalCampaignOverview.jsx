@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CampaignModal from "./modals/CampaignModal";
 
 export default function SeasonalCampaignOverview() {
+  const location = useLocation();
   const [campaigns, setCampaigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,6 +12,10 @@ export default function SeasonalCampaignOverview() {
   const [campaignModal, setCampaignModal] = useState(false);
 
   const resultsPerPage = 6;
+  const url =
+    location.pathname === "/marketing/campaigns"
+      ? "/marketing/campaigns/seasonal"
+      : "/marketing/campaigns/seasonal";
 
   useEffect(() => {
     fetchCampaigns();
@@ -71,11 +76,11 @@ export default function SeasonalCampaignOverview() {
   }
 
   return (
-    <div className="py-4">
+    <div className=" bg-white">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
+        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-4 lg:mx-6">
+          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2 ml-4">
             Seasonal Campaign Overview
           </h1>
           <button
@@ -135,7 +140,7 @@ export default function SeasonalCampaignOverview() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Link
-                          to={`seasonal/${campaign.id}`}
+                          to={`${url}/${campaign.id}`}
                           className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
                           See details

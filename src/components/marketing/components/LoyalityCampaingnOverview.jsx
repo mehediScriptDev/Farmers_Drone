@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CampaignModal from "./modals/CampaignModal";
 
 export default function LoyalityCampaingnOverview() {
@@ -9,6 +9,11 @@ export default function LoyalityCampaingnOverview() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [campaignModal, setCampaignModal] = useState(false);
+  const location = useLocation();
+  const url =
+    location.pathname === "/marketing/campaigns"
+      ? "/marketing/campaigns/seasonal"
+      : "/marketing/campaigns/seasonal";
 
   const resultsPerPage = 6;
 
@@ -71,12 +76,12 @@ export default function LoyalityCampaingnOverview() {
   }
 
   return (
-    <div className="py-4">
+    <div className="bg-white">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-4 lg:mx-6 ">
           <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
-            Seasonal Campaign Overview
+            Loyalty Campaign Overview
           </h1>
           <button
             onClick={() => setCampaignModal(true)}
@@ -88,7 +93,7 @@ export default function LoyalityCampaingnOverview() {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-white rounded-b-lg shadow overflow-hidden">
           {campaigns.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500">No campaigns found</p>
@@ -135,7 +140,7 @@ export default function LoyalityCampaingnOverview() {
                       </td>
                       <td className="px-6 py-4 text-right">
                         <Link
-                          to={`loyality/${campaign.id}`}
+                          to={`${url}/${campaign.id}`}
                           className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
                           See details

@@ -338,7 +338,7 @@ const LoyalityCampaingnDetails = () => {
               {t("dashboard.marketing.CampaignDetails.ChannelPerformance")}
             </h1>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
               {channels.map((channel, index) => (
                 <ChannelCard key={index} {...channel} />
               ))}
