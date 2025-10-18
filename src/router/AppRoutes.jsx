@@ -20,6 +20,7 @@ import Complaints from '../components/admin/components/Complaints';
 import ComplaintDetails from '../components/admin/components/ComplaintDetails';
 import ComplaintFeedback from '../components/admin/components/ComplaintFeedback';
 import AdminServices from '../components/admin/components/Services';
+import Settings from '../components/admin/components/Settings';
 import OrderDetails from '../components/admin/components/OrderDetails';
 
 // Field Agent Components
@@ -144,6 +145,14 @@ const AppRoutes = createBrowserRouter([
         element: <AdminServices />,
       },
     ],
+  },
+  {
+    path: '/admin/settings',
+    element: (
+      <PrivateAdminRoute>
+        <Settings />
+      </PrivateAdminRoute>
+    ),
   },
   {
     path: '/employee',
