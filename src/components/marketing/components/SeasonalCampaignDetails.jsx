@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import {

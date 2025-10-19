@@ -6,6 +6,7 @@ import UserNav from './UserNav';
 import Footer from './Footer';
 import { useLocation } from 'react-router';
 import { Outlet } from 'react-router-dom';
+import ScrollToTop from '../utility/ScrollToTop';
 
 
 export const Layout = () => {
@@ -14,12 +15,17 @@ export const Layout = () => {
 
   return (
     <div className='flex flex-col min-h-screen bg-gray-50 w-full'>
-      {location.pathname == '/admin' && location.pathname == '/marketing' && location.pathname == '/employee' && location.pathname == '/field-agent'? <Header/>:<UserNav/>}
+      <ScrollToTop />
+      {location.pathname === '/admin' || location.pathname === '/marketing' || location.pathname === '/employee' || location.pathname === '/field-agent' ? (
+        <Header />
+      ) : (
+        <UserNav />
+      )}
       <main className='flex-grow w-full flex flex-col'>
-        <Outlet/>
+        <Outlet />
       </main>
       {/* {user? "":<Footer/>} */}
-      { location.pathname !== '/login' ?<Footer/> : null}
+      {location.pathname !== '/login' ? <Footer /> : null}
     </div>
   );
 };
