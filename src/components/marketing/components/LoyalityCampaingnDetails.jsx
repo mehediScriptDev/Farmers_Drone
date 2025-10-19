@@ -56,6 +56,17 @@ const LoyalityCampaingnDetails = () => {
   const [data, setData] = useState(null);
   
   useEffect(() => {
+    // Scroll to top of the page
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
+    // Also scroll the main container if it exists
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+      mainElement.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, []);
+  
+  useEffect(() => {
     let isMounted = true;
     axiosInstance
       .get('/MarketingDashboard/data/marketingLandingPage.json')

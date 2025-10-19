@@ -53,6 +53,18 @@ const SeasonalCampaignDetails = () => {
   const { t } = useTranslation();
   const [data, setData] = useState(null);
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    // Scroll to top of the page
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    
+    // Also scroll the main container if it exists
+    const mainElement = document.querySelector('main');
+    if (mainElement) {
+      mainElement.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, []);
+
   // fetch data client-side instead of using the route loader
   useEffect(() => {
     let isMounted = true;
