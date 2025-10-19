@@ -246,19 +246,14 @@ const OrderDetails = () => {
               </table>
             </div>
 
-            <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
-              <div className='text-sm text-gray-700'>
-                Showing {paginatedOrders.length} of{' '}
-                {orderData?.orders.length || 0} jobs
-              </div>
-              <Pagination
-                currentPage={currentPage}
-                totalItems={orderData?.orders.length || 0}
-                itemsPerPage={itemsPerPage}
-                onPageChange={(page) => setCurrentPage(page)}
-                showingText=''
-              />
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalItems={orderData?.orders.length || 0}
+              itemsPerPage={itemsPerPage}
+              onPageChange={(page) => setCurrentPage(page)}
+              itemLabel='job'
+              itemLabelPlural='jobs'
+            />
           </div>
         </div>
       </div>
