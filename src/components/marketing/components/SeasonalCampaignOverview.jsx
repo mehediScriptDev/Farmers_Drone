@@ -79,8 +79,9 @@ export default function SeasonalCampaignOverview() {
     <div className=" bg-white">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-4 lg:mx-6">
-          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2 ml-4">
+        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-3 lg:mx-2
+        ">
+          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
             Seasonal Campaign Overview
           </h1>
           <button
