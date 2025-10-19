@@ -7,7 +7,6 @@ import Pagination from "../../fieldAgent/components/Pagination";
 import axiosInstance from "../../../config/axiosConfig";
 import AutomationModal from "./modals/AutomationModal ";
 import SalesSequenceModal from "./modals/SalesSequenceModal";
-// import LeadStatusDropdown from './LeadStatusDropdown'
 
 const LeadManagment = () => {
   const { t } = useTranslation();

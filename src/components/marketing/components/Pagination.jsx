@@ -8,7 +8,7 @@ const Pagination = ({
   onPageChange = () => {},
   variant = "ellipsis", // "ellipsis" | "full" | "simple"
   labels = {},
-  showCount, // optional: { current: number, total: number, prefix?: string, label?: string }
+  showCount, 
   className = "",
 }) => {
   const { t } = useTranslation();
