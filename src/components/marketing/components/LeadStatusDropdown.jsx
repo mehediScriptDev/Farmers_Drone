@@ -22,7 +22,7 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
 
   return (
     <div
-      className="relative inline-block text-left"
+      className="relative inline-block text-left min-w-[200px]"
       onClick={() => setIsOpen(!isOpen)}
     >
       <button
@@ -41,8 +41,8 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
       </button>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-full min-w-[150px] rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+        <div className="absolute right-0 mt-1 w-full min-w-[150px] rounded-lg shadow-xl bg-white ">
+          <div className="">
             {options.map((option) => (
               <div
                 key={option.value}
