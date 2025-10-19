@@ -1,6 +1,7 @@
 
 
 import React, { useState, useCallback, memo } from "react";
+import { IoClose } from "react-icons/io5";
 import { ChevronDown } from "lucide-react";
 
 // Validation utilities
@@ -129,13 +130,13 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md relative">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-xl relative">
         <button
           onClick={onClose}
           className="absolute top-2 md:top-3 lg:top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-light"
           aria-label="Close"
         >
-          ×
+          <IoClose />
         </button>
 
         <div className="px-6 py-3 md:py-4 border-b border-gray-300">
@@ -283,7 +284,7 @@ export const PersonalInfoModal = memo(({ isOpen, onClose, email }) => {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl z-10"
           aria-label="Close"
         >
-          ×
+          <IoClose />
         </button>
 
         <div className="px-6 pt-4 pb-2 flex-shrink-0 border-b">
@@ -666,7 +667,7 @@ export const ServiceLocationModal = memo(({ isOpen, onClose, email }) => {
 
           <button
             onClick={handleSave}
-            className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+            className="w-full mt-6 py-3 bg-[#28A844] hover:bg-green-600 text-white font-medium rounded-md transition-colors"
           >
             Confirm Registration
           </button>
@@ -675,3 +676,14 @@ export const ServiceLocationModal = memo(({ isOpen, onClose, email }) => {
     </div>
   );
 });
+
+
+
+
+
+
+
+
+
+
+
