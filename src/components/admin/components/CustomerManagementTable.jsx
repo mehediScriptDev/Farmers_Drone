@@ -1,4 +1,5 @@
 import React from 'react';
+import { BsPersonDashFill, BsPersonPlusFill } from 'react-icons/bs';
 import { useTranslation } from 'react-i18next';
 
 const CustomerManagementTable = ({ customers, onShowDetails }) => {
@@ -94,9 +95,18 @@ const CustomerManagementTable = ({ customers, onShowDetails }) => {
                   <div className='flex items-center justify-center space-x-4'>
                     <button
                       onClick={() => onShowDetails(customer)}
-                      className='px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded-md hover:bg-green-700 transition'
+                      aria-label={
+                        customer.status === 'active'
+                          ? 'view-active'
+                          : 'view-suspended'
+                      }
+                      className='p-2 rounded-md hover:bg-gray-100 transition flex items-center justify-center'
                     >
-                      {t('dashboard.admin.userManagement.seeDetails')}
+                      {customer.status === 'active' ? (
+                        <BsPersonDashFill className='w-5 h-5 text-green-600' />
+                      ) : (
+                        <BsPersonPlusFill className='w-5 h-5 text-red-600' />
+                      )}
                     </button>
                   </div>
                 </td>
