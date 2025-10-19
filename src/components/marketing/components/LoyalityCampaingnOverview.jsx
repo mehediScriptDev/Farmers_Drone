@@ -76,10 +76,10 @@ export default function LoyalityCampaingnOverview() {
   }
 
   return (
-    <div className="bg-white">
+    <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md p-4 md:p-6 lg:p-8">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-4 lg:mx-6 ">
+        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-4 mx-2 md:mx-4 lg:mx-6 ">
           <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
             Loyalty Campaign Overview
           </h1>
