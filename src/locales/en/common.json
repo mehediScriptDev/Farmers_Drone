@@ -507,7 +507,7 @@
             "preferredTime": "Preferred Time",
             "timeFormat": "HH:MM AM - 12:00 PM",
             "specialInstruction": "Special Instruction",
-            "createRequest":" Create Request"
+            "createRequest": " Create Request"
           },
           "rescheduleServiceOrder": {
             "title": "Reschedule Service Order",
@@ -678,6 +678,15 @@
       "Loyaltyprograms": "Loyalty programs",
       "Confirm": "Confirm",
       "LaunchCampaign": "Launch Campaign",
+      "CampaignOverview": {
+        "SeasonalCampaignOverview": "Seasonal Campaign Overview",
+        "LoyaltyCampaignOverview": "Loyalty Campaign Overview",
+        "CampaignName": "Campaign Name",
+        "CampaignTypes": "Campaign Types",
+        "LeadsGenerated": "Leads Generated",
+        "ROI": "ROI",
+        "Actions": "ACTIONS"
+      },
       "CampaignDetails": {
         "CampaignOverview": "Campaign Overview",
         "Back": "Back",

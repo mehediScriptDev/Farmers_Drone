@@ -688,6 +688,15 @@
       "SeeDetails": "विवरण देखें",
       "Loyaltyprograms": "निष्ठा कार्यक्रम",
       "LaunchCampaign": "अभियान लॉन्च करें",
+      "CampaignOverview": {
+        "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
+        "LoyaltyCampaignOverview": "निष्ठा अभियान अवलोकन",
+        "CampaignName": "अभियान का नाम",
+        "CampaignTypes": "अभियान प्रकार",
+        "LeadsGenerated": "उत्पन्न लीड्स",
+        "ROI": "आरओआई",
+        "Actions": "क्रियाएँ"
+      },
       "CampaignDetails": {
         "CampaignOverview": "अभियान अवलोकन",
         "Back": "वापस",

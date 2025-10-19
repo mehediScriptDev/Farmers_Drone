@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
 import { Link, useLocation } from "react-router-dom";
 import CampaignModal from "./modals/CampaignModal";
+import { t } from "i18next";
 
 export default function SeasonalCampaignOverview() {
   const location = useLocation();
@@ -76,20 +77,20 @@ export default function SeasonalCampaignOverview() {
   }
 
   return (
-    <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md p-4 md:p-6 lg:p-8">
+    <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md ">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 mx-2 md:mx-3 lg:mx-2
+        <div className="flex justify-between items-center mx-2 md:mx-3 lg:mx-2
         ">
-          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
-            Seasonal Campaign Overview
+          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2 p-4 md:p-6">
+            {t("dashboard.marketing.CampaignOverview.SeasonalCampaignOverview")},
           </h1>
           <button
             onClick={() => setCampaignModal(true)}
             className="bg-[#28A844] hover:bg-green-600 text-black px-2 md:px-4 py-2 rounded flex  items-center gap-1 md:gap-2"
           >
             <span className="text-xl ">+</span>
-            <span className="text-base md:text-lg">Create Campaign</span>
+            <span className="text-base md:text-lg">{t("dashboard.marketing.CreateCampaign")}</span>
           </button>
         </div>
 
@@ -105,19 +106,19 @@ export default function SeasonalCampaignOverview() {
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Campaign Name
+                      {t("dashboard.marketing.CampaignOverview.CampaignName")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Campaign Types
+                      {t("dashboard.marketing.CampaignOverview.CampaignTypes")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Leads Generated
+                      {t("dashboard.marketing.CampaignOverview.LeadsGenerated")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      ROI
+                      {t("dashboard.marketing.CampaignOverview.ROI")}
                     </th>
                     <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-right whitespace-nowrap">
-                      ACTIONS
+                      {t("dashboard.marketing.CampaignOverview.Actions")}
                     </th>
                   </tr>
                 </thead>
@@ -144,7 +145,7 @@ export default function SeasonalCampaignOverview() {
                           to={`${url}/${campaign.id}`}
                           className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
-                          See details
+                          {t("dashboard.marketing.SeeDetails")}
                         </Link>
                       </td>
                     </tr>
@@ -155,7 +156,7 @@ export default function SeasonalCampaignOverview() {
               {/* Footer */}
               <div className="flex justify-between items-center px-6 py-4 bg-white border-t border-gray-200">
                 <div className="text-sm text-gray-600">
-                  Showing {startResult} to {endResult} of {totalResults} results
+                  {t("dashboard.marketing.Showing")} {startResult} to {endResult} of {totalResults} 
                 </div>
                 <div className="flex gap-2">
                   <button
@@ -163,14 +164,14 @@ export default function SeasonalCampaignOverview() {
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage((p) => p - 1)}
                   >
-                    Previous
+                    {t("dashboard.marketing.Previous")}
                   </button>
                   <button
                     className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={endResult >= totalResults}
                     onClick={() => setCurrentPage((p) => p + 1)}
                   >
-                    Next
+                    {t("dashboard.marketing.Next")}
                   </button>
                 </div>
               </div>
