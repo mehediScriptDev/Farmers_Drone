@@ -570,7 +570,8 @@
         "showing": "Showing",
         "users": "Users",
         "previous": "Previous",
-        "next": "Next"
+        "next": "Next",
+        "of": "of"
       },
       "createServiceModal": {
         "CreateService": "Create Service",

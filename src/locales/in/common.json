@@ -558,6 +558,7 @@
       "welcome": "वापस स्वागत है, फील्ड एजेंट",
       "fieldAgentSummery": {
         "userAdded": "आपके द्वारा जोड़े गए कुल उपयोगकर्ता",
+        "ActiveCustomers": "सक्रिय ग्राहक",
         "totalcommition": "कुल अर्जित कमीशन",
         "totalPayments": "हमारा बकाया भुगतान"
       },
@@ -581,7 +582,8 @@
         "showing": "दिखा रहे हैं",
         "users": "उपयोगकर्ता",
         "previous": "पिछला",
-        "next": "अगला"
+        "next": "अगला",
+        "of": "का"
       },
       "createServiceModal": {
         "CreateService": "सेवा बनाएँ",
