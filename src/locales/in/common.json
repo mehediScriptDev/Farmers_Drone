@@ -95,11 +95,11 @@
 
       "userManagement": {
         "title": "उपयोगकर्ता प्रबंधन",
-        "tabUser": "उपयोगकर्ता",
+        "tabUser": "ऑपरेटर",
         "tabCustomer": "ग्राहक",
         "tabEmployee": "कर्मचारी",
         "tabFieldAgent": "फील्ड एजेंट",
-        "subTabAll": "सभी उपयोगकर्ता",
+        "subTabAll": "सभी ड्रोन ऑपरेटर",
         "subTabPending": "लंबित",
         "searchPlaceholder": "खोजें",
         "tableHeaders": {

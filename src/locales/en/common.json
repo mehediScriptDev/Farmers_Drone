@@ -95,11 +95,11 @@
 
       "userManagement": {
         "title": "User Management",
-        "tabUser": "User",
+        "tabUser": "Operator",
         "tabCustomer": "Customer",
         "tabEmployee": "Employee",
         "tabFieldAgent": "Field agent",
-        "subTabAll": "All Users",
+        "subTabAll": "All Drone Operators",
         "subTabPending": "Pending",
         "searchPlaceholder": "Search",
         "tableHeaders": {
@@ -507,7 +507,7 @@
             "preferredTime": "Preferred Time",
             "timeFormat": "HH:MM AM - 12:00 PM",
             "specialInstruction": "Special Instruction",
-            "createRequest":" Create Request"
+            "createRequest": " Create Request"
           },
           "rescheduleServiceOrder": {
             "title": "Reschedule Service Order",
