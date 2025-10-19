@@ -5,6 +5,8 @@ const Pagination = ({
   totalItems = 0,
   itemsPerPage = 10,
   onPageChange,
+  itemLabel = 'User', // singular form
+  itemLabelPlural = 'Users', // plural form
 }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
@@ -17,7 +19,6 @@ const Pagination = ({
   };
 
   // Calculate the range of items being shown
-  const startItem = totalItems > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0;
   const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
   // Generate page numbers to show (show current page and one more if available)
@@ -42,10 +43,10 @@ const Pagination = ({
       <div className='flex flex-col sm:flex-row items-center justify-between gap-3'>
         <div className='text-sm text-gray-600'>
           {totalItems > 0
-            ? `Showing ${startItem} to ${endItem} of ${totalItems} ${
-                totalItems === 1 ? 'User' : 'Users'
+            ? `Showing ${endItem} of ${totalItems} ${
+                totalItems === 1 ? itemLabel : itemLabelPlural
               }`
-            : 'No users to display'}
+            : `No ${itemLabelPlural.toLowerCase()} to display`}
         </div>
         <div className='flex items-center space-x-1'>
           <button
