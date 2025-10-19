@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineChevronUp } from "react-icons/hi";
 
 const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const options = [
     { label: t("dashboard.marketing.AllLeads"), value: "All" },
@@ -22,6 +39,7 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
 
   return (
     <div
+      ref={dropdownRef}
       className="relative inline-block text-left min-w-[200px]"
       onClick={() => setIsOpen(!isOpen)}
     >
