@@ -129,10 +129,6 @@ const AppRoutes = createBrowserRouter([
         element: <Jobs />,
       },
       {
-        path: 'order-details/:operatorId',
-        element: <OrderDetails />,
-      },
-      {
         path: 'payments',
         element: <PaymentsManagement />,
       },
@@ -155,6 +151,14 @@ const AppRoutes = createBrowserRouter([
     element: (
       <PrivateAdminRoute>
         <Settings />
+      </PrivateAdminRoute>
+    ),
+  },
+  {
+    path: '/admin/order-details/:operatorId',
+    element: (
+      <PrivateAdminRoute>
+        <OrderDetails />
       </PrivateAdminRoute>
     ),
   },
