@@ -8,7 +8,7 @@ const ComplaintDetailsModal = ({ complaint, onClose, isOpen }) => {
     <div className='fixed inset-0 z-50 overflow-y-auto'>
       {/* Overlay */}
       <div
-        className='fixed inset-0 bg-black bg-opacity-50 transition-opacity'
+        className='fixed inset-0 bg-black/70 bg-opacity-50 transition-opacity'
         onClick={onClose}
       />
 
