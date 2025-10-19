@@ -1,5 +1,4 @@
 import React from 'react';
-// import { useTranslation } from 'react-i18next';
 
 const Pagination = ({
   currentPage = 1,
@@ -7,7 +6,6 @@ const Pagination = ({
   itemsPerPage = 10,
   onPageChange,
 }) => {
-  // const { t } = useTranslation();
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePreviousClick = () => {
@@ -18,28 +16,42 @@ const Pagination = ({
     if (currentPage < totalPages) onPageChange(currentPage + 1);
   };
 
-  // Show only 2 numbered buttons at once
-  let startPage = currentPage;
-  let endPage = Math.min(startPage + 1, totalPages);
-  if (currentPage === totalPages && totalPages > 1) {
-    startPage = totalPages - 1;
-    endPage = totalPages;
+  // Calculate the range of items being shown
+  const startItem = totalItems > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0;
+  const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+
+  // Generate page numbers to show (show current page and one more if available)
+  const pages = [];
+  if (totalPages > 0) {
+    let startPage = currentPage;
+    let endPage = Math.min(startPage + 1, totalPages);
+
+    // If we're on the last page and there are more than 1 pages, show previous page too
+    if (currentPage === totalPages && totalPages > 1) {
+      startPage = totalPages - 1;
+      endPage = totalPages;
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
   }
 
-  const pages = [];
-  for (let i = startPage; i <= endPage; i++) pages.push(i);
-
   return (
-    <div className='px-6 py-4 bg-white border-t border-gray-200'>
-      <div className='flex items-center justify-between'>
-       <div className='text-sm text-gray-700'>
-  {`Showing ${Math.min(currentPage * itemsPerPage, totalItems)} of ${totalItems} Users`}
-</div>
+    <div className='px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200'>
+      <div className='flex flex-col sm:flex-row items-center justify-between gap-3'>
+        <div className='text-sm text-gray-600'>
+          {totalItems > 0
+            ? `Showing ${startItem} to ${endItem} of ${totalItems} ${
+                totalItems === 1 ? 'User' : 'Users'
+              }`
+            : 'No users to display'}
+        </div>
         <div className='flex items-center space-x-1'>
           <button
             onClick={handlePreviousClick}
-            className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
-            disabled={currentPage === 1}
+            className='px-3 md:px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+            disabled={currentPage === 1 || totalPages === 0}
           >
             Previous
           </button>
@@ -47,10 +59,10 @@ const Pagination = ({
           {pages.map((page) => (
             <button
               key={page}
-              className={`px-3 py-2 text-sm font-medium rounded ${
+              className={`px-3 md:px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
                 currentPage === page
                   ? 'bg-green-500 text-white'
-                  : 'text-gray-700 hover:bg-gray-100'
+                  : 'text-gray-700 border border-gray-300 hover:bg-gray-50'
               }`}
               onClick={() => onPageChange(page)}
             >
@@ -60,8 +72,8 @@ const Pagination = ({
 
           <button
             onClick={handleNextClick}
-            className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
-            disabled={currentPage === totalPages}
+            className='px-3 md:px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors'
+            disabled={currentPage === totalPages || totalPages === 0}
           >
             Next
           </button>
