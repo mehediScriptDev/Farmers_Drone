@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { HiDotsVertical, HiUser } from 'react-icons/hi';
+import { HiUser } from 'react-icons/hi';
+import { BsPersonPlus } from 'react-icons/bs';
 import Pagination from './Pagination';
 
 const getStatusColor = (statusType) => {
@@ -111,9 +112,9 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
                 <td className='px-6 py-4 whitespace-nowrap text-center'>
                   <button
                     aria-label='Actions'
-                    className='text-gray-400 hover:text-gray-600 p-1'
+                    className='text-black hover:text-gray-600 p-1'
                   >
-                    <HiDotsVertical className='h-5 w-5 mx-auto' />
+                    <BsPersonPlus className='h-5 w-5 mx-auto' />
                   </button>
                 </td>
               </tr>
