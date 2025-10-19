@@ -11,6 +11,7 @@ import axiosInstance from "../../../config/axiosConfig";
 import RegistrationModal from "./components/Modal/RegistrationModal";
 import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from "./components/Modal/AssistProfileSetupModal";
 import { BiChevronDown } from "react-icons/bi";
+import Pagination from "../../common/Pagination";
 
 function DashBoard() {
   const [selectedPeriod, setSelectedPeriod] = useState("last30days");
@@ -109,12 +110,17 @@ function DashBoard() {
     });
   }, [activities, selectedPeriod]);
 
+  // eslint-disable-next-line no-unused-vars
   const totalPages = Math.ceil(filteredActivities.length / itemsPerPage);
   const paginatedActivities = filteredActivities.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-  
+ // Pagination handler
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   // Dropdown logic
   const toggleDropdown = (index) => {
     if (activeDropdown === index) {
@@ -327,7 +333,7 @@ function DashBoard() {
         </div>
 
         {/* Pagination */}
-         <div className="py-4  border-t border-gray-200">
+         {/* <div className="py-4  border-t border-gray-200">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4   md:pt-3">
             <p className="text-sm text-black px-4 md:px-6">
               Showing {paginatedActivities.length} of {filteredActivities.length} results
@@ -354,7 +360,13 @@ function DashBoard() {
               >Next</button>
             </div>
           </div>
-        </div> 
+        </div>  */}
+         <Pagination
+          currentPage={currentPage}
+          totalItems={filteredActivities.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={handlePageChange}
+        />
       </div>
 
       {/* Modals */}

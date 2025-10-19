@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 import MarketingSidebar from './MarketingSidebar';
 import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
 
-
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user } = useAuth();
@@ -27,7 +26,7 @@ export const DashboardLayout = () => {
   }, [location.pathname]);
 
   return (
-    <div className='flex flex-col h-screen '>
+    <div className='flex flex-col h-screen'>
       <Header /> {/* Navbar at the top */}
       <div className='flex flex-1 overflow-hidden'>
         {user?.role === 'admin' && (
@@ -49,12 +48,13 @@ export const DashboardLayout = () => {
         {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
-    <main ref={mainRef} className="flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]">
-      <div className="w-full ">
-        <Outlet />
+        <main
+          ref={mainRef}
+          className='flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]'
+        >
+          <Outlet />
+        </main>
       </div>
-    </main>
-  </div>
-</div>
+    </div>
   );
 };
