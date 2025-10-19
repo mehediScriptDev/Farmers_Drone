@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
-import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { HiMenuAlt2, HiX } from 'react-icons/hi';
 import {
   LayoutDashboard,
   Users,
@@ -67,12 +67,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Mobile Menu Button */}
       {!sidebarOpen && (
         <div className='lg:hidden fixed top-4 left-4 z-50'>
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className='bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200'
-          >
-            <HiMenuAlt3 className='w-5 h-5 text-gray-700' />
-          </button>
+          <div className='lg:hidden fixed top-4 left-4 z-50'>
+                   <button
+                     onClick={() => setSidebarOpen(true)}
+                     className=' p-3  hover:bg-gray-50 transition-all duration-200 '
+                   >
+                     <HiMenuAlt2 className='w-8 h-7 text-gray-700' />
+                   </button>
+                 </div>
         </div>
       )}
 

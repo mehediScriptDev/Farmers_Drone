@@ -52,7 +52,7 @@ const ProfileDropDown = () => {
         ${open ? "opacity-100 scale-100" : "opacity-0 scale-95 pointer-events-none"}`}
       >
         {/* Notification */}
-        {user &&
+        {/* {user &&
           ["admin", "marketing", "employee"].includes(user.role) && (
             <Link
               to="#"
@@ -60,7 +60,7 @@ const ProfileDropDown = () => {
             >
               <FiBell /> Notification
             </Link>
-          )}
+          )} */}
 
         {/* Settings */}
         {user?.role === "admin" && (
