@@ -67,7 +67,7 @@
       "location": "Gujrat, India",
       "score": 95,
       "status": "Hot",
-      "date"  : "2025-10-13"
+      "date": "2025-10-13"
     },
     {
       "lead": "Agritech Solutions",
@@ -76,7 +76,7 @@
       "location": "Gujrat, India",
       "score": 75,
       "status": "Warm",
-      "date"  : "2025-10-08"
+      "date": "2025-10-08"
     },
     {
       "lead": "Agritech Solutions",
@@ -84,8 +84,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cold",
-      "date"  : "2025-10-04"
+      "status": "Cool",
+      "date": "2025-10-04"
     },
     {
       "lead": "Agritech Solutions",
@@ -94,7 +94,7 @@
       "location": "Gujrat, India",
       "score": 85,
       "status": "Hot",
-      "date"  : "2025-09-30"
+      "date": "2025-09-30"
     },
     {
       "lead": "Agritech Solutions",
@@ -102,8 +102,8 @@
       "source": "Email campaign",
       "location": "Gujrat, India",
       "score": 65,
-      "status": "Cold",
-      "date"  : "2025-10-20"
+      "status": "Cool",
+      "date": "2025-10-20"
     },
     {
       "lead": "Agritech Solutions",
@@ -112,92 +112,269 @@
       "location": "Gujrat, India",
       "score": 85,
       "status": "Hot",
-      "date"  : "2025-09-25"
+      "date": "2025-09-25"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 95,
+      "status": "Hot",
+      "date": "2025-10-13"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 75,
+      "status": "Warm",
+      "date": "2025-10-08"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 65,
+      "status": "Cool",
+      "date": "2025-10-04"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 85,
+      "status": "Hot",
+      "date": "2025-09-30"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 65,
+      "status": "Cool",
+      "date": "2025-10-20"
+    },
+    {
+      "lead": "Agritech Solutions",
+      "contact": "John@agritech.com\n(225) 555-0118",
+      "source": "Email campaign",
+      "location": "Gujrat, India",
+      "score": 85,
+      "status": "Hot",
+      "date": "2025-09-25"
     }
   ],
   "statusStyles": {
     "Hot": "bg-red-100 text-red-600",
     "Warm": "bg-yellow-100 text-yellow-600",
-    "Cool": "bg-green-100 text-green-600"
+    "Cool": "bg-green-200 text-green-400"
   },
-  "leads": ["All Lead", "Hot", "Warm", "Cold"],
+  "leads": ["All Lead", "Hot", "Warm", "Cool"],
   "allSeasonalCampaigns": [
     {
+      "id": 1,
       "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
       "title": "AgriBoost Season Kickoff",
-      "description": "A seasonal campaign offering discounted drone planting services for farmers at the start of the planting season."
+      "description": "A seasonal campaign aimed at acquiring new customers using targeted drone planting services.",
+      "type": "Customer Acquisition",
+      "leads": 450,
+      "roi": "120%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&h=300&fit=crop",
-      "title": "Fly With Us Operator Drive",
-      "description": "A recruitment campaign targeting drone pilots, encouraging licenses and guaranteed crop projects based on location availability."
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
+      "title": "AgriBoost Season Kickoff",
+      "description": "A seasonal campaign offering discounted drone planting services for farmers at the start of the planting season.",
+      "type": "Brand Awareness",
+      "leads": 500,
+      "roi": "145%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=500&h=300&fit=crop",
-      "title": "Harvest Ready Agri Drone Drive",
-      "description": "A campaign to prepare farmers for the harvest season, offering last discounts on crop monitoring and aerial spraying services."
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
+      "title": "AgriBoost Season Kickoff",
+      "description": "A campaign to re-engage previous customers with exclusive drone service offers.",
+      "type": "Retargeting",
+      "leads": 300,
+      "roi": "110%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=500&h=300&fit=crop",
-      "title": "Spring Planting Special",
-      "description": "Get ready for spring with our exclusive planting packages designed for maximum yield and efficiency."
+      "id": 4,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Drive new client sign-ups for advanced agricultural drone services during harvest season.",
+      "type": "Customer Acquisition",
+      "leads": 520,
+      "roi": "130%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=500&h=300&fit=crop",
-      "title": "Winter Prep Campaign",
-      "description": "Prepare your fields for winter with our specialized drone services and soil analysis packages."
+      "id": 5,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Promote awareness about new drone technology for crop monitoring among farmers.",
+      "type": "Brand Awareness",
+      "leads": 600,
+      "roi": "150%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=500&h=300&fit=crop",
-      "title": "Summer Growth Monitoring",
-      "description": "Track your crop growth throughout summer with our advanced monitoring and analytics services."
+      "id": 6,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Encourage previous users to try updated drone features with special offers.",
+      "type": "Retargeting",
+      "leads": 380,
+      "roi": "115%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1560493676-04071c5f467b?w=500&h=300&fit=crop",
-      "title": "Autumn Harvest Support",
-      "description": "Maximize your autumn harvest with our comprehensive drone support and logistics coordination."
+      "id": 7,
+      "image": "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=500&h=300&fit=crop",
+      "title": "DroneFarm Expansion",
+      "description": "Attract new farmers to adopt drone services for precision agriculture.",
+      "type": "Customer Acquisition",
+      "leads": 480,
+      "roi": "125%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500&h=300&fit=crop",
-      "title": "Pest Control Initiative",
-      "description": "Protect your crops with our targeted pest control campaigns using precision drone technology."
+      "id": 8,
+      "image": "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=500&h=300&fit=crop",
+      "title": "DroneFarm Expansion",
+      "description": "Increase brand visibility among farming communities for drone technology.",
+      "type": "Brand Awareness",
+      "leads": 550,
+      "roi": "140%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=500&h=300&fit=crop",
-      "title": "Irrigation Optimization",
-      "description": "Optimize water usage with our smart irrigation monitoring and management solutions."
+      "id": 9,
+      "image": "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=500&h=300&fit=crop",
+      "title": "DroneFarm Expansion",
+      "description": "Target previous leads with personalized drone service promotions.",
+      "type": "Retargeting",
+      "leads": 350,
+      "roi": "112%"
+    },
+    {
+      "id": 10,
+      "image": "https://images.unsplash.com/photo-1581090461519-1f7d8f5e4e2f?w=500&h=300&fit=crop",
+      "title": "AgriTech Boost",
+      "description": "Acquire new farmers for cutting-edge drone mapping services.",
+      "type": "Customer Acquisition",
+      "leads": 510,
+      "roi": "128%"
+    },
+    {
+      "id": 11,
+      "image": "https://images.unsplash.com/photo-1581090461519-1f7d8f5e4e2f?w=500&h=300&fit=crop",
+      "title": "AgriTech Boost",
+      "description": "Spread awareness about AgriTech Boost drone services in rural regions.",
+      "type": "Brand Awareness",
+      "leads": 580,
+      "roi": "142%"
+    },
+    {
+      "id": 12,
+      "image": "https://images.unsplash.com/photo-1581090461519-1f7d8f5e4e2f?w=500&h=300&fit=crop",
+      "title": "AgriTech Boost",
+      "description": "Re-engage old customers with loyalty offers on AgriTech drone services.",
+      "type": "Retargeting",
+      "leads": 360,
+      "roi": "118%"
+    },
+    {
+      "id": 13,
+      "image": "https://images.unsplash.com/photo-1572375055901-5c13b5d2de39?w=500&h=300&fit=crop",
+      "title": "SmartFarm Initiative",
+      "description": "Target new clients for AI-driven farm monitoring drones.",
+      "type": "Customer Acquisition",
+      "leads": 495,
+      "roi": "132%"
+    },
+    {
+      "id": 14,
+      "image": "https://images.unsplash.com/photo-1572375055901-5c13b5d2de39?w=500&h=300&fit=crop",
+      "title": "SmartFarm Initiative",
+      "description": "Raise awareness of SmartFarm's AI drone solutions among farmers.",
+      "type": "Brand Awareness",
+      "leads": 570,
+      "roi": "148%"
+    },
+    {
+      "id": 15,
+      "image": "https://images.unsplash.com/photo-1572375055901-5c13b5d2de39?w=500&h=300&fit=crop",
+      "title": "SmartFarm Initiative",
+      "description": "Reconnect with previous users offering advanced SmartFarm drone features.",
+      "type": "Retargeting",
+      "leads": 370,
+      "roi": "116%"
     }
   ],
   "allLoyaltyPrograms": [
     {
+      "id": 1,
       "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
-      "title": "Earn Rewards on Every Service",
-      "description": "Each time you book or use our services, you collect reward points. Over time, these points can be redeemed for discounts, credits, or rewards."
+      "title": "AgriBoost Season Kickoff",
+      "description": "A seasonal campaign aimed at acquiring new customers using targeted drone planting services.",
+      "type": "Customer Acquisition",
+      "leads": 450,
+      "roi": "120%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?w=500&h=300&fit=crop",
-      "title": "Unlock Exclusive Member Benefits",
-      "description": "As part of our loyalty program, you'll gain access to exclusive perks such as weekend promotions, early access to new services, and premium rewards."
+      "id": 2,
+      "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
+      "title": "AgriBoost Season Kickoff",
+      "description": "A seasonal campaign offering discounted drone planting services for farmers at the start of the planting season.",
+      "type": "Brand Awareness",
+      "leads": 500,
+      "roi": "145%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=500&h=300&fit=crop",
-      "title": "Share & Save Through Referrals",
-      "description": "Invite your farming colleagues to join and enjoy our services. Every referred referral earns you special perks and special discounts."
+      "id": 3,
+      "image": "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=500&h=300&fit=crop",
+      "title": "AgriBoost Season Kickoff",
+      "description": "A campaign to re-engage previous customers with exclusive drone service offers.",
+      "type": "Retargeting",
+      "leads": 300,
+      "roi": "110%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1556740758-90de374c12ad?w=500&h=300&fit=crop",
-      "title": "VIP Platinum Membership",
-      "description": "Reach platinum status and enjoy priority booking, dedicated support, and exclusive seasonal discounts."
+      "id": 4,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Drive new client sign-ups for advanced agricultural drone services during harvest season.",
+      "type": "Customer Acquisition",
+      "leads": 520,
+      "roi": "130%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500&h=300&fit=crop",
-      "title": "Birthday Bonus Program",
-      "description": "Celebrate your special day with bonus points and exclusive offers available during your birthday month."
+      "id": 5,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Promote awareness about new drone technology for crop monitoring among farmers.",
+      "type": "Brand Awareness",
+      "leads": 600,
+      "roi": "150%"
     },
     {
-      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&h=300&fit=crop",
-      "title": "Early Bird Rewards",
-      "description": "Book services in advance and earn extra points plus guaranteed availability during peak seasons."
+      "id": 6,
+      "image": "https://images.unsplash.com/photo-1606788075761-9b1bdb7b1b8d?w=500&h=300&fit=crop",
+      "title": "HarvestPro Launch",
+      "description": "Encourage previous users to try updated drone features with special offers.",
+      "type": "Retargeting",
+      "leads": 380,
+      "roi": "115%"
+    },
+    {
+      "id": 7,
+      "image": "https://images.unsplash.com/photo-1593642634315-48f5414c3ad9?w=500&h=300&fit=crop",
+      "title": "DroneFarm Expansion",
+      "description": "Attract new farmers to adopt drone services for precision agriculture.",
+      "type": "Customer Acquisition",
+      "leads": 480,
+      "roi": "125%"
     }
   ]
 }

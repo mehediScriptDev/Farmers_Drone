@@ -1,11 +1,13 @@
-import React from 'react'
+import LoyalityCampaingnOverview from "./LoyalityCampaingnOverview";
+import SeasonalCampaignOverview from "./SeasonalCampaignOverview";
 
 const Campaigns = () => {
   return (
-    <div>
-      campaings
+    <div className="bg-[#fafffd] px-4  md:px-12">
+      <SeasonalCampaignOverview />
+      <LoyalityCampaingnOverview />
     </div>
-  )
-}
+  );
+};
 
-export default Campaigns
+export default Campaigns;

@@ -8,8 +8,6 @@ import NotFoundPage from '../pages/NotFoundPage';
 // Dashboard Components
 import AdminDashboard from '../components/admin/components/AdminDashboard';
 
-import FieldAgentDashboard from '../components/fieldAgent/FieldAgentDashboard';
-
 // Admin Components
 import Jobs from '../components/admin/components/Jobs';
 import PaymentsManagement from '../components/admin/components/PaymentsManagement';
@@ -24,12 +22,13 @@ import Settings from '../components/admin/components/Settings';
 import OrderDetails from '../components/admin/components/OrderDetails';
 
 // Field Agent Components
-import FieldAgentReports from '../components/fieldAgent/Reports';
-import MyAssignments from '../components/fieldAgent/MyAssignments';
-import LocationTracking from '../components/fieldAgent/LocationTracking';
-import PhotoCapture from '../components/fieldAgent/PhotoCapture';
-import RouteOptimization from '../components/fieldAgent/RouteOptimization';
-import VehicleManagement from '../components/fieldAgent/VehicleManagement';
+import FieldAgentDashboard from '../components/fieldAgent/components/FieldAgentDashboard';
+// import FieldAgentReports from "../components/fieldAgent/Reports";
+// import MyAssignments from "../components/fieldAgent/MyAssignments";
+// import LocationTracking from "../components/fieldAgent/LocationTracking";
+// import PhotoCapture from "../components/fieldAgent/PhotoCapture";
+// import RouteOptimization from "../components/fieldAgent/RouteOptimization";
+// import VehicleManagement from "../components/fieldAgent/VehicleManagement";
 
 // Private Route Components
 import {
@@ -55,14 +54,16 @@ import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
-import Leads from './../components/marketing/Leads';
-import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import Analytics from './../components/marketing/Analytics';
 import ForgotPasswordFlow from '../pages/login/ForgetPasswordFllow';
 import LoginPage from '../pages/login/LoginPage';
 import SignUpFlow from '../pages/signUp/SignUpFllow';
+import axiosInstance from '../config/axiosConfig';
+import SeasonalCampaignDetails from '../components/marketing/components/SeasonalCampaignDetails';
+import LoyalityCampaingnDetails from '../components/marketing/components/LoyalityCampaingnDetails';
+import Campaigns from './../components/marketing/components/Campaigns';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -99,7 +100,7 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: 'signup',
-        element: <SignUpFlow/>,
+        element: <SignUpFlow />,
       },
     ],
   },
@@ -224,30 +225,6 @@ const AppRoutes = createBrowserRouter([
         index: true,
         element: <FieldAgentDashboard />,
       },
-      {
-        path: 'reports',
-        element: <FieldAgentReports />,
-      },
-      {
-        path: 'assignments',
-        element: <MyAssignments />,
-      },
-      {
-        path: 'location-tracking',
-        element: <LocationTracking />,
-      },
-      {
-        path: 'photo-capture',
-        element: <PhotoCapture />,
-      },
-      {
-        path: 'route-optimization',
-        element: <RouteOptimization />,
-      },
-      {
-        path: 'vehicle-management',
-        element: <VehicleManagement />,
-      },
     ],
   },
   {
@@ -263,7 +240,23 @@ const AppRoutes = createBrowserRouter([
         element: <MarketingDashBoard />,
       },
       {
-        path: 'campaigns',
+        path: 'campaigns/seasonal/:id',
+        element: <SeasonalCampaignDetails />,
+        loader: () =>
+          axiosInstance.get(
+            '/MarketingDashboard/data/marketingLandingPage.json'
+          ),
+      },
+      {
+        path: 'campaigns/loyality/:id',
+        element: <LoyalityCampaingnDetails />,
+        loader: () =>
+          axiosInstance.get(
+            '/MarketingDashboard/data/marketingLandingPage.json'
+          ),
+      },
+      {
+        path: 'Campaigns',
         element: <Campaigns />,
       },
       {

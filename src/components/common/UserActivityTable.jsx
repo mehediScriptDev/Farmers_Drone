@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiDotsVertical, HiUser } from 'react-icons/hi';
-import Pagination from './Pagination';
+import Pagination from '../marketing/components/Pagination';
 
 const getStatusColor = (statusType) => {
   const colors = {
