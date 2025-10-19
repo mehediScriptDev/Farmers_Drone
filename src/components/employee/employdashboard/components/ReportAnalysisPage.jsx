@@ -1,12 +1,37 @@
-import { useEffect, useState } from "react";
-import { FiTrendingUp, FiShoppingCart, FiClock, FiCreditCard, FiChevronDown, FiChevronUp, FiSearch } from "react-icons/fi";
-import axiosInstance from "../../../../config/axiosConfig";
 
+
+import { useEffect, useState, useRef } from "react";
+import {
+  FiTrendingUp,
+  FiShoppingCart,
+  FiClock,
+  FiCreditCard,
+  FiChevronDown,
+  FiChevronUp,
+  FiSearch,
+} from "react-icons/fi";
+import axiosInstance from "../../../../config/axiosConfig";
+import { useTranslation } from "react-i18next";
+import Pagination from "../../../common/Pagination";
+
+//  Custom Dropdown with outside click handler
 const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
   const [open, setOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  //  Close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
-    <div className="relative w-full">
+    <div ref={dropdownRef} className="relative w-full">
       <label className="block text-sm font-medium text-gray-700 mb-2">{label}</label>
       <button
         type="button"
@@ -47,12 +72,7 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
 };
 
 const ReportAnalysisPage = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState("last30days");
-  // eslint-disable-next-line no-unused-vars
-  const [filters, setFilters] = useState({
-    customerTypes: ["Aerial Media Services", "Ground Media Services"],
-    serviceCategories: ["Aerial Photography & Videography (MP)", "Event Photography"],
-  });
+ 
 
   const [summary, setSummary] = useState({});
   const [customers, setCustomers] = useState([]);
@@ -62,25 +82,43 @@ const ReportAnalysisPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const periodDropdownRef = useRef(null);
+  const { t } = useTranslation();
+ const [selectedPeriod, setSelectedPeriod] = useState("last30days");
+  const [filters] = useState({
+    customerTypes: [
+      t("dashboard.employee.pages.dashboard.dropDown.customerType"),
+      t("dashboard.employee.pages.dashboard.dropDown.groundMediaServices")],
+    serviceCategories: [t("dashboard.employee.pages.dashboard.dropDown.aerialPhotographyVideographyMP"), t("dashboard.employee.pages.dashboard.dropDown.eventPhotography")],
+  });
   const itemsPerPage = 4;
 
-  const periodOptions = [
-    { key: "last7days", label: "Last 7 Days" },
-    { key: "last30days", label: "Last 30 Days" },
-    { key: "last60days", label: "Last 60 Days" },
-    { key: "last90days", label: "Last 90 Days" },
-    { key: "last6months", label: "Last 6 Months" },
-    { key: "last12months", label: "Last 12 Months" },
+ const periodOptions = [
+    { key: "last7days", label: t("dashboard.employee.pages.dashboard.dropDown.last7days") },
+    { key: "last30days", label: t("dashboard.employee.pages.dashboard.dropDown.last30days") },
+    { key: "last60days", label: t("dashboard.employee.pages.dashboard.dropDown.last60days") },
+    { key: "last90days", label: t("dashboard.employee.pages.dashboard.dropDown.last90days") },
+    { key: "last6months", label: t("dashboard.employee.pages.dashboard.dropDown.last6months") },
+    { key: "last12months", label: t("dashboard.employee.pages.dashboard.dropDown.last12months") },
   ];
 
-  // Fetch data
+  //  Outside click for period dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (periodDropdownRef.current && !periodDropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  //  Fetch data
   const fetchReportData = async () => {
     try {
       setLoading(true);
       const response = await axiosInstance.get("/employee/data/customerManagementData.json");
       const data = response.data;
-
       setSummary({
         totalCustomers: data.summary?.totalCustomers || 0,
         totalRevenue: data.summary?.totalRevenue || 0,
@@ -101,7 +139,7 @@ const ReportAnalysisPage = () => {
 
   const stats = [
     {
-      label: "Total Customers",
+      label: t("dashboard.employee.pages.dashboard.card.totalCustomers"),
       value: summary.totalCustomers,
       change: "+13% vs last month",
       positive: true,
@@ -109,7 +147,7 @@ const ReportAnalysisPage = () => {
       bgColor: "bg-green-50",
     },
     {
-      label: "Total Revenue",
+      label: t("dashboard.employee.pages.dashboard.card.totalRevenue"),
       value: summary.totalRevenue,
       change: "+8% vs last month",
       positive: true,
@@ -117,7 +155,7 @@ const ReportAnalysisPage = () => {
       bgColor: "bg-blue-50",
     },
     {
-      label: "Avg Duration",
+      label: t("dashboard.employee.pages.dashboard.card.avgDuration"),
       value: summary.avgDuration,
       change: "-5% vs last month",
       positive: false,
@@ -125,7 +163,7 @@ const ReportAnalysisPage = () => {
       bgColor: "bg-orange-50",
     },
     {
-      label: "Pending Payments",
+      label: t("dashboard.employee.pages.dashboard.card.pendingPayments"),
       value: summary.pendingPayments,
       change: "+12% vs last month",
       positive: true,
@@ -134,7 +172,7 @@ const ReportAnalysisPage = () => {
     },
   ];
 
-  // Filter customers
+  //  Filtering logic
   const filteredCustomers = customers.filter((customer) => {
     const matchesCustomerType = selectedCustomerType
       ? customer.customerType === selectedCustomerType
@@ -148,27 +186,24 @@ const ReportAnalysisPage = () => {
       : true;
     return matchesCustomerType && matchesServiceCategory && matchesSearch;
   });
-
-  // Pagination
   const totalPages = Math.ceil(filteredCustomers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentCustomers = filteredCustomers.slice(startIndex, startIndex + itemsPerPage);
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  };
-
-  const handlePrevPage = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-  };
-
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  }
   return (
     <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-6 md:mb-8">
-        <h1 className="text-xl md:text-2xl font-bold text-gray-900">Customer Management</h1>
-        <p className="text-sm md:text-base text-gray-600">
-          Manage customer registration and profile setup
+        <h1 className="text-xl md:text-3xl font-bold text-[#002244] mb-2">
+          {t('dashboard.employee.title.customPageTitle')}
+        </h1>
+        <p className="text-sm md:text-base text-[#464646]">
+          {t('dashboard.employee.subTitle.custompageSub')}
         </p>
       </div>
 
@@ -182,13 +217,17 @@ const ReportAnalysisPage = () => {
           <>
             {/* Period Dropdown */}
             <div className="mb-4 md:mb-6 flex flex-col items-start gap-2 relative">
-              <div className="relative w-52">
+              <div ref={periodDropdownRef} className="relative w-52">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="w-full flex items-center justify-between px-3 py-2 md:px-4 md:py-2 border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-gray-700 transition-all duration-200"
                 >
                   {periodOptions.find((p) => p.key === selectedPeriod)?.label}
-                  {dropdownOpen ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />}
+                  {dropdownOpen ? (
+                    <FiChevronUp className="w-4 h-4" />
+                  ) : (
+                    <FiChevronDown className="w-4 h-4" />
+                  )}
                 </button>
                 {dropdownOpen && (
                   <div className="absolute mt-2 w-full bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden z-20">
@@ -201,8 +240,8 @@ const ReportAnalysisPage = () => {
                           setCurrentPage(1);
                         }}
                         className={`block w-full text-left px-4 py-2 text-xs md:text-sm hover:bg-gray-100 ${selectedPeriod === period.key
-                            ? "bg-gray-50 font-medium text-gray-900"
-                            : "text-gray-700"
+                          ? "bg-gray-50 font-medium text-gray-900"
+                          : "text-gray-700"
                           }`}
                       >
                         {period.label}
@@ -251,7 +290,9 @@ const ReportAnalysisPage = () => {
                       </div>
                     </div>
                     <p className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                    <p className={`text-xs ${stat.positive ? "text-green-600" : "text-red-600"}`}>{stat.change}</p>
+                    <p className={`text-xs ${stat.positive ? "text-green-600" : "text-red-600"}`}>
+                      {stat.change}
+                    </p>
                   </div>
                 );
               })}
@@ -261,9 +302,9 @@ const ReportAnalysisPage = () => {
       </div>
 
       {/* Customer Table */}
-      <div className="p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <h2 className="text-lg md:text-xl font-bold text-gray-900">Customer Details</h2>
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
+        <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+          <h2 className="text-lg md:text-xl font-bold text-gray-900">{ t("dashboard.employee.table.customerDetails") }</h2>
 
           {/* Search Field */}
           <div className="relative w-full md:w-1/2 lg:w-1/3">
@@ -289,22 +330,24 @@ const ReportAnalysisPage = () => {
           <>
             <div className="overflow-x-auto">
               <table className="w-full min-w-max">
-                <thead className="bg-gray-50 border-b border-gray-200">
+                <thead className="bg-gray-50 border-b h-14 border-gray-200">
                   <tr>
-                    <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
-                      Service / Name
+                    <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
+                      { t("dashboard.employee.table.serviceName") }
                     </th>
-                    <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
-                      Contact
+                    <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
+                      { t("dashboard.employee.tablecontact") }
+
                     </th>
-                    <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
-                      Date
+                    <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
+                      { t("dashboard.employee.table.tableDate") }
+                      
                     </th>
-                    <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
-                      Duration
+                    <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
+                       { t("dashboard.employee.table.duration") }
                     </th>
-                    <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
-                      Revenue
+                    <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
+                       { t("dashboard.employee.table.revenue") }
                     </th>
                   </tr>
                 </thead>
@@ -320,11 +363,19 @@ const ReportAnalysisPage = () => {
                         </div>
                       </td>
                       <td className="px-3 md:px-6 py-4">
-                        <div className="text-xs md:text-sm text-gray-900 whitespace-nowrap">{customer.contact || "-"}</div>
-                        <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">{customer.phone || "-"}</div>
+                        <div className="text-xs md:text-sm text-gray-900 whitespace-nowrap">
+                          {customer.contact || "-"}
+                        </div>
+                        <div className="text-xs md:text-sm text-gray-500 whitespace-nowrap">
+                          {customer.phone || "-"}
+                        </div>
                       </td>
-                      <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">{customer.date || "-"}</td>
-                      <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">{customer.duration || "-"}</td>
+                      <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">
+                        {customer.date || "-"}
+                      </td>
+                      <td className="px-3 md:px-6 py-4 text-xs md:text-sm text-gray-900 whitespace-nowrap">
+                        {customer.duration || "-"}
+                      </td>
                       <td className="px-3 md:px-6 py-4 text-xs md:text-sm font-medium text-gray-900 whitespace-nowrap">
                         ${customer.revenue || 0}
                       </td>
@@ -335,48 +386,14 @@ const ReportAnalysisPage = () => {
             </div>
 
             {/* Pagination */}
-            {/* Pagination */}
-            <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-              {/* Showing Text */}
-              <div className="text-xs md:text-sm text-gray-600">
-                Showing {startIndex + 1}–{Math.min(startIndex + itemsPerPage, filteredCustomers.length)} of {filteredCustomers.length} results
-              </div>
-
-              {/* Pagination Buttons */}
-              <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-                {/* Previous */}
-                <button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}
-                  className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  Previous
-                </button>
-
-                {/* Page Numbers */}
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                  <button
-                    key={number}
-                    onClick={() => setCurrentPage(number)}
-                    className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                        ? "bg-[#28A844] text-white font-medium"
-                        : "!bg-gray-100 text-black hover:bg-gray-200"
-                      }`}
-                  >
-                    {number}
-                  </button>
-                ))}
-
-                {/* Next */}
-                <button
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages || totalPages === 0}
-                  className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+              startIndex={startIndex}
+              itemsPerPage={itemsPerPage}
+              totalItems={filteredCustomers.length}
+            />
           </>
         )}
       </div>

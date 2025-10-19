@@ -207,7 +207,7 @@ const SupportPage = () => {
             Customer Support Activity
           </h2>
           <div className='relative w-full md:w-1/2 lg:w-1/3'>
-            <span className='absolute inset-y-0 left-3 flex items-center text-gray-400 text-2xl'>
+            <span className='absolute inset-y-0 left-3 flex items-center text-gray-400 text-xl'>
               <CiSearch />
             </span>
             <input
