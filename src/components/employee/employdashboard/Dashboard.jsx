@@ -114,7 +114,7 @@ function DashBoard() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
-
+  
   // Dropdown logic
   const toggleDropdown = (index) => {
     if (activeDropdown === index) {
@@ -238,7 +238,7 @@ function DashBoard() {
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-[#F5F7FA] border-b h-18 border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b h-18 border-[#C0C0C0]">
               <tr>
                 <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
                 <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.contact')}</th>
@@ -327,7 +327,7 @@ function DashBoard() {
         </div>
 
         {/* Pagination */}
-        <div className="py-4  border-t border-gray-200">
+         <div className="py-4  border-t border-gray-200">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4   md:pt-3">
             <p className="text-sm text-black px-4 md:px-6">
               Showing {paginatedActivities.length} of {filteredActivities.length} results
@@ -354,7 +354,7 @@ function DashBoard() {
               >Next</button>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
 
       {/* Modals */}

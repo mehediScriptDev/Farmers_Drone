@@ -225,24 +225,24 @@ const SupportPage = () => {
         </div>
         <div className='overflow-x-auto'>
           <table className='min-w-full table-fixed'>
-            <thead className='bg-gray-50 border-b border-gray-200'>
+            <thead className='bg-[#F5F7FA] border-b h-18 border-gray-200'>
               <tr>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.serviceName')}
                 </th>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.tableIssues')}
                 </th>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.tableDate')}
                 </th>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.progress')}
                 </th>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.priority')}
                 </th>
-                <th className='px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap'>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
                   {t('dashboard.employee.table.action')}
                 </th>
               </tr>
