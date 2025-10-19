@@ -145,14 +145,6 @@ const AppRoutes = createBrowserRouter([
         element: <Complaints />,
       },
       {
-        path: 'complaint-details/:id',
-        element: <ComplaintDetails />,
-      },
-      {
-        path: 'complaint-feedback/:id',
-        element: <ComplaintFeedback />,
-      },
-      {
         path: 'services',
         element: <AdminServices />,
       },
@@ -163,6 +155,22 @@ const AppRoutes = createBrowserRouter([
     element: (
       <PrivateAdminRoute>
         <Settings />
+      </PrivateAdminRoute>
+    ),
+  },
+  {
+    path: '/admin/complaint-details/:id',
+    element: (
+      <PrivateAdminRoute>
+        <ComplaintDetails />
+      </PrivateAdminRoute>
+    ),
+  },
+  {
+    path: '/admin/complaint-feedback/:id',
+    element: (
+      <PrivateAdminRoute>
+        <ComplaintFeedback />
       </PrivateAdminRoute>
     ),
   },
