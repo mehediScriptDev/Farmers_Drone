@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
 import { Link, useLocation } from "react-router-dom";
 import CampaignModal from "./modals/CampaignModal";
+import Pagination from "../../common/Pagination";
 import { t } from "i18next";
 
 export default function LoyalityCampaingnOverview() {
@@ -44,10 +45,10 @@ export default function LoyalityCampaingnOverview() {
     }
   };
   console.log(campaigns);
-  const totalResults = campaigns.length;
-  const startResult = (currentPage - 1) * resultsPerPage + 1;
-  const endResult = Math.min(currentPage * resultsPerPage, totalResults);
-  const paginatedCampaigns = campaigns.slice(startResult - 1, endResult);
+  
+  const startIndex = (currentPage - 1) * resultsPerPage;
+  const endIndex = startIndex + resultsPerPage;
+  const paginatedCampaigns = campaigns.slice(startIndex, endIndex);
 
   if (loading) {
     return (
@@ -152,28 +153,13 @@ export default function LoyalityCampaingnOverview() {
                 </tbody>
               </table>
 
-              {/* Footer */}
-              <div className="flex justify-between items-center px-6 py-4 bg-white border-t border-gray-200">
-                <div className="text-sm text-gray-600">
-                  {t("dashboard.marketing.Showing")} {startResult} to {endResult} of {totalResults} {t("dashboard.marketing.Results")}
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((p) => p - 1)}
-                  >
-                    {t("dashboard.marketing.Previous")} 
-                  </button>
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={endResult >= totalResults}
-                    onClick={() => setCurrentPage((p) => p + 1)}
-                  >
-                    {t("dashboard.marketing.Next")}
-                  </button>
-                </div>
-              </div>
+              {/* Pagination */}
+              <Pagination
+                currentPage={currentPage}
+                totalItems={campaigns.length}
+                itemsPerPage={resultsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           )}
         </div>
