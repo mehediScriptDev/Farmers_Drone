@@ -50,7 +50,7 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   ];
 
   return (
-    <div className='bg-white rounded-xl shadow-sm'>
+    <div className='bg-white rounded-xl shadow-sm mb-6'>
       <div className='p-6 border-b border-gray-200'>
         <h3 className='text-lg font-semibold text-gray-900'>{title}</h3>
       </div>
@@ -127,6 +127,15 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
         totalItems={data.data.length}
         itemsPerPage={itemsPerPage}
         onPageChange={handlePageChange}
+        showCount={{
+          current: `${(currentPage - 1) * itemsPerPage + 1}-${Math.min(
+            currentPage * itemsPerPage,
+            data.data.length
+          )}`,
+          total: data.data.length,
+          prefix: 'Showing',
+          label: 'of',
+        }}
       />
     </div>
   );

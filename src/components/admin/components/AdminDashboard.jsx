@@ -75,7 +75,7 @@ const AdminDashboard = () => {
   return (
     <div className='w-full bg-[#fafffd] px-6 xl:px-11 py-3 lg:py-6'>
       {/* Header Section */}
-      <div className='mb-6 '>
+      <div className='mb-6'>
         <div>
           <h1 className='text-2xl font-bold text-gray-900 mb-2'>
             {t('dashboard.admin.title')}
@@ -138,12 +138,10 @@ const AdminDashboard = () => {
 
       {/* User Activity Table */}
       {dashboardData.recentActivity && (
-        <div>
-          <UserActivityTable
-            data={dashboardData.recentActivity}
-            title={t('dashboard.admin.userActivity.title')}
-          />
-        </div>
+        <UserActivityTable
+          data={dashboardData.recentActivity}
+          title={t('dashboard.admin.userActivity.title')}
+        />
       )}
     </div>
   );
