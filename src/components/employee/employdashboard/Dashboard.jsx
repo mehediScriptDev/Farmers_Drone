@@ -238,22 +238,22 @@ function DashBoard() {
 
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-[#F5F7FA] border-b border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b h-18 border-gray-200">
               <tr>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.contact')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.location')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.served')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.progress')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.priority')}</th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.action')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.serviceName')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.contact')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.location')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.served')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.progress')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.priority')}</th>
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">{t('dashboard.employee.table.action')}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200">
               {paginatedActivities.map((activity, index) => {
                 const actualIndex = activities.findIndex(a => a.id === activity.id);
                 return (
-                  <tr key={activity.id} className="hover:bg-gray-50">
+                  <tr key={activity.id} className=" hover:bg-gray-50 ">
                     <td className="px-3 md:px-6 py-4">{activity.serviceName}</td>
                     <td className="px-3 md:px-6 py-4">
                       <div className="text-xs md:text-sm text-gray-900 whitespace-nowrap">{activity.contact}</div>
@@ -267,7 +267,7 @@ function DashBoard() {
                     {/* Progress Dropdown */}
                     <td className="px-3 md:px-6 py-4 relative">
                       <div
-                        className="relative inline-block w-40"
+                        className="relative inline-block w-40"      
                         ref={(el) => (buttonRefs.current[index] = el)}
                       >
                         <button
@@ -327,8 +327,8 @@ function DashBoard() {
         </div>
 
         {/* Pagination */}
-        <div className="py-4 md:py-6">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 border-t border-gray-200 pt-2 md:pt-3">
+        <div className="py-4  border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4   md:pt-3">
             <p className="text-sm text-black px-4 md:px-6">
               Showing {paginatedActivities.length} of {filteredActivities.length} results
             </p>

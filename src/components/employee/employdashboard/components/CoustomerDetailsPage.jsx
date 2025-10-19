@@ -41,7 +41,7 @@ function CustomerDetailsPage() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen ">
       <div className="flex-1 p-6 md:px-12">
         {/* Back Button */}
         <button
@@ -119,8 +119,24 @@ function CustomerDetailsPage() {
 
         {/* KYC Section */}
         <div className="mt-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">KYC Document</h2>
-          {/* ...Your existing KYC cards code remains unchanged */}
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900">KYC Document</h2>
+            
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Aadhaar Card */}
+            <div className="bg-gray-200 rounded-lg p-4 flex items-center justify-center min-h-[280px]">
+              {/* Replace with actual Aadhaar card image */}
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtGqylBi7P-tFmrAnqZz7ekxGetT_433E0S8_vWYgy7EmP2kR_zC6ViifF0C-TpNYiy8&usqp=CAU" alt="" srcset="" />
+            </div>
+
+            {/* Passport */}
+            <div className="bg-gray-300 rounded-lg p-8 flex items-center justify-center min-h-[180px]">
+              {/* Replace with actual Passport image */}  
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPENKscX6Sh2XjXF80KwSkWMV5CRf0XzViNQ&s" alt="" srcset="" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
