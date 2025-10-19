@@ -7,6 +7,7 @@ import ApplyDiscountModal from './components/Modal/ApplyDiscountModal';
 import ResolveBillingModal from './components/Modal/ResolveBillingModal';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../../config/axiosConfig';
+import Pagination from '../../common/Pagination';
 
 const PaymentManagement = () => {
   const { t, i18n } = useTranslation();
@@ -70,31 +71,26 @@ const PaymentManagement = () => {
     i18n.on('languageChanged', handleLanguageChange);
     return () => i18n.off('languageChanged', handleLanguageChange);
   }, [i18n]);
-  
+
   // Search
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
 
     const filtered = recentTransactions.filter(txn =>
-      txn.serviceId.toLowerCase().includes(query) ||  
-      txn.customerName.toLowerCase().includes(query) || 
-      txn.payment.toString().toLowerCase().includes(query) || 
-      txn.progress.toLowerCase().includes(query)       
+      txn.serviceId.toLowerCase().includes(query) ||
+      txn.customerName.toLowerCase().includes(query) ||
+      txn.payment.toString().toLowerCase().includes(query) ||
+      txn.progress.toLowerCase().includes(query)
     );
 
     setFilteredTransactions(filtered);
     setCurrentPage(1);
   };
 
-  // Pagination
-  const totalPages = Math.ceil(filteredTransactions.length / itemsPerPage);
+  // Paginated Transactions
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedTransactions = filteredTransactions.slice(startIndex, startIndex + itemsPerPage);
-
-  const handlePrevious = () => { if (currentPage > 1) setCurrentPage(prev => prev - 1); };
-  const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); };
-
 
   return (
     <div className="flex-1 p-4 md:px-12">
@@ -155,6 +151,7 @@ const PaymentManagement = () => {
           </div>
         ))}
       </div>
+
       {/* Transaction Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -175,6 +172,7 @@ const PaymentManagement = () => {
             />
           </div>
         </div>
+
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
             <thead className="bg-[#F5F7FA] border-b h-18 border-gray-200">
@@ -221,45 +219,16 @@ const PaymentManagement = () => {
             </tbody>
           </table>
         </div>
-        {/* Pagination */}
-        {/* Pagination */}
-        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs md:text-sm text-gray-600">
-            Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
-          </div>
-          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            {/* Previous */}
-            <button
-              onClick={handlePrevious}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            {/* Page Numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-              <button
-                key={number}
-                onClick={() => setCurrentPage(number)}
-                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                  ? 'bg-[#28A844] text-white font-medium'
-                  : 'bg-gray-100 text-black hover:bg-gray-200'
-                  }`}
-              >
-                {number}
-              </button>
-            ))}
-            {/* Next */}
-            <button
-              onClick={handleNext}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={currentPage === totalPages || totalPages === 0}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+
+        {/* Common Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={filteredTransactions.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
+
       {/* Modals */}
       <CollectPaymentModal isOpen={isPaymentModalOpen} onClose={() => setIsPaymentModalOpen(false)} />
       <ApplyDiscountModal isOpen={isDiscountModalOpen} onClose={() => setIsDiscountModalOpen(false)} />

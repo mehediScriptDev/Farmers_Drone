@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react'; // Removed useRef
+
+
+
+
+
+
+
+import React, { useState, useEffect, useMemo } from 'react';
 import { TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { GrUserSettings } from 'react-icons/gr';
 import { CiSearch } from 'react-icons/ci';
@@ -7,6 +14,7 @@ import CreateTicketModal from './components/Modal/CreateTicketModal';
 import EscalateTicketModal from './components/Modal/EscalateTicketModal';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../../config/axiosConfig';
+import Pagination from '../../common/Pagination';
 
 const SupportPage = () => {
   const [showCreate, setShowCreate] = useState(false);
@@ -57,17 +65,11 @@ const SupportPage = () => {
     );
   }, [supportData, searchQuery]);
 
-  // Pagination
-  const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
+  // Pagination Slice
   const paginatedData = useMemo(() => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    const end = start + ITEMS_PER_PAGE;
-    return filteredData.slice(start, end);
+    return filteredData.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredData, currentPage]);
-
-  const handlePrevious = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
-  const handleNext = () =>
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
@@ -77,7 +79,6 @@ const SupportPage = () => {
   const toggleDropdown = (index) => {
     setActiveDropdown((prev) => (prev === index ? null : index));
   };
-
 
   const handleManageTicket = () => {
     setShowManageModal(true);
@@ -112,15 +113,12 @@ const SupportPage = () => {
     }
   };
 
-
   useEffect(() => {
     const handleGlobalClick = (event) => {
+      // eslint-disable-next-line no-unused-vars
       const tableContainer = document.getElementById('support-table-container');
 
       if (activeDropdown !== null) {
-
-        // eslint-disable-next-line no-unused-vars
-        const isTableClick = tableContainer && tableContainer.contains(event.target);
         const isDropdownButton = event.target.closest('.dropdown-toggle-button');
         const isDropdownMenu = event.target.closest('.dropdown-menu-content');
 
@@ -133,7 +131,6 @@ const SupportPage = () => {
     document.addEventListener('mousedown', handleGlobalClick);
     return () => document.removeEventListener('mousedown', handleGlobalClick);
   }, [activeDropdown]);
-
 
   return (
     <div className='flex-1 p-4 md:px-12 bg-[#fafffd] min-h-screen'>
@@ -163,9 +160,8 @@ const SupportPage = () => {
         </button>
       </div>
 
-      {/* Stats (omitted for brevity) */}
+      {/* Stats */}
       <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6'>
-        {/* ... Stats rendering ... */}
         {stats.map((stat, index) => {
           const bottomContent = stat.change || stat.subtext;
           return (
@@ -223,69 +219,40 @@ const SupportPage = () => {
             />
           </div>
         </div>
+
         <div className='overflow-x-auto'>
           <table className='min-w-full table-fixed'>
             <thead className='bg-[#F5F7FA] border-b h-18 border-gray-200'>
               <tr>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.serviceName')}
-                </th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.tableIssues')}
-                </th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.tableDate')}
-                </th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.progress')}
-                </th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.priority')}
-                </th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>
-                  {t('dashboard.employee.table.action')}
-                </th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Service Name</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Issues</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Date</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Progress</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Priority</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Action</th>
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
               {paginatedData.length > 0 ? (
                 paginatedData.map((item, index) => {
                   const dropdownIndex = index;
-
-                  // Calculate if the dropdown is near the bottom of the visible items
                   const isNearBottom = dropdownIndex >= ITEMS_PER_PAGE - 2;
 
                   return (
                     <tr key={dropdownIndex} className='hover:bg-gray-50'>
                       <td className='px-3 md:px-6 py-4'>
-                        <div className='font-medium text-gray-900 text-sm md:text-base'>
-                          {item.serviceName}
-                        </div>
-                        <div className='text-xs md:text-sm text-gray-500'>
-                          {item.name}
-                        </div>
+                        <div className='font-medium text-gray-900 text-sm md:text-base'>{item.serviceName}</div>
+                        <div className='text-xs md:text-sm text-gray-500'>{item.name}</div>
                       </td>
-                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900'>
-                        {item.issues}
-                      </td>
-                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900 whitespace-nowrap'>
-                        {item.date}
-                      </td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900'>{item.issues}</td>
+                      <td className='px-3 md:px-6 py-4 text-xs md:text-base text-gray-900 whitespace-nowrap'>{item.date}</td>
                       <td className='px-3 md:px-6 py-4'>
-                        <span
-                          className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm ${getProgressColor(
-                            item.progress
-                          )}`}
-                        >
+                        <span className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm ${getProgressColor(item.progress)}`}>
                           {item.progress}
                         </span>
                       </td>
                       <td className='px-3 md:px-6 py-4 text-xs md:text-sm whitespace-nowrap'>
-                        <span
-                          className={`font-medium inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${getPriorityColor(
-                            item.priority
-                          )}`}
-                        >
+                        <span className={`font-medium inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${getPriorityColor(item.priority)}`}>
                           {item.priority}
                         </span>
                       </td>
@@ -296,19 +263,12 @@ const SupportPage = () => {
                             className='text-2xl dropdown-toggle-button'
                           >
                             <BiChevronDown
-                              className={`transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''
-                                }`}
+                              className={`transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''}`}
                             />
                           </button>
 
                           {activeDropdown === dropdownIndex && (
-                            <div
-                              // Added className for global click listener to identify the menu
-                              className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 dropdown-menu-content ${
-                                // Adjusted positioning logic
-                                isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'
-                                }`}
-                            >
+                            <div className={`absolute right-0 w-48 bg-white border border-gray-200 rounded shadow-lg z-50 dropdown-menu-content ${isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'}`}>
                               <button
                                 onClick={handleManageTicket}
                                 className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors'
@@ -318,7 +278,7 @@ const SupportPage = () => {
                               <button
                                 onClick={() => {
                                   setShowEscalate(true);
-                                  setActiveDropdown(null); // Close dropdown when opening modal
+                                  setActiveDropdown(null);
                                 }}
                                 className='block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors border-t border-gray-100'
                               >
@@ -342,65 +302,18 @@ const SupportPage = () => {
           </table>
         </div>
 
-        {/* Pagination (omitted for brevity) */}
-        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs md:text-sm text-gray-600">
-            Showing{' '}
-            {paginatedData.length === 0
-              ? 0
-              : (currentPage - 1) * ITEMS_PER_PAGE + 1}{' '}
-            to{' '}
-            {(currentPage - 1) * ITEMS_PER_PAGE + paginatedData.length} of{' '}
-            {filteredData.length} results
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            <button
-              onClick={handlePrevious}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-              <button
-                key={number}
-                onClick={() => setCurrentPage(number)}
-                className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                  ? 'bg-[#28A844] text-white font-medium'
-                  : 'bg-gray-100 text-black hover:bg-gray-200'
-                  }`}
-              >
-                {number}
-              </button>
-            ))}
-
-            <button
-              onClick={handleNext}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={currentPage === totalPages || totalPages === 0}
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        {/* Replace inline pagination with common Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={filteredData.length}
+          itemsPerPage={ITEMS_PER_PAGE}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
-      <CreateTicketModal
-        isOpen={showCreate}
-        onClose={() => setShowCreate(false)}
-      />
-      <EscalateTicketModal
-        isOpen={showEscalate}
-        onClose={() => setShowEscalate(false)}
-      />
-      {showManageModal && (
-        <CreateTicketModal
-          isOpen={showManageModal}
-          onClose={() => setShowManageModal(false)}
-        />
-      )}
+      <CreateTicketModal isOpen={showCreate} onClose={() => setShowCreate(false)} />
+      <EscalateTicketModal isOpen={showEscalate} onClose={() => setShowEscalate(false)} />
+      {showManageModal && <CreateTicketModal isOpen={showManageModal} onClose={() => setShowManageModal(false)} />}
     </div>
   );
 };
