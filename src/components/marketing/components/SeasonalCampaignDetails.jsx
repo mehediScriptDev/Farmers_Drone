@@ -146,9 +146,12 @@ const SeasonalCampaignDetails = () => {
 
   // Memoize the selected campaign to avoid recomputation
   const currentCampaign = useMemo(() => {
-    const seasonalCampaigns = data?.data?.allSeasonalCampaigns ?? [];
-    return seasonalCampaigns.find((c) => c.id === campaignId);
-  }, [data, campaignId]);
+    // the JSON returned by marketingLandingPage.json places campaigns at the
+    // root under `allSeasonalCampaigns` (not under `data`). Use that path
+    // and make the id comparison robust to string/number mismatches.
+    const seasonalCampaigns = data?.allSeasonalCampaigns ?? [];
+    return seasonalCampaigns.find((c) => c.id === campaignId || String(c.id) === String(id));
+  }, [data, campaignId, id]);
 
   // Loading and not-found states
   const isLoading = data === null;

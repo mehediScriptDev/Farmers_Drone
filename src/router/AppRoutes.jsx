@@ -60,7 +60,6 @@ import Analytics from "./../components/marketing/Analytics";
 import ForgotPasswordFlow from "../pages/login/ForgetPasswordFllow";
 import LoginPage from "../pages/login/LoginPage";
 import SignUpFlow from "../pages/signUp/SignUpFllow";
-import axiosInstance from "../config/axiosConfig";
 import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
 import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 import Campaigns from "./../components/marketing/components/Campaigns";
@@ -246,10 +245,6 @@ const AppRoutes = createBrowserRouter([
       {
         path: "campaigns/loyality/:id",
         element: <LoyalityCampaingnDetails />,
-        loader: () =>
-          axiosInstance.get(
-            "/MarketingDashboard/data/marketingLandingPage.json"
-          ),
       },
       {
         path: "Campaigns",

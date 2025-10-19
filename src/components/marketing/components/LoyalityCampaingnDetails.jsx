@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import {
   FiArrowLeft,
@@ -7,7 +7,9 @@ import {
   FiUsers,
   FiTrendingUp,
 } from "react-icons/fi";
-import { useLoaderData, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import axiosInstance from '../../../config/axiosConfig';
+import LoadingSpinner from '../../common/LoadingSpinner';
 // import { FaChevronDown } from "react-icons/fa";
 import MapAudience from "../MapAudience";
 import { useTranslation } from "react-i18next";
@@ -51,7 +53,23 @@ const LoyalityCampaingnDetails = () => {
   // const [timeRange, setTimeRange] = useState("Last 30 days overview");
   const { t } = useTranslation();
 
-  const data = useLoaderData();
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    let isMounted = true;
+    axiosInstance
+      .get('/MarketingDashboard/data/marketingLandingPage.json')
+      .then((res) => {
+        if (isMounted) setData(res.data);
+      })
+      .catch((err) => {
+        console.error('Failed to load loyalty campaign data', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   const { id } = useParams();
   const navigate = useNavigate();
   const channels = [
@@ -127,6 +145,7 @@ const LoyalityCampaingnDetails = () => {
   // Derive from loader data instead of setting state during render
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const loyaltyPrograms = data?.data?.allLoyaltyPrograms ?? [];
+  const isLoading = data === null;
   const campaignId = Number(id);
 
   // Memoize the selected campaign to avoid recomputation
@@ -296,34 +315,51 @@ const LoyalityCampaingnDetails = () => {
               {t("dashboard.marketing.CampaignDetails.CampaignStory")}
             </h2>
 
-            {/* Drone Images */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div className="rounded-xl overflow-hidden shadow-md h-80">
-                <img
-                  src={currentCampaign.image}
-                  alt="Drone over house"
-                  className="w-full h-full object-cover"
-                />
+            {isLoading ? (
+              <div className="flex items-center justify-center h-80">
+                <LoadingSpinner />
               </div>
-              <div className="rounded-xl overflow-hidden shadow-md h-80">
-                <img
-                  src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=600&h=400&fit=crop"
-                  alt="White drone in flight"
-                  className="w-full h-full object-cover"
-                />
+            ) : !currentCampaign ? (
+              <div className="p-8 text-center">
+                <h3 className="text-lg md:text-xl font-bold text-black mb-2">
+                  {t('dashboard.marketing.CampaignDetails.NotFound') || 'Campaign not found'}
+                </h3>
+                <p className="text-sm text-gray-600">
+                  {t('dashboard.marketing.CampaignDetails.NotFoundMessage') || 'The campaign you are looking for does not exist.'}
+                </p>
               </div>
-            </div>
+            ) : (
+              <>
+                {/* Drone Images */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="rounded-xl overflow-hidden shadow-md h-80">
+                    <img
+                      src={currentCampaign.image || 'https://via.placeholder.com/600x400?text=No+Image'}
+                      alt={currentCampaign.title || 'Campaign image'}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="rounded-xl overflow-hidden shadow-md h-80">
+                    <img
+                      src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=600&h=400&fit=crop"
+                      alt="White drone in flight"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
 
-            {/* Story Content */}
-            <div className="space-y-4">
-              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-black">
-                {currentCampaign.title}
-              </h3>
+                {/* Story Content */}
+                <div className="space-y-4">
+                  <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-black">
+                    {currentCampaign.title}
+                  </h3>
 
-              <p className="leading-relaxed text-black">
-                {currentCampaign.description}
-              </p>
-            </div>
+                  <p className="leading-relaxed text-black">
+                    {currentCampaign.description}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
