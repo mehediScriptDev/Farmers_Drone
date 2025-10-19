@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from '../components/common/Layout';
 import { DashboardLayout } from '../components/common/DashboardLayout';
-import LoginPage from '../pages/LoginPage';
+
 import NotAuthorizedPage from '../pages/NotAuthorizedPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -60,6 +60,9 @@ import Campaigns from './../components/marketing/Campaigns';
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
 import Analytics from './../components/marketing/Analytics';
+import ForgotPasswordFlow from '../pages/login/ForgetPasswordFllow';
+import LoginPage from '../pages/login/LoginPage';
+import SignUpFlow from '../pages/signUp/SignUpFllow';
 
 const AppRoutes = createBrowserRouter([
   {
@@ -89,6 +92,14 @@ const AppRoutes = createBrowserRouter([
       {
         path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'login/forget-password',
+        element: <ForgotPasswordFlow />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpFlow/>,
       },
     ],
   },
@@ -176,7 +187,7 @@ const AppRoutes = createBrowserRouter([
       },
 
       {
-        path: 'report-analysis',
+        path: 'customers/report-analysis',
         element: <ReportAnalysisPage />,
       },
       {

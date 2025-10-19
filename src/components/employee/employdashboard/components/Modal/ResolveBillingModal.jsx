@@ -1,116 +1,174 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { BiChevronDown, BiChevronUp } from "react-icons/bi";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import { IoMdClose } from "react-icons/io";
 
-// Resolve Billing Modal Component
 const ResolveBillingModal = ({ isOpen, onClose }) => {
-  const [customer, setCustomer] = useState('');
-  const [issueType, setIssueType] = useState('Incorrect charge');
-  const [transactionId, setTransactionId] = useState('');
-  const [notes, setNotes] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const initialState = {
+    customer: '',
+    issueType: 'Incorrect charge',
+    transactionId: '',
+    notes: '',
+    isDropdownOpen: false,
+  };
+
+  const [state, setState] = useState(initialState);
+  const modalRef = useRef(null);
+  const dropdownRef = useRef(null);
   const { t } = useTranslation();
+
   const issueTypes = [
     t('dashboard.employee.modal.resolveIssueTypeOption1'),
     t('dashboard.employee.modal.resolveIssueTypeOption2'),
     t('dashboard.employee.modal.resolveIssueTypeOption3'),
     t('dashboard.employee.modal.resolveIssueTypeOption4'),
     t('dashboard.employee.modal.resolveIssueTypeOption5'),
-
   ];
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutsideDropdown = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setState(prev => ({ ...prev, isDropdownOpen: false }));
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideDropdown);
+    return () => document.removeEventListener("mousedown", handleClickOutsideDropdown);
+  }, []);
+
+  // Close modal when clicking outside
+  useEffect(() => {
+    const handleClickOutsideModal = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutsideModal);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutsideModal);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  const handleSubmit = () => {
-    console.log({ customer, issueType, transactionId, notes });
-    alert('Issue resolved successfully!');
+  const handleClose = () => {
+    setState(initialState);
     onClose();
   };
 
-  return (
-    <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center p-5 z-50">
-      <div className="bg-white rounded-lg w-full max-w-lg shadow-2xl">
-        <div className="flex justify-between items-center p-6 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-800">{t('dashboard.employee.modal.resolveTitle')}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 text-2xl leading-none">×</button>
-        </div>
+  const handleSubmit = () => {
+    const { customer, issueType, transactionId, notes } = state;
 
-        <div className="p-6">
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('dashboard.employee.modal.customerLabel')}</label>
-            <input
-              type="text"
-              placeholder={t('dashboard.employee.modal.resolveCustomerPlaceholder')}
-              value={customer}
-              onChange={(e) => setCustomer(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-green-500 text-sm"
-            />
+    if (!customer.trim()) {
+      toast.error("Customer ID is required!");
+      return;
+    }
+    if (!transactionId.trim()) {
+      toast.error("Transaction ID is required!");
+      return;
+    }
+
+    toast.success("Issue resolved successfully!");
+    console.log({ customer, issueType, transactionId, notes });
+
+    setTimeout(() => {
+      handleClose();
+    }, 3800);
+  };
+
+  return (
+    <>
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-2 sm:p-5 z-50">
+        <div ref={modalRef} className="bg-white rounded-lg w-full max-w-xl shadow-2xl">
+          {/* Header */}
+          <div className="flex justify-between items-center p-4 sm:p-6 border-b border-gray-200">
+            <h2 className="text-xl font-semibold text-gray-800">{t('dashboard.employee.modal.resolveTitle')}</h2>
+            <button onClick={handleClose} className="text-gray-400 hover:text-gray-600 text-2xl leading-none"><IoMdClose />
+            </button>
           </div>
 
-          <div className="mb-5 relative">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('dashboard.employee.modal.resolveIssueTypeLabel')}</label>
-            <div className="relative">
+          {/* Body */}
+          <div className="p-4 sm:p-6">
+            {/* Customer */}
+            <div className="mb-4">
+              <label className="block text-base font-medium text-[#002244] mb-1">{t('dashboard.employee.modal.customerLabel')}</label>
+              <input
+                type="text"
+                placeholder={t('dashboard.employee.modal.resolveCustomerPlaceholder')}
+                value={state.customer}
+                onChange={(e) => setState(prev => ({ ...prev, customer: e.target.value }))}
+                className="w-full px-3 py-2 border border-[#002244] rounded focus:outline-none focus:border-green-500 text-sm"
+              />
+            </div>
+
+            {/* Issue Type Dropdown */}
+            <div className="mb-4 relative" ref={dropdownRef}>
+              <label className="block text-base font-medium text-[#002244] mb-1">{t('dashboard.employee.modal.resolveIssueTypeLabel')}</label>
               <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-3 py-2.5 border border-gray-300 rounded text-left text-sm text-gray-700 bg-white hover:border-gray-400 flex justify-between items-center"
+                onClick={() => setState(prev => ({ ...prev, isDropdownOpen: !prev.isDropdownOpen }))}
+                className="w-full px-3 py-2 border border-[#002244] rounded text-left text-base text-[#002244] bg-white hover:border-gray-400 flex justify-between items-center"
               >
-                {issueType}
-                <span className="text-xs">▼</span>
+                {state.issueType}
+                {state.isDropdownOpen ? <BiChevronUp className="text-xl text-[#002244]" /> : <BiChevronDown className="text-xl text-[#002244]" />}
               </button>
-              
-              {isDropdownOpen && (
-                <div className="absolute top-full left-0 right-0 bg-white border border-gray-300 rounded mt-1 shadow-lg z-10">
+
+              {state.isDropdownOpen && (
+                <div className="absolute top-full left-0 right-0 bg-white border border-[#002244] rounded mt-1 shadow-lg z-10 overflow-hidden">
                   {issueTypes.map((type, index) => (
                     <div
                       key={index}
-                      onClick={() => {
-                        setIssueType(type);
-                        setIsDropdownOpen(false);
-                      }}
-                      className={`px-3 py-2.5 cursor-pointer text-sm ${
-                        issueType === type
-                          ? 'bg-green-500 text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
+                      onClick={() => setState(prev => ({ ...prev, issueType: type, isDropdownOpen: false }))}
+                      className={`px-3 py-2 cursor-pointer text-base flex justify-between items-center transition-colors ${state.issueType === type ? 'bg-green-500 text-white' : 'text-gray-700 hover:bg-gray-100'
+                        }`}
                     >
                       {type}
+                      {state.issueType === type && <span className="text-white">✓</span>}
                     </div>
                   ))}
                 </div>
               )}
             </div>
-          </div>
 
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('dashboard.employee.modal.resolveTransactionIdLabel')}</label>
-            <input
-              type="text"
-              placeholder={t('dashboard.employee.modal.resolveTransactionIdPlaceholder')}
-              value={transactionId}
-              onChange={(e) => setTransactionId(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-green-500 text-sm"
-            />
-          </div>
+            {/* Transaction ID */}
+            <div className="mb-4">
+              <label className="block text-base font-medium text-[#002244] mb-1">{t('dashboard.employee.modal.resolveTransactionIdLabel')}</label>
+              <input
+                type="text"
+                placeholder={t('dashboard.employee.modal.resolveTransactionIdPlaceholder')}
+                value={state.transactionId}
+                onChange={(e) => setState(prev => ({ ...prev, transactionId: e.target.value }))}
+                className="w-full px-3 py-2 border border-[#002244] rounded focus:outline-none focus:border-green-500 text-base"
+              />
+            </div>
 
-          <div className="mb-5">
-            <label className="block text-sm font-medium text-gray-700 mb-2">{t('dashboard.employee.modal.notesLabel')}</label>
-            <textarea
-              placeholder={t('dashboard.employee.modal.resolveNotesPlaceholder')}
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-300 rounded focus:outline-none focus:border-green-500 text-sm resize-none h-24"
-            />
-          </div>
+            {/* Notes */}
+            <div className="mb-4">
+              <label className="block text-base font-medium text-[#002244] mb-1">{t('dashboard.employee.modal.notesLabel')}</label>
+              <textarea
+                placeholder={t('dashboard.employee.modal.resolveNotesPlaceholder')}
+                value={state.notes}
+                onChange={(e) => setState(prev => ({ ...prev, notes: e.target.value }))}
+                className="w-full px-3 py-2 border border-[#002244] rounded focus:outline-none focus:border-green-500 text-base resize-none h-24"
+              />
+            </div>
 
-          <button
-            onClick={handleSubmit}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded text-sm transition-colors"
-          >
-          {t('dashboard.employee.modal.resolveButton')}
-          </button>
+            {/* Submit */}
+            <button
+              onClick={handleSubmit}
+              className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 rounded text-base transition-colors"
+            >
+              {t('dashboard.employee.modal.resolveButton')}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Toast container */}
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
   );
 };
 
-export default ResolveBillingModal
+export default ResolveBillingModal;

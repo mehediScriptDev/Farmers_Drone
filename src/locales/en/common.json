@@ -506,7 +506,8 @@
             "dateFormat": "mm/dd/yyyy",
             "preferredTime": "Preferred Time",
             "timeFormat": "HH:MM AM - 12:00 PM",
-            "specialInstruction": "Special Instruction"
+            "specialInstruction": "Special Instruction",
+            "createRequest":" Create Request"
           },
           "rescheduleServiceOrder": {
             "title": "Reschedule Service Order",

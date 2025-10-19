@@ -70,15 +70,19 @@ const PaymentManagement = () => {
     i18n.on('languageChanged', handleLanguageChange);
     return () => i18n.off('languageChanged', handleLanguageChange);
   }, [i18n]);
-
+  
   // Search
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
+
     const filtered = recentTransactions.filter(txn =>
-      txn.serviceId.toLowerCase().includes(query) ||
-      txn.customerName.toLowerCase().includes(query)
+      txn.serviceId.toLowerCase().includes(query) ||  
+      txn.customerName.toLowerCase().includes(query) || 
+      txn.payment.toString().toLowerCase().includes(query) || 
+      txn.progress.toLowerCase().includes(query)       
     );
+
     setFilteredTransactions(filtered);
     setCurrentPage(1);
   };
@@ -91,11 +95,12 @@ const PaymentManagement = () => {
   const handlePrevious = () => { if (currentPage > 1) setCurrentPage(prev => prev - 1); };
   const handleNext = () => { if (currentPage < totalPages) setCurrentPage(prev => prev + 1); };
 
+
   return (
     <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-4 md:mb-6">
-        <h1 className="text-lg md:text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-lg md:text-3xl font-bold text-gray-900 mb-2">
           {t('dashboard.employee.title.paymentPageTitle')}
         </h1>
         <p className="text-xs md:text-base text-gray-600">
@@ -150,14 +155,12 @@ const PaymentManagement = () => {
           </div>
         ))}
       </div>
-
       {/* Transaction Table */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <h2 className="text-lg md:text-xl font-bold text-gray-900">
             {t('dashboard.employee.table.recentTransaction')}
           </h2>
-
           {/* Search Field */}
           <div className="relative w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
             <span className="absolute inset-y-0 left-3 flex items-center text-gray-400 text-xl md:text-2xl">
@@ -168,11 +171,10 @@ const PaymentManagement = () => {
               placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 sm:py-3 border-2 border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-black/30 text-sm sm:text-base"
+              className="w-full pl-10 pr-4 py-2 sm:py-3 border-2 border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#002244] text-sm sm:text-base"
             />
           </div>
         </div>
-
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -203,12 +205,12 @@ const PaymentManagement = () => {
                   <td className="px-3 md:px-6 py-4">
                     <span
                       className={`inline-flex px-2 md:px-3 py-1 rounded-full text-xs md:text-sm whitespace-nowrap ${txn.progress === 'Completed'
-                          ? 'bg-green-100 text-green-700'
-                          : txn.progress === 'Processed'
-                            ? 'bg-blue-100 text-blue-700'
-                            : txn.progress === 'Pending'
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'bg-gray-100 text-gray-700'
+                        ? 'bg-green-100 text-green-700'
+                        : txn.progress === 'Processed'
+                          ? 'bg-blue-100 text-blue-700'
+                          : txn.progress === 'Pending'
+                            ? 'bg-yellow-100 text-yellow-700'
+                            : 'bg-gray-100 text-gray-700'
                         }`}
                     >
                       {txn.progress}
@@ -219,14 +221,12 @@ const PaymentManagement = () => {
             </tbody>
           </table>
         </div>
-
         {/* Pagination */}
         {/* Pagination */}
         <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs md:text-sm text-gray-600">
             Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredTransactions.length)} of {filteredTransactions.length} results
           </div>
-
           <div className="flex flex-wrap items-center gap-1 sm:gap-2">
             {/* Previous */}
             <button
@@ -236,21 +236,19 @@ const PaymentManagement = () => {
             >
               Previous
             </button>
-
             {/* Page Numbers */}
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
               <button
                 key={number}
                 onClick={() => setCurrentPage(number)}
                 className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number
-                    ? 'bg-[#28A844] text-white font-medium'
-                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                  ? 'bg-[#28A844] text-white font-medium'
+                  : 'bg-gray-100 text-black hover:bg-gray-200'
                   }`}
               >
                 {number}
               </button>
             ))}
-
             {/* Next */}
             <button
               onClick={handleNext}
@@ -261,9 +259,7 @@ const PaymentManagement = () => {
             </button>
           </div>
         </div>
-
       </div>
-
       {/* Modals */}
       <CollectPaymentModal isOpen={isPaymentModalOpen} onClose={() => setIsPaymentModalOpen(false)} />
       <ApplyDiscountModal isOpen={isDiscountModalOpen} onClose={() => setIsDiscountModalOpen(false)} />

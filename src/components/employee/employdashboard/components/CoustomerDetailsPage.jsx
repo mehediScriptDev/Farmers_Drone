@@ -41,13 +41,13 @@ function CustomerDetailsPage() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="flex-1 p-4 md:px-12">
+    <div className="min-h-screen ">
+      <div className="flex-1 p-6 md:px-12">
         {/* Back Button */}
         <button
             onClick={() => navigate(-1)}
           aria-label="Back"
-          className="mb-4 text-2xl flex items-center gap-2 p-3 sm:p-4 bg-white border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+          className="mb-2 text-xl flex items-center p-1 sm:p-2  border border-gray-300 rounded-xl text-gray-700  font-medium transition-colors"
         >
           <IoArrowBack className="w-5 h-5" />
         </button>
@@ -119,8 +119,24 @@ function CustomerDetailsPage() {
 
         {/* KYC Section */}
         <div className="mt-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">KYC Document</h2>
-          {/* ...Your existing KYC cards code remains unchanged */}
+          <div className="flex items-center gap-3 mb-4">
+            <h2 className="text-2xl font-bold text-gray-900">KYC Document</h2>
+            
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Aadhaar Card */}
+            <div className="bg-gray-200 rounded-lg p-4 flex items-center justify-center min-h-[280px]">
+              {/* Replace with actual Aadhaar card image */}
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtGqylBi7P-tFmrAnqZz7ekxGetT_433E0S8_vWYgy7EmP2kR_zC6ViifF0C-TpNYiy8&usqp=CAU" alt="" srcset="" />
+            </div>
+
+            {/* Passport */}
+            <div className="bg-gray-300 rounded-lg p-8 flex items-center justify-center min-h-[180px]">
+              {/* Replace with actual Passport image */}  
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPENKscX6Sh2XjXF80KwSkWMV5CRf0XzViNQ&s" alt="" srcset="" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
