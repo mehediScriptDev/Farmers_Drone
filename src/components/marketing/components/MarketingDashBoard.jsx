@@ -296,7 +296,7 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
               {t("dashboard.marketing.CreateCampaign")}
@@ -347,7 +347,7 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
               {t("dashboard.marketing.CreateCampaign")}

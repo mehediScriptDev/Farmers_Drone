@@ -87,7 +87,7 @@ export default function SeasonalCampaignOverview() {
           </h1>
           <button
             onClick={() => setCampaignModal(true)}
-            className="bg-[#28A844] hover:bg-green-600 text-black px-2 md:px-4 py-2 rounded flex  items-center gap-1 md:gap-2"
+            className="bg-[#28A844] hover:bg-green-600 text-white px-2 md:px-4 py-2 rounded flex  items-center gap-1 md:gap-2"
           >
             <span className="text-xl ">+</span>
             <span className="text-base md:text-lg">{t("dashboard.marketing.CreateCampaign")}</span>
