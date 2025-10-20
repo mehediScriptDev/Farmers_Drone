@@ -169,7 +169,13 @@ const MarketingDashBoard = () => {
 
         <div className="pb-3 md:pb-5">
           <h2 className="text-sm md:!text-xl font-normal text-gray-700">
-            {t("dashboard.marketing.daysOverview")}
+            {selectedPeriod === "7"
+              ? t("dashboard.marketing.Last7daysOverview")
+              : selectedPeriod === "30"
+              ? t("dashboard.marketing.Last30daysOverview")
+              : selectedPeriod === "90"
+              ? t("dashboard.marketing.Last90daysOverview")
+              : null}
           </h2>
         </div>
 
