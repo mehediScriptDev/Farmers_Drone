@@ -21,6 +21,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
     specialInstruction: ''
   });
 
+  const [errors, setErrors] = useState({});
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const serviceTypes = [
@@ -30,7 +31,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
     'Topographic Survey',
   ];
 
-  //  Outside click handler for modal and dropdown
+  // Outside click handler
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -46,11 +47,14 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
   }, [onClose]);
 
   const handleSubmit = () => {
-    const { customer, preferredDate, preferredTime } = formData;
-    if (!customer || !preferredDate || !preferredTime) {
-      toast.error('Please fill in all required fields.');
-      return;
-    }
+    const newErrors = {};
+    if (!formData.customer) newErrors.customer = 'This field is required';
+    if (!formData.preferredDate) newErrors.preferredDate = 'This field is required';
+    if (!formData.preferredTime) newErrors.preferredTime = 'This field is required';
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
 
     if (onSubmit) onSubmit(formData);
 
@@ -63,6 +67,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
       preferredTime: '',
       specialInstruction: ''
     });
+    setErrors({});
     setDropdownOpen(false);
     onClose();
   };
@@ -100,8 +105,15 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
               placeholder={t('dashboard.employee.pages.order.rescheduleServiceOrder.customerName')}
               value={formData.customer}
               onChange={(e) => setFormData({ ...formData, customer: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm"
+              className={`w-full px-3 py-2 border ${
+                errors.customer ? 'border-red-500' : 'border-gray-300'
+              } rounded-md focus:outline-none focus:ring-2 ${
+                errors.customer ? 'focus:ring-red-500' : 'focus:ring-green-500'
+              } text-sm`}
             />
+            {errors.customer && (
+              <p className="text-red-500 text-xs mt-1">{errors.customer}</p>
+            )}
           </div>
 
           {/* Service Type Dropdown */}
@@ -129,8 +141,9 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
                       setFormData({ ...formData, serviceType: type });
                       setDropdownOpen(false);
                     }}
-                    className={`px-3 py-2 hover:bg-green-50 cursor-pointer ${formData.serviceType === type ? 'bg-green-100 font-medium' : ''
-                      }`}
+                    className={`px-3 py-2 hover:bg-green-50 cursor-pointer ${
+                      formData.serviceType === type ? 'bg-green-100 font-medium' : ''
+                    }`}
                   >
                     {type}
                   </div>
@@ -152,13 +165,20 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
                   type="date"
                   value={formData.preferredDate}
                   onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute"
+                  className={`w-full px-3 py-2 pr-10 border ${
+                    errors.preferredDate ? 'border-red-500' : 'border-gray-300'
+                  } rounded-md focus:outline-none focus:ring-2 ${
+                    errors.preferredDate ? 'focus:ring-red-500' : 'focus:ring-green-500'
+                  } text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaCalendarAlt
                   onClick={() => dateInputRef.current && dateInputRef.current.showPicker()}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
                 />
               </div>
+              {errors.preferredDate && (
+                <p className="text-red-500 text-xs mt-1">{errors.preferredDate}</p>
+              )}
             </div>
 
             {/* Preferred Time */}
@@ -172,13 +192,20 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
                   type="time"
                   value={formData.preferredTime}
                   onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute"
+                  className={`w-full px-3 py-2 pr-10 border ${
+                    errors.preferredTime ? 'border-red-500' : 'border-gray-300'
+                  } rounded-md focus:outline-none focus:ring-2 ${
+                    errors.preferredTime ? 'focus:ring-red-500' : 'focus:ring-green-500'
+                  } text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaClock
                   onClick={() => timeInputRef.current && timeInputRef.current.showPicker()}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer"
                 />
               </div>
+              {errors.preferredTime && (
+                <p className="text-red-500 text-xs mt-1">{errors.preferredTime}</p>
+              )}
             </div>
           </div>
 

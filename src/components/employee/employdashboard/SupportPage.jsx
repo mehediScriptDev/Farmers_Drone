@@ -205,7 +205,7 @@ const SupportPage = () => {
             </span>
             <input
               type='text'
-              placeholder='Search by service name, issue, progress or priority...'
+              placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={handleSearch}
               className='w-full pl-10 pr-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black/30 text-base'

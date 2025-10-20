@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import {
   FiTrendingUp,
   FiShoppingCart,
@@ -13,7 +13,8 @@ import {
 import axiosInstance from "../../../../config/axiosConfig";
 import { useTranslation } from "react-i18next";
 import Pagination from "../../../common/Pagination";
-
+import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 //  Custom Dropdown with outside click handler
 const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
   const [open, setOpen] = useState(false);
@@ -72,8 +73,7 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
 };
 
 const ReportAnalysisPage = () => {
- 
-
+  const navigate = useNavigate();
   const [summary, setSummary] = useState({});
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -85,12 +85,16 @@ const ReportAnalysisPage = () => {
   const periodDropdownRef = useRef(null);
   const { t } = useTranslation();
  const [selectedPeriod, setSelectedPeriod] = useState("last30days");
-  const [filters] = useState({
-    customerTypes: [
-      t("dashboard.employee.pages.dashboard.dropDown.customerType"),
-      t("dashboard.employee.pages.dashboard.dropDown.groundMediaServices")],
-    serviceCategories: [t("dashboard.employee.pages.dashboard.dropDown.aerialPhotographyVideographyMP"), t("dashboard.employee.pages.dashboard.dropDown.eventPhotography")],
-  });
+  const filters = useMemo(() => ({
+  customerTypes: [
+    t("dashboard.employee.pages.dashboard.dropDown.customerType"),
+    t("dashboard.employee.pages.dashboard.dropDown.groundMediaServices"),
+  ],
+  serviceCategories: [
+    t("dashboard.employee.pages.dashboard.dropDown.aerialPhotographyVideographyMP"),
+    t("dashboard.employee.pages.dashboard.dropDown.eventPhotography"),
+  ],
+}), [t]);
   const itemsPerPage = 4;
 
  const periodOptions = [
@@ -199,12 +203,13 @@ const ReportAnalysisPage = () => {
     <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-6 md:mb-8">
-        <h1 className="text-xl md:text-3xl font-bold text-[#002244] mb-2">
-          {t('dashboard.employee.title.customPageTitle')}
-        </h1>
-        <p className="text-sm md:text-base text-[#464646]">
-          {t('dashboard.employee.subTitle.custompageSub')}
-        </p>
+         <button
+            onClick={() => navigate(-1)}
+          aria-label="Back"
+          className="mb-2 text-xl p-1 sm:p-2  cursor-pointer"
+        >
+          <IoArrowBack className="w-6 h-6" />
+        </button>
       </div>
 
       {/* Filters & Analytics */}
@@ -253,27 +258,27 @@ const ReportAnalysisPage = () => {
             </div>
 
             {/* Filter Dropdowns */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
               <CustomDropdown
-                label="Customer Type"
+                label={t("dashboard.employee.pages.dashboard.dropDown.customerType")}
                 options={filters.customerTypes}
                 value={selectedCustomerType}
                 onChange={(val) => {
                   setSelectedCustomerType(val);
                   setCurrentPage(1);
                 }}
-                placeholder="All Customer Types"
+                placeholder= {t("dashboard.employee.pages.dashboard.dropDown.customerType")}
               />
 
               <CustomDropdown
-                label="Service Category"
+                label={t("dashboard.employee.pages.dashboard.dropDown.serviceCategory")}
                 options={filters.serviceCategories}
                 value={selectedServiceCategory}
                 onChange={(val) => {
                   setSelectedServiceCategory(val);
                   setCurrentPage(1);
                 }}
-                placeholder="All Service Categories"
+                placeholder={t("dashboard.employee.pages.dashboard.dropDown.allServiceCategories")}
               />
             </div>
 
@@ -313,7 +318,7 @@ const ReportAnalysisPage = () => {
             </span>
             <input
               type="text"
-              placeholder="Search by service name or company..."
+              placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -336,7 +341,7 @@ const ReportAnalysisPage = () => {
                       { t("dashboard.employee.table.serviceName") }
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                      { t("dashboard.employee.tablecontact") }
+                      { t("dashboard.employee.table.contact") }
 
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
