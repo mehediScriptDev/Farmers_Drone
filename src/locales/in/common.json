@@ -1202,5 +1202,19 @@
       "previous": "पिछला",
       "next": "अगला"
     }
+  },
+  "audience": {
+    "title": "लक्षित दर्शक",
+    "location": "स्थान",
+    "demographics": "जनसांख्यिकी",
+    "age": "आयु",
+    "income": "आय",
+    "audienceType": "दर्शक प्रकार"
+  },
+   "heatmap": {
+    "title": "हीटमैप",
+    "high": "उच्च",
+    "medium": "मध्यम",
+    "low": "निम्न"
   }
 }

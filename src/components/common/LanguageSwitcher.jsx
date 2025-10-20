@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactCountryFlag from "react-country-flag";
-import { ChevronDown } from 'lucide-react';
+import { IoIosArrowDown } from 'react-icons/io';
 
 const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation();
@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
         <span className='text-xs font-bold'>
           {languages.find((lang) => lang.code === i18n.language)?.name || 'EN'}
         </span>
-        <ChevronDown className='w-3 h-3' />
+        <IoIosArrowDown  className='w-3 h-3' />
       </button>
 
       {/* Dropdown */}
@@ -40,7 +40,7 @@ const LanguageSwitcher = () => {
           />
           
           {/* Dropdown Menu */}
-          <div className='absolute left-1/2 -translate-x-1/2 top-full mt-2 w-48 rounded-md border border-gray-300 bg-white ring-1 ring-opacity-5 z-20'>
+          <div className='absolute left-1/2  -translate-x-1/2 top-full mt-2 w-48 rounded-md border border-gray-300 bg-white ring-1 ring-opacity-5 z-20'>
             <div className='py-1'>
               {languages.map((language) => (
                 <button
@@ -48,7 +48,7 @@ const LanguageSwitcher = () => {
                   onClick={() => handleLanguageChange(language.code)}
                   className={`w-full text-left px-4 py-2 text-sm !bg-white flex items-center space-x-3 transition-colors ${
                     i18n.language === language.code
-                      ? ' text-indigo-700'
+                      ? ' text-green-500'
                       : 'text-gray-700'
                   }`}
                 >
@@ -66,7 +66,7 @@ const LanguageSwitcher = () => {
                     <span className='text-xs text-gray-500'>{language.name}</span>
                   </div>
                   {i18n.language === language.code && (
-                    <span className='ml-auto text-indigo-500'>✓</span>
+                    <span className='ml-auto text-green-500'>✓</span>
                   )}
                 </button>
               ))}
