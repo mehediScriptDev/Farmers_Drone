@@ -718,6 +718,9 @@
       "SeeDetails": "विवरण देखें",
       "Loyaltyprograms": "निष्ठा कार्यक्रम",
       "LaunchCampaign": "अभियान लॉन्च करें",
+      "Notifications": "सूचनाएँ",
+      "NoUnreadNotifications": "सभी कैच अप! कोई अनपढ़ सूचनाएँ नहीं हैं।",
+      "MarkAllRead": "सभी को पढ़ा करें",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
         "LoyaltyCampaignOverview": "निष्ठा अभियान अवलोकन",

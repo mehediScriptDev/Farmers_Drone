@@ -709,6 +709,9 @@
       "Loyaltyprograms": "Loyalty programs",
       "Confirm": "Confirm",
       "LaunchCampaign": "Launch Campaign",
+      "NoUnreadNotifications": "All caught up! No unread notifications.",
+      "Notifications" : "Notifications",
+      "MarkAllRead": "Mark All Read",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "Seasonal Campaign Overview",
         "LoyaltyCampaignOverview": "Loyalty Campaign Overview",
