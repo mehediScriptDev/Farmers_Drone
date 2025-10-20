@@ -1,32 +1,34 @@
-import { createBrowserRouter } from "react-router-dom";
-import { Layout } from "../components/common/Layout";
-import { DashboardLayout } from "../components/common/DashboardLayout";
-import LoginPage from "../pages/LoginPage";
-import NotAuthorizedPage from "../pages/NotAuthorizedPage";
-import NotFoundPage from "../pages/NotFoundPage";
+import { createBrowserRouter } from 'react-router-dom';
+import { Layout } from '../components/common/Layout';
+import { DashboardLayout } from '../components/common/DashboardLayout';
+
+import NotAuthorizedPage from '../pages/NotAuthorizedPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 // Dashboard Components
-import AdminDashboard from "../components/admin/components/AdminDashboard";
-
-import FieldAgentDashboard from "../components/fieldAgent/FieldAgentDashboard";
+import AdminDashboard from '../components/admin/components/AdminDashboard';
 
 // Admin Components
-import Complaints from "../components/admin/components/Complaints";
-import DroneOperator from "../components/admin/components/DroneOperator";
-import EmployeeManagement from "../components/admin/components/EmployeeManagement";
-import FieldAgent from "../components/admin/components/FieldAgent";
-import Jobs from "../components/admin/components/Jobs";
-import PaymentsManagement from "../components/admin/components/PaymentsManagement";
-import Reports from "../components/admin/components/Reports";
-import UserManagement from "../components/admin/components/UserManagement";
+import Jobs from '../components/admin/components/Jobs';
+import PaymentsManagement from '../components/admin/components/PaymentsManagement';
+import Reports from '../components/admin/components/Reports';
+import UserManagement from '../components/admin/components/UserManagement';
+import UserManagementDetails from '../components/admin/components/UserManagementDetails';
+import Complaints from '../components/admin/components/Complaints';
+import ComplaintDetails from '../components/admin/components/ComplaintDetails';
+import ComplaintFeedback from '../components/admin/components/ComplaintFeedback';
+import AdminServices from '../components/admin/components/Services';
+import Settings from '../components/admin/components/Settings';
+import OrderDetails from '../components/admin/components/OrderDetails';
 
 // Field Agent Components
-import FieldAgentReports from "../components/fieldAgent/Reports";
-import MyAssignments from "../components/fieldAgent/MyAssignments";
-import LocationTracking from "../components/fieldAgent/LocationTracking";
-import PhotoCapture from "../components/fieldAgent/PhotoCapture";
-import RouteOptimization from "../components/fieldAgent/RouteOptimization";
-import VehicleManagement from "../components/fieldAgent/VehicleManagement";
+import FieldAgentDashboard from '../components/fieldAgent/components/FieldAgentDashboard';
+// import FieldAgentReports from "../components/fieldAgent/Reports";
+// import MyAssignments from "../components/fieldAgent/MyAssignments";
+// import LocationTracking from "../components/fieldAgent/LocationTracking";
+// import PhotoCapture from "../components/fieldAgent/PhotoCapture";
+// import RouteOptimization from "../components/fieldAgent/RouteOptimization";
+// import VehicleManagement from "../components/fieldAgent/VehicleManagement";
 
 // Private Route Components
 import {
@@ -52,23 +54,20 @@ import SupportPage from '../components/employee/employdashboard/SupportPage';
 import ReportAnalysisPage from '../components/employee/employdashboard/components/ReportAnalysisPage';
 import CoustomerDetailsPage from '../components/employee/employdashboard/components/CoustomerDetailsPage';
 
-
-
 import OrderDetailsPage from '../components/employee/employdashboard/components/OrderDetailsPage';
-import DroneOperatorDetails from '../components/admin/components/DroneOperatorDetails'; // Add this import
 import MarketingDashBoard from '../components/marketing/components/MarketingDashBoard';
-
-import axiosInstance from "../config/axiosConfig";
-import SeasonalCampaignDetails from './../components/marketing/components/SeasonalCampaignDetails';
-import LoyalityCampaingnDetails from './../components/marketing/components/LoyalityCampaingnDetails';
-import Campaigns from "../components/marketing/components/Campaigns";
-import Analytics from "../components/marketing/components/Analytics";
-
-
+import Analytics from './../components/marketing/Analytics';
+import ForgotPasswordFlow from '../pages/login/ForgetPasswordFllow';
+import LoginPage from '../pages/login/LoginPage';
+import SignUpFlow from '../pages/signUp/SignUpFllow';
+import axiosInstance from '../config/axiosConfig';
+import SeasonalCampaignDetails from '../components/marketing/components/SeasonalCampaignDetails';
+import LoyalityCampaingnDetails from '../components/marketing/components/LoyalityCampaingnDetails';
+import Campaigns from './../components/marketing/components/Campaigns';
 
 const AppRoutes = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <Layout />,
     children: [
       {
@@ -76,29 +75,37 @@ const AppRoutes = createBrowserRouter([
         element: <MainLayout />,
       },
       {
-        path: "/services",
+        path: '/services',
         element: <Services />,
       },
       {
-        path: "/about",
+        path: '/about',
         element: <About />,
       },
       {
-        path: "/blog",
+        path: '/blog',
         element: <Blog />,
       },
       {
-        path: "/contact",
+        path: '/contact',
         element: <Contact />,
       },
       {
-        path: "login",
+        path: 'login',
         element: <LoginPage />,
+      },
+      {
+        path: 'login/forget-password',
+        element: <ForgotPasswordFlow />,
+      },
+      {
+        path: 'signup',
+        element: <SignUpFlow />,
       },
     ],
   },
   {
-    path: "/admin",
+    path: '/admin',
     element: (
       <PrivateAdminRoute>
         <DashboardLayout />
@@ -110,41 +117,57 @@ const AppRoutes = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "complaints",
-        element: <Complaints />,
+        path: 'users',
+        element: <UserManagement />,
       },
       {
-        path: "drone-operators",
-        element: <DroneOperator />,
+        path: 'users/:userId',
+        element: <UserManagementDetails />,
       },
       {
-        path: 'employees',
-        element: <EmployeeManagement />,
-      },
-      {
-        path: "field-agents",
-        element: <FieldAgent />,
-      },
-      {
-        path: "jobs",
+        path: 'jobs',
         element: <Jobs />,
       },
       {
-        path: "payments",
+        path: 'order-details/:operatorId',
+        element: <OrderDetails />,
+      },
+      {
+        path: 'payments',
         element: <PaymentsManagement />,
       },
       {
-        path: "reports",
+        path: 'reports',
         element: <Reports />,
       },
       {
-        path: "users",
-        element: <UserManagement />,
+        path: 'complaints',
+        element: <Complaints />,
+      },
+      {
+        path: 'complaint-details/:id',
+        element: <ComplaintDetails />,
+      },
+      {
+        path: 'complaint-feedback/:id',
+        element: <ComplaintFeedback />,
+      },
+      {
+        path: 'services',
+        element: <AdminServices />,
       },
     ],
   },
   {
-    path: "/employee",
+    path: '/admin/settings',
+    element: (
+      <PrivateAdminRoute>
+        <Settings />
+      </PrivateAdminRoute>
+    ),
+  },
+  {
+    path: '/employee',
     element: (
       <PrivateEmployeeRoute>
         <DashboardLayout />
@@ -156,41 +179,42 @@ const AppRoutes = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "customers/:customerId",
+        path: 'customers/:customerId',
         element: <CoustomerDetailsPage />,
       },
       {
-        path: "customers/:customerId/order/:id",
-        element: <OrderDetailsPage />,
-      },
-      {
-        path: "customers",
+        path: 'customers',
         element: <Coustomerpage />,
       },
+
       {
-        path: "report-analysis",
+        path: 'customers/report-analysis',
         element: <ReportAnalysisPage />,
       },
       {
-        path: "orders",
+        path: 'orders',
         element: <OrderManagementPage />,
       },
       {
-        path: "payments",
+        path: 'orders/:orderId',
+        element: <OrderDetailsPage />,
+      },
+      {
+        path: 'payments',
         element: <PaymentManagement />,
       },
       {
-        path: "supports",
+        path: 'supports',
         element: <SupportPage />,
       },
       {
-        path: "messages",
+        path: 'messages',
         element: <MessagePage />,
       },
     ],
   },
   {
-    path: "/field-agent",
+    path: '/field-agent',
     element: (
       <PrivateFieldAgentRoute>
         <DashboardLayout />
@@ -201,34 +225,10 @@ const AppRoutes = createBrowserRouter([
         index: true,
         element: <FieldAgentDashboard />,
       },
-      {
-        path: "reports",
-        element: <FieldAgentReports />,
-      },
-      {
-        path: "assignments",
-        element: <MyAssignments />,
-      },
-      {
-        path: "location-tracking",
-        element: <LocationTracking />,
-      },
-      {
-        path: "photo-capture",
-        element: <PhotoCapture />,
-      },
-      {
-        path: "route-optimization",
-        element: <RouteOptimization />,
-      },
-      {
-        path: "vehicle-management",
-        element: <VehicleManagement />,
-      },
     ],
   },
   {
-    path: "/marketing",
+    path: '/marketing',
     element: (
       <PrivateMarketingRoute>
         <DashboardLayout />
@@ -240,23 +240,23 @@ const AppRoutes = createBrowserRouter([
         element: <MarketingDashBoard />,
       },
       {
-        path: "campaigns/seasonal/:id",
+        path: 'campaigns/seasonal/:id',
         element: <SeasonalCampaignDetails />,
         loader: () =>
           axiosInstance.get(
-            "/MarketingDashboard/data/marketingLandingPage.json"
+            '/MarketingDashboard/data/marketingLandingPage.json'
           ),
       },
       {
-        path: "campaigns/loyality/:id",
+        path: 'campaigns/loyality/:id',
         element: <LoyalityCampaingnDetails />,
         loader: () =>
           axiosInstance.get(
-            "/MarketingDashboard/data/marketingLandingPage.json"
+            '/MarketingDashboard/data/marketingLandingPage.json'
           ),
       },
       {
-        path: "campaigns",
+        path: 'Campaigns',
         element: <Campaigns />,
       },
       {
@@ -271,7 +271,7 @@ const AppRoutes = createBrowserRouter([
     ],
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: (
       <PrivateRoute>
         <RoleBasedRedirect />
@@ -279,11 +279,11 @@ const AppRoutes = createBrowserRouter([
     ),
   },
   {
-    path: "/unauthorized",
+    path: '/unauthorized',
     element: <NotAuthorizedPage />,
   },
   {
-    path: "*",
+    path: '*',
     element: <NotFoundPage />,
   },
 ]);

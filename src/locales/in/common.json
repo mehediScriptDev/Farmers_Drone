@@ -64,13 +64,42 @@
           "showing": "{{total}} उपयोगकर्ताओं में से {{current}} दिखा रहे हैं"
         }
       },
-      "droneOperator": {
+      "settings": {
+        "title": "बैकएंड इंटीग्रेशन",
+        "subtitle": "पेमेंट गेटवे कनेक्शन और एपीआई कॉन्फ़िगरेशन प्रबंधित करें",
+        "addPaymentButton": "भुगतान विधियाँ जोड़ें",
+        "indianSystems": "भारतीय सिस्टम",
+        "international": "अंतर्राष्ट्रीय",
+        "walletServices": "वॉलेट सेवाएं",
+        "status": {
+          "testing": "परीक्षण",
+          "active": "सक्रिय"
+        },
+        "modal": {
+          "title": "नई भुगतान विधियाँ जोड़ें",
+          "apiKeyLabel": "एपीआई कुंजी",
+          "apiKeyPlaceholder": "***********",
+          "urlLabel": "यूआरएल",
+          "urlPlaceholder": "https://api.droneplatform.com/webhooks/payments",
+          "saveButton": "कॉन्फ़िगरेशन सहेजें"
+        },
+        "configModal": {
+          "title": "भुगतान प्रबंधन",
+          "apiKeyLabel": "एपीआई कुंजी",
+          "statusLabel": "स्थिति",
+          "webhookUrlLabel": "वेबहूक यूआरएल",
+          "saveButton": "कॉन्फ़िगरेशन सहेजें",
+          "cancelButton": "रद्द करें"
+        }
+      },
+
+      "userManagement": {
         "title": "उपयोगकर्ता प्रबंधन",
-        "tabOperator": "ऑपरेटर",
+        "tabUser": "उपयोगकर्ता",
         "tabCustomer": "ग्राहक",
         "tabEmployee": "कर्मचारी",
         "tabFieldAgent": "फील्ड एजेंट",
-        "subTabAll": "सभी ड्रोन ऑपरेटर",
+        "subTabAll": "सभी उपयोगकर्ता",
         "subTabPending": "लंबित",
         "searchPlaceholder": "खोजें",
         "tableHeaders": {
@@ -82,7 +111,267 @@
         },
         "seeDetails": "विवरण देखें",
         "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहा है",
-        "noOperatorsFound": "कोई ड्रोन ऑपरेटर नहीं मिला"
+        "noUsersFound": "कोई उपयोगकर्ता नहीं मिला",
+        "modal": {
+          "aboutTitle": "इस उपयोगकर्ता के बारे में",
+          "fullName": "पूरा नाम:",
+          "phoneNumber": "फ़ोन नंबर:",
+          "email": "ईमेल:",
+          "latLong": "अक्षांश/देशांतर:",
+          "industry": "उद्योग:",
+          "approveButton": "अनुमोदित",
+          "cancelButton": "रद्द"
+        }
+      },
+
+      "customerManagement": {
+        "title": "ग्राहक प्रबंधन",
+        "tabOperator": "संचालक",
+        "tabCustomer": "ग्राहक",
+        "tabEmployee": "कर्मचारी",
+        "tabFieldAgent": "फील्ड एजेंट",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "customer": "ग्राहक",
+          "status": "स्थिति",
+          "totalOrder": "कुल आदेश",
+          "lastActive": "अंतिम सक्रिय",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "suspended": "निलंबित"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "suspend": "उपयोगकर्ता निलंबित करें",
+          "activate": "उपयोगकर्ता सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noCustomersFound": "कोई ग्राहक नहीं मिला",
+        "fetchError": "ग्राहक डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "ग्राहक विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "totalOrders": "कुल आदेश",
+          "registrationDate": "पंजीकरण तिथि",
+          "lastActive": "अंतिम सक्रिय",
+          "customerId": "ग्राहक आईडी",
+          "close": "बंद करें",
+          "suspend": "ग्राहक निलंबित करें",
+          "activate": "ग्राहक सक्रिय करें"
+        }
+      },
+
+      "employeeManagement": {
+        "title": "कर्मचारी प्रबंधन",
+        "addEmployees": "कर्मचारी जोड़ें",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "employees": "कर्मचारी",
+          "role": "भूमिका",
+          "roleCode": "भूमिका कोड",
+          "startDate": "समाप्ति तिथि",
+          "endDate": "समाप्ति तिथि",
+          "annualSalary": "वार्षिक वेतन",
+          "lastActive": "अंतिम सक्रिय",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "inactive": "निष्क्रिय"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "edit": "कर्मचारी संपादित करें",
+          "deactivate": "कर्मचारी निष्क्रिय करें",
+          "activate": "कर्मचारी सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noEmployeesFound": "कोई कर्मचारी नहीं मिला",
+        "fetchError": "कर्मचारी डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "कर्मचारी विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "role": "भूमिका",
+          "roleCode": "भूमिका कोड",
+          "department": "विभाग",
+          "startDate": "आरंभ तिथि",
+          "endDate": "समाप्ति तिथि",
+          "annualSalary": "वार्षिक वेतन",
+          "lastActive": "अंतिम सक्रिय",
+          "employeeId": "कर्मचारी आईडी",
+          "close": "बंद करें",
+          "deactivate": "कर्मचारी निष्क्रिय करें",
+          "activate": "कर्मचारी सक्रिय करें"
+        }
+      },
+
+      "fieldAgentManagement": {
+        "title": "फील्ड एजेंट प्रबंधन",
+        "searchPlaceholder": "खोजें",
+        "tableHeaders": {
+          "fieldAgent": "फील्ड एजेंट",
+          "totalAddCustomer": "कुल ग्राहक जोड़े",
+          "totalAddOperator": "कुल ऑपरेटर जोड़े",
+          "totalBookOrders": "कुल बुक ऑर्डर",
+          "status": "स्थिति",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "active": "सक्रिय",
+          "suspended": "निलंबित"
+        },
+        "actions": {
+          "viewDetails": "विवरण देखें",
+          "suspend": "एजेंट निलंबित करें",
+          "activate": "एजेंट सक्रिय करें"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "noFieldAgentsFound": "कोई फील्ड एजेंट नहीं मिला",
+        "fetchError": "फील्ड एजेंट डेटा प्राप्त करने में विफल",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        },
+        "modal": {
+          "title": "फील्ड एजेंट विवरण",
+          "email": "ईमेल",
+          "phone": "फ़ोन नंबर",
+          "address": "पता",
+          "totalAddCustomer": "कुल ग्राहक जोड़े",
+          "totalAddOperator": "कुल ऑपरेटर जोड़े",
+          "totalBookOrders": "कुल बुक ऑर्डर",
+          "joinDate": "शामिल होने की तिथि",
+          "area": "क्षेत्र",
+          "vehicleNumber": "वाहन नंबर",
+          "agentId": "एजेंट आईडी",
+          "close": "बंद करें",
+          "suspend": "एजेंट निलंबित करें",
+          "activate": "एजेंट सक्रिय करें"
+        }
+      },
+
+      "orderManagement": {
+        "title": "ऑर्डर प्रबंधन",
+        "subtitle": "सभी प्लेटफॉर्म कार्यों को ट्रैक और प्रबंधित करें",
+        "scheduled": "निर्धारित",
+        "inProgress": "प्रगति में",
+        "complete": "पूर्ण",
+        "jobs": "कार्य",
+        "tableHeaders": {
+          "droneOperator": "ड्रोन ऑपरेटर",
+          "status": "स्थिति",
+          "job": "कार्य",
+          "progress": "प्रगति",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "inProgress": "प्रगति में",
+          "notStarted": "शुरू नहीं हुआ",
+          "suspended": "निलंबित"
+        },
+        "showing": "{{total}} में से {{count}} उपयोगकर्ता दिखा रहे हैं",
+        "pagination": {
+          "previous": "पिछला",
+          "next": "अगला"
+        }
+      },
+
+      "assignJob": {
+        "title": "नया कार्य सौंपें",
+        "clientName": "क्लाइंट का पूरा नाम",
+        "clientNamePlaceholder": "अपना पहला नाम दर्ज करें",
+        "phoneNumber": "फ़ोन नंबर",
+        "email": "ईमेल",
+        "orderId": "ऑर्डर आईडी",
+        "city": "शहर",
+        "postalCode": "पोस्टल कोड",
+        "street": "गली",
+        "assignButton": "सौंपें"
+      },
+
+      "orderDetails": {
+        "title": "ऑर्डर जानकारी",
+        "subtitle": "कार्य समीक्षा करें जो सौंपे गए हैं",
+        "TotalactiveJobs": "कुल सक्रिय कार्य",
+        "Totalcompletejob": "कुल पूर्ण कार्य",
+        "Averagerating": "औसत रेटिंग",
+        "Totaldrone": "कुल ड्रोन",
+        "outOf5": "5 में से",
+        "active": "सक्रिय",
+        "tableHeaders": {
+          "service": "सेवा",
+          "status": "स्थिति",
+          "rating": "रेटिंग",
+          "progress": "प्रगति",
+          "orderId": "ऑर्डर आईडी",
+          "location": "स्थान",
+          "actions": "क्रियाएं"
+        },
+        "status": {
+          "inProgress": "प्रगति में",
+          "notStarted": "शुरू नहीं हुआ",
+          "completed": "पूर्ण"
+        },
+        "noRating": "अभी कोई रेटिंग नहीं",
+        "outOfRating": "5 में से",
+        "showing": "{{total}} कार्यों में से {{count}} दिखा रहे हैं"
+      },
+
+      "paymentsManagement": {
+        "title": "भुगतान प्रबंधन",
+        "subtitle": "ग्राहकों और ड्रोन ऑपरेटरों के लिए भुगतान विधियों को कॉन्फ़िगर और प्रबंधित करें",
+        "tabs": {
+          "overview": "अवलोकन",
+          "customerPayments": "ग्राहक भुगतान",
+          "operatorPayments": "ऑपरेटर भुगतान"
+        },
+        "stats": {
+          "revenue": "राजस्व",
+          "activeIntegrations": "सक्रिय एकीकरण",
+          "paymentMethods": "भुगतान विधियाँ"
+        },
+        "customerPayments": {
+          "tableHeaders": {
+            "userName": "उपयोगकर्ता नाम",
+            "paymentMethod": "भुगतान विधि",
+            "status": "स्थिति",
+            "transactions": "लेन-देन",
+            "dateTime": "दिनांक और समय"
+          },
+          "status": {
+            "done": "पूर्ण",
+            "failed": "विफल"
+          },
+          "showing": "{{total}} ग्राहक लेन-देन में से {{count}} दिखा रहे हैं"
+        },
+        "operatorPayments": {
+          "tableHeaders": {
+            "serviceProvider": "सेवा प्रदाता",
+            "paymentMethod": "भुगतान विधि",
+            "status": "स्थिति",
+            "payouts": "भुगतान",
+            "dateTime": "दिनांक और समय"
+          },
+          "status": {
+            "done": "पूर्ण",
+            "failed": "विफल"
+          },
+          "showing": "{{total}} ग्राहक लेन-देन में से {{count}} दिखा रहे हैं"
+        }
       }
     },
     "employee": {
@@ -294,6 +583,24 @@
         "previous": "पिछला",
         "next": "अगला"
       },
+      "createServiceModal": {
+        "CreateService": "सेवा बनाएँ",
+        "ServiceTitle": "सेवा का शीर्षक",
+        "AquaDomoService": "Aqua Domo Service",
+        "ServicePrice": "सेवा की कीमत",
+        "PriceValue": "$130 / एकड़",
+        "Industry": "उद्योग",
+        "IndustryValue": "मैपिंग और सर्वेक्षण",
+        "Agriculture": "कृषि",
+        "Construction": "निर्माण",
+        "Environmental": "पर्यावरण",
+        "SubCategory": "उप श्रेणी",
+        "SubCategoryValue": "डोमो मैपिंग और सर्वेक्षण (MMD1)",
+        "ServiceDetails": "सेवा विवरण",
+        "DescribeYourService": "अपनी सेवा का वर्णन करें",
+        "ServiceLocation": "सेवा स्थान",
+        "ServiceLocationValue": "डोमो मैपिंग और सर्वेक्षण (MMD1)"
+      },
       "FirstModal": {
         "addCustomer": "ग्राहक जोड़ें",
         "customerInfo": "ग्राहक जानकारी",
@@ -347,7 +654,110 @@
     },
     "marketing": {
       "title": "मार्केटिंग डैशबोर्ड",
-      "welcome": "वापस स्वागत है, मार्केटिंग टीम"
+      "monitor": "अपने ग्राहक सेवा प्रदर्शन की निगरानी करें",
+      "daysOverview": "पिछले 30 दिनों का अवलोकन",
+      "last_90_days": "पिछले 90 दिनों",
+      "last_30_days": "पिछले 30 दिन",
+      "last_7_days": "पिछले 7 दिन",
+      "clickRate": "क्लिक-थ्रू दर",
+      "ConversionRate": "रूपांतरण दर",
+      "CustomerAcquisitionCost": "ग्राहक अधिग्रहण लागत",
+      "RIO": "आरआईओ",
+      "LeadManagement": "लीड प्रबंधन",
+      "TrackAndNurtureYourMarketingLeads": "अपनी मार्केटिंग लीड्स को ट्रैक करें और पोषित करें",
+      "ExportLeads": "लीड्स निर्यात करें",
+      "Automation": "स्वचालन",
+      "AllLeads": "सभी लीड्स",
+      "Hot": "गरम लीड्स",
+      "Warm": "मध्यम लीड्स",
+      "Cool": "ठंडी लीड्स",
+      "Lead": "लीड",
+      "Contact": "संपर्क",
+      "Source": "स्रोत",
+      "Location": "स्थान",
+      "Score": "स्कोर",
+      "Status": "स्थिति",
+      "Action": "कार्य",
+      "Results": "परिणाम",
+      "Showing": "दिखा रहा है",
+      "Previous": "पिछला",
+      "Next": "अगला",
+      "Confirm": "पुष्टि करें",
+      "seasonalCampaings": "मौसमी अभियान",
+      "CreateCampaign": "अभियान बनाएँ",
+      "SeeDetails": "विवरण देखें",
+      "LoyaltyPrograms": "निष्ठा कार्यक्रम",
+      "LaunchCampaign": "अभियान लॉन्च करें",
+      "CampaignDetails": {
+        "CampaignOverview": "अभियान अवलोकन",
+        "Back": "वापस",
+        "Export": "निर्यात करें",
+        "Delete": "हटाएँ",
+        "CampaignName": "अभियान का नाम",
+        "Objective": "उद्देश्य",
+        "Duration": "अवधि",
+        "CampaignType": "अभियान प्रकार",
+        "CampaignStory": "अभियान कहानी",
+        "ChannelPerformance": "चैनल प्रदर्शन",
+        "Impressions": "इम्प्रेशन",
+        "Clicks": "क्लिक्स",
+        "LeadGeneration": "लीड जनरेशन",
+        "ConversionsRate": "रूपांतरण दर",
+        "RIO": "आरआईओ"
+      },
+      "AutomationModal": {
+        "Enabled": "सक्रिय",
+        "ThreeOfFourRulesActive": "4 में से 3 नियम सक्रिय हैं",
+        "IfLeadIsHot": "यदि लीड गरम है",
+        "Disabled": "असक्रिय",
+        "AutomationSettings": "स्वचालन सेटिंग्स"
+      },
+      "CampaignModal": {
+        "step_1": {
+          "CreateNewCampaign": "नया अभियान बनाएँ",
+          "Step": "चरण",
+          "Progress25Percent": "25%",
+          "SetCampaignType": "अभियान प्रकार सेट करें",
+          "BrandAwareness": "ब्रांड जागरूकता",
+          "BrandAwarenessDescription": "ब्रांड की दृश्यता और पहचान फैलाएँ",
+          "CustomerAcquisition": "ग्राहक अधिग्रहण",
+          "CustomerAcquisitionDescription": "नए ग्राहकों और लीड्स को आकर्षित करें",
+          "Retargeting": "रीटार्गेटिंग",
+          "RetargetingDescription": "मौजूदा विज़िटर्स और ग्राहकों को पुनः संलग्न करें",
+          "ReferralProgram": "रेफ़रल प्रोग्राम",
+          "ReferralProgramDescription": "विकास के लिए मौजूदा ग्राहकों की संख्या बढ़ाएँ",
+          "DefineTargetSegment": "लक्षित सेगमेंट निर्धारित करें",
+          "Operator": "ऑपरेटर",
+          "Customers": "ग्राहक",
+          "SelectTargetSegment": "लक्षित सेगमेंट चुनें"
+        },
+        "step_2": {
+          "SetCampaignGoals": "अभियान लक्ष्य सेट करें",
+          "Signups": "साइनअप्स",
+          "Bookings": "बुकिंग्स",
+          "Downloads": "डाउनलोड्स",
+          "Engagement": "सक्रियता",
+          "CampaignBudget": "अभियान बजट",
+          "EnterBudgetAmount": "बजट राशि दर्ज करें"
+        },
+        "step_3": {
+          "CampaignTitle": "अभियान शीर्षक",
+          "EnterCampaignTitle": "अभियान शीर्षक दर्ज करें",
+          "Description": "विवरण",
+          "EnterCampaignDetails": "अभियान विवरण दर्ज करें",
+          "TargetedAudience": "लक्षित दर्शक",
+          "SelectTargetSegment": "लक्षित सेगमेंट चुनें",
+          "UploadCampaignImages": "अभियान चित्र अपलोड करें",
+          "Previous": "पिछला"
+        },
+        "step_4": {
+          "ChooseMarketingChannels": "मार्केटिंग चैनल चुनें",
+          "Email": "ईमेल",
+          "SMS": "एसएमएस",
+          "PushNotification": "पुश सूचनाएँ",
+          "SocialMedia": "सोशल मीडिया"
+        }
+      }
     }
   },
   "sidebar": {
@@ -360,7 +770,8 @@
       "jobs": "नौकरियां",
       "paymentsManagement": "भुगतान प्रबंधन",
       "reports": "रिपोर्ट",
-      "complaints": "शिकायतें"
+      "complaints": "शिकायतें",
+      "services": "सेवाएं"
     },
     "employee": {
       "dashboard": "डैशबोर्ड",
@@ -731,5 +1142,28 @@
     "title": "ब्लॉग और शोध",
     "subtitle": "भारत के अग्रणी ड्रोन सेवा प्रदाता से उद्योग अंतर्दृष्टि, सफलता की कहानियाँ और शोध।",
     "description": "उद्योग की अंतर्दृष्टि खोजें, वास्तविक सफलता की कहानियों से सीखें, और हमारे विशेषज्ञ श्वेतपत्रों के माध्यम से गहन ज्ञान प्राप्त करें।"
+  },
+  "reports": {
+    "title": "रिपोर्ट",
+    "subtitle": "ग्राहकों और ड्रोन ऑपरेटरों के लिए भुगतान विधियों को कॉन्फ़िगर और प्रबंधित करें",
+    "last7DaysRevenue": "पिछले 7 दिनों का राजस्व",
+    "monthlyRevenue": "मासिक राजस्व"
+  },
+  "complaints": {
+    "title": "शिकायतें",
+    "subtitle": "देखें कि किन ग्राहकों ने शिकायतें जमा की हैं।",
+    "table": {
+      "customer": "ग्राहक",
+      "complainTitle": "शिकायत का शीर्षक",
+      "ticketId": "शिकायत आईडी/टिकट आईडी",
+      "rating": "शिकायत का शीर्षक",
+      "actions": "कार्रवाई",
+      "seeDetails": "विवरण देखें"
+    },
+    "pagination": {
+      "showing": "{{count}} में से {{total}} ग्राहक दिखा रहे हैं",
+      "previous": "पिछला",
+      "next": "अगला"
+    }
   }
 }

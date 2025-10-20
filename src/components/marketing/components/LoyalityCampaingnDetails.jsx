@@ -1,9 +1,17 @@
 import React, { useMemo } from "react";
-import { ArrowLeft, Eye, MousePointer, Users, TrendingUp } from "lucide-react";
-import { useLoaderData, useParams, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
-import MapAudience from "./MapAudience";
+import {
+  FiArrowLeft,
+  FiEye,
+  FiMousePointer,
+  FiUsers,
+  FiTrendingUp,
+} from "react-icons/fi";
+import { useLoaderData, useParams, useNavigate } from "react-router-dom";
+// import { FaChevronDown } from "react-icons/fa";
 
+import { useTranslation } from "react-i18next";
+import MapAudience from './MapAudience';
 
 const ChannelCard = ({
   leads,
@@ -42,6 +50,7 @@ const ChannelCard = ({
 
 const LoyalityCampaingnDetails = () => {
   // const [timeRange, setTimeRange] = useState("Last 30 days overview");
+  const { t } = useTranslation();
 
   const data = useLoaderData();
   const { id } = useParams();
@@ -129,20 +138,40 @@ const LoyalityCampaingnDetails = () => {
   console.log(currentCampaign);
 
   const stats = [
-    { label: "Impressions", value: "245,000", icon: Eye, trend: "+12%" },
-    { label: "Clicks", value: "12,300", icon: MousePointer, trend: "+8%" },
-    { label: "Lead Genetation", value: "387", icon: Users, trend: "+15%" },
-    { label: "Conversions Rate", value: "387", icon: Users, trend: "+15%" },
     {
-      label: "RIO",
+      label: t("dashboard.marketing.CampaignDetails.Impressions"),
+      value: "245,000",
+      icon: FiEye,
+      trend: "+12%",
+    },
+    {
+      label: t("dashboard.marketing.CampaignDetails.Clicks"),
+      value: "12,300",
+      icon: FiMousePointer,
+      trend: "+8%",
+    },
+    {
+      label: t("dashboard.marketing.CampaignDetails.LeadManagement"),
+      value: "387",
+      icon: FiUsers,
+      trend: "+15%",
+    },
+    {
+      label: t("dashboard.marketing.CampaignDetails.ConversionsRate"),
+      value: "387",
+      icon: FiUsers,
+      trend: "+15%",
+    },
+    {
+      label: t("dashboard.marketing.CampaignDetails.RIO"),
       value: "3.15%",
-      icon: TrendingUp,
+      icon: FiTrendingUp,
       trend: "+5%",
     },
   ];
 
   return (
-    <div className="bg-[#F9FAFB] p-4 md:px-12">
+    <div className="bg-[#F9FFFD] p-4 md:px-12">
       <div>
         {/* Header */}
         <div className="mb-2 md:mb-4 lg:mb-8">
@@ -152,15 +181,15 @@ const LoyalityCampaingnDetails = () => {
                 className="flex items-center text-black hover:text-gray-900 cursor-pointer"
                 onClick={() => navigate(-1)}
               >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                <span>Back</span>
+                <FiArrowLeft className="w-5 h-5 mr-2" />
+                <span>{t("dashboard.marketing.CampaignDetails.Back")}</span>
               </button>
               <div className="flex gap-3">
                 <button className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 transition cursor-pointer">
-                  Export
+                  {t("dashboard.marketing.CampaignDetails.Export")}
                 </button>
                 <button className="px-4 md:px-6 py-2 bg-red-500 text-black rounded-lg hover:bg-[#DC3545] transition cursor-pointer">
-                  Delete
+                  {t("dashboard.marketing.CampaignDetails.Delete")}
                 </button>
               </div>
             </div>
@@ -171,27 +200,39 @@ const LoyalityCampaingnDetails = () => {
           {/* Campaign Overview */}
           <div className="bg-white rounded-lg shadow-sm p-4 md:p-8 mb-8">
             <h1 className="text-xl md:text-2xl font-bold text-balck mb-3 md:mb-6">
-              Campaign Overview
+              {t("dashboard.marketing.CampaignDetails.CampaignOverview")}
             </h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-6 mb-4 md:mb-8">
               <div>
-                <p className="text-sm text-black md:mb-1">Campaign Name</p>
+                <p className="text-sm text-black md:mb-1">
+                  {" "}
+                  {t("dashboard.marketing.CampaignDetails.CampaignName")}
+                </p>
                 <p className="font-semibold text-black">
-                  {currentCampaign.title ??
+                  {currentCampaign?.title ??
                     "Luxury Real Estate Drone Photography Campaign"}
                 </p>
               </div>
               <div>
-                <p className="text-sm text-black md:mb-1">Objective</p>
+                <p className="text-sm text-black md:mb-1">
+                  {" "}
+                  {t("dashboard.marketing.CampaignDetails.Objective")}
+                </p>
                 <p className="font-semibold text-black">Lead Generation</p>
               </div>
               <div>
-                <p className="text-sm text-black md:mb-1">Duration</p>
+                <p className="text-sm text-black md:mb-1">
+                  {" "}
+                  {t("dashboard.marketing.CampaignDetails.Duration")}
+                </p>
                 <p className="font-semibold text-black">1/6/2024 - 21/6/2024</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 md:mb-1">Campaign Type</p>
+                <p className="text-sm text-gray-600 md:mb-1">
+                  {" "}
+                  {t("dashboard.marketing.CampaignDetails.CampaignType")}
+                </p>
                 <p className="font-semibold text-black">Multi-Channel</p>
               </div>
             </div>
@@ -203,9 +244,16 @@ const LoyalityCampaingnDetails = () => {
                 // onChange={(e) => setSelectedPeriod(e.target.value)}
                 className="w-full px-2 md:px-4 py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-xs md:text-base text-[#1A1A1A] appearance-none"
               >
-                <option value="7">Last 7 days</option>
-                <option value="30">Last 30 days</option>
-                <option value="90">Last 90 days</option>
+                <option value="7">
+                  {" "}
+                  {t("dashboard.marketing.last_7_days")}
+                </option>
+                <option value="30">
+                  {t("dashboard.marketing.last_30_days")}
+                </option>
+                <option value="90">
+                  {t("dashboard.marketing.last_90_days")}
+                </option>
               </select>
               <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
                 <FaChevronDown />
@@ -234,7 +282,7 @@ const LoyalityCampaingnDetails = () => {
                   </div>
                   <div>
                     <span className="text-[#FFC107] text-sm font-semibold flex items-center">
-                      <TrendingUp className="w-4 h-4 mr-1" />
+                      <FiTrendingUp className="w-4 h-4 mr-1" />
                       {stat.trend}
                     </span>
                   </div>
@@ -246,7 +294,7 @@ const LoyalityCampaingnDetails = () => {
           {/* Campaign Story */}
           <div className="bg-white rounded-lg shadow-sm p-8">
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
-              Campaign Story
+              {t("dashboard.marketing.CampaignDetails.CampaignStory")}
             </h2>
 
             {/* Drone Images */}
@@ -288,10 +336,10 @@ const LoyalityCampaingnDetails = () => {
         <div className=" bg-white p-4 sm:p-6 lg:p-8 mt-3 md:mt-6 lg:mt-10 rounded-xl">
           <div className="mx-auto">
             <h1 className="text-xl md:text-2xl lg:text-3xl  font-bold text-gray-900 mb-6 sm:mb-8">
-              Channel Performance
+              {t("dashboard.marketing.CampaignDetails.ChannelPerformance")}
             </h1>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6">
               {channels.map((channel, index) => (
                 <ChannelCard key={index} {...channel} />
               ))}

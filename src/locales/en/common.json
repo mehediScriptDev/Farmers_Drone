@@ -64,13 +64,42 @@
           "showing": "Showing {{current}} of {{total}} Users"
         }
       },
-      "droneOperator": {
+      "settings": {
+        "title": "Backend Integrations",
+        "subtitle": "Manage payment gateway connections and API configurations",
+        "addPaymentButton": "Add payment methods",
+        "indianSystems": "Indian Systems",
+        "international": "International",
+        "walletServices": "Wallet Services",
+        "status": {
+          "testing": "Testing",
+          "active": "Active"
+        },
+        "modal": {
+          "title": "Add new payment methods",
+          "apiKeyLabel": "API Key",
+          "apiKeyPlaceholder": "***********",
+          "urlLabel": "URL",
+          "urlPlaceholder": "https://api.droneplatform.com/webhooks/payments",
+          "saveButton": "Save Configuration"
+        },
+        "configModal": {
+          "title": "Payment Management",
+          "apiKeyLabel": "API Key",
+          "statusLabel": "Status",
+          "webhookUrlLabel": "Webhook URL",
+          "saveButton": "Save Configuration",
+          "cancelButton": "Cancel"
+        }
+      },
+
+      "userManagement": {
         "title": "User Management",
-        "tabOperator": "Operator",
+        "tabUser": "User",
         "tabCustomer": "Customer",
         "tabEmployee": "Employee",
         "tabFieldAgent": "Field agent",
-        "subTabAll": "All Drone Operator",
+        "subTabAll": "All Users",
         "subTabPending": "Pending",
         "searchPlaceholder": "Search",
         "tableHeaders": {
@@ -82,7 +111,267 @@
         },
         "seeDetails": "See Details",
         "showing": "Showing {{count}} of {{total}} Users",
-        "noOperatorsFound": "No Drone Operators Found"
+        "noUsersFound": "No Users Found",
+        "modal": {
+          "aboutTitle": "About this User",
+          "fullName": "Full Name:",
+          "phoneNumber": "Phone number:",
+          "email": "Email:",
+          "latLong": "Latitude/Longitude:",
+          "industry": "Industry:",
+          "approveButton": "Approved",
+          "cancelButton": "Cancelled"
+        }
+      },
+
+      "customerManagement": {
+        "title": "Customer Management",
+        "tabOperator": "Operator",
+        "tabCustomer": "Customer",
+        "tabEmployee": "Employee",
+        "tabFieldAgent": "Field agent",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "customer": "Customer",
+          "status": "Status",
+          "totalOrder": "Total order",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "suspended": "Suspended"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "suspend": "Suspend User",
+          "activate": "Activate User"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noCustomersFound": "No Customers Found",
+        "fetchError": "Failed to fetch customer data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Customer Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "totalOrders": "Total Orders",
+          "registrationDate": "Registration Date",
+          "lastActive": "Last Active",
+          "customerId": "Customer ID",
+          "close": "Close",
+          "suspend": "Suspend Customer",
+          "activate": "Activate Customer"
+        }
+      },
+
+      "employeeManagement": {
+        "title": "Employee Management",
+        "addEmployees": "Add employees",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "employees": "Employees",
+          "role": "Role",
+          "roleCode": "Role Code",
+          "startDate": "End Date",
+          "endDate": "End Date",
+          "annualSalary": "Annual salary",
+          "lastActive": "Last Active",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "edit": "Edit Employee",
+          "deactivate": "Deactivate Employee",
+          "activate": "Activate Employee"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noEmployeesFound": "No Employees Found",
+        "fetchError": "Failed to fetch employee data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Employee Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "role": "Role",
+          "roleCode": "Role Code",
+          "department": "Department",
+          "startDate": "Start Date",
+          "endDate": "End Date",
+          "annualSalary": "Annual Salary",
+          "lastActive": "Last Active",
+          "employeeId": "Employee ID",
+          "close": "Close",
+          "deactivate": "Deactivate Employee",
+          "activate": "Activate Employee"
+        }
+      },
+
+      "fieldAgentManagement": {
+        "title": "Field Agent Management",
+        "searchPlaceholder": "Search",
+        "tableHeaders": {
+          "fieldAgent": "Field agent",
+          "totalAddCustomer": "Total add customer",
+          "totalAddOperator": "Total add operator",
+          "totalBookOrders": "Total book orders",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "status": {
+          "active": "Active",
+          "suspended": "Suspended"
+        },
+        "actions": {
+          "viewDetails": "View Details",
+          "suspend": "Suspend Agent",
+          "activate": "Activate Agent"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "noFieldAgentsFound": "No Field Agents Found",
+        "fetchError": "Failed to fetch field agent data",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "modal": {
+          "title": "Field Agent Details",
+          "email": "Email",
+          "phone": "Phone Number",
+          "address": "Address",
+          "totalAddCustomer": "Total Add Customer",
+          "totalAddOperator": "Total Add Operator",
+          "totalBookOrders": "Total Book Orders",
+          "joinDate": "Join Date",
+          "area": "Area",
+          "vehicleNumber": "Vehicle Number",
+          "agentId": "Agent ID",
+          "close": "Close",
+          "suspend": "Suspend Agent",
+          "activate": "Activate Agent"
+        }
+      },
+
+      "orderManagement": {
+        "title": "Order Management",
+        "subtitle": "Track and manage all platform jobs",
+        "scheduled": "Scheduled",
+        "inProgress": "In progress",
+        "complete": "Complete",
+        "jobs": "jobs",
+        "tableHeaders": {
+          "droneOperator": "Drone operator",
+          "status": "Status",
+          "job": "Job",
+          "progress": "Progress",
+          "actions": "Actions"
+        },
+        "status": {
+          "inProgress": "In progress",
+          "notStarted": "Not started",
+          "suspended": "Suspended"
+        },
+        "showing": "Showing {{count}} of {{total}} Users",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next"
+        }
+      },
+
+      "assignJob": {
+        "title": "Assign new job",
+        "clientName": "Client full name",
+        "clientNamePlaceholder": "Enter your first name",
+        "phoneNumber": "Phone number",
+        "email": "Email",
+        "orderId": "Oder ID",
+        "city": "City",
+        "postalCode": "Postal code",
+        "street": "Street",
+        "assignButton": "Assign"
+      },
+
+      "orderDetails": {
+        "title": "Orders info",
+        "subtitle": "Review the tasks assigned to",
+        "TotalactiveJobs": "Total active Jobs",
+        "Totalcompletejob": "Total complete job",
+        "Averagerating": "Average rating",
+        "Totaldrone": "Total drone",
+        "outOf5": "Out of 5",
+        "active": "Active",
+        "tableHeaders": {
+          "service": "Service",
+          "status": "Status",
+          "rating": "Rating",
+          "progress": "Progress",
+          "orderId": "Order ID",
+          "location": "Location",
+          "actions": "Actions"
+        },
+        "status": {
+          "inProgress": "In progress",
+          "notStarted": "Not started",
+          "completed": "Completed"
+        },
+        "noRating": "No rating now",
+        "outOfRating": "out of 5",
+        "showing": "Showing {{count}} of {{total}} jobs"
+      },
+
+      "paymentsManagement": {
+        "title": "Payment Management",
+        "subtitle": "Configure and manage payment methods for customers and drone operators",
+        "tabs": {
+          "overview": "Overview",
+          "customerPayments": "Customer payments",
+          "operatorPayments": "Operator Payments"
+        },
+        "stats": {
+          "revenue": "Revenue",
+          "activeIntegrations": "Active Integrations",
+          "paymentMethods": "Payment Methods"
+        },
+        "customerPayments": {
+          "tableHeaders": {
+            "userName": "User name",
+            "paymentMethod": "Payment method",
+            "status": "Status",
+            "transactions": "Transactions",
+            "dateTime": "Date & Time"
+          },
+          "status": {
+            "done": "Done",
+            "failed": "Failed"
+          },
+          "showing": "Showing {{count}} of {{total}} customer transactions"
+        },
+        "operatorPayments": {
+          "tableHeaders": {
+            "serviceProvider": "Service Provider",
+            "paymentMethod": "Payment method",
+            "status": "Status",
+            "payouts": "PAYOUTS",
+            "dateTime": "Date & Time"
+          },
+          "status": {
+            "done": "Done",
+            "failed": "Failed"
+          },
+          "showing": "Showing {{count}} of {{total}} customer transactions"
+        }
       }
     },
     "employee": {
@@ -217,7 +506,8 @@
             "dateFormat": "mm/dd/yyyy",
             "preferredTime": "Preferred Time",
             "timeFormat": "HH:MM AM - 12:00 PM",
-            "specialInstruction": "Special Instruction"
+            "specialInstruction": "Special Instruction",
+            "createRequest":" Create Request"
           },
           "rescheduleServiceOrder": {
             "title": "Reschedule Service Order",
@@ -282,6 +572,24 @@
         "previous": "Previous",
         "next": "Next"
       },
+      "createServiceModal": {
+        "CreateService": "Create Service",
+        "ServiceTitle": "Service Title",
+        "AquaDomoService": "Aqua Domo Service",
+        "ServicePrice": "Service Price",
+        "PriceValue": "$130 / Acre",
+        "Industry": "Industry",
+        "IndustryValue": "Mapping & Surveying",
+        "Agriculture": "Agriculture",
+        "Construction": "Construction",
+        "Environmental": "Environmental",
+        "SubCategory": "Sub category",
+        "SubCategoryValue": "Domo Mapping & Surveying (MMD1)",
+        "ServiceDetails": "Service Details",
+        "DescribeYourService": "Describe your Service",
+        "ServiceLocation": "Service location",
+        "ServiceLocationValue": "Domo Mapping & Surveying (MMD1)"
+      },
       "FirstModal": {
         "addCustomer": "Add Customer",
         "customerInfo": "Customer Info",
@@ -336,7 +644,109 @@
     },
     "marketing": {
       "title": "Marketing Dashboard",
-      "welcome": "Welcome back, Marketing Team"
+      "monitor": "Monitor your customer service performance",
+      "daysOverview": "Last 30 days overview",
+      "last_90_days": "last 90 days",
+      "last_30_days": "last 30 days",
+      "last_7_days": "last 7 days",
+      "clickRate": "Click through rate",
+      "ConversionRate": "Conversion Rate",
+      "CustomerAcquisitionCost": "Customer Acquisition Cost",
+      "RIO": "RIO",
+      "LeadManagement": "Lead Management",
+      "TrackAndNurtureYourMarketingLeads": "Track and nurture your marketing leads",
+      "ExportLeads": "Export Leads",
+      "Automation": "Automation",
+      "AllLeads": "All Leads",
+      "Hot": "Hot",
+      "Warm": "Warm",
+      "Cool": "Cool",
+      "Lead": "Lead",
+      "Contact": "Contact",
+      "Source": "Source",
+      "Location": "Location",
+      "Score": "Score",
+      "Status": "Status",
+      "Action": "Action",
+      "Results": "Results",
+      "Showing": "Showing",
+      "Previous": "Previous",
+      "Next": "Next",
+      "seasonalCampaings": "Seasonal campaigns",
+      "CreateCampaign": "Create Campaign",
+      "SeeDetails": "See Details",
+      "Loyaltyprograms": "Loyalty programs",
+      "Confirm": "Confirm",
+      "LaunchCampaign": "Launch Campaign",
+      "CampaignDetails": {
+        "CampaignOverview": "Campaign Overview",
+        "Back": "Back",
+        "Export": "Export",
+        "Delete": "Delete",
+        "CampaignName": "Campaign Name",
+        "Objective": "Objective",
+        "Duration": "Duration",
+        "CampaignType": "Campaign Type",
+        "CampaignStory": "Campaign Story",
+        "ChannelPerformance": "Channel Performance",
+        "Impressions": "Impressions",
+        "Clicks": "Clicks",
+        "LeadGeneration": "Lead Genetation",
+        "ConversionsRate": "Conversions Rate",
+        "RIO": "RIO"
+      },
+      "AutomationModal": {
+        "Enabled": "Enabled",
+        "ThreeOfFourRulesActive": "3 of 4 rules active",
+        "IfLeadIsHot": "if lead is hot",
+        "Disabled": "Disabled",
+        "AutomationSettings": "Automation Settings"
+      },
+      "CampaignModal": {
+        "step_1": {
+          "CreateNewCampaign": "Create New Campaign",
+          "Step": "Step",
+          "Progress25Percent": "25%",
+          "SetCampaignType": "Set Campaign Type",
+          "BrandAwareness": "Brand Awareness",
+          "BrandAwarenessDescription": "Spread brand visibility and recognition",
+          "CustomerAcquisition": "Customer Acquisition",
+          "CustomerAcquisitionDescription": "Attract new customers and leads",
+          "Retargeting": "Retargeting",
+          "RetargetingDescription": "Re-engage existing visitors and customers",
+          "ReferralProgram": "Referral Program",
+          "ReferralProgramDescription": "Increase existing customers for growth",
+          "DefineTargetSegment": "Define Target Segment",
+          "Operator": "Operator",
+          "Customers": "Customers",
+          "SelectTargetSegment": "Select target segment"
+        },
+        "step_2": {
+          "SetCampaignGoals": "Set Campaign Goals",
+          "Signups": "Signups",
+          "Bookings": "Bookings",
+          "Downloads": "Downloads",
+          "Engagement": "Engagement",
+          "CampaignBudget": "Campaign Budget",
+          "EnterBudgetAmount": "Enter budget amount"
+        },
+        "step_3": {
+          "CampaignTitle": "Campaign Title",
+          "EnterCampaignTitle": "Enter campaign title",
+          "Description": "Description",
+          "EnterCampaignDetails": "Enter campaign details",
+          "TargetedAudience": "Targeted Audience",
+          "SelectTargetSegment": "Select target segment",
+          "UploadCampaignImages": "Upload campaign images"
+        },
+        "step_4": {
+          "ChooseMarketingChannels": "Choose Marketing Channels",
+          "Email": "Email",
+          "SMS": "SMS",
+          "PushNotification": "Push Notification",
+          "SocialMedia": "Social Media"
+        }
+      }
     }
   },
   "sidebar": {
@@ -349,7 +759,8 @@
       "jobs": "Jobs",
       "paymentsManagement": "Payments management",
       "reports": "Reports",
-      "complaints": "Complaints"
+      "complaints": "Complaints",
+      "services": "Services"
     },
     "employee": {
       "dashboard": "Dashboard",
@@ -721,5 +1132,28 @@
     "title": "Blog & Research",
     "subtitle": "Industry insights, success stories, and research from India's leading drone service provider.",
     "description": "Explore industry insights, learn from real success stories, and gain in-depth knowledge through our expert whitepapers."
+  },
+  "reports": {
+    "title": "Reports",
+    "subtitle": "Configure and manage payment methods for customers and drone operators",
+    "last7DaysRevenue": "Last 7 days revenue",
+    "monthlyRevenue": "Monthly revenue"
+  },
+  "complaints": {
+    "title": "Complaints",
+    "subtitle": "View which customers have submitted complaints.",
+    "table": {
+      "customer": "Customer",
+      "complainTitle": "Complain title",
+      "ticketId": "Complaints ID/Ticket ID",
+      "rating": "Complain title",
+      "actions": "Actions",
+      "seeDetails": "See details"
+    },
+    "pagination": {
+      "showing": "Showing {{count}} of {{total}} Customer",
+      "previous": "Previous",
+      "next": "Next"
+    }
   }
 }

@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { HiOutlineBriefcase, HiOutlineEye } from 'react-icons/hi';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { HiOutlineInformationCircle } from 'react-icons/hi';
+import { FiLayers } from 'react-icons/fi';
 import axiosInstance from '../../../config/axiosConfig';
+import { LoadingSpinner } from '../../common/LoadingSpinner';
+import Pagination from '../../common/Pagination';
+import AssignJobModal from '../../common/AssignJobModal';
 
 const Jobs = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [jobsData, setJobsData] = useState(null);
-  const [jobs, setJobs] = useState([]);
+  const [operators, setOperators] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
+  const [selectedOperator, setSelectedOperator] = useState(null);
+  const itemsPerPage = 6;
 
   useEffect(() => {
     const fetchJobsData = async () => {
@@ -17,7 +27,7 @@ const Jobs = () => {
         const response = await axiosInstance.get('/admin/data/jobs.json');
         const data = response.data;
         setJobsData(data);
-        setJobs(data.jobs || []);
+        setOperators(data.operators || []);
       } catch (err) {
         console.error('Error fetching jobs:', err);
         setError(err.message || 'Failed to load jobs data');
@@ -29,36 +39,59 @@ const Jobs = () => {
     fetchJobsData();
   }, []);
 
-  // Pagination
-  const totalPages = Math.ceil(jobs.length / itemsPerPage);
-  const paginatedJobs = jobs.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+  const paginatedOperators = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return operators.slice(startIndex, startIndex + itemsPerPage);
+  }, [operators, currentPage, itemsPerPage]);
 
-  const handlePrevious = () => {
-    setCurrentPage((prev) => Math.max(prev - 1, 1));
+  const getStatusBadgeClass = (status) => {
+    const normalizedStatus = status.toLowerCase();
+    if (normalizedStatus === 'in progress') {
+      return 'bg-green-100 text-green-700';
+    } else if (normalizedStatus === 'not started') {
+      return 'bg-red-100 text-red-700';
+    } else if (normalizedStatus === 'suspended') {
+      return 'bg-yellow-100 text-yellow-700';
+    }
+    return 'bg-gray-100 text-gray-700';
   };
 
-  const handleNext = () => {
-    setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const getProgressBarColor = (progress) => {
+    if (progress >= 75) return 'bg-green-500';
+    if (progress >= 50) return 'bg-blue-500';
+    if (progress >= 25) return 'bg-yellow-500';
+    return 'bg-red-500';
+  };
+
+  const handleAssignJob = (operator) => {
+    setSelectedOperator(operator);
+    setIsAssignModalOpen(true);
+  };
+
+  const handleViewOrderDetails = (operator) => {
+    navigate(`/admin/order-details/${operator.id}`);
+  };
+
+  const handleCloseModal = () => {
+    setIsAssignModalOpen(false);
+    setSelectedOperator(null);
   };
 
   if (loading) {
     return (
-      <div className='min-h-screen bg-gray-50 w-full flex items-center justify-center'>
-        <div className='text-gray-700'>Loading jobs data...</div>
+      <div className='min-h-screen bg-[#fafffd] w-full flex items-center justify-center'>
+        <LoadingSpinner />
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className='min-h-screen bg-gray-50 w-full flex items-center justify-center'>
+      <div className='min-h-screen bg-[#fafffd] w-full flex items-center justify-center'>
         <div className='text-center'>
           <p className='text-red-600 mb-4'>Error: {error}</p>
           <button
-            className='px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700'
+            className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'
             onClick={() => window.location.reload()}
           >
             Retry
@@ -69,172 +102,180 @@ const Jobs = () => {
   }
 
   return (
-    <div className='min-h-screen bg-[#fafffd] w-full'>
-      <div className='w-full px-4 sm:px-6 lg:px-8 py-6'>
-        {/* Header Section */}
-        <div className='bg-white rounded-xl shadow-sm p-6 sm:p-8 mb-8'>
-          <div className='flex items-center justify-between flex-wrap gap-4'>
-            <div className='flex items-center'>
-              <div className='bg-teal-100 p-3 rounded-lg mr-4'>
-                <HiOutlineBriefcase className='w-8 h-8 text-teal-600' />
-              </div>
-              <div>
-                <h1 className='text-2xl sm:text-3xl font-bold text-gray-900'>
-                  {jobsData?.title || 'Jobs'}
-                </h1>
-                <p className='text-gray-600 mt-1'>
-                  Manage job postings and assignments
-                </p>
-              </div>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <span className='bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-sm font-medium'>
-                Active
-              </span>
-            </div>
+    <div className='min-h-screen bg-[#fafffd] w-full px-6 xl:px-11 py-3 lg:py-6'>
+      {/* Header Section */}
+      <div className='mb-8'>
+        <h1 className='text-2xl sm:text-3xl font-bold text-gray-900 mb-2'>
+          {t('dashboard.admin.orderManagement.title')}
+        </h1>
+        <p className='text-gray-600'>
+          {t('dashboard.admin.orderManagement.subtitle')}
+        </p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mb-8'>
+        {/* Scheduled Card */}
+        <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
+          <div className='flex justify-between items-start mb-4'>
+            <h3 className='text-lg font-semibold text-gray-900'>
+              {t('dashboard.admin.orderManagement.scheduled')}
+            </h3>
+            <span className='text-sm text-gray-500'>
+              {jobsData?.scheduled?.date}
+            </span>
           </div>
+          <p className='text-3xl font-bold text-gray-900'>
+            {jobsData?.scheduled?.count || 0}{' '}
+            <span className='text-base font-normal text-gray-600'>
+              {t('dashboard.admin.orderManagement.jobs')}
+            </span>
+          </p>
         </div>
 
-        {/* Stats Cards */}
-        {jobsData?.stats && (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8'>
-            {jobsData.stats.map((stat, index) => (
-              <div key={index} className='bg-white p-6 rounded-xl shadow-sm'>
-                <h3 className='font-semibold text-gray-900 mb-2'>
-                  {stat.label}
-                </h3>
-                <p className='text-2xl font-bold text-blue-600'>{stat.value}</p>
-                {stat.change && (
-                  <p
-                    className={`text-sm mt-1 ${
-                      stat.changeType === 'positive'
-                        ? 'text-green-600'
-                        : 'text-red-600'
-                    }`}
-                  >
-                    {stat.change}
-                  </p>
-                )}
-              </div>
-            ))}
+        {/* In Progress Card */}
+        <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
+          <div className='flex justify-between items-start mb-4'>
+            <h3 className='text-lg font-semibold text-gray-900'>
+              {t('dashboard.admin.orderManagement.inProgress')}
+            </h3>
+            <span className='text-sm text-gray-500'>
+              {jobsData?.inProgress?.date}
+            </span>
           </div>
-        )}
+          <p className='text-3xl font-bold text-gray-900'>
+            {jobsData?.inProgress?.count || 0}{' '}
+            <span className='text-base font-normal text-gray-600'>
+              {t('dashboard.admin.orderManagement.jobs')}
+            </span>
+          </p>
+        </div>
 
-        {/* Jobs Table */}
-        <div className='bg-white rounded-xl shadow-sm'>
-          <div className='p-6 border-b border-gray-200'>
-            <h2 className='text-xl font-bold text-gray-900'>All Jobs</h2>
-            <p className='text-gray-600 mt-1'>
-              Showing {paginatedJobs.length} of {jobs.length} jobs
-            </p>
+        {/* Complete Card */}
+        <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
+          <div className='flex justify-between items-start mb-4'>
+            <h3 className='text-lg font-semibold text-gray-900'>
+              {t('dashboard.admin.orderManagement.complete')}
+            </h3>
+            <span className='text-sm text-gray-500'>
+              {jobsData?.complete?.date}
+            </span>
           </div>
-
-          <div className='overflow-x-auto'>
-            <table className='w-full'>
-              <thead className='bg-gray-50 border-b border-gray-200'>
-                <tr>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Job Title
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Client
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Status
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Priority
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Created
-                  </th>
-                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase'>
-                    Action
-                  </th>
-                </tr>
-              </thead>
-              <tbody className='divide-y divide-gray-200'>
-                {paginatedJobs.map((job, index) => (
-                  <tr key={job.id || index} className='hover:bg-gray-50'>
-                    <td className='px-6 py-4'>
-                      <div className='text-sm font-medium text-gray-900'>
-                        {job.title || 'N/A'}
-                      </div>
-                      <div className='text-sm text-gray-500'>
-                        {job.description || ''}
-                      </div>
-                    </td>
-                    <td className='px-6 py-4 text-sm text-gray-900'>
-                      {job.client || 'N/A'}
-                    </td>
-                    <td className='px-6 py-4'>
-                      <span
-                        className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${
-                          job.status === 'completed'
-                            ? 'bg-green-100 text-green-700'
-                            : job.status === 'in-progress'
-                            ? 'bg-yellow-100 text-yellow-700'
-                            : job.status === 'pending'
-                            ? 'bg-gray-100 text-gray-700'
-                            : 'bg-blue-100 text-blue-700'
-                        }`}
-                      >
-                        {job.status || 'pending'}
-                      </span>
-                    </td>
-                    <td className='px-6 py-4'>
-                      <span
-                        className={`text-sm font-medium ${
-                          job.priority === 'high'
-                            ? 'text-red-600'
-                            : job.priority === 'medium'
-                            ? 'text-yellow-600'
-                            : 'text-green-600'
-                        }`}
-                      >
-                        {job.priority || 'medium'}
-                      </span>
-                    </td>
-                    <td className='px-6 py-4 text-sm text-gray-900'>
-                      {job.createdDate || 'N/A'}
-                    </td>
-                    <td className='px-6 py-4'>
-                      <button className='text-gray-600 hover:text-gray-900'>
-                        <HiOutlineEye className='w-5 h-5' />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination */}
-          <div className='px-6 py-4 border-t border-gray-200 flex items-center justify-between'>
-            <div className='text-sm text-gray-600'>
-              Showing {(currentPage - 1) * itemsPerPage + 1} to{' '}
-              {Math.min(currentPage * itemsPerPage, jobs.length)} of{' '}
-              {jobs.length} results
-            </div>
-            <div className='flex gap-2'>
-              <button
-                onClick={handlePrevious}
-                disabled={currentPage === 1}
-                className='px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50'
-              >
-                Previous
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={currentPage === totalPages || totalPages === 0}
-                className='px-4 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50'
-              >
-                Next
-              </button>
-            </div>
-          </div>
+          <p className='text-3xl font-bold text-gray-900'>
+            {jobsData?.complete?.count || 0}{' '}
+            <span className='text-base font-normal text-gray-600'>
+              {t('dashboard.admin.orderManagement.jobs')}
+            </span>
+          </p>
         </div>
       </div>
+
+      {/* Operators Table */}
+      <div className='bg-white rounded-lg shadow-sm'>
+        <div className='overflow-x-auto'>
+          <table className='w-full'>
+            <thead className='bg-gray-50 border-b border-gray-200'>
+              <tr>
+                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                  {t(
+                    'dashboard.admin.orderManagement.tableHeaders.droneOperator'
+                  )}
+                </th>
+                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                  {t('dashboard.admin.orderManagement.tableHeaders.status')}
+                </th>
+                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                  {t('dashboard.admin.orderManagement.tableHeaders.job')}
+                </th>
+                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                  {t('dashboard.admin.orderManagement.tableHeaders.progress')}
+                </th>
+                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                  {t('dashboard.admin.orderManagement.tableHeaders.actions')}
+                </th>
+              </tr>
+            </thead>
+            <tbody className='divide-y divide-gray-200 bg-white'>
+              {paginatedOperators.map((operator) => (
+                <tr
+                  key={operator.id}
+                  className='hover:bg-gray-50 transition-colors'
+                >
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <div className='text-sm font-medium text-gray-900'>
+                      {operator.name}
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <span
+                      className={`inline-flex px-3 py-1 rounded-full text-xs font-medium ${getStatusBadgeClass(
+                        operator.status
+                      )}`}
+                    >
+                      {operator.status}
+                    </span>
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <div className='text-sm text-gray-900'>
+                      {operator.jobNumber}
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <div className='flex items-center gap-3'>
+                      <div className='flex-1 bg-gray-200 rounded-full h-2 max-w-[120px]'>
+                        <div
+                          className={`h-2 rounded-full ${getProgressBarColor(
+                            operator.progress
+                          )}`}
+                          style={{ width: `${operator.progress}%` }}
+                        ></div>
+                      </div>
+                      <span className='text-sm font-medium text-gray-700 min-w-[40px]'>
+                        {operator.progress}%
+                      </span>
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 whitespace-nowrap'>
+                    <div className='flex items-center gap-3'>
+                      <button
+                        onClick={() => handleAssignJob(operator)}
+                        className='text-green-600 hover:text-green-800 transition-colors'
+                      >
+                        <FiLayers className='w-5 h-5' />
+                      </button>
+                      <button
+                        onClick={() => handleViewOrderDetails(operator)}
+                        className='text-gray-600 hover:text-gray-800 transition-colors'
+                      >
+                        <HiOutlineInformationCircle className='w-5 h-5' />
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalItems={operators.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={(page) => setCurrentPage(page)}
+          showingText={t('dashboard.admin.orderManagement.showing', {
+            count: paginatedOperators.length,
+            total: operators.length,
+          })}
+        />
+      </div>
+
+      {/* Assign Job Modal */}
+      <AssignJobModal
+        isOpen={isAssignModalOpen}
+        onClose={handleCloseModal}
+        operator={selectedOperator}
+      />
     </div>
   );
 };

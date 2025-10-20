@@ -1,65 +1,149 @@
-import React from 'react';
-import { HiOutlineExclamation } from 'react-icons/hi';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { AiFillStar } from 'react-icons/ai';
+import axiosInstance from '../../../config/axiosConfig';
+import { LoadingSpinner } from '../../common/LoadingSpinner';
+import Pagination from '../../common/Pagination';
 
 const Complaints = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [complaintsData, setComplaintsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    const fetchComplaintsData = async () => {
+      try {
+        setLoading(true);
+        const response = await axiosInstance.get('/admin/data/complaints.json');
+        setComplaintsData(response.data.complaints || []);
+      } catch (err) {
+        setError('Failed to fetch complaints data.');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchComplaintsData();
+  }, []);
+
+  const paginatedData = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return complaintsData.slice(startIndex, endIndex);
+  }, [complaintsData, currentPage, itemsPerPage]);
+
+  const handleShowDetails = (complaintId) => {
+    navigate(`/admin/complaint-details/${complaintId}`, {
+      state: { from: 'complaints' },
+    });
+  };
+
+  if (error) {
+    return <div className='text-center py-10 text-red-500'>{error}</div>;
+  }
+
   return (
-    <div className='min-h-screen bg-[#fafffd] w-full'>
-      <div className='w-full px-4 sm:px-6 lg:px-8 py-6'>
-        {/* Header Section */}
-        <div className='bg-white rounded-xl shadow-sm p-6 sm:p-8 mb-8'>
-          <div className='flex items-center justify-between flex-wrap gap-4'>
-            <div className='flex items-center'>
-              <div className='bg-red-100 p-3 rounded-lg mr-4'>
-                <HiOutlineExclamation className='w-8 h-8 text-red-600' />
-              </div>
-              <div>
-                <h1 className='text-2xl sm:text-3xl font-bold text-gray-900'>
-                  Complaints
-                </h1>
-                <p className='text-gray-600 mt-1'>
-                  Manage customer complaints and issues
-                </p>
-              </div>
-            </div>
-            <div className='flex items-center space-x-2'>
-              <span className='bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium'>
-                Active
-              </span>
-            </div>
-          </div>
-        </div>
+    <div className='w-full bg-[#fafffd] px-6 xl:px-11 py-3 lg:py-6'>
+      <div className='mb-6'>
+        <h1 className='text-2xl font-semibold text-gray-900 font-Poppins'>
+          {t('complaints.title')}
+        </h1>
+        <p className='text-base text-gray-600 font-Lato mt-1'>
+          {t('complaints.subtitle')}
+        </p>
+      </div>
 
-        {/* Content Area */}
-        <div className='bg-white rounded-xl shadow-sm p-6'>
-          <h2 className='text-xl font-bold text-gray-900 mb-4'>
-            Complaints Management Dashboard
-          </h2>
-          <p className='text-gray-600 mb-6'>
-            This page will contain complaint management functionality.
-          </p>
-
-          {/* Demo Content */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>
-                Total Complaints
-              </h3>
-              <p className='text-2xl font-bold text-blue-600'>87</p>
-            </div>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>Open</h3>
-              <p className='text-2xl font-bold text-red-600'>23</p>
-            </div>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>In Progress</h3>
-              <p className='text-2xl font-bold text-yellow-600'>31</p>
-            </div>
-            <div className='bg-gray-50 p-4 rounded-lg'>
-              <h3 className='font-semibold text-gray-900 mb-2'>Resolved</h3>
-              <p className='text-2xl font-bold text-green-600'>33</p>
-            </div>
+      <div className='bg-white rounded-lg shadow-sm mb-6'>
+        {loading ? (
+          <div className='flex justify-center items-center h-96'>
+            <LoadingSpinner />
           </div>
-        </div>
+        ) : (
+          <>
+            <div className='overflow-x-auto'>
+              <table className='w-full'>
+                <thead>
+                  <tr className='bg-gray-50 border-t border-b border-gray-200'>
+                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      {t('complaints.table.customer')}
+                    </th>
+                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      {t('complaints.table.complainTitle')}
+                    </th>
+                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      {t('complaints.table.ticketId')}
+                    </th>
+                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      {t('complaints.table.rating')}
+                    </th>
+                    <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                      {t('complaints.table.actions')}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className='bg-white divide-y divide-gray-200'>
+                  {paginatedData.length > 0 ? (
+                    paginatedData.map((complaint) => (
+                      <tr key={complaint.id} className='hover:bg-gray-50'>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {complaint.customer}
+                        </td>
+                        <td className='px-6 py-4 text-sm text-gray-900'>
+                          <div className='max-w-xs truncate'>
+                            {complaint.complainTitle}
+                          </div>
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {complaint.ticketId}
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          <div className='flex items-center gap-2'>
+                            <AiFillStar className='w-5 h-5 text-yellow-400' />
+                            <span>{complaint.rating}</span>
+                          </div>
+                        </td>
+                        <td className='px-6 py-4 whitespace-nowrap text-sm'>
+                          <button
+                            onClick={() => handleShowDetails(complaint.id)}
+                            className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium'
+                          >
+                            {t('complaints.table.seeDetails')}
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td
+                        colSpan='5'
+                        className='px-6 py-8 text-center text-gray-500'
+                      >
+                        {t('dashboard.admin.userManagement.noUsersFound')}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            <Pagination
+              currentPage={currentPage}
+              totalItems={complaintsData.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={(page) => setCurrentPage(page)}
+              showingText={t('complaints.pagination.showing', {
+                count: paginatedData.length,
+                total: complaintsData.length,
+              })}
+            />
+          </>
+        )}
       </div>
     </div>
   );

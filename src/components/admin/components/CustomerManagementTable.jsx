@@ -1,0 +1,118 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+const CustomerManagementTable = ({ customers, onShowDetails }) => {
+  const { t } = useTranslation();
+
+  const getTimeAgo = (dateString) => {
+    try {
+      const date = new Date(dateString);
+      const now = new Date();
+      const diffInMs = now - date;
+      const diffInMinutes = Math.floor(diffInMs / 60000);
+
+      if (diffInMinutes < 1) return 'just now';
+      if (diffInMinutes < 60) return `${diffInMinutes} minutes ago`;
+
+      const diffInHours = Math.floor(diffInMinutes / 60);
+      if (diffInHours < 24)
+        return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+
+      const diffInDays = Math.floor(diffInHours / 24);
+      return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    } catch {
+      return dateString;
+    }
+  };
+
+  return (
+    <div className='overflow-x-auto'>
+      <table className='w-full table-fixed'>
+        <thead className='bg-gray-50'>
+          <tr>
+            <th
+              scope='col'
+              className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+            >
+              {t('dashboard.admin.customerManagement.tableHeaders.customer')}
+            </th>
+            <th
+              scope='col'
+              className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+            >
+              {t('dashboard.admin.customerManagement.tableHeaders.status')}
+            </th>
+            <th
+              scope='col'
+              className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+            >
+              {t('dashboard.admin.customerManagement.tableHeaders.totalOrder')}
+            </th>
+            <th
+              scope='col'
+              className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+            >
+              {t('dashboard.admin.customerManagement.tableHeaders.lastActive')}
+            </th>
+            <th
+              scope='col'
+              className='w-[25%] px-6 py-3 text-center text-sm font-bold text-gray-700 uppercase tracking-wider'
+            >
+              {t('dashboard.admin.customerManagement.tableHeaders.actions')}
+            </th>
+          </tr>
+        </thead>
+        <tbody className='divide-y divide-gray-200'>
+          {customers.length > 0 ? (
+            customers.map((customer) => (
+              <tr key={customer.id} className='hover:bg-gray-50'>
+                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                  {customer.name}
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap'>
+                  <span
+                    className={`inline-flex px-2 py-1 text-xs font-medium rounded ${
+                      customer.status === 'active'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
+                    }`}
+                  >
+                    {customer.status === 'active'
+                      ? t('dashboard.admin.customerManagement.status.active')
+                      : t(
+                          'dashboard.admin.customerManagement.status.suspended'
+                        )}
+                  </span>
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                  {String(customer.totalOrders).padStart(2, '0')}
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                  {getTimeAgo(customer.lastActive)}
+                </td>
+                <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                  <div className='flex items-center justify-center space-x-4'>
+                    <button
+                      onClick={() => onShowDetails(customer)}
+                      className='px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded-md hover:bg-green-700 transition'
+                    >
+                      {t('dashboard.admin.userManagement.seeDetails')}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr className='min-h-[408px]'>
+              <td colSpan={5} className='text-center py-10 text-gray-500'>
+                {t('dashboard.admin.customerManagement.noCustomersFound')}
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+export default CustomerManagementTable;
