@@ -1,11 +1,12 @@
+import { MdUploadFile } from "react-icons/md";
 const CreateServiceCard = ({ onCreateService }) => {
   return (
-    <div className="bg-white p-8 sm:p-12 rounded-2xl w-full max-w-xl border border-gray-100">
+    <div className="bg-white p-8 sm:p-12 rounded-2xl w-full mx-auto border border-gray-100">
       <button
         onClick={onCreateService}
-        className="bg-[#28A844] text-white px-5 py-2 rounded"
+        className="text-[#28A844]  px-5 py-2 rounded mx-auto flex flex-col items-center gap-2 font-medium text-sm md:text-base"
       >
-        Create Service
+        <MdUploadFile  className=" size-20 md:size-24 mx-auto"/> <p>Create Service</p>
       </button>
     </div>
   );
