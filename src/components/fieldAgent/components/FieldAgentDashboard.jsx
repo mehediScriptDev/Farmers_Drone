@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { FaRupeeSign, FaAngleUp, FaAngleDown, FaTrophy } from "react-icons/fa";
 import { PiUsersThreeBold } from "react-icons/pi";
 import { FiUserPlus } from "react-icons/fi";
-import AddCustomerModal from "../../common/AddCustomerModal";
 import axiosInstance from "../../../config/axiosConfig";
 import FieldAgentCreateServiceModal from "./modals/FieldAgentCreateServiceModal";
 
@@ -14,6 +13,7 @@ import CreateServiceCard from "./CreateServiceCard";
 import FilterBar from "./FilterBar";
 import UsersTable from "./UsersTable";
 import Pagination from "../../common/Pagination";
+import RegistrationModal from "../../employee/employdashboard/components/Modal/RegistrationModal";
 
 const FieldAgentDashboard = () => {
   // const { user } = useAuth();
@@ -231,7 +231,7 @@ const FieldAgentDashboard = () => {
       </div>
 
       {/* Modals */}
-      <AddCustomerModal
+      <RegistrationModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       />

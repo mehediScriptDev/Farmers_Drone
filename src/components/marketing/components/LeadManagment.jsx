@@ -7,6 +7,7 @@ import Pagination from "../../fieldAgent/components/Pagination";
 import axiosInstance from "../../../config/axiosConfig";
 import AutomationModal from "./modals/AutomationModal ";
 import SalesSequenceModal from "./modals/SalesSequenceModal";
+import CommonPagination from "../../common/Pagination";
 
 const LeadManagment = () => {
   const { t } = useTranslation();
@@ -122,7 +123,6 @@ const LeadManagment = () => {
           </div>
         </div>
 
-        {/* Table extracted */}
         <LeadsTable
           data={paginatedData}
           statusStyles={statusStyles}
@@ -130,25 +130,12 @@ const LeadManagment = () => {
         />
 
         {/* Footer */}
-        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs md:text-sm text-gray-600">
-            {t("dashboard.marketing.Showing")} {startIndex + 1} to{" "}
-            {Math.min(startIndex + rowsPerPage, filteredActivities.length)} of{" "}
-            {filteredActivities.length} {t("dashboard.marketing.Results")}
-          </div>
-          <Pagination
-            variant="ellipsis"
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setCurrentPage}
-            showCount={{
-              current: paginatedData.length,
-              total: filteredActivities.length,
-              prefix: "Showing",
-              label: "results",
-            }}
-          />
-        </div>
+        <CommonPagination
+          currentPage={currentPage}
+          totalItems={filteredActivities.length}
+          itemsPerPage={rowsPerPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
       <MapAudience />
