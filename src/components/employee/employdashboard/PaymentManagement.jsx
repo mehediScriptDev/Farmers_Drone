@@ -73,20 +73,23 @@ const PaymentManagement = () => {
   }, [i18n]);
 
   // Search
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+ 
+const handleSearch = (e) => {
+  const value = e.target.value;
+  setSearchQuery(value);
 
-    const filtered = recentTransactions.filter(txn =>
-      txn.serviceId.toLowerCase().includes(query) ||
-      txn.customerName.toLowerCase().includes(query) ||
-      txn.payment.toString().toLowerCase().includes(query) ||
-      txn.progress.toLowerCase().includes(query)
-    );
+  const query = value.toLowerCase();
+  const filtered = recentTransactions.filter(txn =>
+    txn.serviceId.toLowerCase().includes(query) ||
+    txn.customerName.toLowerCase().includes(query) ||
+    txn.payment.toString().toLowerCase().includes(query) ||
+    txn.progress.toLowerCase().includes(query)
+  );
 
-    setFilteredTransactions(filtered);
-    setCurrentPage(1);
-  };
+  setFilteredTransactions(filtered);
+  setCurrentPage(1);
+};
+
 
   // Paginated Transactions
   const startIndex = (currentPage - 1) * itemsPerPage;
