@@ -5,7 +5,6 @@ import { PiUsersThreeBold } from "react-icons/pi";
 import { FiUserPlus } from "react-icons/fi";
 import AddCustomerModal from "../../common/AddCustomerModal";
 import axiosInstance from "../../../config/axiosConfig";
-import { useAuth } from "../../../hooks/useAuth";
 import FieldAgentCreateServiceModal from "./modals/FieldAgentCreateServiceModal";
 
 // New parts
@@ -14,7 +13,7 @@ import RankCard from "./RankCard";
 import CreateServiceCard from "./CreateServiceCard";
 import FilterBar from "./FilterBar";
 import UsersTable from "./UsersTable";
-import Pagination from "./Pagination";
+import Pagination from "../../common/Pagination";
 
 const FieldAgentDashboard = () => {
   // const { user } = useAuth();
@@ -38,7 +37,7 @@ const FieldAgentDashboard = () => {
   // user rank
   const [rank, setRank] = useState("Silver");
 
-  const usersPerPage = 4;
+  const usersPerPage = 6;
   const [searchTerm, setSearchTerm] = useState("");
 
   const ICONS = {
@@ -89,6 +88,7 @@ const FieldAgentDashboard = () => {
   const handleSubmit = (formData) => {
     // API call or state update korte paren
     setCreatServiceshowModal(false);
+    console.log(formData)
   };
 
   // Sorting
@@ -221,20 +221,12 @@ const FieldAgentDashboard = () => {
           </div>
 
           {/* Pagination */}
-          <div className="py-4 md:py-6">
-            <Pagination
-              t={t}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              totalUsers={totalUsers}
-              currentCount={currentUsers.length}
-              onChangePage={(p) => setCurrentPage(p)}
-              onPrev={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              onNext={() =>
-                setCurrentPage((prev) => Math.min(totalPages, prev + 1))
-              }
-            />
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalUsers}
+            itemsPerPage={usersPerPage}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </div>
       </div>
 

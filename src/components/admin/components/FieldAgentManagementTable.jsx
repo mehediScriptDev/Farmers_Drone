@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiOutlineUserGroup, HiOutlineInformationCircle } from 'react-icons/hi';
+import { BsPersonDashFill, BsPersonPlusFill } from 'react-icons/bs';
 
 const FieldAgentManagementTable = ({ fieldAgents, onShowDetails }) => {
   const { t } = useTranslation();
@@ -88,17 +89,17 @@ const FieldAgentManagementTable = ({ fieldAgents, onShowDetails }) => {
                   </span>
                 </td>
                 <td className='px-3 py-4 whitespace-nowrap text-sm font-medium'>
-                  <div className='flex items-center justify-center space-x-4'>
+                  <div className='flex items-center justify-center'>
                     <button
                       onClick={() => onShowDetails(agent)}
-                      className={`p-2 rounded-full transition ${
-                        agent.status === 'Active'
-                          ? 'text-green-600 hover:bg-green-50'
-                          : 'text-red-600 hover:bg-red-50'
-                      }`}
+                      className='p-2 rounded-full transition hover:bg-gray-50'
                       title='View Details'
                     >
-                      <HiOutlineUserGroup className='w-5 h-5' />
+                      {agent.status === 'Active' ? (
+                        <BsPersonDashFill className='w-5 h-5 text-green-600' />
+                      ) : (
+                        <BsPersonPlusFill className='w-5 h-5 text-red-600' />
+                      )}
                     </button>
                     <button
                       onClick={() => onShowDetails(agent)}

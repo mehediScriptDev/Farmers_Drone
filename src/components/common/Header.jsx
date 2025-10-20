@@ -34,12 +34,12 @@ export const Header = () => {
           {/* Language switcher */}
           <LanguageSwitcher />
 
-          {user &&
+          {/* {user &&
             (['admin', 'marketing', 'employee'].includes(user.role) ? (
               <Link className='text-gray-800 text-xl lg:flex hidden'>
                 <FiBell />
               </Link>
-            ) : null)}
+            ) : null)} */}
 
           {user.role == 'admin' ? (
             <Link

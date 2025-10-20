@@ -1,10 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { HiOutlineChevronUp } from "react-icons/hi";
 
 const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const options = [
     { label: t("dashboard.marketing.AllLeads"), value: "All" },
@@ -22,7 +39,8 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
 
   return (
     <div
-      className="relative inline-block text-left"
+      ref={dropdownRef}
+      className="relative inline-block text-left min-w-[200px]"
       onClick={() => setIsOpen(!isOpen)}
     >
       <button
@@ -41,8 +59,8 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
       </button>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-full min-w-[150px] rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="py-1">
+        <div className="absolute right-0 mt-1 w-full min-w-[150px] rounded-lg shadow-xl bg-white ">
+          <div className="">
             {options.map((option) => (
               <div
                 key={option.value}

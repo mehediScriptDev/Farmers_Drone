@@ -243,7 +243,7 @@ const AssignJobModal = ({ isOpen, onClose }) => {
                 type='submit'
                 className='self-stretch px-2.5 py-3 bg-green-500 rounded inline-flex justify-center items-center gap-2.5'
               >
-                <div className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                <div className='text-white text-base font-medium font-["Poppins"] leading-normal'>
                   {t('dashboard.admin.assignJob.assignButton')}
                 </div>
               </button>

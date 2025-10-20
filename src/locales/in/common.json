@@ -95,11 +95,11 @@
 
       "userManagement": {
         "title": "उपयोगकर्ता प्रबंधन",
-        "tabUser": "उपयोगकर्ता",
+        "tabUser": "ऑपरेटर",
         "tabCustomer": "ग्राहक",
         "tabEmployee": "कर्मचारी",
         "tabFieldAgent": "फील्ड एजेंट",
-        "subTabAll": "सभी उपयोगकर्ता",
+        "subTabAll": "सभी ड्रोन ऑपरेटर",
         "subTabPending": "लंबित",
         "searchPlaceholder": "खोजें",
         "tableHeaders": {
@@ -412,7 +412,10 @@
         "tableDate": "तारीख",
         "tableProgress": "प्रगति",
         "tablePriority": "प्राथमिकता",
-        "tableAction": "क्रिया"
+        "tableAction": "क्रिया",
+        "customerDetails": "ग्राहक विवरण",
+        "duration": "अवधि",
+        "revenue": "राजस्व"
       },
       "button": {
         "registerNewCustomer": "नया ग्राहक पंजीकृत करें",
@@ -484,7 +487,18 @@
         "ticketServiceTypeOption3": "रखरखाव",
         "ticketIssueDescriptionLabel": "समस्या का विवरण *",
         "ticketIssueDescriptionPlaceholder": "ग्राहक की समस्या का विस्तृत विवरण...",
-        "ticketCreateButton": "टिकट बनाएं"
+        "ticketCreateButton": "टिकट बनाएं",
+        "assistInProfileSetup": "प्रोफ़ाइल सेटअप में सहायता करें",
+        "customerEmailOrPhone": "ग्राहक ईमेल या फ़ोन",
+        "enterCustomerEmailOrPhone": "ग्राहक का ईमेल या फ़ोन दर्ज करें",
+        "setupType": "सेटअप प्रकार",
+        "personalInformation": "व्यक्तिगत जानकारी",
+        "notes": "नोट्स",
+        "addNotesAboutSetup": "सेटअप सहायता के लिए कोई नोट्स जोड़ें...",
+        "startSetupAssistance": "सेटअप सहायता शुरू करें",
+        "personalInformation2": "व्यक्तिगत जानकारी",
+        "verificationDetails": "सत्यापन विवरण",
+        "serviceLocation": "सेवा स्थान"
       },
       "pages": {
         "dashboard": {
@@ -495,7 +509,15 @@
             "last90days": "पिछले 90 दिन",
             "last6months": "पिछले 6 महीने",
             "last12months": "पिछले 12 महीने",
-            "overview": "सारांश"
+            "overview": "सारांश",
+            "customerType": "ग्राहक प्रकार",
+            "all": "सभी",
+            "aerialMediaServices": "हवाई मीडिया सेवाएं",
+            "groundMediaServices": "जमीनी मीडिया सेवाएं",
+            "serviceCategory": "सेवा श्रेणी",
+            "allServiceCategories": "सभी सेवा श्रेणियाँ",
+            "aerialPhotographyVideographyMP": "हवाई फोटोग्राफी और वीडियोग्राफी (MP)",
+            "eventPhotography": "ईवेंट फोटोग्राफी"
           },
           "card": {
             "1st": "कुल ग्राहक",
@@ -503,7 +525,11 @@
             "3rd": "लंबित भुगतान",
             "4th": "खुले टिकट",
             "5th": "पूर्ण किए गए आदेश",
-            "6th": "रद्द किए गए आदेश"
+            "6th": "रद्द किए गए आदेश",
+            "totalCustomers": "कुल ग्राहक",
+            "totalRevenue": "कुल राजस्व",
+            "avgDuration": "औसत अवधि",
+            "pendingPayments": "बकाया भुगतान"
           }
         },
         "order": {
@@ -558,6 +584,7 @@
       "welcome": "वापस स्वागत है, फील्ड एजेंट",
       "fieldAgentSummery": {
         "userAdded": "आपके द्वारा जोड़े गए कुल उपयोगकर्ता",
+        "ActiveCustomers": "सक्रिय ग्राहक",
         "totalcommition": "कुल अर्जित कमीशन",
         "totalPayments": "हमारा बकाया भुगतान"
       },
@@ -581,7 +608,8 @@
         "showing": "दिखा रहे हैं",
         "users": "उपयोगकर्ता",
         "previous": "पिछला",
-        "next": "अगला"
+        "next": "अगला",
+        "of": "का"
       },
       "createServiceModal": {
         "CreateService": "सेवा बनाएँ",
@@ -686,8 +714,17 @@
       "seasonalCampaings": "मौसमी अभियान",
       "CreateCampaign": "अभियान बनाएँ",
       "SeeDetails": "विवरण देखें",
-      "LoyaltyPrograms": "निष्ठा कार्यक्रम",
+      "Loyaltyprograms": "निष्ठा कार्यक्रम",
       "LaunchCampaign": "अभियान लॉन्च करें",
+      "CampaignOverview": {
+        "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
+        "LoyaltyCampaignOverview": "निष्ठा अभियान अवलोकन",
+        "CampaignName": "अभियान का नाम",
+        "CampaignTypes": "अभियान प्रकार",
+        "LeadsGenerated": "उत्पन्न लीड्स",
+        "ROI": "आरओआई",
+        "Actions": "क्रियाएँ"
+      },
       "CampaignDetails": {
         "CampaignOverview": "अभियान अवलोकन",
         "Back": "वापस",

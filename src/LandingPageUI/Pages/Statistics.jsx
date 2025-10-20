@@ -1,5 +1,9 @@
-import React from "react";
+import { GoPeople } from "react-icons/go";
 import { useTranslation } from "react-i18next";
+import { BsShieldCheck } from "react-icons/bs";
+import { TbSchool } from 'react-icons/tb';
+import { FaArrowTrendUp } from "react-icons/fa6";
+
 
 // StatsCards.jsx
 // Responsive 4-card stats section using Tailwind CSS v4
@@ -10,10 +14,7 @@ const cards = [
   {
     id: 1,
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M20 21v-1a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <GoPeople size={36} />
     ),
     value: "1000+",
     titleKey: "landingstats.satisfiedClients",
@@ -21,9 +22,7 @@ const cards = [
   {
     id: 2,
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2l3 3 7 1-4 4 1 7-6-3-6 3 1-7-4-4 7-1 3-3z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <BsShieldCheck size={36}/>
     ),
     value: "1000+",
     titleKey: "landingstats.projectsCompleted",
@@ -31,11 +30,7 @@ const cards = [
   {
     id: 3,
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2l9 4-9 4-9-4 9-4z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M12 10v10" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M7 14l5 3 5-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <TbSchool size={36} />
     ),
     value: "15+",
     titleKey: "landingstats.industryCertifications",
@@ -43,9 +38,7 @@ const cards = [
   {
     id: 4,
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 17l6-6 4 4 8-8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
+      <FaArrowTrendUp size={36} />
     ),
     value: "99%",
     titleKey: "landingstats.clientSatisfaction",
@@ -64,15 +57,15 @@ export default function Statistics() {
           {cards.map((c) => (
             <div
               key={c.id}
-              className="bg-white rounded-xl p-6 shadow-sm flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow"
+              className=" rounded-xl p-6  flex flex-col items-center justify-center text-center hover:shadow-md transition-shadow"
             >
               <div className="mb-4">
-                <div className="inline-flex items-center justify-center w-14  h-14 rounded-lg bg-emerald-50 text-emerald-700">
+                <div className="inline-flex font-normal items-center justify-center xl:w-20  xl:h-20 w-14 h-14 rounded-lg bg-[#E6EBF1] text-[#353F38]">
                   {c.icon}
                 </div>
               </div>
 
-              <div className="lg:text-2xl xl:text-3xl text-xl font-extrabold text-slate-900">{c.value}</div>
+              <div className="lg:text-2xl xl:text-3xl text-xl font-bold text-[#00264D]">{c.value}</div>
               <div className="mt-3 line-clamp-1 text-sm text-slate-600">{t(c.titleKey)}</div>
             </div>
           ))}

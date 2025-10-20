@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../../config/axiosConfig";
 import { Link, useLocation } from "react-router-dom";
 import CampaignModal from "./modals/CampaignModal";
+import Pagination from "../../common/Pagination";
+import { t } from "i18next";
 
 export default function LoyalityCampaingnOverview() {
   const [campaigns, setCampaigns] = useState([]);
@@ -43,10 +45,10 @@ export default function LoyalityCampaingnOverview() {
     }
   };
   console.log(campaigns);
-  const totalResults = campaigns.length;
-  const startResult = (currentPage - 1) * resultsPerPage + 1;
-  const endResult = Math.min(currentPage * resultsPerPage, totalResults);
-  const paginatedCampaigns = campaigns.slice(startResult - 1, endResult);
+  
+  const startIndex = (currentPage - 1) * resultsPerPage;
+  const endIndex = startIndex + resultsPerPage;
+  const paginatedCampaigns = campaigns.slice(startIndex, endIndex);
 
   if (loading) {
     return (
@@ -76,16 +78,16 @@ export default function LoyalityCampaingnOverview() {
   }
 
   return (
-    <div className="bg-white">
+    <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md ">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 py-2 md:py-4 lg:py-6 mx-2 md:mx-4 lg:mx-6 ">
+        <div className="flex justify-between items-center py-2 md:py-4 lg:py-4 mx-2 md:mx-4 lg:mx-4 p-2 md:p-4">
           <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
-            Loyalty Campaign Overview
+            {t("dashboard.marketing.CampaignOverview.LoyaltyCampaignOverview")}
           </h1>
           <button
             onClick={() => setCampaignModal(true)}
-            className="bg-[#28A844] hover:bg-green-600 text-black px-2 md:px-4 py-2 rounded flex  items-center gap-1 md:gap-2"
+            className="bg-[#28A844] hover:bg-green-600 text-white px-2 md:px-4 py-2 rounded flex  items-center gap-1 md:gap-2"
           >
             <span className="text-xl ">+</span>
             <span className="text-base md:text-lg">Create Campaign</span>
@@ -93,7 +95,7 @@ export default function LoyalityCampaingnOverview() {
         </div>
 
         {/* Table */}
-        <div className="bg-white rounded-b-lg shadow overflow-hidden">
+        <div className="bg-white rounded-b-lg overflow-hidden">
           {campaigns.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-gray-500">No campaigns found</p>
@@ -104,19 +106,19 @@ export default function LoyalityCampaingnOverview() {
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Campaign Name
+                      {t("dashboard.marketing.CampaignOverview.CampaignName")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Campaign Types
+                      {t("dashboard.marketing.CampaignOverview.CampaignTypes")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      Leads Generated
+                      {t("dashboard.marketing.CampaignOverview.LeadsGenerated")}
                     </th>
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
-                      ROI
+                      {t("dashboard.marketing.CampaignOverview.ROI")}
                     </th>
                     <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-right whitespace-nowrap">
-                      ACTIONS
+                      {t("dashboard.marketing.CampaignOverview.Actions")}
                     </th>
                   </tr>
                 </thead>
@@ -143,7 +145,7 @@ export default function LoyalityCampaingnOverview() {
                           to={`${url}/${campaign.id}`}
                           className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"
                         >
-                          See details
+                          {t("dashboard.marketing.SeeDetails")}
                         </Link>
                       </td>
                     </tr>
@@ -151,28 +153,13 @@ export default function LoyalityCampaingnOverview() {
                 </tbody>
               </table>
 
-              {/* Footer */}
-              <div className="flex justify-between items-center px-6 py-4 bg-white border-t border-gray-200">
-                <div className="text-sm text-gray-600">
-                  Showing {startResult} to {endResult} of {totalResults} results
-                </div>
-                <div className="flex gap-2">
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((p) => p - 1)}
-                  >
-                    Previous
-                  </button>
-                  <button
-                    className="px-4 py-2 border border-gray-300 rounded text-sm text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={endResult >= totalResults}
-                    onClick={() => setCurrentPage((p) => p + 1)}
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+              {/* Pagination */}
+              <Pagination
+                currentPage={currentPage}
+                totalItems={campaigns.length}
+                itemsPerPage={resultsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           )}
         </div>

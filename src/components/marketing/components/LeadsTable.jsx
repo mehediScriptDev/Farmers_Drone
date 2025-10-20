@@ -66,7 +66,7 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
               </td>
               <td className="py-3 px-4 text-base md:text-lg">
                 <button
-                  className="rounded-full p-1 text-green-200 transition md:ml-4"
+                  className="rounded-full p-1 text-[#BAFF57] transition md:ml-4"
                   onClick={onOpenClock}
                 >
                   <FaRegClock />

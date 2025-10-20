@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { HiDotsVertical, HiUser } from 'react-icons/hi';
+import { HiUser } from 'react-icons/hi';
+import { BsPersonPlus } from 'react-icons/bs';
 import Pagination from './Pagination';
 
 const getStatusColor = (statusType) => {
@@ -16,7 +17,7 @@ const getStatusColor = (statusType) => {
 const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
 
   // Use useMemo to calculate the data for the current page.
   // This avoids re-calculating on every render unless dependencies change.
@@ -50,7 +51,7 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   ];
 
   return (
-    <div className='bg-white rounded-lg shadow-sm mb-6'>
+    <div className='bg-white rounded-xl shadow-sm'>
       <div className='p-6 border-b border-gray-200'>
         <h3 className='text-lg font-semibold text-gray-900'>{title}</h3>
       </div>
@@ -111,9 +112,9 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
                 <td className='px-6 py-4 whitespace-nowrap text-center'>
                   <button
                     aria-label='Actions'
-                    className='text-gray-400 hover:text-gray-600 p-1'
+                    className='text-black hover:text-gray-600 p-1'
                   >
-                    <HiDotsVertical className='h-5 w-5 mx-auto' />
+                    <BsPersonPlus className='h-5 w-5 mx-auto' />
                   </button>
                 </td>
               </tr>

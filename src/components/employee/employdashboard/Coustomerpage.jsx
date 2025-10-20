@@ -1,3 +1,6 @@
+
+
+
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { LuEye } from 'react-icons/lu';
@@ -11,7 +14,7 @@ import {
   ServiceLocationModal,
   VerificationModal,
 } from './components/Modal/AssistProfileSetupModal';
-
+import Pagination from '../../common/Pagination';
 const Coustomerpage = () => {
   const [open, setOpen] = useState(false);
   const [activities, setActivities] = useState([]);
@@ -23,11 +26,10 @@ const Coustomerpage = () => {
   const [customerEmail, setCustomerEmail] = useState('');
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownPositions, setDropdownPositions] = useState({});
-  const buttonRefs = useRef({}); 
+  const buttonRefs = useRef({});
 
   const { t } = useTranslation();
-  const itemsPerPage = 4;
-  const totalPages = Math.ceil(activities.length / itemsPerPage);
+  const itemsPerPage = 6;
 
   const handleOpenSubModal = useCallback((setupType, email) => {
     setCustomerEmail(email);
@@ -81,26 +83,17 @@ const Coustomerpage = () => {
     startIndex + itemsPerPage
   );
 
-  const handlePrevious = () => {
-    if (currentPage > 1) setCurrentPage((prev) => prev - 1);
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
-  };
-
   // Dropdown logic
   const toggleDropdown = (index) => {
     if (activeDropdown === index) {
       setActiveDropdown(null);
     } else {
-      const shouldOpenUp = index >= paginatedActivities.length - 2; // last 2 open upward
+      const shouldOpenUp = index >= paginatedActivities.length - 2;
       setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
       setActiveDropdown(index);
     }
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -194,27 +187,27 @@ const Coustomerpage = () => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
-            <thead className="bg-[#F5F7FA] border-b border-gray-200">
+            <thead className="bg-[#F5F7FA] border-b h-18 border-gray-200 ">
               <tr>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.serviceName')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.contact')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.location')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.served')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.progress')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.priority')}
                 </th>
-                <th className="px-3 md:px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase whitespace-nowrap">
+                <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
                   {t('dashboard.employee.table.action')}
                 </th>
               </tr>
@@ -340,48 +333,14 @@ const Coustomerpage = () => {
         </div>
 
         {/* Pagination */}
-        <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs md:text-sm text-gray-600">
-            Showing{' '}
-            {paginatedActivities.length > 0 ? startIndex + 1 : 0} to{' '}
-            {startIndex + paginatedActivities.length} of {activities.length}{' '}
-            results
-          </div>
-
-          <div className="flex flex-wrap items-center gap-1 sm:gap-2">
-            <button
-              onClick={handlePrevious}
-              disabled={currentPage === 1}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Previous
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (number) => (
-                <button
-                  key={number}
-                  onClick={() => setCurrentPage(number)}
-                  className={`px-3 py-1.5 text-sm rounded transition-colors ${
-                    currentPage === number
-                      ? 'bg-[#28A844] text-white font-medium'
-                      : '!bg-gray-100 text-black hover:bg-gray-200'
-                  }`}
-                >
-                  {number}
-                </button>
-              )
-            )}
-
-            <button
-              onClick={handleNext}
-              disabled={currentPage === totalPages || totalPages === 0}
-              className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-            >
-              Next
-            </button>
-          </div>
-        </div>
+        <Pagination
+          currentPage={currentPage}
+          totalItems={activities.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={(page) => setCurrentPage(page)}
+          itemLabel="Customer"
+          itemLabelPlural="Customers"
+        />
       </div>
 
       {/* Modals */}

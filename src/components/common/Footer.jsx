@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <div>
       {/* CTA Section */}
-      <div className="bg-gray-50 py-6 sm:py-10 lg:pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 ">
+      <div className="bg-[#f0f8ff] py-6 sm:py-10 lg:pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 ">
         <div className="lg:w-10/12 mx-auto max-w-7xl">
           <div className="bg-[#002347] relative -mb-40 z-40 rounded-2xl p-8 md:p-12 text-center shadow-lg">
             <h2 className="text-xl sm:text-3xl xl:text-4xl font-bold text-white mb-6">

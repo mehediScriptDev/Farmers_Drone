@@ -47,9 +47,9 @@ function CustomerDetailsPage() {
         <button
             onClick={() => navigate(-1)}
           aria-label="Back"
-          className="mb-2 text-xl flex items-center p-1 sm:p-2  border border-gray-300 rounded-xl text-gray-700  font-medium transition-colors"
+          className="mb-2 text-xl p-1 sm:p-2  cursor-pointer"
         >
-          <IoArrowBack className="w-5 h-5" />
+          <IoArrowBack className="w-6 h-6" />
         </button>
 
         {/* Customer Profile Section */}

@@ -115,7 +115,7 @@ const Settings = () => {
     <>
       <Header />
       <div className='w-full min-h-screen bg-[#FAFFFD] p-6 md:p-10 lg:p-12'>
-        <div className='max-w-6xl mx-auto'>
+        <div className='max-w-7xl mx-auto'>
           {/* Back Button */}
           <div className='mb-8'>
             <button

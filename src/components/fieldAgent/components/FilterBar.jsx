@@ -40,7 +40,7 @@ const FilterBar = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search"
-          className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-xl text-base"
+          className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-base"
         />
       </div>
 

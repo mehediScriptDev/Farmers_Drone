@@ -1,7 +1,9 @@
 
 
 import React, { useState, useCallback, memo } from "react";
+import { IoClose } from "react-icons/io5";
 import { ChevronDown } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // Validation utilities
 const validators = {
@@ -48,9 +50,8 @@ const Input = memo(
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`mt-1 w-full px-3 md:px-4 py-2 border ${
-          error ? "border-red-500" : "border-gray-300"
-        } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
+        className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
+          } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
       />
       {error && <p className="text-xs md:text-sm text-red-500 mt-1">{error}</p>}
     </div>
@@ -69,9 +70,8 @@ const Select = memo(
         name={name}
         value={value}
         onChange={onChange}
-        className={`mt-1 w-full px-3 md:px-4 py-2 border ${
-          error ? "border-red-500" : "border-gray-300"
-        } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500`}
+        className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
+          } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500`}
       >
         {options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -91,11 +91,13 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
   const [notes, setNotes] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({});
+  const { t } = useTranslation();
 
   const setupOptions = [
-    "Personal Information",
-    "Verification Details",
-    "Service Location",
+    t("dashboard.employee.modal.personalInformation2"),
+    t("dashboard.employee.modal.verificationDetails"),
+    t("dashboard.employee.modal.serviceLocation"),
+
   ];
 
   const handleSubmit = useCallback(() => {
@@ -129,34 +131,33 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md relative">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-xl relative">
         <button
           onClick={onClose}
           className="absolute top-2 md:top-3 lg:top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-light"
           aria-label="Close"
         >
-          ×
+          <IoClose />
         </button>
 
         <div className="px-6 py-3 md:py-4 border-b border-gray-300">
           <h2 className="text-lg md:text-xl font-semibold text-[#002244]">
-            Assist in Profile Setup
+            {t("dashboard.employee.modal.assistInProfileSetup")}
           </h2>
         </div>
 
         <div className="px-4 md:px-6 py-3 md:py-6 space-y-5">
           <div>
             <label className="block text-base font-medium text-[#002244] mb-1 md:mb-2">
-              Customer email or phone
+              {t("dashboard.employee.modal.customerEmailOrPhone")}
             </label>
             <input
               type="text"
               value={email}
               onChange={handleEmailChange}
-              placeholder="Enter customer email or phone"
-              className={`w-full text-sm px-3 py-2 border ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              } rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent`}
+              placeholder={t("dashboard.employee.modal.enterCustomerEmailOrPhone")}
+              className={`w-full text-sm px-3 py-2 border ${errors.email ? "border-red-500" : "border-gray-300"
+                } rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent`}
             />
             {errors.email && (
               <p className="text-sm text-red-500 mt-1">{errors.email}</p>
@@ -165,21 +166,20 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
 
           <div>
             <label className="block text-base font-medium text-[#002244] mb-2">
-              Setup Type
+              {t("dashboard.employee.modal.setupType")}
             </label>
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className={`w-full text-sm px-3 py-2 border ${
-                  errors.setupType ? "border-red-500" : "border-gray-300"
-                } rounded-md bg-white text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black`}
+                className={`w-full text-sm px-3 py-2 border ${errors.setupType ? "border-red-500" : "border-gray-300"
+                  } rounded-md bg-white text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black`}
                 aria-haspopup="listbox"
                 aria-expanded={dropdownOpen}
               >
                 <span
                   className={setupType ? "text-[#002244]" : "text-gray-400"}
                 >
-                  {setupType || "Personal Information"}
+                  {setupType || t("dashboard.employee.modal.personalInformation")}
                 </span>
                 <ChevronDown className="w-5 h-5 text-gray-400" />
               </button>
@@ -190,9 +190,8 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
                     <button
                       key={option}
                       onClick={() => handleSelectOption(option)}
-                      className={`w-full text-sm px-4 py-2 text-left hover:bg-green-50 ${
-                        setupType === option ? "bg-green-50" : "text-gray-700"
-                      } first:rounded-t-md last:rounded-b-md transition-colors`}
+                      className={`w-full text-sm px-4 py-2 text-left hover:bg-green-50 ${setupType === option ? "bg-green-50" : "text-gray-700"
+                        } first:rounded-t-md last:rounded-b-md transition-colors`}
                     >
                       {option}
                     </button>
@@ -207,17 +206,16 @@ export const AssistProfileSetupModal2 = memo(({ isOpen, onClose, onOpenSubModal 
 
           <div>
             <label className="block text-base font-medium text-[#002244] mb-2">
-              Notes
+              {t("dashboard.employee.modal.notes")}
             </label>
             <textarea
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="Add any notes about the setup assistance needed..."
+              placeholder={t("dashboard.employee.modal.addNotesAboutSetup")}
               rows={4}
               className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent resize-none"
             />
           </div>
-
           <button
             onClick={handleSubmit}
             className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
@@ -283,7 +281,7 @@ export const PersonalInfoModal = memo(({ isOpen, onClose, email }) => {
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl z-10"
           aria-label="Close"
         >
-          ×
+          <IoClose />
         </button>
 
         <div className="px-6 pt-4 pb-2 flex-shrink-0 border-b">
@@ -311,7 +309,7 @@ export const PersonalInfoModal = memo(({ isOpen, onClose, email }) => {
               onChange={handleChange}
               placeholder="Middle Name"
             />
-            <Input
+            <Inputx
               label="Last Name"
               name="lastName"
               value={formData.lastName}
@@ -630,19 +628,18 @@ export const ServiceLocationModal = memo(({ isOpen, onClose, email }) => {
                       {idx === 0
                         ? "st"
                         : idx === 1
-                        ? "nd"
-                        : idx === 2
-                        ? "rd"
-                        : "th"}{" "}
+                          ? "nd"
+                          : idx === 2
+                            ? "rd"
+                            : "th"}{" "}
                       Latitude/Longitude
                     </span>
                   )}
                 </label>
                 <input
                   type="text"
-                  value={`${loc.lat}${loc.lat && loc.long ? ", " : ""}${
-                    loc.long
-                  }`}
+                  value={`${loc.lat}${loc.lat && loc.long ? ", " : ""}${loc.long
+                    }`}
                   onChange={(e) => {
                     const [lat, long] = e.target.value
                       .split(",")
@@ -666,7 +663,7 @@ export const ServiceLocationModal = memo(({ isOpen, onClose, email }) => {
 
           <button
             onClick={handleSave}
-            className="w-full mt-6 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+            className="w-full mt-6 py-3 bg-[#28A844] hover:bg-green-600 text-white font-medium rounded-md transition-colors"
           >
             Confirm Registration
           </button>
@@ -675,3 +672,14 @@ export const ServiceLocationModal = memo(({ isOpen, onClose, email }) => {
     </div>
   );
 });
+
+
+
+
+
+
+
+
+
+
+

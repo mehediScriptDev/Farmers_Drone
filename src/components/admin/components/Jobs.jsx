@@ -118,7 +118,7 @@ const Jobs = () => {
         {/* Scheduled Card */}
         <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
           <div className='flex justify-between items-start mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className='text-xl font-bold text-gray-900'>
               {t('dashboard.admin.orderManagement.scheduled')}
             </h3>
             <span className='text-sm text-gray-500'>
@@ -136,7 +136,7 @@ const Jobs = () => {
         {/* In Progress Card */}
         <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
           <div className='flex justify-between items-start mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className='text-xl font-bold text-gray-900'>
               {t('dashboard.admin.orderManagement.inProgress')}
             </h3>
             <span className='text-sm text-gray-500'>
@@ -154,7 +154,7 @@ const Jobs = () => {
         {/* Complete Card */}
         <div className='bg-white rounded-lg shadow-sm p-6 border-t-4 border-gray-300'>
           <div className='flex justify-between items-start mb-4'>
-            <h3 className='text-lg font-semibold text-gray-900'>
+            <h3 className='text-xl font-bold text-gray-900'>
               {t('dashboard.admin.orderManagement.complete')}
             </h3>
             <span className='text-sm text-gray-500'>
@@ -176,21 +176,21 @@ const Jobs = () => {
           <table className='w-full'>
             <thead className='bg-gray-50 border-b border-gray-200'>
               <tr>
-                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                <th className='px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'>
                   {t(
                     'dashboard.admin.orderManagement.tableHeaders.droneOperator'
                   )}
                 </th>
-                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                <th className='px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'>
                   {t('dashboard.admin.orderManagement.tableHeaders.status')}
                 </th>
-                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                <th className='px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'>
                   {t('dashboard.admin.orderManagement.tableHeaders.job')}
                 </th>
-                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                <th className='px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'>
                   {t('dashboard.admin.orderManagement.tableHeaders.progress')}
                 </th>
-                <th className='px-6 py-4 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider'>
+                <th className='px-6 py-4 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'>
                   {t('dashboard.admin.orderManagement.tableHeaders.actions')}
                 </th>
               </tr>
