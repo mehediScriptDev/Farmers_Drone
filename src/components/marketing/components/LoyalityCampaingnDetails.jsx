@@ -211,7 +211,6 @@ const LoyalityCampaingnDetails = () => {
                 onClick={() => navigate(-1)}
               >
                 <FiArrowLeft className="w-5 h-5 mr-2" />
-                <span>{t("dashboard.marketing.CampaignDetails.Back")}</span>
               </button>
               <div className="flex gap-3">
                 <button className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 transition cursor-pointer">
