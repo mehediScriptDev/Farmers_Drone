@@ -66,8 +66,8 @@ export default function Industry() {
   ];
 
   return (
-    <div className="xl:min-h-screen bg-[#E6EBF1] py-4 lg:py-16 xl:py-[83px] px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="xl:min-h-screen bg-[#E6EBF1] section-padding">
+      <div className="section-container">
         <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-gray-900 mb-4 lg:mb-16">
           Our Services
         </h1>

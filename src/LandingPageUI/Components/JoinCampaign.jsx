@@ -14,20 +14,20 @@ const JoinCampaign = () => {
       });
   }, []);
   return (
-    <div className="bg-[#E6EBF1]  py-6 sm:py-10 xl:pt-20 px-4 sm:px-6 md:px-8 lg:px-10">
-      <div className="max-w-7xl mx-auto lg:mb-10 mb-6">
+    <div className="bg-[#E6EBF1] section-padding">
+      <div className="section-container">
         <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-black mb-4 lg:mb-10">
           Join Our Campaign
         </h1>
         <div>
-          <div className="max-w-7xl lg:max-w-6xl mx-auto">
+          <div className=" mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-6 lg:gap-5 gap-2.5">
               {campaigns.slice(0, 3).map((campaign) => (
                 <div
                   key={campaign.id}
                   className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 p-4"
                 >
-                  <div className="h-48 lg:h-44 mb-2 w-full overflow-hidden ">
+                  <div className="h-52  mb-2 w-full overflow-hidden ">
                     <img
                       src={campaign.image}
                       alt={campaign.title}

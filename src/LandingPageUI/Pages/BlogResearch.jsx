@@ -26,8 +26,8 @@ const BlogResearch = () => {
   ];
 
   return (
-    <div className="py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10 bg-white">
-      <div className="lg:w-10/12 xl:max-w-7xl mx-auto">
+    <div className="section-padding bg-white">
+      <div className="section-container">
         {/* Header */}
         <div className="text-center mb-6 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">

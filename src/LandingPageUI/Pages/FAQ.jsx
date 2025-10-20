@@ -21,8 +21,8 @@ const FAQ = () => {
   };
 
   return (
-    <div className="py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10 bg-gray-50 mb-0">
-      <div className="lg:w-10/12 mx-auto max-w-7xl">
+    <div className="section-padding bg-gray-50 mb-0">
+      <div className="section-container">
         {/* Header */}
         <div className="text-center max-w-xl mx-auto mb-6 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
