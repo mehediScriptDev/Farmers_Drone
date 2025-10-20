@@ -10,20 +10,14 @@ import { BiX } from "react-icons/bi";
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
-  // const [isLangOpen, setIsLangOpen] = useState(false);
-  const { t } = useTranslation(); // <-- added
+  const { t } = useTranslation();
   const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
+
   const logOutHandler = async () => {
     await logout();
-
     navigate("/");
   };
-
-  // const [testUser,setTestUser] = useState(false);
-  // if(user.role == 'admin' || user.role == 'employee'){
-  //   setTestUser(true)
-  // }
 
   const navLinks = [
     { name: t("nav.home"), href: "/" },
@@ -33,7 +27,7 @@ export default function Nav() {
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.contact"), href: "/contact" },
   ];
-// hello
+
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50 px-4 sm:px-6 md:px-8 lg:px-10">
       <div className="max-w-7xl mx-auto xl:h-20 flex items-center justify-center">
@@ -46,7 +40,7 @@ export default function Nav() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center xl:space-x-8 space-x-5">
+          <div className="hidden lg:flex items-center xl:space-x-8 space-x-4">
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
@@ -60,10 +54,7 @@ export default function Nav() {
 
           {/* Right Side Actions */}
           <div className="hidden lg:flex items-center space-x-4">
-            {/* Language Selector */}
             <LanguageSwitcher />
-
-            {/* Download Button */}
             <button className="!bg-green-500 cursor-pointer hover:bg-green-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200">
               {t("nav.download")}
             </button>
@@ -85,16 +76,11 @@ export default function Nav() {
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-2">
             <LanguageSwitcher />
-
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-700 hover:text-green-500 transition-colors duration-200"
             >
-              {isOpen ? (
-                <BiX className="w-6 h-6" />
-              ) : (
-                <MdMenu className="w-6 h-6" />
-              )}
+              {isOpen ? <BiX className="w-6 h-6" /> : <MdMenu className="w-6 h-6" />}
             </button>
           </div>
         </div>
@@ -102,31 +88,36 @@ export default function Nav() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden absolute z-50 w-full bg-white border-t border-gray-200">
-          <div className="px-4 w-11/12 mx-auto pt-2 pb-4 space-y-3">
+        <div className="lg:hidden fixed top-16 left-0 w-full z-50 bg-white border-t border-gray-200">
+          <div className="px-4 mx-auto w-11/12 pt-2 pb-4 space-y-3">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
+                to={link.href}
                 className="block !text-gray-700 hover:text-green-500 transition-colors duration-200 text-base font-medium py-2"
+                onClick={() => setIsOpen(false)} // closes menu on click
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
 
-            <div className="pt-4 z-50 border-t border-gray-200 space-y-3">
-              {/* Download App Button Mobile */}
-              <button className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200">
+            <div className="pt-4 border-t border-gray-200 space-y-3">
+              <button className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-sm rounded-md font-medium transition-colors duration-200">
                 {t("nav.download")}
               </button>
+
               {user ? (
                 <div className="space-y-3">
-                  <Link className="btn w-full" to={"/dashboard"}>
+                  <Link
+                    className="w-full flex items-center justify-center gap-2 bg-gray-300 text-black px-6 py-3 text-sm rounded-md font-medium transition-colors duration-200"
+                    to={"/dashboard"}
+                    onClick={() => setIsOpen(false)}
+                  >
                     <MdOutlineDashboard /> Dashboard
                   </Link>
                   <button
                     onClick={logOutHandler}
-                    className="bg-red-400 w-full btn py-1 px-3"
+                    className="bg-red-400 rounded-md font-medium flex justify-center items-center gap-2 w-full px-6 py-3 text-white"
                   >
                     <RiLogoutBoxRLine /> {t("navigation.logout")}
                   </button>
@@ -134,7 +125,8 @@ export default function Nav() {
               ) : (
                 <Link
                   to={"/login"}
-                  className="border-green-500 block text-center w-full btn border bg-transparent shadow-none hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className="border-green-500 block text-center w-full border bg-transparent shadow-none hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  onClick={() => setIsOpen(false)}
                 >
                   {t("nav.login")}
                 </Link>
