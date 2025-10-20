@@ -104,7 +104,7 @@ export default function LoyalityCampaingnOverview() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
+                  <tr className="bg-[#F5F7FA]">
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.CampaignName")}
                     </th>
@@ -117,7 +117,7 @@ export default function LoyalityCampaingnOverview() {
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.ROI")}
                     </th>
-                    <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-right whitespace-nowrap">
+                    <th className="px-6 py-3 text-sm md:text-base  font-semibold text-black text-right whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.Actions")}
                     </th>
                   </tr>
