@@ -28,7 +28,7 @@ const FilterBar = ({
     setSelectedFilterValue(item.value);
     setIsOpen(false);
   };
-
+console.log(selectedFilterValue)
   return (
     <div className="flex gap-4 mr-2">
       <div className="relative w-full md:w-1/2 lg:w-2/3">
