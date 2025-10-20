@@ -129,6 +129,13 @@ const FieldAgentDashboard = () => {
     );
 
     return sortedData.filter((row) => {
+      // If a specific filter is selected, search only in that field
+      if (selectedFilterValue && selectedFilterValue !== "customerList") {
+        const fieldValue = row[selectedFilterValue];
+        return rx.test((fieldValue ?? "").toString());
+      }
+      
+      // Otherwise search in all fields (default behavior)
       const haystacks = [
         row.customerList,
         row.role,
@@ -143,7 +150,7 @@ const FieldAgentDashboard = () => {
       ];
       return haystacks.some((h) => rx.test((h ?? "").toString()));
     });
-  }, [sortedData, searchTerm]);
+  }, [sortedData, searchTerm, selectedFilterValue]);
 
   // Pagination
   const totalUsers = filteredData.length;

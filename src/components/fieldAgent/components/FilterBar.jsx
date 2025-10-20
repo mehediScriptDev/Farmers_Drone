@@ -38,7 +38,7 @@ console.log(selectedFilterValue)
         <input
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => setSearchTerm(e.target.value.trimStart())}
           placeholder="Search"
           className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-base"
         />
