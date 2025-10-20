@@ -47,7 +47,7 @@ const FilterBar = ({
       <div ref={dropdownRef} className="relative inline-block text-left">
         <button
           onClick={toggleDropdown}
-          className="flex items-center space-x-2 px-4 py-3 border border-gray-300 rounded-full shadow-sm bg-transparent hover:bg-gray-100 transition duration-150 ease-in-out"
+          className="flex items-center space-x-2 px-4 py-3 border border-gray-300 rounded-full  bg-transparent hover:bg-gray-100 transition duration-150 ease-in-out"
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
