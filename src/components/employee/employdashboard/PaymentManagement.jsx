@@ -171,7 +171,7 @@ const handleSearch = (e) => {
               placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 sm:py-3 border-2 border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#002244] text-sm sm:text-base"
+              className="w-full pl-10 pr-4 py-2 sm:py-3 border border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#002244] text-sm sm:text-base"
             />
           </div>
         </div>

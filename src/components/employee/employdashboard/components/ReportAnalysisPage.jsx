@@ -206,7 +206,7 @@ const ReportAnalysisPage = () => {
          <button
             onClick={() => navigate(-1)}
           aria-label="Back"
-          className="mb-2 text-xl p-1 sm:p-2  cursor-pointer"
+          className="mb-2 text-xl  pt-2 cursor-pointer"
         >
           <IoArrowBack className="w-6 h-6" />
         </button>
@@ -324,7 +324,7 @@ const ReportAnalysisPage = () => {
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="w-full pl-10 pr-4 py-2 border-2 border-[#C2C2C2] rounded-xl focus:outline-none focus:ring-2 focus:ring-black/30 text-sm"
+              className="w-full pl-10 pr-4 py-2 border border-[#C2C2C2] rounded-xl focus:outline-none focus:ring-2 focus:ring-black/70 text-sm"
             />
           </div>
         </div>

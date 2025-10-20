@@ -122,15 +122,25 @@ function DashBoard() {
   };
 
   // Dropdown logic
-  const toggleDropdown = (index) => {
-    if (activeDropdown === index) {
-      setActiveDropdown(null);
+const toggleDropdown = (index) => {
+  if (activeDropdown === index) {
+    setActiveDropdown(null);
+  } else {
+    let shouldOpenUp = false;
+
+    if (paginatedActivities.length < 3) {
+      // For 1 or 2 rows
+      shouldOpenUp = index === 1; // 2nd row opens upward
     } else {
-      const shouldOpenUp = index >= paginatedActivities.length - 2; // last 2 open upward
-      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
-      setActiveDropdown(index);
+      // Normal logic for 3+ rows
+      shouldOpenUp = index >= paginatedActivities.length - 2;
     }
-  };
+
+    setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+    setActiveDropdown(index);
+  }
+};
+
 
   const handleProgressChange = (actualIndex, status) => {
     setActivities((prev) => {
