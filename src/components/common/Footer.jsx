@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo from "../../../public/assets/images/logo1.png";
+// import logo from "/assets/images/logo1.png";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
@@ -33,7 +33,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div>
               <div className="flex items-center mb-4">
-                <img src={logo} alt="Logo" />
+                <img src={"/assets/images/logo1.png"} alt="Logo" />
                 <span className="font-bold text-lg">
                   {t("footer.brand.name")}
                 </span>

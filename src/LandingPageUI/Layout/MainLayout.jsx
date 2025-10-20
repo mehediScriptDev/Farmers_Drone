@@ -6,6 +6,7 @@ import Industry from './../Pages/Industry';
 import Gallery from './../Pages/Gallery';
 import BlogResearch from './../Pages/BlogResearch';
 import FAQ from './../Pages/FAQ';
+import TrainingNCertification from '../Components/TrainingNCertification';
 
 const MainLayout = () => {
     return (
@@ -14,6 +15,7 @@ const MainLayout = () => {
             <Hero/>
             <Statistics/>
             <Industry/>
+            <TrainingNCertification/>
             <Gallery/>
             <BlogResearch/>
             <FAQ/>

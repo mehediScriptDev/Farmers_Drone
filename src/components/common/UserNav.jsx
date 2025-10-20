@@ -1,4 +1,4 @@
-import logo from "../../../public/assets/images/logo.png";
+// import logo from "/assets/images/logo.png";
 import { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function Nav() {
           {/* Logo */}
           <Link to={"/"} className="flex items-center">
             <div className="flex items-center justify-items-start">
-              <img src={logo} alt="navlogo" />
+              <img src={"/assets/images/logo.png"} alt="navlogo" />
             </div>
           </Link>
 

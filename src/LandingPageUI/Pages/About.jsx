@@ -1,7 +1,7 @@
 import React from "react";
 import CompleteSections from "../Components/CompleteSections";
 import MissionNumbersSection from "../Components/MissionNumbersSection";
-import banner from "../../../public/assets/images/aboutBanner.jpg";
+// import banner from "/assets/images/aboutBanner.jpg";
 import { useTranslation } from "react-i18next";
 
 const About = () => {
@@ -11,7 +11,7 @@ const About = () => {
     <div>
       {/* Banner Section */}
       <div
-        style={{ backgroundImage: `url(${banner})` }}
+        style={{ backgroundImage: `url(${"/assets/images/aboutBanner.jpg"})` }}
         className="relative h-[450px] bg-cover bg-center flex items-center justify-center"
       >
         <div className="absolute bg-gradient-to-r from-[#06422c]/70 via-[#013522cd]/60 to-[#035a3ab8]/35 inset-0"></div>

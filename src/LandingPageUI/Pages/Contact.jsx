@@ -1,5 +1,5 @@
 import CForm from "../Components/Form/CForm";
-import banner from "../../../public/assets/images/aboutBanner.jpg";
+// import banner from "/assets/images/aboutBanner.jpg";
 import { useTranslation } from "react-i18next";
 
 const Contact = () => {
@@ -9,7 +9,7 @@ const Contact = () => {
     <div>
       {/* Banner */}
       <div
-        style={{ backgroundImage: `url(${banner})` }}
+        style={{ backgroundImage: `url(${"/assets/images/aboutBanner.jpg"})` }}
         className="relative h-[270px] bg-cover bg-center flex items-center justify-center"
       >
         <div className='absolute bg-gradient-to-l from-[#00C805] to-[#006202] inset-0'></div>

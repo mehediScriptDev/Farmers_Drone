@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { HiGlobeAlt } from 'react-icons/hi';
+import ReactCountryFlag from "react-country-flag";
 import { ChevronDown } from 'lucide-react';
 
 const LanguageSwitcher = () => {
@@ -8,8 +8,8 @@ const LanguageSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const languages = [
-    { code: 'en', name: 'EN', flag: 'en', fullName: t('languages.english') },
-    { code: 'hi', name: 'IN', flag: '🇮🇳', fullName: t('languages.hindi') },
+    { code: 'en', name: 'EN', flagCode: 'US', fullName: t('languages.english') },
+    { code: 'hi', name: 'IN', flagCode: 'IN', fullName: t('languages.hindi') },
   ];
 
   const handleLanguageChange = (languageCode) => {
@@ -52,7 +52,15 @@ const LanguageSwitcher = () => {
                       : 'text-gray-700'
                   }`}
                 >
-                  <span className='text-lg'>{language.flag}</span>
+                  <ReactCountryFlag 
+                    countryCode={language.flagCode}
+                    svg
+                    style={{
+                      width: '1.5em',
+                      height: '1.5em',
+                    }}
+                  />
+
                   <div className='flex flex-col'>
                     <span className='font-medium'>{language.fullName}</span>
                     <span className='text-xs text-gray-500'>{language.name}</span>

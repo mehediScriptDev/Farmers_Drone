@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import card from "../../../public/assets/images/card1.png";
-import card1 from "../../../public/assets/images/card2.jpg";
+// import card from "/assets/images/card1.png"
+// import card1 from "/assets/images/card2.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 
@@ -10,14 +10,14 @@ const BlogResearch = () => {
 
   const blogs = [
     {
-      image: card,
+      image: "/assets/images/card1.png",
       categoryKey: "blogs.agriculture.category",
       titleKey: "blogs.agriculture.title",
       descriptionKey: "blogs.agriculture.description",
       date: "March 15, 2025",
     },
     {
-      image: card1,
+      image: "/assets/images/card2.jpg",
       categoryKey: "blogs.construction.category",
       titleKey: "blogs.construction.title",
       descriptionKey: "blogs.construction.description",

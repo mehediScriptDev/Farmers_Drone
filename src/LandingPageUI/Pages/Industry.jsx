@@ -1,14 +1,14 @@
-import industry1 from "/assets/images/industry1.png";
-import industry2 from "/assets/images/industry2.png";
-import industry3 from "/assets/images/industry3.png";
-import industry4 from "/assets/images/industry4.png";
-import industry5 from "/assets/images/industry5.png";
-import industry6 from "/assets/images/industry6.png";
+// import industry1 from "/assets/images/industry1.png";
+// import industry2 from "/assets/images/industry2.png";
+// import industry3 from "/assets/images/industry3.png";
+// import industry4 from "/assets/images/industry4.png";
+// import industry5 from "/assets/images/industry5.png";
+// import industry6 from "/assets/images/industry6.png";
 export default function Industry() {
   const services = [
     {
       id: "01",
-      icon: industry1,
+      icon: "/assets/images/industry1.png",
       title: "Aerial Media Services",
       description:
         "Capture stunning aerial footage and photography to elevate your media projects.",
@@ -17,7 +17,7 @@ export default function Industry() {
     },
     {
       id: "02",
-      icon: industry2,
+      icon: "/assets/images/industry2.png",
       title: "Real Estate & Marketing",
       description:
         "Showcase properties from the sky for effective real estate promotion and marketing.",
@@ -26,7 +26,7 @@ export default function Industry() {
     },
     {
       id: "03",
-      icon: industry3,
+      icon: "/assets/images/industry3.png",
       title: "Mapping & Surveying",
       description:
         "Accurate aerial mapping and surveying solutions for precise planning and analysis.",
@@ -35,7 +35,7 @@ export default function Industry() {
     },
     {
       id: "04",
-      icon: industry4,
+      icon: "/assets/images/industry4.png",
       title: "Agriculture",
       description:
         "Monitor crops and optimize farm management with advanced drone technology.",
@@ -44,7 +44,7 @@ export default function Industry() {
     },
     {
       id: "05",
-      icon: industry5,
+      icon: "/assets/images/industry5.png",
       title: "Inspection & Infrastructure",
       description:
         "Conduct safe and efficient inspections of bridges, towers, and other infrastructure.",
@@ -53,7 +53,7 @@ export default function Industry() {
     },
     {
       id: "06",
-      icon: industry6,
+      icon: "/assets/images/industry6.png",
       title: "Specialized Operations",
       description:
         "Handle custom drone operations with specialized equipment for unique tasks.",

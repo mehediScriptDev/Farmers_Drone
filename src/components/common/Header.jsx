@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LanguageSwitcher from './LanguageSwitcher';
 import { HiFire } from 'react-icons/hi';
 import { APP_NAME, ROUTES } from '../../constants/app';
-import logo from '../../../public/assets/images/logo.png';
+// import logo from '/assets/images/logo.png';
 import { FiBell } from 'react-icons/fi';
 import { FiSettings } from 'react-icons/fi';
 import { useAuth } from '../../hooks/useAuth';
@@ -27,7 +27,7 @@ export const Header = () => {
               user?.role === 'field_agent' ? '' : 'ml-16 sm:ml-14 lg:ml-0'
             }  w-28 sm:w-30 lg:w-32 font-bold text-gray-800`}
           >
-            <img src={logo} alt='logo' />
+            <img src={'/assets/images/logo.png'} alt='logo' />
           </span>
         </Link>
         <div className='flex items-center space-x-2 sm:space-x-5'>

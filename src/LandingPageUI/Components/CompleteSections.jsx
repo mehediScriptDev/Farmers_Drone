@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import cardimage from "../../../public/assets/images/aboutcard.png"
-import cardimage1 from "../../../public/assets/images/aboutcard1.png"
-import cardimage2 from "../../../public/assets/images/aboutcard2.jpg"
-import cardimage3 from "../../../public/assets/images/aboutcard3.jpg"
+// import cardimage from "./assets/images/aboutcard.png"
+// import cardimage1 from "./assets/images/aboutcard1.png"
+// import cardimage2 from "./assets/images/aboutcard2.jpg"
+// import cardimage3 from "/assets/images/aboutcard3.jpg"
 
 export default function CompleteSections() {
   const { t } = useTranslation();
@@ -13,25 +13,25 @@ export default function CompleteSections() {
       nameKey: 'team.arun.name',
       roleKey: 'team.arun.role',
       descriptionKey: 'team.arun.description',
-      image: cardimage3
+      image: "/assets/images/aboutcard3.jpg"
     },
     {
       nameKey: 'team.priya.name',
       roleKey: 'team.priya.role',
       descriptionKey: 'team.priya.description',
-      image: cardimage1
+      image: "./assets/images/aboutcard1.png"
     },
     {
       nameKey: 'team.meena.name',
       roleKey: 'team.meena.role',
       descriptionKey: 'team.meena.description',
-      image: cardimage2
+      image: "./assets/images/aboutcard2.jpg"
     },
     {
       nameKey: 'team.rajeev.name',
       roleKey: 'team.rajeev.role',
       descriptionKey: 'team.rajeev.description',
-      image: cardimage
+      image: "./assets/images/aboutcard.png"
     }
   ];
 
