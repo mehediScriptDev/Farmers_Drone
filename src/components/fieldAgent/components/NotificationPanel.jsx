@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const NotificationPanel = () => {
+    const { t } = useTranslation();
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -82,12 +84,12 @@ const NotificationPanel = () => {
       <div className="max-w-8xl mx-auto bg-white rounded-lg shadow-sm">
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
-          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">Notifications</h1>
+          <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-900">{t("dashboard.marketing.Notifications")}</h1>
           <button
             onClick={markAllAsRead}
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
-            <span className="hidden sm:inline">Mark All Read</span>
+            <span className="hidden sm:inline">{t("dashboard.marketing.MarkAllRead")}</span>
             <Check className="w-4 h-4" />
           </button>
         </div>
@@ -133,7 +135,7 @@ const NotificationPanel = () => {
         {/* Empty state or unread count */}
         {unreadCount === 0 && (
           <div className="p-6 text-center text-gray-500 text-sm">
-            All caught up! No unread notifications.
+            {t("dashboard.marketing.NoUnreadNotifications")}
           </div>
         )}
       </div>
