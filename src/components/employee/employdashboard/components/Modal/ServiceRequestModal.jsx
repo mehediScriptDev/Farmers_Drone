@@ -122,7 +122,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     >
       <div
         ref={modalRef}
-        className="bg-white rounded-lg shadow-2xl w-full max-w-md md:max-w-lg lg:max-w-xl relative"
+        className="bg-white rounded-lg shadow-2xl w-full max-w-md md:max-w-xl lg:max-w-xl relative"
         onClick={(e) => e.stopPropagation()} 
       >
         {/* Header */}
@@ -150,7 +150,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
               placeholder={t('dashboard.employee.pages.order.modal.enterCustomerNameOrPhone')}
               value={formData.customer}
               onChange={(e) => setFormData({ ...formData, customer: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm ${
                 errors.customer ? 'border-red-500' : 'border-gray-300'
               }`}
             />
@@ -167,7 +167,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
             <button
               type="button"
               onClick={() => setServiceTypeOpen(!serviceTypeOpen)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-green-500 text-base bg-white"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white"
             >
               <span>{formData.serviceType}</span>
               <IoChevronDown
@@ -203,7 +203,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
             <button
               type="button"
               onClick={() => setPriorityOpen(!priorityOpen)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-green-500 text-base bg-white"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white"
             >
               <span>{formData.priority}</span>
               <IoChevronDown
@@ -246,7 +246,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, preferredDate: e.target.value })
                   }
-                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm appearance-none ${
+                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${
                     errors.preferredDate ? 'border-red-500' : 'border-gray-300'
                   } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
@@ -273,7 +273,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, preferredTime: e.target.value })
                   }
-                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm appearance-none ${
+                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${
                     errors.preferredTime ? 'border-red-500' : 'border-gray-300'
                   } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
@@ -307,7 +307,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
+            className="w-full bg-[#28A844] hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
           >
             {t('dashboard.employee.pages.order.modal.createRequest') || 'Create Request'}
           </button>

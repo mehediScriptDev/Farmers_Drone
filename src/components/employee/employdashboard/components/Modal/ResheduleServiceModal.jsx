@@ -13,14 +13,15 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
   const modalRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     customer: '',
     serviceType: 'Mapping & Surveying',
     preferredDate: '',
     preferredTime: '',
     specialInstruction: ''
-  });
+  };
 
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -31,6 +32,14 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
     'Topographic Survey',
   ];
 
+  // Modal close হলে ফর্ম reset
+  const handleClose = () => {
+    setFormData(initialFormData);
+    setErrors({});
+    setDropdownOpen(false);
+    onClose();
+  };
+
   // Outside click handler
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -38,13 +47,13 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
         setDropdownOpen(false);
       }
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        onClose();
+        handleClose();
       }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [onClose]);
+  }, []);
 
   const handleSubmit = () => {
     const newErrors = {};
@@ -53,20 +62,12 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
     if (!formData.preferredTime) newErrors.preferredTime = 'This field is required';
 
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) return;
 
     if (onSubmit) onSubmit(formData);
-
     toast.success('Service request rescheduled successfully!');
 
-    setFormData({
-      customer: '',
-      serviceType: 'Mapping & Surveying',
-      preferredDate: '',
-      preferredTime: '',
-      specialInstruction: ''
-    });
+    setFormData(initialFormData);
     setErrors({});
     setDropdownOpen(false);
     onClose();
@@ -86,7 +87,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
             {t('dashboard.employee.pages.order.rescheduleServiceOrder.title')}
           </h2>
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="text-gray-500 hover:text-gray-700 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -97,7 +98,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="px-6 py-5">
           {/* Customer Field */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-base font-medium text-gray-800 mb-2">
               {t('dashboard.employee.pages.order.rescheduleServiceOrder.orderId')}
             </label>
             <input
@@ -108,23 +109,23 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
               className={`w-full px-3 py-2 border ${
                 errors.customer ? 'border-red-500' : 'border-gray-300'
               } rounded-md focus:outline-none focus:ring-2 ${
-                errors.customer ? 'focus:ring-red-500' : 'focus:ring-green-500'
-              } text-sm`}
+                errors.customer ? 'focus:ring-red-500' : 'focus:ring-black/70'
+              } text-base`}
             />
             {errors.customer && (
-              <p className="text-red-500 text-xs mt-1">{errors.customer}</p>
+              <p className="text-red-500 text-base mt-1">{errors.customer}</p>
             )}
           </div>
 
           {/* Service Type Dropdown */}
           <div className="mb-4 relative" ref={dropdownRef}>
-            <label className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-base font-medium text-gray-800 mb-2">
               {t('dashboard.employee.pages.order.rescheduleServiceOrder.serviceType')}
             </label>
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-green-500 text-base bg-white"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white"
             >
               <span>{formData.serviceType}</span>
               <IoChevronDown
@@ -168,7 +169,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
                   className={`w-full px-3 py-2 pr-10 border ${
                     errors.preferredDate ? 'border-red-500' : 'border-gray-300'
                   } rounded-md focus:outline-none focus:ring-2 ${
-                    errors.preferredDate ? 'focus:ring-red-500' : 'focus:ring-green-500'
+                    errors.preferredDate ? 'focus:ring-red-500' : 'focus:ring-black/70'
                   } text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaCalendarAlt
@@ -195,7 +196,7 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
                   className={`w-full px-3 py-2 pr-10 border ${
                     errors.preferredTime ? 'border-red-500' : 'border-gray-300'
                   } rounded-md focus:outline-none focus:ring-2 ${
-                    errors.preferredTime ? 'focus:ring-red-500' : 'focus:ring-green-500'
+                    errors.preferredTime ? 'focus:ring-red-500' : 'focus:ring-black/70'
                   } text-sm appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaClock
@@ -211,21 +212,21 @@ const ResheduleServiceModal = ({ isOpen, onClose, onSubmit }) => {
 
           {/* Special Instruction Field */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-base font-medium text-gray-800 mb-2">
               {t('dashboard.employee.pages.order.rescheduleServiceOrder.specialInstruction')}
             </label>
             <textarea
               value={formData.specialInstruction}
               onChange={(e) => setFormData({ ...formData, specialInstruction: e.target.value })}
               rows="4"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm resize-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm resize-none"
             />
           </div>
 
           {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
+            className="w-full bg-[#28A844] hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
           >
             {t('dashboard.employee.pages.order.rescheduleServiceOrder.createRequest')}
           </button>

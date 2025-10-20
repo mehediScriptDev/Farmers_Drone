@@ -1,6 +1,3 @@
-
-
-
 import React, { useState, useRef, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { IoChevronDown } from 'react-icons/io5';
@@ -107,7 +104,7 @@ const CancleModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="px-6 py-5">
           {/* Customer */}
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-800 mb-2">
+            <label className="block text-base font-medium text-gray-800 mb-2">
               {t('dashboard.employee.pages.order.cancelServiceOrder.orderId')}
             </label>
             <input
@@ -115,7 +112,7 @@ const CancleModal = ({ isOpen, onClose, onSubmit }) => {
               placeholder={t('dashboard.employee.pages.order.cancelServiceOrder.customerName')}
               value={formData.customer}
               onChange={(e) => setFormData({ ...formData, customer: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm ${
                 errors.customer ? 'border-red-500' : 'border-gray-300'
               }`}
             />
@@ -124,13 +121,13 @@ const CancleModal = ({ isOpen, onClose, onSubmit }) => {
 
           {/* Action Dropdown */}
           <div className="mb-4 relative" ref={dropdownRef}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-base font-medium text-gray-700 mb-2">
               {t('dashboard.employee.pages.order.cancelServiceOrder.action')}
             </label>
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className={`w-full px-3 py-2 border rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-green-500 text-base bg-white ${
+              className={`w-full px-3 py-2 border rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white ${
                 errors.serviceType ? 'border-red-500' : 'border-gray-300'
               }`}
             >
@@ -163,14 +160,14 @@ const CancleModal = ({ isOpen, onClose, onSubmit }) => {
 
           {/* Reason */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-base font-medium text-gray-700 mb-2">
               {t('dashboard.employee.pages.order.cancelServiceOrder.reason')}
             </label>
             <textarea
               value={formData.specialInstruction}
               onChange={(e) => setFormData({ ...formData, specialInstruction: e.target.value })}
               rows="4"
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-sm resize-none ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm resize-none ${
                 errors.specialInstruction ? 'border-red-500' : 'border-gray-300'
               }`}
             />

@@ -557,7 +557,7 @@
             "preferredTime": "पसंदीदा समय",
             "timeFormat": "घंटा:मिनट पूर्वाह्न - अपराह्न",
             "specialInstruction": "कोई विशेष निर्देश या आवश्यकताएँ...",
-            "createRequest": "अनुरोध बनाएं"
+            "createRequest": "ऑर्डर पुनर्निर्धारित करें"
           },
           "cancelServiceOrder": {
             "title": "सेवा आदेश रद्द करें",

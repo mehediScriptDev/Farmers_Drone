@@ -546,7 +546,7 @@
             "preferredTime": "Preferred Time",
             "timeFormat": "HH:MM AM - 12:00 PM",
             "specialInstruction": "Any special instructions or requirements...",
-            "createRequest": "Create Request"
+            "createRequest": "Reshedule Order"
           },
 
           "cancelServiceOrder": {
