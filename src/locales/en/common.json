@@ -577,7 +577,7 @@
         "totalPayments": "Ourstanding payments"
       },
       "userAdd": {
-        "AddedByYou": "Added by you",
+        "CustomerOnboard": "Customer Onboard",
         "AddCustomer": "Add Customer"
       },
       "tableHeader": {
