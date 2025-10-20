@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { Star } from "lucide-react";
 import { FaArrowLeft, FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 // ---------------- VideoCard Component ----------------
 function VideoCard({ src }) {
@@ -98,22 +99,24 @@ export default function OrderDetailsPage() {
   const [hover, setHover] = useState(0);
   const [tip, setTip] = useState("$30");
   const [review, setReview] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   return (
 
 
     <main className="p-4 md:px-12 ">
       <div className="max-w-8xl mx-auto rounded ">
-           {/* ✅ Back Button */}
-          <button
-            onClick={() => navigate(-1)}
-            className="flex items-center border-2 border-[#666666] p-2 rounded-full gap-2 mb-2 text-gray-700 hover:text-gray-900 font-medium cursor-pointer hover:bg-white"
-          >
-            <FaArrowLeft className="w-5 h-5" />
-          </button>
+        {/* ✅ Back Button */}
+        <button
+          onClick={() => navigate(-1)}
+          aria-label="Back"
+          className="mb-2 text-xl p-1 sm:p-2  cursor-pointer"
+        >
+          <IoArrowBack className="w-6 h-6" />
+        </button>
+
         <div className="p-2 md:p-5 ">
-       
+
           {/* Order IDs */}
           <div className="mb-6 space-y-2">
             <div className="flex justify-between items-center text-sm py-1.5">

@@ -6,6 +6,7 @@ import { HiLocationMarker } from 'react-icons/hi';
 import { FiUpload } from 'react-icons/fi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
+import { IoChevronDown } from "react-icons/io5";
 
 const INITIAL_FORM = {
   firstName: '',
@@ -142,9 +143,9 @@ export default function RegistrationModal({ isOpen, onClose }) {
           {modalStep > 1 && (
             <button
               onClick={prevStep}
-              className='bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-600 transition w-10 h-10 flex justify-center items-center'
+              className='text-2xl text-gray-600 transition w-10 h-10 flex justify-center items-center'
             >
-              <FaChevronLeft className='w-4 h-4' />
+              <FaChevronLeft className='w-6 h-5' />
             </button>
           )}
           <h2 className='text-lg md:text-2xl lg:text-3xl font-semibold  flex-1'>
@@ -249,8 +250,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     value={formData[key]}
                     onChange={handleInputChange}
                     placeholder={t(
-                      `dashboard.fieldAgent.FirstModal.enter${
-                        key.charAt(0).toUpperCase() + key.slice(1)
+                      `dashboard.fieldAgent.FirstModal.enter${key.charAt(0).toUpperCase() + key.slice(1)
                       }`
                     )}
                     className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
@@ -260,24 +260,32 @@ export default function RegistrationModal({ isOpen, onClose }) {
 
               {/* Registered By */}
               <div>
-                <label className='block text-sm font-medium mb-1'>
+                 <label className='block text-sm md:text-base pb-2 font-medium'>
                   {t('dashboard.fieldAgent.FirstModal.registeredBy')}
                   <span className='text-red-500'>*</span>
                 </label>
+                <div className="relative">
+
                 <select
                   name='registeredBy'
                   value={formData.registeredBy}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border rounded-lg focus:ring-green-500 appearance-none  text-sm"
                 >
-                  <option value=''>
+                  <option>
                     {t('dashboard.fieldAgent.FirstModal.selectAgent')}
                   </option>
-                  <option value='agent1'>
+                  <option>
                     {t('dashboard.fieldAgent.FirstModal.FieldAgent')}
                   </option>
                 </select>
+                <IoChevronDown
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+                  size={20}
+                />
               </div>
+              </div>
+
             </div>
           )}
 
@@ -370,11 +378,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   {t('dashboard.fieldAgent.SecondModal.industry')}
                   <span className='text-red-500'>*</span>
                 </label>
-                <select
+                <div className='relative'>
+                  <select
                   name='industry'
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border rounded-lg focus:ring-green-500 appearance-none  text-sm"
                 >
                   <option value=''>
                     {t('dashboard.fieldAgent.SecondModal.selectIndustry')}
@@ -386,6 +395,11 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     {t('dashboard.fieldAgent.SecondModal.surveyMapping')}
                   </option>
                 </select>
+                <IoChevronDown
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+                  size={20}
+                />
+                </div>
               </div>
             </div>
           )}
@@ -397,13 +411,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
                 <div key={key}>
                   <label className='block text-sm font-medium mb-1 flex justify-between'>
                     {t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          'firstLatLong',
-                          'secondLatLong',
-                          'thirdLatLongPlus',
-                          'numberOfAcres',
-                        ][idx]
+                      `dashboard.fieldAgent.ThirdModal.${[
+                        'firstLatLong',
+                        'secondLatLong',
+                        'thirdLatLongPlus',
+                        'numberOfAcres',
+                      ][idx]
                       }`
                     )}
                     {key === 'lat3' && (
@@ -418,13 +431,12 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     value={formData[key]}
                     onChange={handleInputChange}
                     placeholder={t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          'firstLatLongValue',
-                          'secondLatLongValue',
-                          'thirdLatLongPlusValue',
-                          'landAreaInAcres',
-                        ][idx]
+                      `dashboard.fieldAgent.ThirdModal.${[
+                        'firstLatLongValue',
+                        'secondLatLongValue',
+                        'thirdLatLongPlusValue',
+                        'landAreaInAcres',
+                      ][idx]
                       }`
                     )}
                     className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'

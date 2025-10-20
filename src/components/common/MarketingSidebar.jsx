@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {  useLocation, NavLink } from "react-router-dom";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
+import { useLocation, NavLink } from "react-router-dom";
+import { HiMenuAlt2, HiX } from "react-icons/hi";
 import { FiTarget } from "react-icons/fi";
 
 import { FiUsers } from "react-icons/fi";
@@ -43,21 +43,20 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <>
       {/* Mobile Menu Button */}
       {!sidebarOpen && (
-        <div className="lg:hidden fixed top-4 left-4 z-50">
+        <div className='lg:hidden fixed top-4 left-4 z-50'>
           <button
             onClick={() => setSidebarOpen(true)}
-            className="bg-white p-3 rounded-lg shadow-lg hover:bg-gray-50 transition-all duration-200 border border-gray-200"
+            className=' p-3  hover:bg-gray-50 transition-all duration-200 '
           >
-            <HiMenuAlt3 className="w-5 h-5 text-gray-700" />
+            <HiMenuAlt2 className='w-8 h-7 text-gray-700' />
           </button>
         </div>
       )}
 
       {/* Sidebar */}
       <div
-        className={`bg-[#EAEDF4] shadow-lg transform ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 xl:pt-3 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
+        className={`bg-[#EAEDF4] shadow-lg transform ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 left-0 z-50 xl:pt-3 pt-10 lg:pt-0 w-[304px] xl:pl-9 overflow-y-auto`}
       >
         <div className="flex flex-col h-full">
           {/* manual close btn */}
@@ -77,10 +76,9 @@ const MarketingSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   to={item.path} // "" | "campaigns" | "LeadManagment" | "analytics"
                   end={item.path === ""} // শুধু index route-এ exact match
                   className={({ isActive }) =>
-                    `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
-                      isActive
-                        ? "bg-white border-green-600 font-semibold shadow-sm"
-                        : "border-transparent text-black hover:bg-gray-50"
+                    `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${isActive
+                      ? "bg-white border-green-600 font-semibold shadow-sm"
+                      : "border-transparent text-black hover:bg-gray-50"
                     }`
                   }
                   onClick={() => setSidebarOpen(false)}

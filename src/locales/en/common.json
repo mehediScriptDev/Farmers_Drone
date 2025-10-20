@@ -408,7 +408,10 @@
         "recentCustomer": "Recent Customer",
         "recentTransaction": " Recent Transaction",
         "tableIssues": "Issues",
-        "tableDate": "Date"
+        "tableDate": "Date",
+        "customerDetails": "Customer Details",
+        "duration": "Duration",
+        "revenue": "Revenue"
       },
       "button": {
         "registerNewCustomer": "Register New Customer",
@@ -473,7 +476,18 @@
         "ticketServiceTypeOption3": "Maintenance",
         "ticketIssueDescriptionLabel": "Issue Description *",
         "ticketIssueDescriptionPlaceholder": "Detailed description of the customer's issue...",
-        "ticketCreateButton": "Create Ticket"
+        "ticketCreateButton": "Create Ticket",
+        "assistInProfileSetup": "Assist in Profile Setup",
+        "customerEmailOrPhone": "Customer email or phone",
+        "enterCustomerEmailOrPhone": "Enter customer email or phone",
+        "setupType": "Setup Type",
+        "personalInformation": "Personal Information",
+        "notes": "Notes",
+        "addNotesAboutSetup": "Add any notes about the setup assistance needed...",
+        "startSetupAssistance": "Start Setup Assistance",
+        "personalInformation2": "Personal Information",
+        "verificationDetails": "Verification Details",
+        "serviceLocation": "Service Location"
       },
       "pages": {
         "dashboard": {
@@ -484,7 +498,15 @@
             "last90days": "Last 90 days",
             "last6months": "Last 6 months",
             "last12months": "Last 12 months",
-            "overview": "overview"
+            "overview": "overview",
+            "customerType": "Customer Type",
+            "all": "All",
+            "aerialMediaServices": "Aerial Media Services",
+            "groundMediaServices": "Ground Media Services",
+            "serviceCategory": "Service Category",
+            "allServiceCategories": "All Service Categories",
+            "aerialPhotographyVideographyMP": "Aerial Photography & Videography (MP)",
+            "eventPhotography": "Event Photography"
           },
           "card": {
             "1st": "Total Customers",
@@ -492,7 +514,11 @@
             "3rd": "Pending Payments",
             "4th": "Open Tickets",
             "5th": "Completed Orders",
-            "6th": "Canceled Orders"
+            "6th": "Canceled Orders",
+            "totalCustomers": "Total Customers",
+            "totalRevenue": "Total Revenue",
+            "avgDuration": "Avg Duration",
+            "pendingPayments": "Pending Payments"
           }
         },
         "order": {
@@ -766,7 +792,7 @@
       "dashboard": "Dashboard",
       "customer": "Customer",
       "orders": "Orders",
-      "payments": "Paypents",
+      "payments": "Payments",
       "support": "Support"
     },
     "fieldAgent": {
