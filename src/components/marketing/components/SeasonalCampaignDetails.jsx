@@ -305,7 +305,7 @@ const SeasonalCampaignDetails = () => {
                     </p>
                   </div>
                   <div className="flex items-center  justify-between flex-row">
-                    <p className="text-3xl font-bold text-[#464646]">
+                    <p className="text-2xl md:text-3xl font-bold text-[#464646]">
                       {stat.value}
                     </p>
                     <p className="bg-[#F7FFE5] p-3">
