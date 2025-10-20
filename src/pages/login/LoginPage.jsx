@@ -108,13 +108,6 @@ const LoginPage = () => {
               >
                 {loading ? t('auth.signingIn') : t('auth.signIn')}
               </button>
-              <button
-                type="button"
-                className="w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50 transition mt-2 sm:mt-0"
-                title="Fingerprint Login"
-              >
-                <Fingerprint size={20} className="text-gray-600" />
-              </button>
             </div>
           </form>
 

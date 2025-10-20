@@ -53,9 +53,7 @@ export default function SignUpFlow() {
             >
               Next
             </button>
-            <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50">
-              <FaFingerprint size={24} className="text-gray-600" />
-            </button>
+           
           </div>
 
           <SocialLogin />
@@ -95,9 +93,7 @@ export default function SignUpFlow() {
               >
                 Next
               </button>
-              <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50">
-                <FaFingerprint size={24} className="text-gray-600" />
-              </button>
+             
             </div>
 
             <SocialLogin />
