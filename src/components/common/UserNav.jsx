@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next"; 
@@ -13,6 +13,7 @@ export default function Nav() {
   const { t } = useTranslation();
   const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
+  const menuRef = useRef(null); // <-- ref for mobile menu
 
   const logOutHandler = async () => {
     await logout();
@@ -27,6 +28,23 @@ export default function Nav() {
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.contact"), href: "/contact" },
   ];
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50 px-4 sm:px-6 md:px-8 lg:px-10">
@@ -88,14 +106,17 @@ export default function Nav() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden fixed top-16 left-0 w-full z-50 bg-white border-t border-gray-200">
+        <div
+          ref={menuRef}
+          className="lg:hidden fixed top-16 left-0 w-full z-50 bg-white border-t border-gray-200"
+        >
           <div className="px-4 mx-auto w-11/12 pt-2 pb-4 space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
                 className="block !text-gray-700 hover:text-green-500 transition-colors duration-200 text-base font-medium py-2"
-                onClick={() => setIsOpen(false)} // closes menu on click
+                onClick={() => setIsOpen(false)}
               >
                 {link.name}
               </Link>

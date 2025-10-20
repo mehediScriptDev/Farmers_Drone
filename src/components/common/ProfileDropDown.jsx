@@ -13,7 +13,7 @@ export default function Nav() {
   const { t } = useTranslation(); 
   const { user, loading, logout } = useAuth();
   const navigate = useNavigate();
-  const containerRef = useRef(null); // <-- wrap button + menu
+  const containerRef = useRef(null);
 
   const logOutHandler = async () => {
     await logout();
