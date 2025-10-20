@@ -66,13 +66,13 @@ export default function Industry() {
   ];
 
   return (
-    <div className="xl:min-h-screen bg-[#E6EBF1] section-padding">
+    <div className=" bg-[#E6EBF1] section-padding">
       <div className="section-container">
         <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-gray-900 mb-4 lg:mb-16">
           Our Services
         </h1>
 
-        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-6 xl:gap-8">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-6 xl:gap-8">
           {services.map((service) => {
             return (
               <div

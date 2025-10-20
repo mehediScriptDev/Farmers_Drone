@@ -40,7 +40,7 @@ const LanguageSwitcher = () => {
           />
           
           {/* Dropdown Menu */}
-          <div className='absolute left-1/2  -translate-x-1/2 top-full mt-2 w-48 rounded-md border border-gray-300 bg-white ring-1 ring-opacity-5 z-20'>
+          <div className='absolute lg:left-1/2 -right-22 -translate-x-1/2 top-full mt-2 lg:mt-5 w-48 rounded-md border border-gray-300 bg-white transition-all duration-300 ease-out z-20'>
             <div className='py-1'>
               {languages.map((language) => (
                 <button

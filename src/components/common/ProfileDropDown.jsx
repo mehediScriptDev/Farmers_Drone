@@ -90,12 +90,16 @@ const ProfileDropDown = () => {
       </div>
 
       {/* user info */}
-      <div className="hidden lg:flex flex-col">
+      {user &&
+          ["admin", "marketing", "employee"].includes(user.role) && (
+            <div className="hidden lg:flex flex-col">
         <p className="text-black text-[10px] lg:text-[16px] font-semibold">
           {user?.role}
         </p>
         <p className="text-gray-400 lg:text-xs text-[8px] ">{user?.role}</p>
       </div>
+          )}
+      
     </div>
   );
 };

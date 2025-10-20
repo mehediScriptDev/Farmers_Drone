@@ -20,7 +20,7 @@ export default function TrainingNCertification() {
     <div className="bg-gray-50 section-padding">
       <div className="section-container">
         <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-gray-900 mb-4 lg:mb-10">Training & Certification</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-6 lg:gap-5 gap-2.5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-6 lg:gap-5 gap-2.5">
           {trainingCards.slice(0, 3).map((card) => (
             <div
               key={card.id}
@@ -57,7 +57,7 @@ export default function TrainingNCertification() {
         </div>
       </div>
 
-      <div className="flex flex-col lg:w-11/12 xl:max-w-7xl mx-auto my-5 items-center gap-4">
+      <div className="section-container mt-12">
         {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/2VLqZtded_0?si=DH643yI3bCtSzoqh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
 
         <video controls onPause={true} src="/assets/demoVideo.mp4"></video>

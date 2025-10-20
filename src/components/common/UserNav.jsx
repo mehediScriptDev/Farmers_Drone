@@ -1,14 +1,12 @@
-// import logo from "/assets/images/logo.png";
 import { useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useTranslation } from "react-i18next"; // <-- added
-import { MdOutlineDashboard } from "react-icons/md";
+import { useTranslation } from "react-i18next"; 
+import { MdMenu, MdOutlineDashboard } from "react-icons/md";
 import ProfileDropDown from "./ProfileDropDown";
-import { AuthContext } from "../../context/AuthContext";
 import { useAuth } from "../../hooks/useAuth";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { BiX } from "react-icons/bi";
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,9 +35,9 @@ export default function Nav() {
   ];
 // hello
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
-      <div className="lg:max-w-7xl mx-auto w-11/12  xl:h-20 flex items-center justify-center">
-        <div className="flex justify-between items-center  w-full h-16">
+    <nav className="bg-white shadow-sm sticky top-0 z-50 px-4 sm:px-6 md:px-8 lg:px-10">
+      <div className="max-w-7xl mx-auto xl:h-20 flex items-center justify-center">
+        <div className="flex justify-between items-center w-full h-16">
           {/* Logo */}
           <Link to={"/"} className="flex items-center">
             <div className="flex items-center justify-items-start">
@@ -53,7 +51,7 @@ export default function Nav() {
               <NavLink
                 key={link.name}
                 to={link.href}
-                className="!text-gray-700 hover:text-green-500 transition-colors duration-200 text-sm xl:text-[16px] font-medium"
+                className="!text-gray-700 hover:text-green-500 transition-colors duration-200 text-[13px] xl:text-[16px] font-medium"
               >
                 {link.name}
               </NavLink>
@@ -93,9 +91,9 @@ export default function Nav() {
               className="text-gray-700 hover:text-green-500 transition-colors duration-200"
             >
               {isOpen ? (
-                <X className="w-6 h-6" />
+                <BiX className="w-6 h-6" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <MdMenu className="w-6 h-6" />
               )}
             </button>
           </div>
@@ -117,11 +115,6 @@ export default function Nav() {
             ))}
 
             <div className="pt-4 z-50 border-t border-gray-200 space-y-3">
-              {/* Language Selector Mobile */}
-              
-
-              
-
               {/* Download App Button Mobile */}
               <button className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200">
                 {t("nav.download")}
@@ -141,7 +134,7 @@ export default function Nav() {
               ) : (
                 <Link
                   to={"/login"}
-                  className="border-green-500 w-full btn border bg-transparent shadow-none hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+                  className="border-green-500 block text-center w-full btn border bg-transparent shadow-none hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
                 >
                   {t("nav.login")}
                 </Link>

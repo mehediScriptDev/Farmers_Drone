@@ -63,6 +63,7 @@ import SignUpFlow from "../pages/signUp/SignUpFllow";
 import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
 import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 import Campaigns from "./../components/marketing/components/Campaigns";
+import TrainingNCertification from "../LandingPageUI/Components/TrainingNCertification";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -80,6 +81,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/trainings",
+        element: <TrainingNCertification/>
       },
       {
         path: "/blog",

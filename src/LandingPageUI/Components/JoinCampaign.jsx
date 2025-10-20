@@ -21,7 +21,7 @@ const JoinCampaign = () => {
         </h1>
         <div>
           <div className=" mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:gap-6 lg:gap-5 gap-2.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-6 lg:gap-5 gap-2.5">
               {campaigns.slice(0, 3).map((campaign) => (
                 <div
                   key={campaign.id}
