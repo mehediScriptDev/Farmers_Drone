@@ -17,7 +17,7 @@ const getStatusColor = (statusType) => {
 const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 5;
 
   // Use useMemo to calculate the data for the current page.
   // This avoids re-calculating on every render unless dependencies change.
@@ -51,7 +51,7 @@ const UserActivityTable = ({ data, title = 'Recent User Activity' }) => {
   ];
 
   return (
-    <div className='bg-white rounded-lg shadow-sm mb-6'>
+    <div className='bg-white rounded-xl shadow-sm'>
       <div className='p-6 border-b border-gray-200'>
         <h3 className='text-lg font-semibold text-gray-900'>{title}</h3>
       </div>

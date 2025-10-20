@@ -239,7 +239,7 @@ const PaymentsManagement = () => {
 
         {/* Customer Payments Tab Content */}
         {activeTab === 'customerPayments' && (
-          <div className='bg-white rounded-lg border border-zinc-100 mb-6'>
+          <div className='bg-white rounded-lg border border-zinc-100'>
             {customerPaymentsData.length === 0 ? (
               <div className='p-8 text-center text-gray-600'>
                 Loading customer payment data...
@@ -329,14 +329,73 @@ const PaymentsManagement = () => {
                   </table>
                 </div>
 
-                <Pagination
-                  currentPage={currentPage}
-                  totalItems={customerPaymentsData.length}
-                  itemsPerPage={itemsPerPage}
-                  onPageChange={(page) => setCurrentPage(page)}
-                  itemLabel='customer transaction'
-                  itemLabelPlural='customer transactions'
-                />
+                <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
+                  <div className='text-sm text-gray-700 font-["Lato"]'>
+                    {t(
+                      'dashboard.admin.paymentsManagement.customerPayments.showing',
+                      {
+                        count: paginatedTransactions.length,
+                        total: customerPaymentsData.length,
+                      }
+                    )}
+                  </div>
+                  <div className='flex items-center space-x-1'>
+                    <button
+                      onClick={() =>
+                        currentPage > 1 && setCurrentPage(currentPage - 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={currentPage === 1}
+                    >
+                      Previous
+                    </button>
+
+                    {Array.from(
+                      {
+                        length: Math.ceil(
+                          customerPaymentsData.length / itemsPerPage
+                        ),
+                      },
+                      (_, i) => i + 1
+                    )
+                      .slice(
+                        Math.max(0, currentPage - 1),
+                        Math.min(
+                          currentPage + 1,
+                          Math.ceil(customerPaymentsData.length / itemsPerPage)
+                        )
+                      )
+                      .map((page) => (
+                        <button
+                          key={page}
+                          className={`px-3 py-2 text-sm font-medium rounded ${
+                            currentPage === page
+                              ? 'bg-green-500 text-white'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                          onClick={() => setCurrentPage(page)}
+                        >
+                          {page}
+                        </button>
+                      ))}
+
+                    <button
+                      onClick={() =>
+                        currentPage <
+                          Math.ceil(
+                            customerPaymentsData.length / itemsPerPage
+                          ) && setCurrentPage(currentPage + 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={
+                        currentPage ===
+                        Math.ceil(customerPaymentsData.length / itemsPerPage)
+                      }
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
               </>
             )}
           </div>
@@ -344,7 +403,7 @@ const PaymentsManagement = () => {
 
         {/* Operator Payments Tab Content */}
         {activeTab === 'operatorPayments' && (
-          <div className='bg-white rounded-lg border border-zinc-100 mb-6'>
+          <div className='bg-white rounded-lg border border-zinc-100'>
             {operatorPaymentsData.length === 0 ? (
               <div className='p-8 text-center text-gray-600'>
                 Loading operator payment data...
@@ -434,14 +493,74 @@ const PaymentsManagement = () => {
                   </table>
                 </div>
 
-                <Pagination
-                  currentPage={operatorCurrentPage}
-                  totalItems={operatorPaymentsData.length}
-                  itemsPerPage={itemsPerPage}
-                  onPageChange={(page) => setOperatorCurrentPage(page)}
-                  itemLabel='operator transaction'
-                  itemLabelPlural='operator transactions'
-                />
+                <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
+                  <div className='text-sm text-gray-700 font-["Lato"]'>
+                    {t(
+                      'dashboard.admin.paymentsManagement.operatorPayments.showing',
+                      {
+                        count: paginatedOperatorTransactions.length,
+                        total: operatorPaymentsData.length,
+                      }
+                    )}
+                  </div>
+                  <div className='flex items-center space-x-1'>
+                    <button
+                      onClick={() =>
+                        operatorCurrentPage > 1 &&
+                        setOperatorCurrentPage(operatorCurrentPage - 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={operatorCurrentPage === 1}
+                    >
+                      Previous
+                    </button>
+
+                    {Array.from(
+                      {
+                        length: Math.ceil(
+                          operatorPaymentsData.length / itemsPerPage
+                        ),
+                      },
+                      (_, i) => i + 1
+                    )
+                      .slice(
+                        Math.max(0, operatorCurrentPage - 1),
+                        Math.min(
+                          operatorCurrentPage + 1,
+                          Math.ceil(operatorPaymentsData.length / itemsPerPage)
+                        )
+                      )
+                      .map((page) => (
+                        <button
+                          key={page}
+                          className={`px-3 py-2 text-sm font-medium rounded ${
+                            operatorCurrentPage === page
+                              ? 'bg-green-500 text-white'
+                              : 'text-gray-700 hover:bg-gray-100'
+                          }`}
+                          onClick={() => setOperatorCurrentPage(page)}
+                        >
+                          {page}
+                        </button>
+                      ))}
+
+                    <button
+                      onClick={() =>
+                        operatorCurrentPage <
+                          Math.ceil(
+                            operatorPaymentsData.length / itemsPerPage
+                          ) && setOperatorCurrentPage(operatorCurrentPage + 1)
+                      }
+                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      disabled={
+                        operatorCurrentPage ===
+                        Math.ceil(operatorPaymentsData.length / itemsPerPage)
+                      }
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
               </>
             )}
           </div>

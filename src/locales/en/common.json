@@ -596,7 +596,8 @@
         "showing": "Showing",
         "users": "Users",
         "previous": "Previous",
-        "next": "Next"
+        "next": "Next",
+        "of": "of"
       },
       "createServiceModal": {
         "CreateService": "Create Service",
@@ -704,6 +705,15 @@
       "Loyaltyprograms": "Loyalty programs",
       "Confirm": "Confirm",
       "LaunchCampaign": "Launch Campaign",
+      "CampaignOverview": {
+        "SeasonalCampaignOverview": "Seasonal Campaign Overview",
+        "LoyaltyCampaignOverview": "Loyalty Campaign Overview",
+        "CampaignName": "Campaign Name",
+        "CampaignTypes": "Campaign Types",
+        "LeadsGenerated": "Leads Generated",
+        "ROI": "ROI",
+        "Actions": "ACTIONS"
+      },
       "CampaignDetails": {
         "CampaignOverview": "Campaign Overview",
         "Back": "Back",

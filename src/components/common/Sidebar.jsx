@@ -82,47 +82,49 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       <div
         className={`bg-[#F5F7FA] shadow-lg transform ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-3 left-0 z-50 w-[304px] pt-10 lg:pt-0 xl:pl-9 flex flex-col`}
+        } lg:translate-x-0 transition-transform duration-300 ease-in-out fixed lg:static inset-y-0 xl:pt-3 left-0 z-50 w-[304px] pt-10 lg:pt-0 xl:pl-9 overflow-y-auto`}
       >
-        {/* manual close btn */}
-        <button
-          onClick={() => setSidebarOpen(false)}
-          className='absolute top-4 right-3 rounded-full lg:hidden'
-        >
-          <HiX className='w-7 h-7 text-gray-700' />
-        </button>
-        {/* Menu Items */}
-        <nav className='flex-1 px-3 py-4 overflow-y-auto'>
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            // Check if current path matches this menu item or its sub-routes
-            const isActiveRoute =
-              (item.path === '' && location.pathname === '/admin') ||
-              (item.path !== '' &&
-                location.pathname.includes(`/admin/${item.path}`));
+        <div className='flex flex-col h-full'>
+          {/* manual close btn */}
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className='absolute top-4 right-3 rounded-full lg:hidden'
+          >
+            <HiX className='w-7 h-7 text-gray-700' />
+          </button>
+          {/* Menu Items */}
+          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              // Check if current path matches this menu item or its sub-routes
+              const isActiveRoute =
+                (item.path === '' && location.pathname === '/admin') ||
+                (item.path !== '' &&
+                  location.pathname.includes(`/admin/${item.path}`));
 
-            return (
-              <NavLink
-                key={item.id}
-                to={item.path}
-                end={item.path === ''}
-                className={() =>
-                  `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
-                    isActiveRoute
-                      ? 'bg-white border-green-600 font-semibold shadow-sm'
-                      : 'border-transparent text-black hover:bg-gray-50'
-                  }`
-                }
-                onClick={() => setSidebarOpen(false)}
-              >
-                <Icon
-                  className={`w-5 h-5 ${item.isRed ? 'text-red-600' : ''}`}
-                />
-                <span>{item.label}</span>
-              </NavLink>
-            );
-          })}
-        </nav>
+              return (
+                <NavLink
+                  key={item.id}
+                  to={item.path}
+                  end={item.path === ''}
+                  className={() =>
+                    `w-full flex items-center gap-3 px-4 py-3 text-left rounded-lg mb-1 border-l-4 transition-all duration-300 ${
+                      isActiveRoute
+                        ? 'bg-white border-green-600 font-semibold shadow-sm'
+                        : 'border-transparent text-black hover:bg-gray-50'
+                    }`
+                  }
+                  onClick={() => setSidebarOpen(false)}
+                >
+                  <Icon
+                    className={`w-5 h-5 ${item.isRed ? 'text-red-600' : ''}`}
+                  />
+                  <span>{item.label}</span>
+                </NavLink>
+              );
+            })}
+          </nav>
+        </div>
       </div>
 
       {/* Overlay for mobile */}

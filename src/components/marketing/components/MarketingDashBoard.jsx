@@ -10,9 +10,11 @@ import SalesSequenceModal from "./modals/SalesSequenceModal";
 // NEW: extracted components
 import LeadStatusDropdown from "./LeadStatusDropdown";
 import LeadsTable from "./LeadsTable";
-import Pagination from "./Pagination";
-import AutomationModal from "./modals/AutomationModal ";
+
 import { useTranslation } from "react-i18next";
+import Pagination from "./Pagination";
+import CommonPagination from "../../common/Pagination";
+import AutomationModal from "./modals/AutomationModal ";
 
 const iconMap = {
   HiCursorClick: HiCursorClick,
@@ -267,25 +269,12 @@ const MarketingDashBoard = () => {
           />
 
           {/* Footer */}
-          <div className="px-4 md:px-6 py-4 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-xs md:text-sm text-gray-600">
-              {t("dashboard.marketing.Showing")} {startIndex + 1} to{" "}
-              {Math.min(startIndex + rowsPerPage, filteredActivities.length)} of{" "}
-              {filteredActivities.length} {t("dashboard.marketing.Results")}
-            </div>
-            <Pagination
-              variant="ellipsis"
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-              showCount={{
-                current: paginatedData.length,
-                total: filteredActivities.length,
-                prefix: "Showing",
-                label: "results",
-              }}
-            />
-          </div>
+          <CommonPagination
+            currentPage={currentPage}
+            totalItems={filteredActivities.length}
+            itemsPerPage={rowsPerPage}
+            onPageChange={setCurrentPage}
+          />
         </div>
 
         {/* Seasonal Campaigns */}
@@ -296,7 +285,7 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-1 md:gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
               {t("dashboard.marketing.CreateCampaign")}
@@ -347,7 +336,7 @@ const MarketingDashBoard = () => {
             </h2>
             <button
               onClick={() => setCampaignModal(true)}
-              className="bg-green-500 hover:opacity-90 text-black font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
+              className="bg-green-500 hover:opacity-90 text-white font-medium py-2 px-1 md:px-2 rounded flex items-center justify-center gap-2 transition-opacity w-1/2 md:w-44"
             >
               <FaPlus size={16} />
               {t("dashboard.marketing.CreateCampaign")}

@@ -7,7 +7,6 @@ import Pagination from "../../fieldAgent/components/Pagination";
 import axiosInstance from "../../../config/axiosConfig";
 import AutomationModal from "./modals/AutomationModal ";
 import SalesSequenceModal from "./modals/SalesSequenceModal";
-// import LeadStatusDropdown from './LeadStatusDropdown'
 
 const LeadManagment = () => {
   const { t } = useTranslation();
@@ -89,7 +88,7 @@ const LeadManagment = () => {
   };
 
   return (
-    <div className="md:px-12 mx-auto py-0 px-4">
+    <div className="md:px-12 mx-auto py-2 md:py-4 lg:py-8 px-4">
       {/* <Leads/> */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="p-4 md:p-6 border-b border-gray-200">

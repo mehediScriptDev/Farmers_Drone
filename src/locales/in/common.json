@@ -584,6 +584,7 @@
       "welcome": "वापस स्वागत है, फील्ड एजेंट",
       "fieldAgentSummery": {
         "userAdded": "आपके द्वारा जोड़े गए कुल उपयोगकर्ता",
+        "ActiveCustomers": "सक्रिय ग्राहक",
         "totalcommition": "कुल अर्जित कमीशन",
         "totalPayments": "हमारा बकाया भुगतान"
       },
@@ -607,7 +608,8 @@
         "showing": "दिखा रहे हैं",
         "users": "उपयोगकर्ता",
         "previous": "पिछला",
-        "next": "अगला"
+        "next": "अगला",
+        "of": "का"
       },
       "createServiceModal": {
         "CreateService": "सेवा बनाएँ",
@@ -712,8 +714,17 @@
       "seasonalCampaings": "मौसमी अभियान",
       "CreateCampaign": "अभियान बनाएँ",
       "SeeDetails": "विवरण देखें",
-      "LoyaltyPrograms": "निष्ठा कार्यक्रम",
+      "Loyaltyprograms": "निष्ठा कार्यक्रम",
       "LaunchCampaign": "अभियान लॉन्च करें",
+      "CampaignOverview": {
+        "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
+        "LoyaltyCampaignOverview": "निष्ठा अभियान अवलोकन",
+        "CampaignName": "अभियान का नाम",
+        "CampaignTypes": "अभियान प्रकार",
+        "LeadsGenerated": "उत्पन्न लीड्स",
+        "ROI": "आरओआई",
+        "Actions": "क्रियाएँ"
+      },
       "CampaignDetails": {
         "CampaignOverview": "अभियान अवलोकन",
         "Back": "वापस",
