@@ -63,7 +63,7 @@ import SignUpFlow from "../pages/signUp/SignUpFllow";
 import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
 import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 import Campaigns from "./../components/marketing/components/Campaigns";
-import NotificationPanel from "../components/fieldAgent/components/NotificationPanel";
+import NotificationPanel from "../components/marketing/components/NotificationPanel";
 
 const AppRoutes = createBrowserRouter([
   {

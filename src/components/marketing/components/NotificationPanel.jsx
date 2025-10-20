@@ -89,7 +89,7 @@ const NotificationPanel = () => {
             onClick={markAllAsRead}
             className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
-            <span className="hidden sm:inline">{t("dashboard.marketing.MarkAllRead")}</span>
+            <span className="hidden sm:inline font-bold">{t("dashboard.marketing.MarkAllRead")}</span>
             <Check className="w-4 h-4" />
           </button>
         </div>
