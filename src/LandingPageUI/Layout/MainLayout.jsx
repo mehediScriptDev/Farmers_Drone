@@ -7,6 +7,8 @@ import Gallery from './../Pages/Gallery';
 import BlogResearch from './../Pages/BlogResearch';
 import FAQ from './../Pages/FAQ';
 import TrainingNCertification from '../Components/TrainingNCertification';
+import JoinCampaign from '../Components/JoinCampaign';
+import MilestoneGallery from '../Components/MilestoneGallery';
 
 const MainLayout = () => {
     return (
@@ -16,6 +18,8 @@ const MainLayout = () => {
             <Statistics/>
             <Industry/>
             <TrainingNCertification/>
+            <JoinCampaign/>
+            <MilestoneGallery/> 
             <Gallery/>
             <BlogResearch/>
             <FAQ/>

@@ -3,6 +3,9 @@
 // import industry3 from "/assets/images/industry3.png";
 // import industry4 from "/assets/images/industry4.png";
 // import industry5 from "/assets/images/industry5.png";
+
+import { Link } from "react-router";
+
 // import industry6 from "/assets/images/industry6.png";
 export default function Industry() {
   const services = [
@@ -63,13 +66,13 @@ export default function Industry() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#E6EBF1] py-4 lg:py-16 xl:py-[83px] px-4 sm:px-6 lg:px-8">
+    <div className="xl:min-h-screen bg-[#E6EBF1] py-4 lg:py-16 xl:py-[83px] px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-gray-900 mb-4 lg:mb-16">
           Our Services
         </h1>
 
-        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-8">
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-6 xl:gap-8">
           {services.map((service) => {
             return (
               <div
@@ -97,7 +100,7 @@ export default function Industry() {
                   {service.description}
                 </p>
 
-                <button className="flex mt-3 items-center text-[#28A844] font-semibold cursor-pointer transition-colors  relative z-10">
+                <Link to={'/services'} className="flex mt-3 items-center text-[#28A844] font-semibold cursor-pointer transition-colors  relative z-10">
                   Learn more
                   <svg
                     className="w-5 h-5 ml-2  transition-transform"
@@ -112,7 +115,7 @@ export default function Industry() {
                       d="M17 8l4 4m0 0l-4 4m4-4H3"
                     />
                   </svg>
-                </button>
+                </Link>
               </div>
             );
           })}

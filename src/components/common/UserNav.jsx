@@ -31,6 +31,7 @@ export default function Nav() {
     { name: t("nav.home"), href: "/" },
     { name: t("nav.about"), href: "/about" },
     { name: t("nav.services"), href: "/services" },
+    { name: t("nav.trainings"), href: "/trainings" },
     { name: t("nav.blog"), href: "/blog" },
     { name: t("nav.contact"), href: "/contact" },
   ];
