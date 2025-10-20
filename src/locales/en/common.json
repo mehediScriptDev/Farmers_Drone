@@ -581,6 +581,8 @@
         "AddCustomer": "Add Customer"
       },
       "tableHeader": {
+        "Filter": "Filter",
+        "Search": "Search",
         "CustomerList": "Customer List",
         "Role": "Industry / Service",
         "RegistrationCommission": "Registration Commission",

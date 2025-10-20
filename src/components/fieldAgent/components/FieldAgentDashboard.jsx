@@ -46,11 +46,11 @@ const FieldAgentDashboard = () => {
   };
 
   const menuItems = [
-    { label: "User", value: "customerList" },
-    { label: "Role", value: "role" },
-    { label: "Registration Commission", value: "registrationCommission" },
-    { label: "First Order Commission", value: "firstOrderCommission" },
-    { label: "Effective Date", value: "effectiveDate" },
+    { label: t("dashboard.fieldAgent.tableHeader.CustomerList"), value: "customerList" },
+    { label: t("dashboard.fieldAgent.tableHeader.Role"), value: "role" },
+    { label: t("dashboard.fieldAgent.tableHeader.RegistrationCommission"), value: "registrationCommission" },
+    { label: t("dashboard.fieldAgent.tableHeader.FirstOrderCommission"), value: "firstOrderCommission" },
+    { label: t("dashboard.fieldAgent.tableHeader.EffectiveDate"), value: "effectiveDate" },
   ];
 
   const staticCardHeaders = [

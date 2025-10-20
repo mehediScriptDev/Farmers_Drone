@@ -39,7 +39,7 @@ console.log(selectedFilterValue)
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value.trimStart())}
-          placeholder="Search"
+          placeholder={t("dashboard.fieldAgent.tableHeader.Search")}
           className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-base"
         />
       </div>
@@ -52,7 +52,7 @@ console.log(selectedFilterValue)
           aria-haspopup="true"
         >
           <FiFilter className="w-5 h-5 text-gray-700" />
-          <span className="text-gray-700 font-medium">Filter</span>
+          <span className="text-gray-700 font-medium">{t("dashboard.fieldAgent.tableHeader.Filter")}</span>
           <FiChevronDown
             className={`w-4 h-4 text-gray-700 transition-transform duration-200 ${
               isOpen ? "transform rotate-180" : ""

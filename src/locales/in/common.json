@@ -593,6 +593,8 @@
         "AddCustomer": "ग्राहक जोड़ें"
       },
       "tableHeader": {
+        "Filter" : "फ़िल्टर",
+        "Search": "यहाँ खोजें...",
         "CustomerList": "ग्राहक सूची",
         "Role": "उद्योग/सेवा",
         "RegistrationCommission": "पंजीकरण कमीशन",
