@@ -148,7 +148,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
               <FaChevronLeft className='w-6 h-5' />
             </button>
           )}
-          <h2 className='text-lg md:text-2xl lg:text-3xl font-semibold  flex-1'>
+          <h2 className='text-xl  font-semibold  flex-1'>
             {stepTitles[modalStep - 1]}
           </h2>
           {/* STEP 2 & 3: No Cross Button */}
@@ -158,7 +158,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
               aria-label='Close'
               className=' text-gray-600 transition w-10 h-10 flex justify-center items-center'
             >
-              <AiOutlineClose className='w-6 h-6' />
+              <AiOutlineClose className='w-5 h-5' />
             </button>
           )}
         </div>
@@ -212,7 +212,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     value={formData[field.name]}
                     onChange={handleInputChange}
                     placeholder={field.placeholder || field.label}
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                    className='w-full px-4 py-2 border  border-black/30  rounded-lg focus:ring-black'
                   />
                 </div>
               ))}
@@ -232,7 +232,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     placeholder={t(
                       'dashboard.fieldAgent.FirstModal.selectOnMap'
                     )}
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                    className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                   />
                   <HiLocationMarker className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5' />
                 </div>
@@ -253,7 +253,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                       `dashboard.fieldAgent.FirstModal.enter${key.charAt(0).toUpperCase() + key.slice(1)
                       }`
                     )}
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                    className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-green-500'
                   />
                 </div>
               ))}
@@ -270,7 +270,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   name='registeredBy'
                   value={formData.registeredBy}
                   onChange={handleInputChange}
-                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border rounded-lg focus:ring-green-500 appearance-none  text-sm"
+                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border  border-black/30 rounded-lg focus:ring-black appearance-none  text-sm"
                 >
                   <option>
                     {t('dashboard.fieldAgent.FirstModal.selectAgent')}
@@ -294,7 +294,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
             <div className='space-y-4'>
               <div>
                 <label className='block text-sm font-medium mb-1'>
-                  {t('dashboard.fieldAgent.SecondModal.kycDocuments')}
+                  {t('dashboard.fieldAgent.SecondModal.kycDocumentsUpload')}
                 </label>
                 <div className='relative'>
                   <input
@@ -302,7 +302,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     name='kycDocument'
                     accept='.doc,.docx,.jpg,.pdf,.png'
                     onChange={handleInputChange}
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                    className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                   />
                   <FiUpload className='absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5' />
                 </div>
@@ -322,7 +322,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   placeholder={t(
                     'dashboard.fieldAgent.SecondModal.streetAddress'
                   )}
-                  className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                  className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                 />
               </div>
 
@@ -342,7 +342,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                       placeholder={t(
                         `dashboard.fieldAgent.SecondModal.${field}`
                       )}
-                      className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                      className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                     />
                   </div>
                 ))}
@@ -366,7 +366,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                           ? '400020'
                           : t('dashboard.fieldAgent.SecondModal.enterCountry')
                       }
-                      className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                      className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                     />
                   </div>
                 ))}
@@ -383,7 +383,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   name='industry'
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border rounded-lg focus:ring-green-500 appearance-none  text-sm"
+                  className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border border-black/30 rounded-lg focus:ring-black appearance-none  text-sm"
                 >
                   <option value=''>
                     {t('dashboard.fieldAgent.SecondModal.selectIndustry')}
@@ -414,7 +414,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                       `dashboard.fieldAgent.ThirdModal.${[
                         'firstLatLong',
                         'secondLatLong',
-                        'thirdLatLongPlus',
+                        'thirdLatLong',
                         'numberOfAcres',
                       ][idx]
                       }`
@@ -433,13 +433,13 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     placeholder={t(
                       `dashboard.fieldAgent.ThirdModal.${[
                         'firstLatLongValue',
-                        'secondLatLongValue',
-                        'thirdLatLongPlusValue',
+                        'secondLatLong',
+                        'thirdLatLong',
                         'landAreaInAcres',
                       ][idx]
                       }`
                     )}
-                    className='w-full px-4 py-2 border rounded-lg focus:ring-green-500'
+                    className='w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black'
                   />
                 </div>
               ))}

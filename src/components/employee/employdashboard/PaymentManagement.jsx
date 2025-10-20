@@ -126,7 +126,7 @@ const PaymentManagement = () => {
           onClick={() => setIsBillingModalOpen(true)}
           className="flex items-center justify-center w-full sm:w-auto px-3 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-xs md:text-sm lg:text-base"
         >
-          <FaWrench className="w-4 h-4 md:w-6 md:h-6 mr-1" />
+          <FaWrench className="w-4 h-4  md:h-6 mr-1" />
           {t('dashboard.employee.button.billing')}
         </button>
       </div>
