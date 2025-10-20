@@ -19,7 +19,7 @@ const PaymentManagement = () => {
   const [isDiscountModalOpen, setIsDiscountModalOpen] = useState(false);
   const [isBillingModalOpen, setIsBillingModalOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   // Fetch JSON Data
   const fetchTransactions = async () => {

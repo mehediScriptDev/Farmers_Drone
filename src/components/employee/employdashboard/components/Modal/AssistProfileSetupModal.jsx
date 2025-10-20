@@ -309,7 +309,7 @@ export const PersonalInfoModal = memo(({ isOpen, onClose, email }) => {
               onChange={handleChange}
               placeholder="Middle Name"
             />
-            <Input
+            <Inputx
               label="Last Name"
               name="lastName"
               value={formData.lastName}

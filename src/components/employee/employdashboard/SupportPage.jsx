@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { GrUserSettings } from 'react-icons/gr';
@@ -26,7 +19,7 @@ const SupportPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const { t } = useTranslation();
-  const ITEMS_PER_PAGE = 4;
+  const ITEMS_PER_PAGE = 6;
 
   // Fetch data
   useEffect(() => {
