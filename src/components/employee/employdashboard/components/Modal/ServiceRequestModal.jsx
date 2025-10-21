@@ -1,17 +1,10 @@
-
-
-
-
-
-
-
-
 import React, { useState, useRef, useEffect } from 'react';
 import { FaTimes, FaCalendarAlt, FaClock } from 'react-icons/fa';
 import { IoChevronDown } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ServiceTypeDropdown from '../common/ServiceTypeDropdown';
 
 const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
   const { t } = useTranslation();
@@ -25,43 +18,37 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
   const serviceTypesData = {
     mappingAndSurveying: {
       label: 'Mapping & Surveying',
-      subcategories: ['Land Mapping', 'Terrain Survey', 'Boundary Survey', 'Topographic Survey']
+      subcategories: ["Drone Mapping & Surveying (MAP)", "General Surveying & Mapping (SRV)", "Ground Collection (GRC)", "Data Analysis (DAT)"]
     },
     aerialMediaServices: {
       label: 'Aerial Media Services',
-      subcategories: ['Photography', 'Videography', 'Thermal Imaging', '3D Modeling']
+      subcategories: ["Aerial Photography & Videography (VID)", "Cinematography (CIN)", "Wedding Coverage (WED)", "Editing (EDT)"]
     },
     agriculture: {
       label: 'Agriculture',
-      subcategories: ['Crop Monitoring', 'Soil Analysis', 'Irrigation Planning', 'Yield Estimation']
+      subcategories: ["Agricultural Services (AGP)", "Agricultural Spray (AGS)", "Agricultural Spread (AGP)"]
     },
     inspectionAndInfrastructure: {
       label: 'Inspection & Infrastructure',
-      subcategories: ['Bridge Inspection', 'Power Line Inspection', 'Pipeline Inspection', 'Building Assessment']
+      subcategories: ["Infrastructure Inspection Services (INF)", "Aerial Inspections (AIN)", "Construction Site Monitoring (CON)", "General Infrastructure (IFG)"]
     },
     specializedOperations: {
       label: 'Specialized Operations',
-      subcategories: ['Search & Rescue', 'Emergency Response', 'Environmental Monitoring', 'Wildlife Tracking']
+      subcategories: ["Drone Delivery Services (DLV)", "Boating & Water Sports (BWS)", "Sports (SPR)"]
     },
     supportAndTraining: {
       label: 'Support & Training',
-      subcategories: ['Pilot Training', 'Technical Support', 'Maintenance Service', 'Consultation']
+      subcategories: ["Drone Maintenance (DMN)", "Drone Training (TRN)"]
+    },
+    realEstate: {
+      label: 'Real Estate & Marketing',
+      subcategories: ["Real Estate Marketing Services (REM)", "Residential Photography (RPH)", "Land Surveying (LND)", "Roof Inspection (RFI)"]
     },
     other: {
       label: 'Other',
-      subcategories: ['Custom Service', 'Additional Service']
+      subcategories: ['Miscellaneous / Custom']
     }
   };
-
-  const serviceTypes = [
-    'mappingAndSurveying',
-    'aerialMediaServices',
-    'agriculture',
-    'inspectionAndInfrastructure',
-    'specializedOperations',
-    'supportAndTraining',
-    'other'
-  ];
 
   const priorities = ['low', 'medium', 'high', 'critical'];
 
@@ -81,15 +68,18 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     preferredTime: ''
   });
 
+  // eslint-disable-next-line no-unused-vars
   const [serviceTypeOpen, setServiceTypeOpen] = useState(false);
-  const [hoveredMenu, setHoveredMenu] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [activeSubMenu, setActiveSubMenu] = useState(null);
   const [priorityOpen, setPriorityOpen] = useState(false);
 
-  // Handle dropdown outside click only
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (serviceTypeDropdownRef.current && !serviceTypeDropdownRef.current.contains(e.target)) {
         setServiceTypeOpen(false);
+        setActiveSubMenu(null);
       }
       if (priorityDropdownRef.current && !priorityDropdownRef.current.contains(e.target)) {
         setPriorityOpen(false);
@@ -114,6 +104,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
       preferredDate: '',
       preferredTime: ''
     });
+    setActiveSubMenu(null);
   };
 
   const handleClose = () => {
@@ -142,19 +133,9 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     return isValid;
   };
 
-  const handleSubCategorySelect = (category, subCategory) => {
-    setFormData({
-      ...formData,
-      serviceType: category,
-      serviceSubType: subCategory
-    });
-    setServiceTypeOpen(false);
-    setHoveredMenu(null);
-  };
-
   const handleSubmit = () => {
     if (!validate()) return;
-
+    console.log('Service Request Form Data:', formData);
     toast.success('Service request created successfully!');
     if (onSubmit) onSubmit(formData);
     setTimeout(() => {
@@ -162,6 +143,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
       onClose();
     }, 3000);
   };
+
 
   if (!isOpen) return null;
 
@@ -200,9 +182,8 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
               placeholder={t('dashboard.employee.pages.order.modal.enterCustomerNameOrPhone')}
               value={formData.customer}
               onChange={(e) => setFormData({ ...formData, customer: e.target.value })}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm ${
-                errors.customer ? 'border-red-500' : 'border-gray-300'
-              }`}
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm ${errors.customer ? 'border-red-500' : 'border-gray-300'
+                }`}
             />
             {errors.customer && (
               <p className="text-red-500 text-xs mt-1">{errors.customer}</p>
@@ -210,72 +191,11 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
           </div>
 
           {/* Service Type Dropdown with Nested Menu */}
-          <div className="mb-4" ref={serviceTypeDropdownRef}>
-            <label className="block text-base font-medium text-gray-800 mb-2">
-              {t('dashboard.employee.pages.order.modal.serviceType')}
-            </label>
-            <button
-              type="button"
-              onClick={() => setServiceTypeOpen(!serviceTypeOpen)}
-              className="w-1/2 px-3 py-2  bg-[#F7FFE5] rounded-md flex items-center justify-between  text-base"
-            >
-              <span className="truncate">
-                {formData.serviceSubType || t(`dashboard.employee.dropdown.${formData.serviceType}`)}
-              </span>
-              <IoChevronDown
-                className={`transition-transform duration-200 flex-shrink-0 ${serviceTypeOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-
-            {serviceTypeOpen && (
-              <div className="absolute w-1/2 mt-1 bg-white shadow-lg rounded-md border border-gray-200 z-50 max-h-96 overflow-visible">
-                {serviceTypes.map((type) => (
-                  <div
-                    key={type}
-                    className="relative"
-                    data-menu-item={type}
-                    onMouseEnter={() => setHoveredMenu(type)}
-                    onMouseLeave={() => setHoveredMenu(null)}
-                  >
-                    {/* Main Category */}
-                    <div
-                      onClick={() => {
-                        setFormData({ ...formData, serviceType: type });
-                      }}
-                      className={`px-3 py-2 cursor-pointer hover:bg-gray-100 transition ${
-                        formData.serviceType === type ? 'bg-[#F7FFE5] border-l-2 border-green-400 font-medium' : ''
-                      }`}
-                    >
-                      {t(`dashboard.employee.dropdown.${type}`)}
-                     
-                    </div>
-
-                    {/* Submenu - appears on hover */}
-                    {hoveredMenu === type && (
-                      <div className="fixed bg-white shadow-lg rounded-md border border-gray-200 z-50 w-48" style={{
-                        top: document.querySelector(`[data-menu-item="${type}"]`)?.getBoundingClientRect().top || '0px',
-                        left: (document.querySelector(`[data-menu-item="${type}"]`)?.getBoundingClientRect().right || 0) + 10 + 'px',
-                      }}>
-                        {serviceTypesData[type].subcategories.map((subCat) => (
-                          <div
-                            key={subCat}
-                            onClick={() => handleSubCategorySelect(type, subCat)}
-                            className={`px-3 py-2 cursor-pointer text-sm hover:bg-green-50 transition ${
-                              formData.serviceSubType === subCat
-                                ? 'bg-[#28A844] text-white font-medium'
-                                : ''
-                            }`}
-                          >
-                            {subCat}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <ServiceTypeDropdown
+            formData={formData}
+            setFormData={setFormData}
+            serviceTypesData={serviceTypesData}
+          />
 
           {/* Priority Dropdown */}
           <div className="mb-4 relative" ref={priorityDropdownRef}>
@@ -302,9 +222,8 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                       setFormData({ ...formData, priority: level });
                       setPriorityOpen(false);
                     }}
-                    className={`px-3 py-2 cursor-pointer ${
-                      formData.priority === level ? 'bg-[#28A844] text-white font-medium' : ''
-                    }`}
+                    className={`px-3 py-2 cursor-pointer ${formData.priority === level ? 'bg-[#28A844] text-white font-medium' : ''
+                      }`}
                   >
                     {t(`dashboard.employee.dropdown.${level}`)}
                   </div>
@@ -328,9 +247,8 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, preferredDate: e.target.value })
                   }
-                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${
-                    errors.preferredDate ? 'border-red-500' : 'border-gray-300'
-                  } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
+                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${errors.preferredDate ? 'border-red-500' : 'border-gray-300'
+                    } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaCalendarAlt
                   onClick={() => dateInputRef.current && dateInputRef.current.showPicker()}
@@ -355,9 +273,8 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                   onChange={(e) =>
                     setFormData({ ...formData, preferredTime: e.target.value })
                   }
-                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${
-                    errors.preferredTime ? 'border-red-500' : 'border-gray-300'
-                  } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
+                  className={`w-full px-3 py-2 pr-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-black/70 text-sm appearance-none ${errors.preferredTime ? 'border-red-500' : 'border-gray-300'
+                    } [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute`}
                 />
                 <FaClock
                   onClick={() => timeInputRef.current && timeInputRef.current.showPicker()}
@@ -391,7 +308,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
             onClick={handleSubmit}
             className="w-full bg-[#28A844] hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
           >
-            {t('dashboard.employee.pages.order.modal.createRequest') || 'Create Request'}
+            {t('dashboard.employee.pages.order.modal.createRequest')}
           </button>
         </div>
       </div>
