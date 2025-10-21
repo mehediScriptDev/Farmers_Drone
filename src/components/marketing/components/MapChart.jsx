@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MapChart = () => {
+  const { t } = useTranslation()
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [data,setData] = useState({});
 
@@ -59,7 +61,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -84,7 +86,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -133,7 +135,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -157,7 +159,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -182,7 +184,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -206,7 +208,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -230,7 +232,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -254,7 +256,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -279,7 +281,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -303,7 +305,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -328,7 +330,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -352,7 +354,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -377,7 +379,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -402,7 +404,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -427,7 +429,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -452,7 +454,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -477,7 +479,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -502,7 +504,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -510,7 +512,7 @@ const MapChart = () => {
         <path
           data-region="JharKhand"
           d="M209.569 191.166L208.909 193.343H210.559L211.549 194.276V196.453L215.51 200.496V201.74H217.16V204.85L218.15 206.716L219.47 208.893L221.78 210.137H223.1V212.625L220.46 213.869L218.15 215.113V217.912L218.81 218.223L224.42 220.088L226.731 218.845L231.351 217.912L233.661 218.223V220.088L232.341 222.265L233.661 223.509H235.311L236.631 222.887L240.592 222.265L241.582 223.509L245.212 224.131L246.532 222.265V218.223L247.192 217.29H249.502L250.822 218.845L254.783 220.088L256.433 221.021L257.423 219.777V218.223L255.443 215.113L252.803 213.869L251.812 212.625V212.003L252.803 211.381V210.137H249.502L247.192 208.893L245.212 207.649V202.984L246.532 201.74H247.192L248.182 202.984L250.162 202.673L251.482 201.74L252.803 200.496H255.443L256.433 198.941L257.423 197.386L260.063 196.142L260.723 197.386L263.033 198.63L264.023 198.008V194.898H266.664L267.654 193.032H268.314L269.304 191.788V190.544H270.624V188.368L271.284 187.124L272.604 186.813V183.081L270.954 179.971V176.861H266.664L265.673 178.105L260.723 181.526V185.88L259.403 186.813L257.093 186.502H254.783L253.463 188.99V189.612L252.803 190.544H251.482L250.162 188.99L248.512 187.746L247.522 185.88L245.212 184.325H241.582V187.746L239.271 188.99H235.311L232.341 190.544H231.021L229.701 187.746L228.051 188.99L226.731 191.788H224.42L223.76 189.923L220.46 188.368L218.15 186.502L216.83 187.746H209.569V188.368L210.559 189.923L209.569 191.166Z"
-          fill={getColor(data["Jharkhand"])}
+          fill={getColor(data["JharKhand"])}
           stroke="#4A9BD4"
           strokeWidth="1"
           onMouseEnter={() => setHoveredRegion("JharKhand")}
@@ -526,7 +528,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -551,7 +553,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -576,7 +578,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -601,7 +603,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -626,7 +628,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -651,7 +653,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -659,7 +661,7 @@ const MapChart = () => {
         <path
           data-region="Chhattisgarh"
           d="M169.008 272.817L166.045 271.569V266.891L167.362 265.955V262.837L168.02 260.965H169.008L169.996 262.213H172.629V261.901V259.094L169.996 255.975L168.02 254.728V252.856L169.666 251.609V250.361H168.02V248.49H170.654V245.683L168.02 244.124L169.008 242.252L168.679 240.693L167.033 237.886L170.654 234.767L170.325 233.831L172.629 232.896V228.529L173.946 227.594V224.787L174.934 223.539H176.251L177.568 221.356V220.42L178.556 218.549L179.543 217.925H182.835L183.165 216.678L184.811 215.43L186.457 214.807L186.786 211.064L188.432 211.688L190.408 209.816L193.041 207.321V205.762L191.395 204.514H190.408L188.432 202.955H184.811V200.46L185.469 197.341H188.432L190.737 198.901H198.638L200.943 197.965V197.341H206.54L207.857 195.158L209.503 193.287H210.82L211.807 194.534V196.405L215.758 200.46V201.707H217.404V204.826L219.709 208.881L222.013 210.128H223.33V212.623L218.392 215.118V217.925L217.075 218.549L213.453 221.98L211.807 222.604V226.97L210.82 228.841L209.832 230.401L209.174 232.272L206.869 235.703L205.881 236.015V236.638H198.967L196.663 239.133H195.675V251.609H199.955L200.943 254.416L198.967 255.975L193.7 252.856L189.749 251.609L187.774 252.856V254.416L188.762 255.975L190.737 258.47V260.03L192.054 262.837V269.698L190.737 271.569L186.786 275.936L184.152 277.495L183.165 279.366V283.421L181.519 283.109H176.909L175.922 282.485L174.934 280.302L173.946 278.743H172.629L171.313 276.248V274.688L170.654 274.064L169.008 272.817Z"
-          fill={getColor(data["Chhttisgarh"])}
+          fill={getColor(data["Chhattisgarh"])}
           // fillOpacity="0.6"
           stroke="#4A9BD4"
           strokeWidth="1"
@@ -676,7 +678,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -701,7 +703,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -725,7 +727,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -750,7 +752,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -775,7 +777,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
@@ -800,7 +802,7 @@ const MapChart = () => {
             fontSize="14"
             fontWeight="bold"
           >
-            {hoveredRegion}
+            {t(`regions.${hoveredRegion}`)}
           </text>
         )}
 
