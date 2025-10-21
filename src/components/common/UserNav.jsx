@@ -1,4 +1,4 @@
-import logo from "../../../public/assets/images/logo.png";
+
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -41,7 +41,7 @@ export default function Nav() {
           {/* Logo */}
           <Link to={"/"} className="flex items-center">
             <div className="flex items-center justify-items-start">
-              <img src={logo} alt="navlogo" />
+              <img src={"/assets/images/logo.png"} alt="navlogo" />
             </div>
           </Link>
 
