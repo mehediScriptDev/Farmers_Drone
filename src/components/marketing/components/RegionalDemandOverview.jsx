@@ -20,15 +20,15 @@ const RegionalDemandOverview = () => {
 
         <div className="flex gap-6 mb-6">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <div className="w-3 h-3 rounded-full bg-[#DC3545]"></div>
             <span className="text-[16px] text-gray-700">High</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div className="w-3 h-3 rounded-full bg-[#FFC107]"></div>
             <span className="text-[16px] text-gray-700">Medium</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <div className="w-3 h-3 rounded-full bg-[#28A745]"></div>
             <span className="text-[16px] text-gray-700">Low</span>
           </div>
         </div>
@@ -87,7 +87,7 @@ const RegionalDemandOverview = () => {
               <div className="grid grid-cols-1 gap-4 h-[500px] overflow-y-auto">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500" />
+                    <div className="w-3 h-3 rounded-full bg-[#DC3545]" />
                     <div className="font-semibold text-lg md:text-xl lg:text-2xl">High</div>
                   </div>
                   {renderList(groups.high, "#ef4444")}
@@ -95,7 +95,7 @@ const RegionalDemandOverview = () => {
 
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                    <div className="w-3 h-3 rounded-full bg-[#FFC107]" />
                     <div className="font-semibold text-lg md:text-xl lg:text-2xl">Medium</div>
                   </div>
                   {renderList(groups.medium, "#f59e0b")}
@@ -103,7 +103,7 @@ const RegionalDemandOverview = () => {
 
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="w-3 h-3 rounded-full bg-green-500" />
+                    <div className="w-3 h-3 rounded-full bg-[#28A745]" />
                     <div className="font-semibold text-lg md:text-xl lg:text-2xl">Low</div>
                   </div>
                   {renderList(groups.low, "#10b981")}
