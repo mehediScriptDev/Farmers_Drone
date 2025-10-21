@@ -724,6 +724,11 @@
       "Notifications": "सूचनाएँ",
       "NoUnreadNotifications": "सभी कैच अप! कोई अनपढ़ सूचनाएँ नहीं हैं।",
       "MarkAllRead": "सभी को पढ़ा करें",
+      "Heatmap": "हीटमैप",
+      "High" : "उच्च",
+      "Medium" : "मध्यम",
+      "Low" : "कम",
+      "DemandByRegion": "क्षेत्र द्वारा मांग",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
         "LoyaltyCampaignOverview": "निष्ठा अभियान अवलोकन",

@@ -712,6 +712,11 @@
       "NoUnreadNotifications": "All caught up! No unread notifications.",
       "Notifications" : "Notifications",
       "MarkAllRead": "Mark All Read",
+      "Heatmap": "Heatmap",
+      "High": "High",
+      "Medium": "Medium",
+      "Low": "Low",
+      "DemandByRegion": "Demand by Region",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "Seasonal Campaign Overview",
         "LoyaltyCampaignOverview": "Loyalty Campaign Overview",

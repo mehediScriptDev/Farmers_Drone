@@ -1,6 +1,7 @@
 import  { useEffect, useState } from "react";
 import MapChart from "../MapChart";
 import axiosInstance from "../../../config/axiosConfig";
+import { t } from "i18next";
 
 const RegionalDemandOverview = () => {
   const [data, setData] = useState({});
@@ -16,27 +17,27 @@ const RegionalDemandOverview = () => {
   return (
     <div className="justify-center  bg-white px-6 flex flex-col md:flex-row gap-6 rounded-lg shadow-sm border border-gray-200 p-6">
       <div className="w-full md:w-1/2">
-        <h1 className="font-semibold text-3xl text-gray-900 mb-7">Heatmap</h1>
+        <h1 className="font-semibold text-3xl text-gray-900 mb-7">{t("dashboard.marketing.Heatmap")}</h1>
 
         <div className="flex gap-6 mb-6">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-[#DC3545]"></div>
-            <span className="text-[16px] text-gray-700">High</span>
+            <span className="text-[16px] text-gray-700">{t("dashboard.marketing.High")}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-[#FFC107]"></div>
-            <span className="text-[16px] text-gray-700">Medium</span>
+            <span className="text-[16px] text-gray-700">{t("dashboard.marketing.Medium")}</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-[#28A745]"></div>
-            <span className="text-[16px] text-gray-700">Low</span>
+            <span className="text-[16px] text-gray-700">{t("dashboard.marketing.Low")}</span>
           </div>
         </div>
         <MapChart />
       </div>
 
       <div className="w-full md:w-1/2 rounded-lg py-4">
-        <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-3">Demand by Region</h3>
+        <h3 className="text-lg md:text-2xl lg:text-3xl font-semibold mb-3">{t("dashboard.marketing.DemandByRegion")}</h3>
 
         {Object.keys(data).length === 0 ? (
           <div className="text-sm text-gray-500">No region data</div>
@@ -88,7 +89,7 @@ const RegionalDemandOverview = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-3 h-3 rounded-full bg-[#DC3545]" />
-                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">High</div>
+                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">{t("dashboard.marketing.High")}</div>
                   </div>
                   {renderList(groups.high, "#ef4444")}
                 </div>
@@ -96,7 +97,7 @@ const RegionalDemandOverview = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-3 h-3 rounded-full bg-[#FFC107]" />
-                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">Medium</div>
+                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">{t("dashboard.marketing.Medium")}</div>
                   </div>
                   {renderList(groups.medium, "#f59e0b")}
                 </div>
@@ -104,7 +105,7 @@ const RegionalDemandOverview = () => {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <div className="w-3 h-3 rounded-full bg-[#28A745]" />
-                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">Low</div>
+                    <div className="font-semibold text-lg md:text-xl lg:text-2xl">{t("dashboard.marketing.Low")}</div>
                   </div>
                   {renderList(groups.low, "#10b981")}
                 </div>
