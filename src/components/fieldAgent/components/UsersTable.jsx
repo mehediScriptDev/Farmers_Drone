@@ -1,5 +1,6 @@
 import React from "react";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import { TbPhoneCall } from "react-icons/tb";
 
 const SortIcon = ({ active, dir }) => (
   <span className="flex flex-col leading-none -space-y-1 text-slate-500">
@@ -148,7 +149,7 @@ const UsersTable = ({ t, data, sortKey, sortDir, onSortChange }) => {
             <td className="py-4 px-6 text-sm text-black">
               {row.serviceInterest}
             </td>
-            <td className="py-4 px-6 text-sm text-black">{row.quickActions}</td>
+            <td className="py-4 px-6 text-sm text-black"><button><TbPhoneCall onClick={()=>alert("Clicked")} className="size-5" /></button></td>
           </tr>
         ))}
       </tbody>
