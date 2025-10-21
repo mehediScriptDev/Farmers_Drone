@@ -461,9 +461,9 @@
         "droneTraining": "Drone Training (TRN)",
         "miscellaneous": "Miscellaneous / Custom",
         "infrastructureInspectionServices": "Infrastructure Inspection Services (INF)",
-  "aerialInspections": "Aerial Inspections (AIN)",
-  "constructionSiteMonitoring": "Construction Site Monitoring (CON)",
-  "generalInfrastructure": "General Infrastructure (IFG)"
+        "aerialInspections": "Aerial Inspections (AIN)",
+        "constructionSiteMonitoring": "Construction Site Monitoring (CON)",
+        "generalInfrastructure": "General Infrastructure (IFG)"
       },
       "modal": {
         "collectTitle": "Collect Payment",

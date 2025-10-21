@@ -64,9 +64,8 @@ const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
           {t(`dashboard.employee.dropdown.${formData.serviceType}`)}
         </span>
         <IoChevronDown
-          className={`transition-transform duration-200 flex-shrink-0 ${
-            serviceTypeOpen ? 'rotate-180' : ''
-          }`}
+          className={`transition-transform duration-200 flex-shrink-0 ${serviceTypeOpen ? 'rotate-180' : ''
+            }`}
         />
       </button>
 
@@ -80,14 +79,13 @@ const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
                   setFormData({ ...formData, serviceType: type, serviceSubType: '' });
                   setActiveSubMenu(activeSubMenu === type ? null : type);
                 }}
-                className={`px-3 py-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition ${
-                  formData.serviceType === type
+                className={`px-3 py-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition ${formData.serviceType === type
                     ? 'bg-[#F7FFE5] border-l-2 border-green-400 font-medium'
                     : ''
-                }`}
+                  }`}
               >
                 <span>
-                    {t(`dashboard.employee.dropdown.${type}`)}
+                  {t(`dashboard.employee.dropdown.${type}`)}
                 </span>
                 <FaChevronRight />
               </div>
@@ -102,11 +100,10 @@ const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
                     <div
                       key={subCat}
                       onClick={() => handleSubCategorySelect(type, subCat)}
-                      className={`px-3 py-2 cursor-pointer text-sm border-b border-gray-200 hover:bg-green-50 transition ${
-                        formData.serviceSubType === subCat
+                      className={`px-3 py-2 cursor-pointer text-sm border-b border-gray-200 hover:bg-green-50 transition ${formData.serviceSubType === subCat
                           ? 'bg-[#28A844] text-white font-medium'
                           : ''
-                      }`}
+                        }`}
                     >
                       {subCat}
                     </div>
