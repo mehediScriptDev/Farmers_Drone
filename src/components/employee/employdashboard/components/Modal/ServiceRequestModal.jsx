@@ -15,40 +15,75 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
   const timeInputRef = useRef(null);
 
   // Service Types with subcategories
-  const serviceTypesData = {
-    mappingAndSurveying: {
-      label: 'Mapping & Surveying',
-      subcategories: ["Drone Mapping & Surveying (MAP)", "General Surveying & Mapping (SRV)", "Ground Collection (GRC)", "Data Analysis (DAT)"]
-    },
-    aerialMediaServices: {
-      label: 'Aerial Media Services',
-      subcategories: ["Aerial Photography & Videography (VID)", "Cinematography (CIN)", "Wedding Coverage (WED)", "Editing (EDT)"]
-    },
-    agriculture: {
-      label: 'Agriculture',
-      subcategories: ["Agricultural Services (AGP)", "Agricultural Spray (AGS)", "Agricultural Spread (AGP)"]
-    },
-    inspectionAndInfrastructure: {
-      label: 'Inspection & Infrastructure',
-      subcategories: ["Infrastructure Inspection Services (INF)", "Aerial Inspections (AIN)", "Construction Site Monitoring (CON)", "General Infrastructure (IFG)"]
-    },
-    specializedOperations: {
-      label: 'Specialized Operations',
-      subcategories: ["Drone Delivery Services (DLV)", "Boating & Water Sports (BWS)", "Sports (SPR)"]
-    },
-    supportAndTraining: {
-      label: 'Support & Training',
-      subcategories: ["Drone Maintenance (DMN)", "Drone Training (TRN)"]
-    },
-    realEstate: {
-      label: 'Real Estate & Marketingd',
-      subcategories: ["Real Estate Marketing Services (REM)", "Residential Photography (RPH)", "Land Surveying (LND)", "Roof Inspection (RFI)"]
-    },
-    other: {
-      label: 'Other',
-      subcategories: ['Miscellaneous / Custom']
-    }
-  };
+const serviceTypesData = {
+  mappingAndSurveying: {
+    label: t('dashboard.employee.dropdown.mappingAndSurveying'),
+    subcategories: [
+      t('dashboard.employee.dropdown.droneMapping'),
+      t('dashboard.employee.dropdown.generalSurveying'),
+      t('dashboard.employee.dropdown.groundCollection'),
+      t('dashboard.employee.dropdown.dataAnalysis')
+    ]
+  },
+  aerialMediaServices: {
+    label: t('dashboard.employee.dropdown.aerialMediaServices'),
+    subcategories: [
+      t('dashboard.employee.dropdown.aerialPhotography'),
+      t('dashboard.employee.dropdown.cinematography'),
+      t('dashboard.employee.dropdown.weddingCoverage'),
+      t('dashboard.employee.dropdown.editing')
+    ]
+  },
+  agriculture: {
+    label: t('dashboard.employee.dropdown.agriculture'),
+    subcategories: [
+      t('dashboard.employee.dropdown.agriculturalServices'),
+      t('dashboard.employee.dropdown.agriculturalSpray'),
+      t('dashboard.employee.dropdown.agriculturalSpread')
+    ]
+  },
+  inspectionAndInfrastructure: {
+    label: t('dashboard.employee.dropdown.inspectionAndInfrastructure'),
+    subcategories: [
+      t('dashboard.employee.dropdown.infrastructureInspectionServices'),
+      t('dashboard.employee.dropdown.aerialInspections'),
+      t('dashboard.employee.dropdown.constructionSiteMonitoring'),
+      t('dashboard.employee.dropdown.generalInfrastructure')
+    ]
+  },
+  specializedOperations: {
+    label: t('dashboard.employee.dropdown.specializedOperations'),
+    subcategories: [
+      t('dashboard.employee.dropdown.droneDeliveryServices'),
+      t('dashboard.employee.dropdown.boatingWaterSports'),
+      t('dashboard.employee.dropdown.sports')
+    ]
+  },
+  supportAndTraining: {
+    label: t('dashboard.employee.dropdown.supportAndTraining'),
+    subcategories: [
+      t('dashboard.employee.dropdown.droneMaintenance'),
+      t('dashboard.employee.dropdown.droneTraining')
+    ]
+  },
+  realEstate: {
+    label: t('dashboard.employee.dropdown.realEstate'),
+    subcategories: [
+      t('dashboard.employee.dropdown.realEstateMarketing'),
+      t('dashboard.employee.dropdown.residentialPhotography'),
+      t('dashboard.employee.dropdown.landSurveying'),
+      t('dashboard.employee.dropdown.roofInspection')
+    ]
+  },
+  other: {
+    label: t('dashboard.employee.dropdown.other'),
+    subcategories: [
+      t('dashboard.employee.dropdown.miscellaneous')
+    ]
+  }
+};
+
+
 
   const priorities = ['low', 'medium', 'high', 'critical'];
 
