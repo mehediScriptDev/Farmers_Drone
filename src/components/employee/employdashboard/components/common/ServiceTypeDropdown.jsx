@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { IoChevronDown } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
+import { FaChevronRight } from 'react-icons/fa';
 
 const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
   const { t } = useTranslation();
@@ -79,13 +80,16 @@ const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
                   setFormData({ ...formData, serviceType: type, serviceSubType: '' });
                   setActiveSubMenu(activeSubMenu === type ? null : type);
                 }}
-                className={`px-3 py-2 cursor-pointer hover:bg-gray-100 transition ${
+                className={`px-3 py-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition ${
                   formData.serviceType === type
                     ? 'bg-[#F7FFE5] border-l-2 border-green-400 font-medium'
                     : ''
                 }`}
               >
-                {t(`dashboard.employee.dropdown.${type}`)}
+                <span>
+                    {t(`dashboard.employee.dropdown.${type}`)}
+                </span>
+                <FaChevronRight />
               </div>
 
               {/* Submenu */}
@@ -98,7 +102,7 @@ const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
                     <div
                       key={subCat}
                       onClick={() => handleSubCategorySelect(type, subCat)}
-                      className={`px-3 py-2 cursor-pointer text-sm hover:bg-green-50 transition ${
+                      className={`px-3 py-2 cursor-pointer text-sm border-b border-gray-200 hover:bg-green-50 transition ${
                         formData.serviceSubType === subCat
                           ? 'bg-[#28A844] text-white font-medium'
                           : ''

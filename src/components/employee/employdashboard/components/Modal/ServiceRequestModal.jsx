@@ -41,7 +41,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
       subcategories: ["Drone Maintenance (DMN)", "Drone Training (TRN)"]
     },
     realEstate: {
-      label: 'Real Estate & Marketing',
+      label: 'Real Estate & Marketingd',
       subcategories: ["Real Estate Marketing Services (REM)", "Residential Photography (RPH)", "Land Surveying (LND)", "Roof Inspection (RFI)"]
     },
     other: {

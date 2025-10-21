@@ -154,7 +154,7 @@ const SupportPage = () => {
           <GrUserSettings className='w-5 h-5 mr-2' /> Escalate to technical team
         </button>
       </div>
-
+      
       {/* Stats */}
       <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6'>
         {stats.map((stat, index) => {
