@@ -35,13 +35,13 @@ export const Header = () => {
           <LanguageSwitcher />
 
           {/* {user &&
-            (['admin', 'marketing', 'employee'].includes(user.role) ? (
+            (['admin', 'marketing', 'employee'].includes(user?.role) ? (
               <Link className='text-gray-800 text-xl lg:flex hidden'>
                 <FiBell />
               </Link>
             ) : null)} */}
 
-          {user.role == 'admin' ? (
+          {user?.role === 'admin' ? (
             <Link
               to='/admin/settings'
               className='text-gray-800 text-xl lg:flex hidden'

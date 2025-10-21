@@ -78,11 +78,11 @@ export default function LoyalityCampaingnOverview() {
   }
 
   return (
-    <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md ">
+    <div className=" bg-white my-4 md:my-6 lg:mt-8 rounded-lg shadow-md ">
       <div className="">
         {/* Header */}
         <div className="flex justify-between items-center py-2 md:py-4 lg:py-4 mx-2 md:mx-4 lg:mx-4 p-2 md:p-4">
-          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2">
+          <h1 className="font-bold  text-[#000000] text-lg md:text-2xl lg:text-3xl w-1/2">
             {t("dashboard.marketing.CampaignOverview.LoyaltyCampaignOverview")}
           </h1>
           <button
@@ -104,7 +104,7 @@ export default function LoyalityCampaingnOverview() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
+                  <tr className="bg-[#F5F7FA]">
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.CampaignName")}
                     </th>
@@ -117,7 +117,7 @@ export default function LoyalityCampaingnOverview() {
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.ROI")}
                     </th>
-                    <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-right whitespace-nowrap">
+                    <th className="px-6 py-3 text-sm md:text-base  font-semibold text-black text-right whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.Actions")}
                     </th>
                   </tr>

@@ -214,7 +214,6 @@ const SeasonalCampaignDetails = () => {
                 onClick={() => navigate(-1)}
               >
                 <FiArrowLeft className="w-5 h-5 mr-2" />
-                <span>{t("dashboard.marketing.CampaignDetails.Back")}</span>
               </button>
               <div className="flex gap-3">
                 <button className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 transition cursor-pointer">
@@ -305,7 +304,7 @@ const SeasonalCampaignDetails = () => {
                     </p>
                   </div>
                   <div className="flex items-center  justify-between flex-row">
-                    <p className="text-3xl font-bold text-[#464646]">
+                    <p className="text-2xl md:text-3xl font-bold text-[#464646]">
                       {stat.value}
                     </p>
                     <p className="bg-[#F7FFE5] p-3">

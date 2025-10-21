@@ -102,7 +102,7 @@ const SalesSequenceModal = ({ isOpen, onClose, sequenceData }) => {
           </div>
 
           {/* Progress Section */}
-          <div className="mb-6">
+          <div className="mb-6 bg-[#F9FAFC] p-3 rounded-sm">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm font-medium text-[#002244]">
                 Progress
@@ -111,7 +111,7 @@ const SalesSequenceModal = ({ isOpen, onClose, sequenceData }) => {
                 {progressPercentage}%
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+            <div className="w-full bg-[#F9FAFC] rounded-full h-2.5 overflow-hidden ">
               <div
                 className="bg-[#9FF625] h-full rounded-full transition-all duration-500"
                 style={{ width: `${progressPercentage}%` }}

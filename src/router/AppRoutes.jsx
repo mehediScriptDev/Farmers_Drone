@@ -63,6 +63,7 @@ import SignUpFlow from "../pages/signUp/SignUpFllow";
 import SeasonalCampaignDetails from "../components/marketing/components/SeasonalCampaignDetails";
 import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 import Campaigns from "./../components/marketing/components/Campaigns";
+import NotificationPanel from "../components/marketing/components/NotificationPanel";
 import TrainingNCertification from "../LandingPageUI/Components/TrainingNCertification";
 
 const AppRoutes = createBrowserRouter([
@@ -254,6 +255,10 @@ const AppRoutes = createBrowserRouter([
       {
         index: true,
         element: <MarketingDashBoard />,
+      },
+      {
+        path:"notifications",
+        element:<NotificationPanel/>
       },
       {
         path: "campaigns/seasonal/:id",

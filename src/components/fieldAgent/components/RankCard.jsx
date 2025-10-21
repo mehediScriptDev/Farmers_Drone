@@ -19,7 +19,7 @@ const RankCard = ({ rank }) => {
   const s = styles[rank] ?? styles.Silver;
 
   return (
-    <div className="bg-white p-8 sm:p-12 rounded-2xl w-full max-w-xl border border-gray-100">
+    <div className="bg-white p-2 sm:p-4 rounded-2xl w-full max-w-xl border border-gray-100">
       <div className="flex justify-center mb-1">
         <FaTrophy
           className="text-8xl"

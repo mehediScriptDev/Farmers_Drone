@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import { Eye, EyeOff, Fingerprint } from 'lucide-react';
@@ -18,10 +18,10 @@ const LoginPage = () => {
   const { t } = useTranslation();
 
   // Redirect if already logged in
-  if (user) {
-    const from = location.state?.from?.pathname || '/dashboard';
-    return <Navigate to={from} replace />;
-  }
+ if (user) {
+  const from = location.state?.from?.pathname || '/dashboard';
+  return <Navigate to={from} replace />;
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();

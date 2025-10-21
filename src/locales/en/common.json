@@ -577,12 +577,14 @@
         "totalPayments": "Ourstanding payments"
       },
       "userAdd": {
-        "AddedByYou": "Added by you",
+        "CustomerOnboard": "Customer Onboard",
         "AddCustomer": "Add Customer"
       },
       "tableHeader": {
+        "Filter": "Filter",
+        "Search": "Search",
         "CustomerList": "Customer List",
-        "Role": "Role",
+        "Role": "Industry / Service",
         "RegistrationCommission": "Registration Commission",
         "FirstOrderCommission": "First Order Commission",
         "EffectiveDate": "Effective Date",
@@ -672,10 +674,12 @@
     "marketing": {
       "title": "Marketing Dashboard",
       "monitor": "Monitor your customer service performance",
-      "daysOverview": "Last 30 days overview",
-      "last_90_days": "last 90 days",
-      "last_30_days": "last 30 days",
-      "last_7_days": "last 7 days",
+      "Last30daysOverview": "Last 30 days overview",
+      "Last7daysOverview": "Last 7 days overview",
+      "Last90daysOverview": "Last 90 days overview",
+      "last_90_days": "Last 90 days",
+      "last_30_days": "Last 30 days",
+      "last_7_days": "Last 7 days",
       "clickRate": "Click through rate",
       "ConversionRate": "Conversion Rate",
       "CustomerAcquisitionCost": "Customer Acquisition Cost",
@@ -705,6 +709,9 @@
       "Loyaltyprograms": "Loyalty programs",
       "Confirm": "Confirm",
       "LaunchCampaign": "Launch Campaign",
+      "NoUnreadNotifications": "All caught up! No unread notifications.",
+      "Notifications" : "Notifications",
+      "MarkAllRead": "Mark All Read",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "Seasonal Campaign Overview",
         "LoyaltyCampaignOverview": "Loyalty Campaign Overview",

@@ -81,10 +81,10 @@ export default function SeasonalCampaignOverview() {
     <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md ">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center mx-2 md:mx-3 lg:mx-2
+        <div className="flex justify-between items-center py-2 md:py-4 lg:py-4 mx-2 md:mx-4 lg:mx-4 p-2 md:p-4
         ">
-          <h1 className="font-bold  text-[#000000] text-xl md:text-2xl lg:text-3xl w-1/2 p-4 md:p-6">
-            {t("dashboard.marketing.CampaignOverview.SeasonalCampaignOverview")},
+          <h1 className="font-bold  text-[#000000] text-lg md:text-2xl lg:text-3xl w-1/2">
+            {t("dashboard.marketing.CampaignOverview.SeasonalCampaignOverview")}
           </h1>
           <button
             onClick={() => setCampaignModal(true)}
@@ -105,7 +105,7 @@ export default function SeasonalCampaignOverview() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr>
+                  <tr className="bg-[#F5F7FA]">
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.CampaignName")}
                     </th>

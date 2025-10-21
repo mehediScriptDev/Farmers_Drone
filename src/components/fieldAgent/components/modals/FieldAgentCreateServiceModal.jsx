@@ -40,7 +40,7 @@ export default function FieldAgentCreateServiceModal({
           >
             <IoArrowBack size={20} />
           </button>
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#002244] text-center w-full mr-8">
+          <h2 className="text-xl md:text-2xl  font-semibold text-[#002244] text-center w-full mr-8">
             {t("dashboard.fieldAgent.createServiceModal.CreateService")}
           </h2>
         </div>

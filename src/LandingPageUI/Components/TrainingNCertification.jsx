@@ -60,7 +60,7 @@ export default function TrainingNCertification() {
       <div className="section-container mt-12">
         {/* <iframe width="560" height="315" src="https://www.youtube.com/embed/2VLqZtded_0?si=DH643yI3bCtSzoqh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
 
-        <video controls onPause={true} src="/assets/demoVideo.mp4"></video>
+        <video controls src="/assets/demoVideo.mp4"></video>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const FilterBar = ({
     setSelectedFilterValue(item.value);
     setIsOpen(false);
   };
-
+console.log(selectedFilterValue)
   return (
     <div className="flex gap-4 mr-2">
       <div className="relative w-full md:w-1/2 lg:w-2/3">
@@ -38,8 +38,8 @@ const FilterBar = ({
         <input
           type="text"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search"
+          onChange={(e) => setSearchTerm(e.target.value.trimStart())}
+          placeholder={t("dashboard.fieldAgent.tableHeader.Search")}
           className="w-full pl-10 pr-4 py-3 border-2 border-gray-100 rounded-full text-base"
         />
       </div>
@@ -47,12 +47,12 @@ const FilterBar = ({
       <div ref={dropdownRef} className="relative inline-block text-left">
         <button
           onClick={toggleDropdown}
-          className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-full shadow-sm bg-transparent hover:bg-gray-100 transition duration-150 ease-in-out"
+          className="flex items-center space-x-2 px-4 py-3 border border-gray-300 rounded-full  bg-transparent hover:bg-gray-100 transition duration-150 ease-in-out"
           aria-expanded={isOpen}
           aria-haspopup="true"
         >
           <FiFilter className="w-5 h-5 text-gray-700" />
-          <span className="text-gray-700 font-medium">Filter</span>
+          <span className="text-gray-700 font-medium">{t("dashboard.fieldAgent.tableHeader.Filter")}</span>
           <FiChevronDown
             className={`w-4 h-4 text-gray-700 transition-transform duration-200 ${
               isOpen ? "transform rotate-180" : ""

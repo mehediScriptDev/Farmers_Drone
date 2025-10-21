@@ -120,7 +120,7 @@
       "firstOrderCommission": "₹105",
       "effectiveDate": "June 15, 2021",
       "registrationDate": "June 15, 2021",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "June 22, 2021",
       "serviceInterest": "0.6%",
       "quickActions": ""
@@ -146,7 +146,7 @@
       "firstOrderCommission": "₹130",
       "effectiveDate": "November 5, 2016",
       "registrationDate": "November 5, 2016",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "November 12, 2016",
       "serviceInterest": "0.3%",
       "quickActions": ""
@@ -198,7 +198,7 @@
       "firstOrderCommission": "₹115",
       "effectiveDate": "September 25, 2017",
       "registrationDate": "September 25, 2017",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "October 2, 2017",
       "serviceInterest": "1%",
       "quickActions": ""
@@ -263,7 +263,7 @@
       "firstOrderCommission": "₹115",
       "effectiveDate": "April 12, 2017",
       "registrationDate": "April 12, 2017",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "April 19, 2017",
       "serviceInterest": "1.8%",
       "quickActions": ""
@@ -302,7 +302,7 @@
       "firstOrderCommission": "₹105",
       "effectiveDate": "March 11, 2016",
       "registrationDate": "March 11, 2016",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "March 18, 2016",
       "serviceInterest": "4.5%",
       "quickActions": ""
@@ -380,7 +380,7 @@
       "firstOrderCommission": "₹120",
       "effectiveDate": "February 15, 2016",
       "registrationDate": "February 15, 2016",
-      "customerType": "Inactive",
+      "customerType": "Suspended",
       "nextFollowUpDate": "February 22, 2016",
       "serviceInterest": "1.9%",
       "quickActions": ""
@@ -523,7 +523,7 @@
       "firstOrderCommission": "₹130",
       "effectiveDate": "January 19, 2016",
       "registrationDate": "January 19, 2016",
-      "customerType": "Active",
+      "customerType": "Suspended",
       "nextFollowUpDate": "January 26, 2016",
       "serviceInterest": "3.9%",
       "quickActions": ""
