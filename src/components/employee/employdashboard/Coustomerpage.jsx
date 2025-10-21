@@ -1,6 +1,3 @@
-
-
-
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { LuEye } from 'react-icons/lu';
@@ -83,16 +80,24 @@ const Coustomerpage = () => {
     startIndex + itemsPerPage
   );
 
-  // Dropdown logic
-  const toggleDropdown = (index) => {
-    if (activeDropdown === index) {
-      setActiveDropdown(null);
+const toggleDropdown = (index) => {
+  if (activeDropdown === index) {
+    setActiveDropdown(null);
+  } else {
+    let shouldOpenUp = false;
+
+    if (paginatedActivities.length < 3) {
+      // For 1 or 2 rows
+      shouldOpenUp = index === 1; // 2nd row opens upward
     } else {
-      const shouldOpenUp = index >= paginatedActivities.length - 2;
-      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
-      setActiveDropdown(index);
+      // Normal logic for 3+ rows
+      shouldOpenUp = index >= paginatedActivities.length - 2;
     }
-  };
+
+    setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+    setActiveDropdown(index);
+  }
+};
 
   useEffect(() => {
     const handleClickOutside = (event) => {

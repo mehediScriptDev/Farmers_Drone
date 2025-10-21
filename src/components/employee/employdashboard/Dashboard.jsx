@@ -122,15 +122,25 @@ function DashBoard() {
   };
 
   // Dropdown logic
-  const toggleDropdown = (index) => {
-    if (activeDropdown === index) {
-      setActiveDropdown(null);
+const toggleDropdown = (index) => {
+  if (activeDropdown === index) {
+    setActiveDropdown(null);
+  } else {
+    let shouldOpenUp = false;
+
+    if (paginatedActivities.length < 3) {
+      // For 1 or 2 rows
+      shouldOpenUp = index === 1; // 2nd row opens upward
     } else {
-      const shouldOpenUp = index >= paginatedActivities.length - 2; // last 2 open upward
-      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
-      setActiveDropdown(index);
+      // Normal logic for 3+ rows
+      shouldOpenUp = index >= paginatedActivities.length - 2;
     }
-  };
+
+    setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+    setActiveDropdown(index);
+  }
+};
+
 
   const handleProgressChange = (actualIndex, status) => {
     setActivities((prev) => {
@@ -170,6 +180,7 @@ function DashBoard() {
   if (loading) return <div className="text-gray-700">Loading...</div>;
   if (error) return <div className="text-red-600">{error}</div>;
 
+               
   return (
     <div className="p-4 lg:pt-6 md:px-12">
       {/* Header */}
@@ -239,6 +250,7 @@ function DashBoard() {
             <button onClick={() => setMainModalOpen(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.assistProfile')}
             </button>
+            
           </div>
         </div>
 
@@ -332,35 +344,7 @@ function DashBoard() {
           </table>
         </div>
 
-        {/* Pagination */}
-         {/* <div className="py-4  border-t border-gray-200">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4   md:pt-3">
-            <p className="text-sm text-black px-4 md:px-6">
-              Showing {paginatedActivities.length} of {filteredActivities.length} results
-            </p>
-            <div className="flex flex-row flex-wrap items-center gap-0.5 sm:gap-2 px-3 sm:px-4 md:px-6">
-              <button
-                onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-                disabled={currentPage === 1}
-                className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >Previous</button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-                <button
-                  key={number}
-                  onClick={() => setCurrentPage(number)}
-                  className={`px-3 py-1.5 text-sm rounded transition-colors ${currentPage === number ? "bg-[#28A844] text-white font-medium" : "!bg-gray-100 text-black hover:bg-gray-200"}`}
-                >{number}</button>
-              ))}
-
-              <button
-                onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-                disabled={currentPage === totalPages || totalPages === 0}
-                className="px-2 sm:px-3 py-1.5 text-sm text-gray-600 !bg-gray-100 hover:bg-gray-200 rounded disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-              >Next</button>
-            </div>
-          </div>
-        </div>  */}
+     
          <Pagination
           currentPage={currentPage}
           totalItems={filteredActivities.length}

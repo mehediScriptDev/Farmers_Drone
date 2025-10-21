@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ErrorBoundary>
       <AuthProvider>
         <RouterProvider router={AppRoutes} />
+        
       </AuthProvider>
     </ErrorBoundary>
   </React.StrictMode>

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -27,11 +26,11 @@ export default function Nav() {
   // }
 
   const navLinks = [
-    { name: t("nav.home"), href: "/" },
-    { name: t("nav.about"), href: "/about" },
-    { name: t("nav.services"), href: "/services" },
-    { name: t("nav.blog"), href: "/blog" },
-    { name: t("nav.contact"), href: "/contact" },
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.about"), path: "/about" },
+    { name: t("nav.services"), path: "/services" },
+    { name: t("nav.blog"), path: "/blog" },
+    { name: t("nav.contact"), path: "/contact" },
   ];
   // hello
   return (
@@ -50,7 +49,7 @@ export default function Nav() {
             {navLinks.map((link) => (
               <NavLink
                 key={link.name}
-                to={link.href}
+                to={link.path}
                 className="!text-gray-700 hover:text-green-500 transition-colors duration-200 text-sm xl:text-[16px] font-medium"
               >
                 {link.name}
@@ -103,20 +102,20 @@ export default function Nav() {
       {/* Mobile Menu */}
       <div
         className={`lg:hidden absolute z-50 w-full bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen 
-            ? 'max-h-[600px] opacity-100' 
-            : 'max-h-0 opacity-0'
+          isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-4 w-11/12 mx-auto pt-2 pb-4 space-y-3">
           {navLinks.map((link) => (
-            <a
+            <NavLink
               key={link.name}
-              href={link.href}
+              to={link.path}
+              end
+              onClick={() => setIsOpen(false)}
               className="block !text-gray-700 hover:text-green-500 transition-colors duration-200 text-base font-medium py-2"
             >
               {link.name}
-            </a>
+            </NavLink>
           ))}
 
           <div className="pt-4 z-50 border-t border-gray-200 space-y-3">
@@ -129,11 +128,15 @@ export default function Nav() {
                 <Link
                   className="flex items-center gap-2 justify-center bg-gray-300 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200"
                   to={"/dashboard"}
+                  onClick={() => setIsOpen(false)}
                 >
                   <MdOutlineDashboard /> Dashboard
                 </Link>
                 <button
-                  onClick={logOutHandler}
+                  onClick={() => {
+                    setIsOpen(false);
+                    logOutHandler();
+                  }}
                   className="bg-red-400 w-full flex items-center gap-2 justify-center px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200"
                 >
                   <RiLogoutBoxRLine /> {t("navigation.logout")}
@@ -142,6 +145,7 @@ export default function Nav() {
             ) : (
               <Link
                 to={"/login"}
+                onClick={() => setIsOpen(false)}
                 className="border-green-500 block w-full btn border bg-transparent shadow-none text-center hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 {t("nav.login")}
@@ -153,8 +157,8 @@ export default function Nav() {
 
       {/* Backdrop overlay when menu is open */}
       {isOpen && (
-        <div 
-          onClick={() => setIsOpen(false)} 
+        <div
+          onClick={() => setIsOpen(false)}
           className="fixed inset-0 z-40  lg:hidden"
         />
       )}

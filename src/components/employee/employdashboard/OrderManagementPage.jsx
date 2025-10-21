@@ -1,5 +1,3 @@
-
-
 import { useState, useEffect, useMemo } from 'react';
 import { FiPlus, FiCalendar, FiX } from 'react-icons/fi';
 import ServiceRequestModal from './components/Modal/ServiceRequestModal';
@@ -21,6 +19,7 @@ const OrderManagementPage = () => {
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [dropdownPositions, setDropdownPositions] = useState({});
   const [activeActionDropdown, setActiveActionDropdown] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
@@ -52,15 +51,48 @@ const OrderManagementPage = () => {
     }
   };
 
+  // Toggle logic for progress dropdown
   const toggleDropdown = (index) => {
-    setActiveDropdown((prev) => (prev === index ? null : index));
-    setActiveActionDropdown(null);
+    if (activeDropdown === index) {
+      setActiveDropdown(null);
+    } else {
+     
+      let shouldOpenUp = false;
+
+      if (paginatedActivities.length < 3) {
+       
+        shouldOpenUp = index === 1; 
+      } else {
+     
+        shouldOpenUp = index >= paginatedActivities.length - 2;
+      }
+
+      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+      setActiveDropdown(index);
+      setActiveActionDropdown(null);
+    }
   };
 
+  // Action Dropdown toggle
   const toggleActionDropdown = (index) => {
-    setActiveActionDropdown((prev) => (prev === index ? null : index));
-    setActiveDropdown(null);
+    if (activeActionDropdown === index) {
+      setActiveActionDropdown(null);
+    } else {
+      
+      let shouldOpenUp = false;
+
+      if (paginatedActivities.length < 3) {
+        shouldOpenUp = index === 1; 
+      } else {
+        shouldOpenUp = index >= paginatedActivities.length - 2; 
+      }
+
+      setDropdownPositions((prev) => ({ ...prev, [`action-${index}`]: shouldOpenUp }));
+      setActiveActionDropdown(index);
+      setActiveDropdown(null);
+    }
   };
+
 
   const handleProgressChange = (index, newStatus) => {
     const activityIndex = (currentPage - 1) * ITEMS_PER_PAGE + index;
@@ -191,7 +223,7 @@ const OrderManagementPage = () => {
               placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 sm:py-3 border-2 border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-black/30 text-sm sm:text-base"
+              className="w-full pl-10 pr-4 py-2 sm:py-3 border border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-black/70 text-sm sm:text-base"
             />
           </div>
         </div>
@@ -218,7 +250,7 @@ const OrderManagementPage = () => {
                   {paginatedActivities.length > 0 ? (
                     paginatedActivities.map((activity, index) => {
                       const dropdownIndex = index;
-                      const isNearBottom = dropdownIndex >= ITEMS_PER_PAGE - 2;
+                      const isDropdownUp = dropdownPositions?.[dropdownIndex] || false;
                       return (
                         <tr key={dropdownIndex} className="hover:bg-gray-50">
                           {/* Order & Customer */}
@@ -255,24 +287,19 @@ const OrderManagementPage = () => {
                               >
                                 <span>{activity.progress}</span>
                                 <BiChevronDown
-                                  className={`ml-1 w-6 h-6 transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''
-                                    }`}
+                                  className={`ml-1 w-6 h-6 transition-transform duration-200 ${activeDropdown === dropdownIndex ? 'rotate-180' : ''}`}
                                 />
                               </button>
 
                               {activeDropdown === dropdownIndex && (
                                 <div
-                                  className={`absolute left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 progress-dropdown-menu overflow-hidden ${isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'
-                                    }`}
+                                  className={`absolute left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 progress-dropdown-menu overflow-hidden ${isDropdownUp ? 'bottom-full mb-1' : 'top-full mt-1'}`}
                                 >
                                   {['In Progress', 'Completed', 'Reschedule'].map((status) => (
                                     <button
                                       key={status}
                                       onClick={() => handleProgressChange(index, status)}
-                                      className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 ${status === activity.progress
-                                        ? 'bg-[#28A844] text-white font-semibold'
-                                        : 'text-gray-700 hover:bg-gray-100'
-                                        }`}
+                                      className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 ${status === activity.progress ? 'bg-[#28A844] text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'}`}
                                     >
                                       {status}
                                     </button>
@@ -298,15 +325,13 @@ const OrderManagementPage = () => {
                                 className="text-gray-600 hover:text-gray-900 text-2xl action-dropdown-toggle"
                               >
                                 <BiChevronDown
-                                  className={`w-5 h-5  md:w-8 md:h-7 transition-transform duration-200 ${activeActionDropdown === dropdownIndex ? 'rotate-180' : ''
-                                    }`}
+                                  className={`w-5 h-5  md:w-8 md:h-7 transition-transform duration-200 ${activeActionDropdown === dropdownIndex ? 'rotate-180' : ''}`}
                                 />
                               </button>
 
                               {activeActionDropdown === dropdownIndex && (
                                 <div
-                                  className={`absolute right-0 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 action-dropdown-menu overflow-hidden ${isNearBottom ? 'bottom-full mb-1' : 'top-full mt-1'
-                                    }`}
+                                  className={`absolute right-0 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50 action-dropdown-menu overflow-hidden ${dropdownPositions[`action-${dropdownIndex}`] ? 'bottom-full mb-1' : 'top-full mt-1'}`}
                                 >
                                   <Link to={`/employee/customers/${activity.id}`}>
                                     <button className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] hover:text-[#FFFFFF] transition-colors border-t border-gray-100">
@@ -327,6 +352,7 @@ const OrderManagementPage = () => {
                                   </button>
                                 </div>
                               )}
+
                             </div>
                           </td>
                         </tr>
@@ -343,7 +369,7 @@ const OrderManagementPage = () => {
               </table>
             </div>
 
-            {/* Replace custom pagination with common Pagination component */}
+            {/* Pagination */}
             <Pagination
               currentPage={currentPage}
               totalItems={filteredActivities.length}
