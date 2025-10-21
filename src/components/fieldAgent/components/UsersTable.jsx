@@ -127,7 +127,21 @@ const UsersTable = ({ t, data, sortKey, sortDir, onSortChange }) => {
             <td className="py-4 px-6 text-sm text-black">
               {row.registrationDate}
             </td>
-            <td className="py-4 px-6 text-sm text-black">{row.customerType}</td>
+            <td className="py-4 px-6 text-sm">
+              <span
+                className={
+                  row.customerType === "Active"
+                    ? "bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold"
+                    : row.customerType === "Suspended"
+                    ? "bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold"
+                    : row.customerType === "Inactive"
+                    ? "bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold"
+                    : ""
+                }
+              >
+                {row.customerType}
+              </span>
+            </td>
             <td className="py-4 px-6 text-sm text-black">
               {row.nextFollowUpDate}
             </td>

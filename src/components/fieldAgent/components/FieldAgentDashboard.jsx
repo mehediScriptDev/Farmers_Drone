@@ -33,6 +33,9 @@ const FieldAgentDashboard = () => {
   // Sorting state
   const [sortKey, setSortKey] = useState("customerList");
   const [sortDir, setSortDir] = useState("asc");
+  
+  // Customer Type Filter state (for cycling through types)
+  const [customerTypeFilter, setCustomerTypeFilter] = useState(null); // null, "Active", "Inactive", "Suspended"
 
   // user rank
   const [rank, setRank] = useState("Silver");
@@ -79,9 +82,27 @@ const FieldAgentDashboard = () => {
   }, []);
 
   const handleSortChange = (key) => {
+    // Special handling for customerType - cycle through filters
+    if (key === "customerType") {
+      // Cycle: null -> Active -> Inactive -> Suspended -> null
+      if (customerTypeFilter === null) {
+        setCustomerTypeFilter("Active");
+      } else if (customerTypeFilter === "Active") {
+        setCustomerTypeFilter("Inactive");
+      } else if (customerTypeFilter === "Inactive") {
+        setCustomerTypeFilter("Suspended");
+      } else {
+        setCustomerTypeFilter(null);
+      }
+      setCurrentPage(1);
+      return;
+    }
+    
+    // Normal sorting for other columns
     const next = sortKey === key && sortDir === "asc" ? "desc" : "asc";
     setSortKey(key);
     setSortDir(next);
+    setCustomerTypeFilter(null); // Reset customer type filter when sorting other columns
     setCurrentPage(1);
   };
 
@@ -102,6 +123,14 @@ const FieldAgentDashboard = () => {
       if (av == null) return 1;
       if (bv == null) return -1;
 
+      // Custom sorting for customerType
+      if (sortKey === "customerType") {
+        const customerTypeOrder = { "Active": 1, "Suspended": 2, "Inactive": 3 };
+        const aOrder = customerTypeOrder[av] ?? 999;
+        const bOrder = customerTypeOrder[bv] ?? 999;
+        return sortDir === "asc" ? aOrder - bOrder : bOrder - aOrder;
+      }
+
       const an = Number(av);
       const bn = Number(bv);
       if (!Number.isNaN(an) && !Number.isNaN(bn)) {
@@ -120,15 +149,21 @@ const FieldAgentDashboard = () => {
     return copy;
   }, [tableData, sortKey, sortDir]);
 
-  // Filter
+  // Apply customer type filter
+  const customerTypeFilteredData = useMemo(() => {
+    if (customerTypeFilter === null) return sortedData;
+    return sortedData.filter(row => row.customerType === customerTypeFilter);
+  }, [sortedData, customerTypeFilter]);
+
+  // Filter by search term
   const filteredData = useMemo(() => {
-    if (!searchTerm.trim()) return sortedData;
+    if (!searchTerm.trim()) return customerTypeFilteredData;
     const rx = new RegExp(
       searchTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
       "i"
     );
 
-    return sortedData.filter((row) => {
+    return customerTypeFilteredData.filter((row) => {
       // If a specific filter is selected, search only in that field
       if (selectedFilterValue && selectedFilterValue !== "customerList") {
         const fieldValue = row[selectedFilterValue];
@@ -150,7 +185,7 @@ const FieldAgentDashboard = () => {
       ];
       return haystacks.some((h) => rx.test((h ?? "").toString()));
     });
-  }, [sortedData, searchTerm, selectedFilterValue]);
+  }, [customerTypeFilteredData, searchTerm, selectedFilterValue]);
 
   // Pagination
   const totalUsers = filteredData.length;
