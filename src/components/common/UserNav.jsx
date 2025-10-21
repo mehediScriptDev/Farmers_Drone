@@ -101,56 +101,62 @@ export default function Nav() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <>
-          <div
-            onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-40 bg-transparent"
-          />
-          <div className="lg:hidden absolute z-50 w-full bg-white border-t border-gray-200">
-            <div className="px-4 w-11/12 mx-auto pt-2 pb-4 space-y-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="block !text-gray-700 hover:text-green-500 transition-colors duration-200 text-base font-medium py-2"
-                >
-                  {link.name}
-                </a>
-              ))}
+      <div
+        className={`lg:hidden absolute z-50 w-full bg-white border-t border-gray-200 overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen 
+            ? 'max-h-[600px] opacity-100' 
+            : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-4 w-11/12 mx-auto pt-2 pb-4 space-y-3">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className="block !text-gray-700 hover:text-green-500 transition-colors duration-200 text-base font-medium py-2"
+            >
+              {link.name}
+            </a>
+          ))}
 
-              <div className="pt-4 z-50 border-t border-gray-200 space-y-3">
-                {/* Download App Button Mobile */}
-                <button className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200">
-                  {t("nav.download")}
+          <div className="pt-4 z-50 border-t border-gray-200 space-y-3">
+            {/* Download App Button Mobile */}
+            <button className="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200">
+              {t("nav.download")}
+            </button>
+            {user ? (
+              <div className="space-y-3">
+                <Link
+                  className="flex items-center gap-2 justify-center bg-gray-300 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200"
+                  to={"/dashboard"}
+                >
+                  <MdOutlineDashboard /> Dashboard
+                </Link>
+                <button
+                  onClick={logOutHandler}
+                  className="bg-red-400 w-full flex items-center gap-2 justify-center px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200"
+                >
+                  <RiLogoutBoxRLine /> {t("navigation.logout")}
                 </button>
-                {user ? (
-                  <div className="space-y-3">
-                    <Link
-                      className="flex items-center gap-2 justify-center bg-gray-300 px-6 py-3 rounded-md text-sm font-medium transition-colors duration-200"
-                      to={"/dashboard"}
-                    >
-                      <MdOutlineDashboard /> Dashboard
-                    </Link>
-                    <button
-                      onClick={logOutHandler}
-                      className="bg-red-400 w-full flex items-center gap-2 justify-center px-6 py-3 text-sm rounded-md  font-medium transition-colors duration-200"
-                    >
-                      <RiLogoutBoxRLine /> {t("navigation.logout")}
-                    </button>
-                  </div>
-                ) : (
-                  <Link
-                    to={"/login"}
-                    className="border-green-500 block w-full btn border bg-transparent shadow-none text-center hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
-                  >
-                    {t("nav.login")}
-                  </Link>
-                )}
               </div>
-            </div>
+            ) : (
+              <Link
+                to={"/login"}
+                className="border-green-500 block w-full btn border bg-transparent shadow-none text-center hover:bg-green-600 text-green-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              >
+                {t("nav.login")}
+              </Link>
+            )}
           </div>
-        </>
+        </div>
+      </div>
+
+      {/* Backdrop overlay when menu is open */}
+      {isOpen && (
+        <div 
+          onClick={() => setIsOpen(false)} 
+          className="fixed inset-0 z-40  lg:hidden"
+        />
       )}
     </nav>
   );
