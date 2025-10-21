@@ -7,7 +7,7 @@ const LeadsTable = ({ data = [], statusStyles = {}, onOpenClock }) => {
     <div className="overflow-x-auto">
       <table className="w-full min-w-max">
         <thead className="bg-gray-50 border-b border-gray-200">
-          <tr>
+          <tr className="bg-[#F5F7FA]">
             <th className="px-3 md:px-6 py-3 text-left text-base md:text-lg font-medium text-black whitespace-nowrap">
               {t("dashboard.marketing.Lead")}
             </th>
