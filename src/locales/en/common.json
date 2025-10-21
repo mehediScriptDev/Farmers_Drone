@@ -426,6 +426,20 @@
         "supportCreateTicket": "Create SUPPORT TICKET",
         "supportEscalate": "Escalate to technical team"
       },
+      "dropdown": {
+        "mappingAndSurveying": "Mapping & Surveying",
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High",
+        "critical": "Critical",
+        "aerialMediaServices": "Aerial Media Services",
+        "realEstateAndMarketing": "Real Estate & Marketing",
+        "agriculture": "Agriculture",
+        "inspectionAndInfrastructure": "Inspection & Infrastructure",
+        "specializedOperations": "Specialized Operations",
+        "supportAndTraining": "Support & Training",
+        "other": "Other"
+      },
       "modal": {
         "collectTitle": "Collect Payment",
         "customerLabel": "Customer",

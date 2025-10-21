@@ -430,6 +430,20 @@
         "supportCreateTicket": "सपोर्ट टिकट बनाएं",
         "supportEscalate": "तकनीकी टीम को बढ़ाएँ"
       },
+      "dropdown": {
+        "mappingAndSurveying": "Mapping & Surveying",
+        "low": "कम",
+        "medium": "मध्यम",
+        "high": "उच्च",
+        "critical": "गंभीर",
+        "aerialMediaServices": "एरियल मीडिया सेवाएँ",
+        "realEstateAndMarketing": "रियल एस्टेट और मार्केटिंग",
+        "agriculture": "कृषि",
+        "inspectionAndInfrastructure": "निरीक्षण और अवसंरचना",
+        "specializedOperations": "विशेष संचालन",
+        "supportAndTraining": "समर्थन और प्रशिक्षण",
+        "other": "अन्य"
+      },
       "modal": {
         "collectTitle": "भुगतान एकत्र करें",
         "closeButton": "×",

@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 import React, { useState, useRef, useEffect } from 'react';
 import { FaTimes, FaCalendarAlt, FaClock } from 'react-icons/fa';
 import { IoChevronDown } from 'react-icons/io5';
@@ -13,10 +21,55 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
   const dateInputRef = useRef(null);
   const timeInputRef = useRef(null);
 
+  // Service Types with subcategories
+  const serviceTypesData = {
+    mappingAndSurveying: {
+      label: 'Mapping & Surveying',
+      subcategories: ['Land Mapping', 'Terrain Survey', 'Boundary Survey', 'Topographic Survey']
+    },
+    aerialMediaServices: {
+      label: 'Aerial Media Services',
+      subcategories: ['Photography', 'Videography', 'Thermal Imaging', '3D Modeling']
+    },
+    agriculture: {
+      label: 'Agriculture',
+      subcategories: ['Crop Monitoring', 'Soil Analysis', 'Irrigation Planning', 'Yield Estimation']
+    },
+    inspectionAndInfrastructure: {
+      label: 'Inspection & Infrastructure',
+      subcategories: ['Bridge Inspection', 'Power Line Inspection', 'Pipeline Inspection', 'Building Assessment']
+    },
+    specializedOperations: {
+      label: 'Specialized Operations',
+      subcategories: ['Search & Rescue', 'Emergency Response', 'Environmental Monitoring', 'Wildlife Tracking']
+    },
+    supportAndTraining: {
+      label: 'Support & Training',
+      subcategories: ['Pilot Training', 'Technical Support', 'Maintenance Service', 'Consultation']
+    },
+    other: {
+      label: 'Other',
+      subcategories: ['Custom Service', 'Additional Service']
+    }
+  };
+
+  const serviceTypes = [
+    'mappingAndSurveying',
+    'aerialMediaServices',
+    'agriculture',
+    'inspectionAndInfrastructure',
+    'specializedOperations',
+    'supportAndTraining',
+    'other'
+  ];
+
+  const priorities = ['low', 'medium', 'high', 'critical'];
+
   const [formData, setFormData] = useState({
     customer: '',
-    serviceType: 'Mapping & Surveying',
-    priority: 'Low',
+    serviceType: 'mappingAndSurveying',
+    serviceSubType: '',
+    priority: 'low',
     preferredDate: '',
     preferredTime: '',
     specialInstruction: ''
@@ -29,21 +82,16 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
   });
 
   const [serviceTypeOpen, setServiceTypeOpen] = useState(false);
+  const [hoveredMenu, setHoveredMenu] = useState(null);
   const [priorityOpen, setPriorityOpen] = useState(false);
 
-  //Handle dropdown outside click only (not modal)
+  // Handle dropdown outside click only
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        serviceTypeDropdownRef.current &&
-        !serviceTypeDropdownRef.current.contains(e.target)
-      ) {
+      if (serviceTypeDropdownRef.current && !serviceTypeDropdownRef.current.contains(e.target)) {
         setServiceTypeOpen(false);
       }
-      if (
-        priorityDropdownRef.current &&
-        !priorityDropdownRef.current.contains(e.target)
-      ) {
+      if (priorityDropdownRef.current && !priorityDropdownRef.current.contains(e.target)) {
         setPriorityOpen(false);
       }
     };
@@ -51,20 +99,12 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const serviceTypes = [
-    'Mapping & Surveying',
-    'Land Survey',
-    'Construction Survey',
-    'Topographic Survey',
-  ];
-
-  const priorities = ['Low', 'Medium', 'High', 'Critical'];
-
   const resetForm = () => {
     setFormData({
       customer: '',
-      serviceType: 'Mapping & Surveying',
-      priority: 'Low',
+      serviceType: 'mappingAndSurveying',
+      serviceSubType: '',
+      priority: 'low',
       preferredDate: '',
       preferredTime: '',
       specialInstruction: ''
@@ -102,6 +142,16 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
     return isValid;
   };
 
+  const handleSubCategorySelect = (category, subCategory) => {
+    setFormData({
+      ...formData,
+      serviceType: category,
+      serviceSubType: subCategory
+    });
+    setServiceTypeOpen(false);
+    setHoveredMenu(null);
+  };
+
   const handleSubmit = () => {
     if (!validate()) return;
 
@@ -123,7 +173,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
       <div
         ref={modalRef}
         className="bg-white rounded-lg shadow-2xl w-full max-w-md md:max-w-xl lg:max-w-xl relative"
-        onClick={(e) => e.stopPropagation()} 
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
@@ -159,36 +209,68 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
             )}
           </div>
 
-          {/* Service Type Dropdown */}
-          <div className="mb-4 relative" ref={serviceTypeDropdownRef}>
+          {/* Service Type Dropdown with Nested Menu */}
+          <div className="mb-4" ref={serviceTypeDropdownRef}>
             <label className="block text-base font-medium text-gray-800 mb-2">
               {t('dashboard.employee.pages.order.modal.serviceType')}
             </label>
             <button
               type="button"
               onClick={() => setServiceTypeOpen(!serviceTypeOpen)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white"
+              className="w-1/2 px-3 py-2  bg-[#F7FFE5] rounded-md flex items-center justify-between  text-base"
             >
-              <span>{formData.serviceType}</span>
+              <span className="truncate">
+                {formData.serviceSubType || t(`dashboard.employee.dropdown.${formData.serviceType}`)}
+              </span>
               <IoChevronDown
-                className={`transition-transform duration-200 ${serviceTypeOpen ? 'rotate-180' : ''}`}
+                className={`transition-transform duration-200 flex-shrink-0 ${serviceTypeOpen ? 'rotate-180' : ''}`}
               />
             </button>
 
             {serviceTypeOpen && (
-              <div className="absolute mt-1 w-full bg-white shadow-lg rounded-md border border-gray-200 z-50">
+              <div className="absolute w-1/2 mt-1 bg-white shadow-lg rounded-md border border-gray-200 z-50 max-h-96 overflow-visible">
                 {serviceTypes.map((type) => (
                   <div
                     key={type}
-                    onClick={() => {
-                      setFormData({ ...formData, serviceType: type });
-                      setServiceTypeOpen(false);
-                    }}
-                    className={`px-3 py-2 cursor-pointer ${
-                      formData.serviceType === type ? 'bg-[#28A844] text-white font-medium' : ''
-                    }`}
+                    className="relative"
+                    data-menu-item={type}
+                    onMouseEnter={() => setHoveredMenu(type)}
+                    onMouseLeave={() => setHoveredMenu(null)}
                   >
-                    {type}
+                    {/* Main Category */}
+                    <div
+                      onClick={() => {
+                        setFormData({ ...formData, serviceType: type });
+                      }}
+                      className={`px-3 py-2 cursor-pointer hover:bg-gray-100 transition ${
+                        formData.serviceType === type ? 'bg-[#F7FFE5] border-l-2 border-green-400 font-medium' : ''
+                      }`}
+                    >
+                      {t(`dashboard.employee.dropdown.${type}`)}
+                     
+                    </div>
+
+                    {/* Submenu - appears on hover */}
+                    {hoveredMenu === type && (
+                      <div className="fixed bg-white shadow-lg rounded-md border border-gray-200 z-50 w-48" style={{
+                        top: document.querySelector(`[data-menu-item="${type}"]`)?.getBoundingClientRect().top || '0px',
+                        left: (document.querySelector(`[data-menu-item="${type}"]`)?.getBoundingClientRect().right || 0) + 10 + 'px',
+                      }}>
+                        {serviceTypesData[type].subcategories.map((subCat) => (
+                          <div
+                            key={subCat}
+                            onClick={() => handleSubCategorySelect(type, subCat)}
+                            className={`px-3 py-2 cursor-pointer text-sm hover:bg-green-50 transition ${
+                              formData.serviceSubType === subCat
+                                ? 'bg-[#28A844] text-white font-medium'
+                                : ''
+                            }`}
+                          >
+                            {subCat}
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
@@ -205,7 +287,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
               onClick={() => setPriorityOpen(!priorityOpen)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-black/70 text-base bg-white"
             >
-              <span>{formData.priority}</span>
+              <span>{t(`dashboard.employee.dropdown.${formData.priority}`)}</span>
               <IoChevronDown
                 className={`transition-transform duration-200 ${priorityOpen ? 'rotate-180' : ''}`}
               />
@@ -224,7 +306,7 @@ const ServiceRequestModal = ({ isOpen, onClose, onSubmit }) => {
                       formData.priority === level ? 'bg-[#28A844] text-white font-medium' : ''
                     }`}
                   >
-                    {level}
+                    {t(`dashboard.employee.dropdown.${level}`)}
                   </div>
                 ))}
               </div>
