@@ -610,6 +610,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
           {/* Step 3 - Service Locations (UI matching the attached screenshot) */}
           {modalStep === 3 && (
             <div className="space-y-4">
+
               {formData.locations.map((loc, idx) => (
                 <div key={idx} className="space-y-3 p-1 rounded-md">
                   <h3 className="text-lg font-semibold">
@@ -794,7 +795,21 @@ export default function RegistrationModal({ isOpen, onClose }) {
               >
                 {t("Confirm Registration")}
               </button>
-              <div className="w-1/2">
+              <div className="w-1/2 flex gap-2">
+                {formData.locations.length > 1 && (
+                  <button
+                    onClick={() => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        locations: prev.locations.slice(0, -1),
+                      }));
+                    }}
+                    className="w-1/2 px-2 md:px-4 py-1 md:py-2 rounded-lg border border-red-400 text-red-600 bg-white"
+                  >
+                    {t('dashboard.fieldAgent.ThirdModal.removeLocation')}
+                  </button>
+                )}
+
                 <button
                   onClick={() => {
                     // add new empty location
@@ -813,9 +828,9 @@ export default function RegistrationModal({ isOpen, onClose }) {
                       ],
                     }));
                   }}
-                  className="w-full px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white"
+                  className={`${formData.locations.length > 1 ? 'w-1/2' : 'w-full'} md:px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white`}
                 >
-                  {t("dashboard.fieldAgent.ThirdModal.addLocation")}
+                  {t('dashboard.fieldAgent.ThirdModal.addLocation')}
                 </button>
               </div>
             </div>
