@@ -4,12 +4,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useParams, Link } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 function CustomerDetailsPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { customerId } = useParams();
-
+const { t } = useTranslation();
   // eslint-disable-next-line no-unused-vars
   const [customer, setCustomer] = useState(location.state?.customer || null);
   // eslint-disable-next-line no-unused-vars
@@ -81,7 +82,7 @@ function CustomerDetailsPage() {
         {/* Orders Section */}
         <div className="bg-white rounded-xl shadow-sm p-5 sm:p-6 md:p-8 border border-gray-100 mb-6">
           <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            Total Orders Completed <span className="text-gray-600">({orders.length})</span>
+            {t('dashboard.employee.pages.orderDetails.totalOrder')}<span className="text-gray-600">({orders.length})</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -108,7 +109,7 @@ function CustomerDetailsPage() {
                   
                   className="w-full bg-[#28A844] hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-colors text-sm shadow-sm"
                 >
-                  Order Details
+                  {t('dashboard.employee.pages.orderDetails.orderDetails')}
                 </button>
                 </Link>
                
@@ -120,8 +121,8 @@ function CustomerDetailsPage() {
         {/* KYC Section */}
         <div className="mt-6">
           <div className="flex items-center gap-3 mb-4">
-            <h2 className="text-2xl font-bold text-gray-900">KYC Document</h2>
-            
+            <h2 className="text-2xl font-bold text-gray-900">{t('dashboard.employee.pages.orderDetails.kycDocument')}</h2>
+
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

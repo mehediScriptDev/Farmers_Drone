@@ -90,7 +90,7 @@ const ReportAnalysisPage = () => {
       t("dashboard.employee.dropdown.weddingCoverage"),
     ],
   }), [t]);
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   const periodOptions = [
     { key: "last7days", label: t("dashboard.employee.pages.dashboard.dropDown.last7days") },
@@ -183,7 +183,48 @@ const ReportAnalysisPage = () => {
       ? customer.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       customer.company.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
-    return matchesCustomerType && matchesServiceCategory && matchesSearch;
+
+    // Period filtering
+    let matchesPeriod = true;
+    if (customer.date) {
+      try {
+       
+        const dateStr = customer.date.split(' - ')[0].trim();
+        
+        const [day, month, year] = dateStr.split('/').map(Number);
+        const customerDate = new Date(year, month - 1, day); 
+        const now = new Date();
+        const diffInDays = Math.floor((now - customerDate) / (1000 * 60 * 60 * 24));
+
+        switch (selectedPeriod) {
+          case "last7days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 7;
+            break;
+          case "last30days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 30;
+            break;
+          case "last60days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 60;
+            break;
+          case "last90days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 90;
+            break;
+          case "last6months":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 180;
+            break;
+          case "last12months":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 365;
+            break;
+          default:
+            matchesPeriod = true;
+        }
+      } catch (error) {
+        console.error('Error parsing date:', customer.date, error);
+        matchesPeriod = true; // Show the item if date parsing fails
+      }
+    }
+
+    return matchesCustomerType && matchesServiceCategory && matchesSearch && matchesPeriod;
   });
   const totalPages = Math.ceil(filteredCustomers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;

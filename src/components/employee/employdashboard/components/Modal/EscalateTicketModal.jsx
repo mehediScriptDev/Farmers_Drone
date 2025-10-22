@@ -247,7 +247,7 @@ const Dropdown = ({ label, options, selected, setSelected }) => {
         transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:outline-none hover:border-green-400`}
       >
         <span className={`${selected ? "text-gray-800" : "text-gray-400"}`}>
-          {selected || `Select ${label}`}
+          {selected || `${label}`}
         </span>
         <ChevronDown
           size={18}
@@ -407,14 +407,25 @@ const escalationReasons = [
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
               />
             </div>
-
+            <div className="flex flex-col space-y-1">
+              <label className="text-base font-medium text-gray-700">
+                {t("dashboard.employee.modal.stepsAlreadyTaken")}
+              </label>
+              <textarea
+                placeholder="Provide detailed information about the technical issue for the development team..."
+                rows="4"
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none resize-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
+              ></textarea>
+            </div>
             {/* Comments */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                {t("dashboard.employee.modal.additionalComments")}
+                {t("dashboard.employee.modal.detailedDescription")}
               </label>
               <textarea
-                placeholder={t("dashboard.employee.modal.enterAdditionalDetails")}
+                placeholder="List troubleshooting steps already attempted..."
                 rows="4"
                 value={comments}
                 onChange={(e) => setComments(e.target.value)}
