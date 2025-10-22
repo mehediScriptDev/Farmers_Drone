@@ -101,7 +101,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
     setModalStep(1);
     setValidationError("");
     setFormData(INITIAL_FORM);
-    setIsDropdownOpen(false); 
+    setIsDropdownOpen(false);
     onClose();
   }, [onClose]);
 
@@ -158,20 +158,18 @@ export default function RegistrationModal({ isOpen, onClose }) {
     handleClose();
   }, [formData, handleClose]);
 
-
   const handleIndustrySelect = useCallback(
     (industry) => {
       if (validationError) setValidationError("");
       setFormData((prev) => ({
         ...prev,
-        industry: industry, 
-        subcategories: [], 
+        industry: industry,
+        subcategories: [],
       }));
-      setIsDropdownOpen(false); 
+      setIsDropdownOpen(false);
     },
     [validationError]
   );
-
 
   const handleSubcategorySelect = useCallback(
     (subcategory) => {
@@ -193,7 +191,6 @@ export default function RegistrationModal({ isOpen, onClose }) {
     },
     [formData.industry, formData.subcategories, validationError] // validationError যোগ করা হয়েছে
   );
-
 
   const removeSubcategory = useCallback(
     (subcategoryToRemove) => {
@@ -662,12 +659,19 @@ export default function RegistrationModal({ isOpen, onClose }) {
               {t("Next")}
             </button>
           ) : (
-            <button
-              onClick={handleConfirm}
-              className="w-full bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
-            >
-              {t("Confirm Registration")}
-            </button>
+            <div className="flex justify-between gap-4">
+              <button
+                onClick={handleConfirm}
+                className="w-1/2 bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
+              >
+                {t("Confirm Registration")}
+              </button>
+              <button
+                className="w-1/2 bg-transparent hover:bg-gray-100 text-black py-2.5 rounded-lg font-medium transition border"
+              >
+                Add Location
+              </button>
+            </div>
           )}
         </div>
       </div>
