@@ -561,7 +561,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                   <button
                     type="button"
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="focus:outline-none focus:ring-2 w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black appearance-none text-sm text-left flex justify-between items-center"
+                    className="focus:outline-none focus:ring-2 w-full px-4 py-2 border bg-[#F7FFE5] border-black/30 rounded-lg focus:ring-black appearance-none text-sm text-left flex justify-between items-center"
                   >
                     <span
                       className={`block truncate ${
@@ -616,7 +616,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                             ${
                               isSelected
                                 ? "bg-gray-200 text-gray-500 border-gray-300 opacity-50 cursor-not-allowed"
-                                : "text-lime-700 bg-lime-100 border-lime-300 hover:bg-lime-200 focus:outline-none focus:ring-2 focus:ring-lime-400"
+                                : "  border-gray-50 hover:bg-lime-50 focus:outline-none focus:ring-2 focus:ring-lime-400"
                             }`}
                           >
                             {subcategory}
