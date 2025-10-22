@@ -111,7 +111,7 @@ const CollectPaymentModal = ({ isOpen, onClose }) => {
               placeholder={t('dashboard.employee.modal.customerPlaceholder')}
               value={customer}
               onChange={(e) => setCustomer(e.target.value)}
-              className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded focus:outline-none focus:border-green-500 text-base ${errors.customer ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded focus:outline-none focus:border-black/70 text-base ${errors.customer ? 'border-red-500' : 'border-gray-300'}`}
             />
             {errors.customer && <p className="text-red-500 text-sm mt-1">{errors.customer}</p>}
           </div>
@@ -126,7 +126,7 @@ const CollectPaymentModal = ({ isOpen, onClose }) => {
               placeholder="$ 00.00"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded focus:outline-none focus:border-green-500 text-base ${errors.amount ? 'border-red-500' : 'border-gray-300'}`}
+              className={`w-full px-2 sm:px-3 py-2 sm:py-2.5 border rounded focus:outline-none focus:border-black/70 text-base ${errors.amount ? 'border-red-500' : 'border-gray-300'}`}
             />
             {errors.amount && <p className="text-red-500 text-sm mt-1">{errors.amount}</p>}
           </div>
@@ -175,7 +175,7 @@ const CollectPaymentModal = ({ isOpen, onClose }) => {
               placeholder={t('dashboard.employee.modal.notesPlaceholder')}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-gray-300 rounded focus:outline-none focus:border-green-500 text-base resize-none h-24"
+              className="w-full px-2 sm:px-3 py-2 sm:py-2.5 border border-gray-300 rounded focus:outline-none focus:border-black/70 text-base resize-none h-24"
             />
           </div>
 

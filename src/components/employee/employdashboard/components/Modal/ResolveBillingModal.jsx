@@ -293,7 +293,7 @@ const ResolveBillingModal = ({ isOpen, onClose }) => {
                 value={state.customer}
                 ref={customerRef}
                 onChange={(e) => setState(prev => ({ ...prev, customer: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-green-500 text-sm ${
+                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-black/70 text-sm ${
                   errors.customer ? 'border-red-500' : 'border-[#002244]'
                 }`}
               />
@@ -343,7 +343,7 @@ const ResolveBillingModal = ({ isOpen, onClose }) => {
                 value={state.transactionId}
                 ref={transactionIdRef}
                 onChange={(e) => setState(prev => ({ ...prev, transactionId: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-green-500 text-base ${
+                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-black/70text-base ${
                   errors.transactionId ? 'border-red-500' : 'border-[#002244]'
                 }`}
               />
@@ -360,7 +360,7 @@ const ResolveBillingModal = ({ isOpen, onClose }) => {
                 value={state.notes}
                 ref={notesRef}
                 onChange={(e) => setState(prev => ({ ...prev, notes: e.target.value }))}
-                className="w-full px-3 py-2 border border-[#002244] rounded focus:outline-none focus:border-green-500 text-base resize-none h-24"
+                className="w-full px-3 py-2 border border-[#002244] rounded focus:outline-none focus:border-black/70 text-base resize-none h-24"
               />
             </div>
 
