@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import LoadingSpinner from '../../common/LoadingSpinner';
+import MapAudience from './MapAudience';
 
 const ChannelCard = ({
   leads,
