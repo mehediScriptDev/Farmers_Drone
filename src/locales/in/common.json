@@ -608,13 +608,11 @@
         "customerUnhappy": "ग्राहक असंतुष्ट",
         "delayedResponse": "देरी से प्रतिक्रिया",
         "technicalEscalation": "तकनीकी एस्केलेशन",
-
         "assignTo": "को असाइन करें",
         "enterNameOrTeam": "नाम या टीम दर्ज करें",
         "additionalComments": "अतिरिक्त टिप्पणियाँ",
         "addAdditionalDetails": "कोई अतिरिक्त विवरण जोड़ें...",
         "escalateTicketBtn": "टिकट एस्केलेट करें",
-
         "billingProblem": "बिलिंग समस्या",
         "serviceComplaint": "सेवा शिकायत",
         "accountAccess": "खाता एक्सेस",
@@ -623,7 +621,6 @@
         "securityConcern": "सुरक्षा चिंता",
         "stepsAlreadyTaken": "पहले से उठाए गए कदम",
         "detailedDescription": "विस्तृत विवरण",
-
         "ticketID": "टिकट आईडी",
         "enterTicketID": "टिकट आईडी दर्ज करें",
         "updateStatus": "स्थिति अपडेट करें",
@@ -635,7 +632,16 @@
         "enterInternalNotes": "आंतरिक नोट्स दर्ज करें...",
         "customerResponse": "ग्राहक प्रतिक्रिया",
         "manageTicket": "टिकट प्रबंधित करें",
-        "updateTicket": "टिकट अपडेट करें"
+        "updateTicket": "टिकट अपडेट करें",
+        "incorrectCharge": "गलत शुल्क",
+        "percentageDiscount": "प्रतिशत छूट",
+        "referralBonus": "रेफरल बोनस",
+        "loyaltyBonus": "निष्ठा बोनस",
+        "campaignDiscount": "अभियान छूट",
+        "creditCard": "क्रेडिट कार्ड",
+        "debitCard": "डेबिट कार्ड",
+        "bank": "बैंक",
+        "rupay": "रुपे कार्ड"
       },
       "pages": {
         "orderDetails": {

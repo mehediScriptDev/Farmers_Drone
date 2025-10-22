@@ -625,9 +625,17 @@
         "internalNotes": "Internal Notes",
         "enterInternalNotes": "Enter internal notes...",
         "customerResponse": "Customer Response",
-
         "updateTicket": "Update ticket",
-        "manageTicket": "Manage a Ticket"
+        "manageTicket": "Manage a Ticket",
+        "creditCard": "Credit Card",
+        "debitCard": "Debit Card",
+        "bank": "Bank",
+        "rupay": "Rupay",
+        "percentageDiscount": "Percentage Discount",
+        "referralBonus": "Referral Bonus",
+        "loyaltyBonus": "Loyalty Bonus",
+        "campaignDiscount": "Campaign Discount",
+        "incorrectCharge": "Incorrect Charge"
       },
       "pages": {
         "orderdetails": {

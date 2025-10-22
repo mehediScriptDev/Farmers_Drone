@@ -185,9 +185,10 @@ import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 
 const ResolveBillingModal = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const initialState = {
     customer: '',
-    issueType: 'Incorrect charge',
+    issueType: t('dashboard.employee.modal.incorrectCharge'),
     transactionId: '',
     notes: '',
     isDropdownOpen: false,
@@ -201,7 +202,7 @@ const ResolveBillingModal = ({ isOpen, onClose }) => {
   const issueTypeRef = useRef(null);
   const transactionIdRef = useRef(null);
   const notesRef = useRef(null);
-  const { t } = useTranslation();
+  
 
   const issueTypes = [
     t('dashboard.employee.modal.resolveIssueTypeOption1'),

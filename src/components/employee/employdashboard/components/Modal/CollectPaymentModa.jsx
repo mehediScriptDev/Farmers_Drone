@@ -4,9 +4,10 @@ import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 
 const CollectPaymentModal = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
   const [customer, setCustomer] = useState('');
   const [amount, setAmount] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState('Credit Card');
+  const [paymentMethod, setPaymentMethod] = useState(t('dashboard.employee.modal.creditCard'));
   const [notes, setNotes] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -17,9 +18,9 @@ const CollectPaymentModal = ({ isOpen, onClose }) => {
 
   const modalRef = useRef(null);
   const dropdownRef = useRef(null);
-  const { t } = useTranslation();
+  
 
-  const paymentMethods = ['Credit Card', 'Debit Card', 'Bank', 'Rupay'];
+  const paymentMethods = [t('dashboard.employee.modal.creditCard'), t('dashboard.employee.modal.debitCard'), t('dashboard.employee.modal.bank'), t('dashboard.employee.modal.rupay')];
 
   // Dropdown outside click
   useEffect(() => {
@@ -49,7 +50,7 @@ const CollectPaymentModal = ({ isOpen, onClose }) => {
   const resetFields = () => {
     setCustomer('');
     setAmount('');
-    setPaymentMethod('Credit Card');
+    setPaymentMethod(t('dashboard.employee.modal.creditCard'));
     setNotes('');
     setErrors({ customer: '', amount: '' });
     setIsDropdownOpen(false);

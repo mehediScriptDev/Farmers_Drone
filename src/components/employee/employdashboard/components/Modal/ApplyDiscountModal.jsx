@@ -190,9 +190,10 @@ import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 
 const ApplyDiscountModal = ({ isOpen, onClose }) => {
+   const { t } = useTranslation();
   const initialState = {
     customer: '',
-    discountType: 'Percentage Discount',
+    discountType: t('dashboard.employee.modal.percentageDiscount'),
     amount: '',
     notes: '',
     isDropdownOpen: false,
@@ -206,9 +207,14 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
   const discountTypeRef = useRef(null);
   const amountRef = useRef(null);
   const notesRef = useRef(null);
-  const { t } = useTranslation();
+ 
 
-  const discountTypes = ['Percentage Discount', 'Referral Bonus', 'Loyalty Bonus', 'Campaign Discount'];
+  const discountTypes = [
+    t('dashboard.employee.modal.percentageDiscount'), 
+    t('dashboard.employee.modal.referralBonus'),
+     t('dashboard.employee.modal.loyaltyBonus'), 
+     t('dashboard.employee.modal.campaignDiscount')
+    ];
 
   // Close dropdown on outside click
   useEffect(() => {
