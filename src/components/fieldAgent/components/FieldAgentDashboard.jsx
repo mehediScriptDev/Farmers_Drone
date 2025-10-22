@@ -13,7 +13,7 @@ import CreateServiceCard from "./CreateServiceCard";
 import FilterBar from "./FilterBar";
 import UsersTable from "./UsersTable";
 import Pagination from "../../common/Pagination";
-import RegistrationModal from "../../employee/employdashboard/components/Modal/RegistrationModal";
+import AddCustomerModal from "../../common/AddCustomerModal"
 
 const FieldAgentDashboard = () => {
   // const { user } = useAuth();
@@ -273,7 +273,7 @@ const FieldAgentDashboard = () => {
       </div>
 
       {/* Modals */}
-      <RegistrationModal
+      <AddCustomerModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       />
