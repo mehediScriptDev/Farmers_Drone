@@ -66,7 +66,7 @@ export default function MilestonesGallery() {
           </div>
 
           {/* Column 4 */}
-          <div className="lg:col-span-1 lg:hidden xl:flex flex-col gap-5">
+          <div className="hidden xl:flex lg:col-span-1 flex-col gap-5">
             <div className="h-[448px] rounded-lg overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=800&h=900&fit=crop"
