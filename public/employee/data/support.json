@@ -1,34 +1,5 @@
 {
-  "stats": [
-    {
-      "label": "Open Tickets",
-      "value": "23",
-      "change": "+2% vs last month",
-      "subtext": null,
-      "trend": "up"
-    },
-    {
-      "label": "In Progress",
-      "value": "15",
-      "change": null,
-      "subtext": "Average response 2h",
-      "trend": null
-    },
-    {
-      "label": "Resolved Today",
-      "value": "34",
-      "change": "+18% from last month",
-      "subtext": null,
-      "trend": "up"
-    },
-    {
-      "label": "Escalated",
-      "value": "5",
-      "change": null,
-      "subtext": "Awaiting tech team",
-      "trend": null
-    }
-  ],
+  
   "supportData": [
     {
       "id": 1,

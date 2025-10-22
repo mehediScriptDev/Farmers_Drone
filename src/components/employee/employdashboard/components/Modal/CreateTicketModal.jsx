@@ -5,10 +5,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
-const priorities = ["Low", "Medium", "High"];
-const categories = ["Technical Issue", "Billing Issue", "Other"];
-const services = ["Mapping & Surveying", "Installation", "Maintenance"];
 
 // ✅ Reusable Dropdown Component
 const Dropdown = ({ label, options, selected, setSelected }) => {
@@ -81,8 +79,12 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
   const [selectedPriority, setSelectedPriority] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedService, setSelectedService] = useState("");
-
+ const { t } = useTranslation();
   const modalRef = useRef(null);
+  const priorities = [t("dashboard.employee.modal.low"), t("dashboard.employee.modal.medium"), t("dashboard.employee.modal.high")];
+const categories = [t("dashboard.employee.modal.technicalIssue"), t("dashboard.employee.modal.billingIssue"), t("dashboard.employee.modal.other")];
+const services = [t("dashboard.employee.modal.mappingSurveying"), t("dashboard.employee.modal.installation"), t("dashboard.employee.modal.maintenance")];
+
 
   // Close modal when clicking outside
   useEffect(() => {
@@ -137,7 +139,7 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
         >
           {/* Header */}
           <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
-            <h2 className="text-xl font-semibold">Create a Ticket</h2>
+            <h2 className="text-xl font-semibold">{t("dashboard.employee.modal.createTicket")}</h2>
             <button
               onClick={onClose}
               className="text-gray-500 text-xl hover:text-gray-800"
@@ -151,11 +153,11 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
             {/* Customer */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Customer <span className="text-red-500">*</span>
+                {t("dashboard.employee.modal.customer")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter customer name or phone number"
+                placeholder={t("dashboard.employee.modal.enterCustomerNameOrPhone")}
                 value={customer}
                 onChange={(e) => setCustomer(e.target.value)}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
@@ -165,13 +167,13 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
             {/* Priority & Category */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Dropdown
-                label="Priority"
+                label={t("dashboard.employee.modal.priority")}
                 options={priorities}
                 selected={selectedPriority}
                 setSelected={setSelectedPriority}
               />
               <Dropdown
-                label="Category"
+                label={t("dashboard.employee.modal.category")}
                 options={categories}
                 selected={selectedCategory}
                 setSelected={setSelectedCategory}
@@ -181,11 +183,11 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
             {/* Issue Title */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Issue Title <span className="text-red-500">*</span>
+                {t("dashboard.employee.modal.issueTitle")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Brief description of the issue"
+                placeholder={t("dashboard.employee.modal.briefDescription")}
                 value={issueTitle}
                 onChange={(e) => setIssueTitle(e.target.value)}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
@@ -194,7 +196,7 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
 
             {/* Service Type */}
             <Dropdown
-              label="Service Type"
+              label={t("dashboard.employee.modal.serviceType")}
               options={services}
               selected={selectedService}
               setSelected={setSelectedService}
@@ -203,10 +205,10 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
             {/* Issue Description */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Issue Description <span className="text-red-500">*</span>
+                {t("dashboard.employee.modal.issueDescription")} <span className="text-red-500">*</span>
               </label>
               <textarea
-                placeholder="Detailed description of the customer's issue..."
+                placeholder={t("dashboard.employee.modal.detailedDescription")}
                 rows="4"
                 value={issueDescription}
                 onChange={(e) => setIssueDescription(e.target.value)}
@@ -219,7 +221,7 @@ const CreateTicketModal = ({ isOpen, onClose }) => {
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 text-white font-medium rounded-md py-2 transition"
             >
-              Create Ticket
+              {t("dashboard.employee.modal.createTicket")}
             </button>
           </form>
         </div>
