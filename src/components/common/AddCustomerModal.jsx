@@ -17,36 +17,38 @@ const categoryData = {
     "Data Analysis (DAT)",
   ],
   "Aerial Media Services": [
-    "Real Estate Photography",
-    "Event Videography",
-    "Cinematic Filming",
+    "Aerial Photography & Videography (VID)",
+    "Cinematography(CIN)",
+    "Wedding Coverage (WED)",
+    "Editing (EDT)",
   ],
   "Real Estate & Marketing": [
-    "Property Showcases",
-    "Virtual Tours",
-    "Commercial Property Ads",
+    "Real Estate Marketing Services (REM)",
+    "Residential Photography (RPH)",
+    "Land Surveying (LND)",
+    "Roof Inspection (RFI)",
   ],
   Agriculture: [
-    "Crop Health Monitoring",
-    "Field Analysis",
-    "Automated Seeding",
+    "Agricultural Services (AGP)",
+    "Agricultural Spray(AGS)",
+    "Agricultural Spread(AGP)",
   ],
   "Inspection & Infrastructure": [
-    "Bridge Inspection",
-    "Powerline Monitoring",
-    "Building Facade Scan",
+    "Infrastructure Inspection Services (INF)",
+    "Aerial Inspections (AIN)",
+    "Construction Site Monitoring (CON)",
+    "General Infrastructure  (IFG)",
   ],
   "Specialized Operations": [
-    "Search & Rescue Support",
-    "Disaster Response",
-    "Wildlife Monitoring",
+    "Drone Delivery Services (DLV)",
+    "Boating & Water Sports (BWS)",
+    "Sports (SPR)",
   ],
   "Support & Training": [
-    "Pilot Training Program",
-    "Software Support",
-    "Maintenance Package",
+    "Drone Maintenance (DMN)",
+    "Drone Training (TRN)"
   ],
-  Other: ["Custom Solutions", "General Inquiry"],
+  Other: ["Miscellaneous / Custom"],
 };
 
 const INITIAL_FORM = {
@@ -69,10 +71,17 @@ const INITIAL_FORM = {
   country: "",
   industry: "",
   subcategories: [],
-  lat1: "",
-  lat2: "",
-  lat3: "",
-  acres: "",
+  // For Step 3 we'll store an array of service locations
+  locations: [
+    {
+      locationName: "",
+      latitude: "",
+      longitude: "",
+      landSize: "",
+      unit: "Acres",
+      accessInstructions: "",
+    },
+  ],
 };
 
 export default function RegistrationModal({ isOpen, onClose }) {
@@ -181,10 +190,10 @@ export default function RegistrationModal({ isOpen, onClose }) {
 
         console.clear();
         console.log("====================================");
-        console.log("প্রধান মেনু (Industry):", formData.industry);
-        console.log("নির্বাচিত সাবমেনু (Sub category):", subcategory);
+        console.log("Industry:", formData.industry);
+        console.log("Sub category:", subcategory);
         console.log("------------------------------------");
-        console.log("সম্পূর্ণ তালিকা:", newList);
+        console.log("finally", newList);
         console.log("====================================");
         // ----------------------------------------
       }
@@ -598,45 +607,164 @@ export default function RegistrationModal({ isOpen, onClose }) {
             </div>
           )}
 
-          {/* Step 3 - Service Locations */}
+          {/* Step 3 - Service Locations (UI matching the attached screenshot) */}
           {modalStep === 3 && (
             <div className="space-y-4">
-              {["lat1", "lat2", "lat3", "acres"].map((key, idx) => (
-                <div key={key}>
-                  <label className=" text-sm font-medium mb-1 flex justify-between">
-                    {t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          "firstLatLong",
-                          "secondLatLong",
-                          "thirdLatLong",
-                          "numberOfAcres",
-                        ][idx]
-                      }`
-                    )}
-                    {key === "lat3" && (
-                      <p className="!text-button-primary text-xl font-bold px-2">
-                        +
-                      </p>
-                    )}
-                  </label>
-                  <input
-                    type="text"
-                    name={key}
-                    value={formData[key]}
-                    onChange={handleInputChange}
-                    placeholder={t(
-                      `dashboard.fieldAgent.ThirdModal.${
-                        [
-                          "firstLatLongValue",
-                          "secondLatLong",
-                          "thirdLatLong",
-                          "landAreaInAcres",
-                        ][idx]
-                      }`
-                    )}
-                    className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
-                  />
+              {formData.locations.map((loc, idx) => (
+                <div key={idx} className="space-y-3 p-1 rounded-md">
+                  <h3 className="text-lg font-semibold">
+                    {t("dashboard.fieldAgent.ThirdModal.locationLabel", {
+                      index: idx + 1,
+                    })}
+                  </h3>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      {t("dashboard.fieldAgent.ThirdModal.locationName")}
+                    </label>
+                    <input
+                      type="text"
+                      name={`locationName-${idx}`}
+                      value={loc.locationName}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setFormData((prev) => {
+                          const copy = { ...prev };
+                          copy.locations = copy.locations.map((l, i) =>
+                            i === idx ? { ...l, locationName: value } : l
+                          );
+                          return copy;
+                        });
+                      }}
+                      placeholder={t(
+                        "dashboard.fieldAgent.ThirdModal.locationNamePlaceholder"
+                      )}
+                      className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-1">
+                        {t("dashboard.fieldAgent.ThirdModal.latitude")}
+                      </label>
+                      <input
+                        type="text"
+                        value={loc.latitude}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setFormData((prev) => {
+                            const copy = { ...prev };
+                            copy.locations = copy.locations.map((l, i) =>
+                              i === idx ? { ...l, latitude: value } : l
+                            );
+                            return copy;
+                          });
+                        }}
+                        placeholder={t(
+                          "dashboard.fieldAgent.ThirdModal.latitudePlaceholder"
+                        )}
+                        className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-1">
+                        {t("dashboard.fieldAgent.ThirdModal.longitude")}
+                      </label>
+                      <input
+                        type="text"
+                        value={loc.longitude}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setFormData((prev) => {
+                            const copy = { ...prev };
+                            copy.locations = copy.locations.map((l, i) =>
+                              i === idx ? { ...l, longitude: value } : l
+                            );
+                            return copy;
+                          });
+                        }}
+                        placeholder={t(
+                          "dashboard.fieldAgent.ThirdModal.longitudePlaceholder"
+                        )}
+                        className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                    <div>
+                      <label className="block text-sm font-medium mb-1">
+                        {t("dashboard.fieldAgent.ThirdModal.landSize")}
+                      </label>
+                      <input
+                        type="text"
+                        value={loc.landSize}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setFormData((prev) => {
+                            const copy = { ...prev };
+                            copy.locations = copy.locations.map((l, i) =>
+                              i === idx ? { ...l, landSize: value } : l
+                            );
+                            return copy;
+                          });
+                        }}
+                        placeholder={t(
+                          "dashboard.fieldAgent.ThirdModal.landSizePlaceholder"
+                        )}
+                        className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
+                      />
+                    </div>
+
+                    <div className="md:col-span-1">
+                      <label className="block text-sm font-medium mb-1">
+                        {t("dashboard.fieldAgent.ThirdModal.unit")}
+                      </label>
+                      <select
+                        value={loc.unit}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          setFormData((prev) => {
+                            const copy = { ...prev };
+                            copy.locations = copy.locations.map((l, i) =>
+                              i === idx ? { ...l, unit: value } : l
+                            );
+                            return copy;
+                          });
+                        }}
+                        className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black"
+                      >
+                        <option>Acres</option>
+                        <option>Hectares</option>
+                        <option>Square meters</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-1">
+                      {t("dashboard.fieldAgent.ThirdModal.accessInstructions")}
+                    </label>
+                    <textarea
+                      value={loc.accessInstructions}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        setFormData((prev) => {
+                          const copy = { ...prev };
+                          copy.locations = copy.locations.map((l, i) =>
+                            i === idx ? { ...l, accessInstructions: value } : l
+                          );
+                          return copy;
+                        });
+                      }}
+                      placeholder={t(
+                        "dashboard.fieldAgent.ThirdModal.accessInstructionsPlaceholder"
+                      )}
+                      className="w-full px-4 py-2 border border-black/30 rounded-lg focus:ring-black min-h-[80px]"
+                    />
+                  </div>
                 </div>
               ))}
             </div>
@@ -666,11 +794,30 @@ export default function RegistrationModal({ isOpen, onClose }) {
               >
                 {t("Confirm Registration")}
               </button>
-              <button
-                className="w-1/2 bg-transparent hover:bg-gray-100 text-black py-2.5 rounded-lg font-medium transition border"
-              >
-                Add Location
-              </button>
+              <div className="w-1/2">
+                <button
+                  onClick={() => {
+                    // add new empty location
+                    setFormData((prev) => ({
+                      ...prev,
+                      locations: [
+                        ...prev.locations,
+                        {
+                          locationName: "",
+                          latitude: "",
+                          longitude: "",
+                          landSize: "",
+                          unit: "Acres",
+                          accessInstructions: "",
+                        },
+                      ],
+                    }));
+                  }}
+                  className="w-full px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white"
+                >
+                  {t("dashboard.fieldAgent.ThirdModal.addLocation")}
+                </button>
+              </div>
             </div>
           )}
         </div>

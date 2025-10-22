@@ -707,7 +707,21 @@
         "secondLatLong": "2nd Latitude/Longitude",
         "thirdLatLong": "3rd Latitude/Longitude",
         "numberOfAcres": "Number of acres",
-        "landAreaInAcres": "Land area in acres"
+        "landAreaInAcres": "Land area in acres",
+        "locationLabel": "Location {{index}}",
+        "locationName": "Location Name",
+        "locationNamePlaceholder": "e.g., North GeoCoordinates",
+        "latitude": "Latitude",
+        "latitudePlaceholder": "17.4529",
+        "longitude": "Longitude",
+        "longitudePlaceholder": "78.3982",
+        "landSize": "Land Size",
+        "landSizePlaceholder": "25 Acres",
+        "unit": "Unit",
+        "accessInstructions": "Access Instructions",
+        "accessInstructionsPlaceholder": "Use north gate, contact site manager.",
+        "addLocation": "Add Location",
+        "removeLocation": "Remove Location"
       }
     },
     "marketing": {

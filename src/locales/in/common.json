@@ -718,7 +718,21 @@
         "secondLatLong": "दूसरा अक्षांश/देशांतर",
         "thirdLatLong": "तीसरा अक्षांश/देशांतर",
         "numberOfAcres": "एकड़ की संख्या",
-        "landAreaInAcres": "भूमि क्षेत्र (एकड़ में)"
+        "landAreaInAcres": "भूमि क्षेत्र (एकड़ में)",
+        "locationLabel": "स्थान {{index}}",
+        "locationName": "स्थान का नाम",
+        "locationNamePlaceholder": "जैसे, उत्तर GeoCoordinates",
+        "latitude": "अक्षांश",
+        "latitudePlaceholder": "17.4529",
+        "longitude": "देशांतर",
+        "longitudePlaceholder": "78.3982",
+        "landSize": "भूमि का आकार",
+        "landSizePlaceholder": "25 एकड़",
+        "unit": "इकाई",
+        "accessInstructions": "पहुँच निर्देश",
+        "accessInstructionsPlaceholder": "उपयोग उत्तर गेट, साइट प्रबंधक से संपर्क करें.",
+        "addLocation": "स्थान जोड़ें",
+        "removeLocation": "स्थान हटाएँ"
       }
     },
     "marketing": {
