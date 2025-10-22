@@ -8,6 +8,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { IoChevronDown, IoCloseCircleOutline } from "react-icons/io5";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
+import IndustrySelect from "./IndustrySelect";
 
 const categoryData = {
   "Mapping & Surveying": [
@@ -44,10 +45,7 @@ const categoryData = {
     "Boating & Water Sports (BWS)",
     "Sports (SPR)",
   ],
-  "Support & Training": [
-    "Drone Maintenance (DMN)",
-    "Drone Training (TRN)"
-  ],
+  "Support & Training": ["Drone Maintenance (DMN)", "Drone Training (TRN)"],
   Other: ["Miscellaneous / Custom"],
 };
 
@@ -91,10 +89,9 @@ export default function RegistrationModal({ isOpen, onClose }) {
   const { t } = useTranslation();
   const panelRef = useRef(null);
 
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const industryDropdownRef = useRef(null);
   const subcategoryRef = useRef(null);
   const scrollContainerRef = useRef(null);
+  const industryDropdownRef = useRef(null);
 
   const handleInputChange = useCallback(
     (e) => {
@@ -112,7 +109,6 @@ export default function RegistrationModal({ isOpen, onClose }) {
     setModalStep(1);
     setValidationError("");
     setFormData(INITIAL_FORM);
-    setIsDropdownOpen(false);
     onClose();
   }, [onClose]);
 
@@ -177,7 +173,6 @@ export default function RegistrationModal({ isOpen, onClose }) {
         industry: industry,
         subcategories: [],
       }));
-      setIsDropdownOpen(false);
     },
     [validationError]
   );
@@ -228,43 +223,32 @@ export default function RegistrationModal({ isOpen, onClose }) {
     };
   }, [isOpen, handleClose]);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (
-        industryDropdownRef.current &&
-        !industryDropdownRef.current.contains(event.target)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [industryDropdownRef]);
-
   // Auto-scroll to subcategory section when industry is selected
   useEffect(() => {
-    if (formData.industry && subcategoryRef.current && scrollContainerRef.current) {
+    if (
+      formData.industry &&
+      subcategoryRef.current &&
+      scrollContainerRef.current
+    ) {
       setTimeout(() => {
         const container = scrollContainerRef.current;
         const element = subcategoryRef.current;
-        
+
         if (container && element) {
           const elementTop = element.offsetTop;
-          
+
           // Scroll to show the element with some padding
           container.scrollTo({
             top: elementTop - 20,
-            behavior: 'smooth'
+            behavior: "smooth",
           });
         }
       }, 150);
     }
   }, [formData.industry]);
 
-  // Auto-scroll when industry dropdown opens and industry already selected
-  useEffect(() => {
+  // Handle industry dropdown toggle and scroll
+  const handleIndustryDropdownToggle = useCallback((isDropdownOpen) => {
     if (isDropdownOpen && scrollContainerRef.current) {
       setTimeout(() => {
         const container = scrollContainerRef.current;
@@ -291,7 +275,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
         }
       }, 100);
     }
-  }, [isDropdownOpen, formData.industry]);
+  }, [formData.industry]);
 
   if (!isOpen) return null;
 
@@ -345,7 +329,10 @@ export default function RegistrationModal({ isOpen, onClose }) {
         </div>
 
         {/* Scrollable Body */}
-        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4">
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4"
+        >
           {/* Step 1 - Customer Info */}
           {modalStep === 1 && (
             <div className="space-y-2.5 md:space-y-3">
@@ -551,51 +538,18 @@ export default function RegistrationModal({ isOpen, onClose }) {
                 ))}
               </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  {t("dashboard.fieldAgent.SecondModal.industry")}
-                  <span className="text-red-500">*</span>
-                </label>
-
-                <div className="relative" ref={industryDropdownRef}>
-                  <button
-                    type="button"
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="focus:outline-none focus:ring-2 w-full px-4 py-2 border bg-[#F7FFE5] border-black/30 rounded-lg focus:ring-black appearance-none text-sm text-left flex justify-between items-center"
-                  >
-                    <span
-                      className={`block truncate ${
-                        formData.industry ? "text-black" : "text-gray-500"
-                      }`}
-                    >
-                      {formData.industry
-                        ? formData.industry
-                        : t("dashboard.fieldAgent.SecondModal.selectIndustry")}
-                    </span>
-                    <IoChevronDown
-                      className={`text-gray-400 transition-transform duration-200 size-5 ${
-                        isDropdownOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {isDropdownOpen && (
-                    <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                      {industryList.map((industry) => (
-                        <li
-                          key={industry}
-                          onClick={() => handleIndustrySelect(industry)}
-                          className="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-gray-100"
-                          role="option"
-                        >
-                          <span className="font-normal block truncate">
-                            {industry}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+              <div ref={industryDropdownRef}>
+                <IndustrySelect
+                  label={t("dashboard.fieldAgent.SecondModal.industry")}
+                  options={industryList}
+                  selectedValue={formData.industry}
+                  onSelect={handleIndustrySelect}
+                  placeholder={t(
+                    "dashboard.fieldAgent.SecondModal.selectIndustry"
                   )}
-                </div>
+                  isRequired={true}
+                  onDropdownToggle={handleIndustryDropdownToggle}
+                />
 
                 {formData.industry && (
                   <div className="mt-4" ref={subcategoryRef}>
@@ -662,7 +616,6 @@ export default function RegistrationModal({ isOpen, onClose }) {
           {/* Step 3 - Service Locations (UI matching the attached screenshot) */}
           {modalStep === 3 && (
             <div className="space-y-4">
-
               {formData.locations.map((loc, idx) => (
                 <div key={idx} className="space-y-3 p-1 rounded-md">
                   <h3 className="text-lg font-semibold">
@@ -858,7 +811,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     }}
                     className="w-1/2 px-2 md:px-4 py-1 md:py-2 rounded-lg border border-red-400 text-red-600 bg-white"
                   >
-                    {t('dashboard.fieldAgent.ThirdModal.removeLocation')}
+                    {t("dashboard.fieldAgent.ThirdModal.removeLocation")}
                   </button>
                 )}
 
@@ -880,9 +833,11 @@ export default function RegistrationModal({ isOpen, onClose }) {
                       ],
                     }));
                   }}
-                  className={`${formData.locations.length > 1 ? 'w-1/2' : 'w-full'} md:px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white`}
+                  className={`${
+                    formData.locations.length > 1 ? "w-1/2" : "w-full"
+                  } md:px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white`}
                 >
-                  {t('dashboard.fieldAgent.ThirdModal.addLocation')}
+                  {t("dashboard.fieldAgent.ThirdModal.addLocation")}
                 </button>
               </div>
             </div>

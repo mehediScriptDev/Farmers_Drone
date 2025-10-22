@@ -13,7 +13,7 @@ import CreateServiceCard from "./CreateServiceCard";
 import FilterBar from "./FilterBar";
 import UsersTable from "./UsersTable";
 import Pagination from "../../common/Pagination";
-import AddCustomerModal from "../../common/AddCustomerModal"
+import AddCustomerModal from "./modals/AddCustomerModal"
 
 const FieldAgentDashboard = () => {
   // const { user } = useAuth();

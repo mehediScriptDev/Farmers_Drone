@@ -1,128 +1,89 @@
-import React, { useState, useRef, useEffect } from "react";
-import { IoChevronDown } from "react-icons/io5";
-import { useTranslation } from "react-i18next";
-import { FaChevronRight } from "react-icons/fa";
+// src/components/ReusableDropdown.jsx
 
-const ServiceTypeDropdown = ({ formData, setFormData, serviceTypesData }) => {
-  const { t } = useTranslation();
+import React, { useState, useEffect, useRef } from "react";
+import { IoChevronDown } from "react-icons/io5";
+
+const ReusableDropdown = ({
+  label,
+  options,
+  selectedValue,
+  onSelect,
+  placeholder,
+  isRequired = false,
+  onDropdownToggle,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const [serviceTypeOpen, setServiceTypeOpen] = useState(false);
-  const [activeSubMenu, setActiveSubMenu] = useState(null);
-
-  const serviceTypes = Object.keys(serviceTypesData);
-
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setServiceTypeOpen(false);
-        setActiveSubMenu(null);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
-  const handleServiceTypeClick = () => {
-    if (serviceTypeOpen) setActiveSubMenu(null);
-    setServiceTypeOpen(!serviceTypeOpen);
+  const handleSelect = (option) => {
+    onSelect(option);
+    setIsOpen(false);
   };
 
-  const handleSubCategorySelect = (category, subCategory) => {
-    setFormData({
-      ...formData,
-      serviceType: category,
-      serviceSubType: subCategory,
-    });
-    setServiceTypeOpen(false);
-    setActiveSubMenu(null);
-  };
-
-  const getSubmenuPosition = (type) => {
-    const mainMenuItem = document.querySelector(`[data-menu-item="${type}"]`);
-    if (!mainMenuItem) return { top: "0px", left: "0px" };
-
-    const rect = mainMenuItem.getBoundingClientRect();
-    return {
-      top: `${rect.top}px`,
-      left: `${rect.right + 10}px`,
-    };
+  const toggleDropdown = () => {
+    const newState = !isOpen;
+    setIsOpen(newState);
+    if (onDropdownToggle) {
+      onDropdownToggle(newState);
+    }
   };
 
   return (
-    <div className="mb-4" ref={dropdownRef}>
-      <label className="block text-base font-medium text-gray-800 mb-2">
-        {t("dashboard.employee.pages.order.modal.serviceType")}
+    <div>
+      <label className="block text-sm font-medium mb-1">
+        {label}
+        {isRequired && <span className="text-red-500">*</span>}
       </label>
 
-      <button
-        type="button"
-        onClick={handleServiceTypeClick}
-        className="w-[286px] px-3 py-2 bg-[#F7FFE5] rounded-md flex items-center justify-between text-base"
-      >
-        <span className="truncate">
-          {t(`dashboard.employee.dropdown.${formData.serviceType}`)}
-        </span>
-        <IoChevronDown
-          className={`transition-transform duration-200 flex-shrink-0 ${
-            serviceTypeOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+      <div className="relative" ref={dropdownRef}>
+        <button
+          type="button"
+          onClick={toggleDropdown}
+          className="focus:outline-none focus:ring-2 w-full px-4 py-2 border bg-[#F7FFE5] border-black/30 rounded-lg focus:ring-black appearance-none text-sm text-left flex justify-between items-center"
+        >
+          <span
+            className={`block truncate ${
+              selectedValue ? "text-black" : "text-gray-500"
+            }`}
+          >
+            {selectedValue || placeholder}
+          </span>
+          <IoChevronDown
+            className={`text-gray-400 transition-transform duration-200 size-5 ${
+              isOpen ? "rotate-180" : ""
+            }`}
+          />
+        </button>
 
-      {serviceTypeOpen && (
-        <div className="absolute w-1/2 mt-1 bg-white shadow-lg rounded-md border border-gray-200 z-50 max-h-96 overflow-visible">
-          {serviceTypes.map((type) => (
-            <div key={type} className="relative" data-menu-item={type}>
-              {/* Main Category */}
-              <div
-                onClick={() => {
-                  setFormData({
-                    ...formData,
-                    serviceType: type,
-                    serviceSubType: "",
-                  });
-                  setActiveSubMenu(activeSubMenu === type ? null : type);
-                }}
-                className={`px-3 py-2 cursor-pointer flex justify-between items-center hover:bg-gray-100 transition ${
-                  formData.serviceType === type
-                    ? "bg-[#F7FFE5] border-l-2 border-green-400 font-medium"
-                    : ""
-                }`}
+        {isOpen && (
+          <ul className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            {options.map((option) => (
+              <li
+                key={option}
+                onClick={() => handleSelect(option)}
+                className="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-gray-100"
+                role="option"
               >
-                {/* <span>
-                  {t(`dashboard.employee.dropdown.${type}`)}
-                </span> */}
-                <FaChevronRight />
-              </div>
-
-              {/* Submenu */}
-              {activeSubMenu === type && (
-                <div
-                  className="fixed bg-white shadow-lg rounded-md border border-gray-200 z-[60] w-48"
-                  style={getSubmenuPosition(type)}
-                >
-                  {serviceTypesData[type].subcategories.map((subCat) => (
-                    <div
-                      key={subCat}
-                      onClick={() => handleSubCategorySelect(type, subCat)}
-                      className={`px-3 py-2 cursor-pointer text-sm border-b border-gray-200 hover:bg-green-50 transition ${
-                        formData.serviceSubType === subCat
-                          ? "bg-[#28A844] text-white font-medium"
-                          : ""
-                      }`}
-                    >
-                      {subCat}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      )}
+                <span className="font-normal block truncate">{option}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
 
-export default ServiceTypeDropdown;
+export default ReusableDropdown;
