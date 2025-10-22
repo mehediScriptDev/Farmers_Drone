@@ -19,7 +19,7 @@ function DashBoard() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const[profileModal,setProfileModal]=useState(false);
+  const [profileModal, setProfileModal] = useState(false);
   const [summary, setSummary] = useState({
     totalCustomers: 0,
     totalRevenue: 0,
@@ -32,10 +32,11 @@ function DashBoard() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const { t } = useTranslation();
- 
+
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownPositions, setDropdownPositions] = useState({});
   const buttonRefs = useRef({});
+  const periodDropdownRef = useRef(null);
 
 
 
@@ -106,30 +107,30 @@ function DashBoard() {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
- // Pagination handler
+  // Pagination handler
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   // Dropdown logic
-const toggleDropdown = (index) => {
-  if (activeDropdown === index) {
-    setActiveDropdown(null);
-  } else {
-    let shouldOpenUp = false;
-
-    if (paginatedActivities.length < 3) {
-      // For 1 or 2 rows
-      shouldOpenUp = index === 1; // 2nd row opens upward
+  const toggleDropdown = (index) => {
+    if (activeDropdown === index) {
+      setActiveDropdown(null);
     } else {
-      // Normal logic for 3+ rows
-      shouldOpenUp = index >= paginatedActivities.length - 2;
-    }
+      let shouldOpenUp = false;
 
-    setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
-    setActiveDropdown(index);
-  }
-};
+      if (paginatedActivities.length < 3) {
+        // For 1 or 2 rows
+        shouldOpenUp = index === 1; // 2nd row opens upward
+      } else {
+        // Normal logic for 3+ rows
+        shouldOpenUp = index >= paginatedActivities.length - 2;
+      }
+
+      setDropdownPositions((prev) => ({ ...prev, [index]: shouldOpenUp }));
+      setActiveDropdown(index);
+    }
+  };
 
 
   const handleProgressChange = (actualIndex, status) => {
@@ -167,10 +168,26 @@ const toggleDropdown = (index) => {
     };
   }, [activeDropdown]);
 
+  // Close period dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        periodDropdownRef.current &&
+        !periodDropdownRef.current.contains(event.target)
+      ) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   if (loading) return <div className="text-gray-700">Loading...</div>;
   if (error) return <div className="text-red-600">{error}</div>;
 
-               
+
   return (
     <div className="p-4 lg:pt-6 md:px-12">
       {/* Header */}
@@ -182,7 +199,7 @@ const toggleDropdown = (index) => {
       {/* Period Select */}
       <div className="mb-4 md:mb-6 flex flex-col items-start gap-2 relative">
         <h2 className="text-lg  font-normal text-gray-700">{periodOptions.find(p => p.key === selectedPeriod)?.label || t("dashboard.employee.pages.dashboard.dropDown.last30days")} {t("dashboard.employee.pages.dashboard.dropDown.overview")}</h2>
-        <div className="relative">
+        <div className="relative" ref={periodDropdownRef}>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="w-full flex items-center gap-4 px-3 py-2 md:px-4 md:py-2 bg-gray-50 border border-[#E6E6E6] rounded-lg text-xs md:text-sm text-[#1A1A1A] transition-all duration-200"
@@ -240,7 +257,7 @@ const toggleDropdown = (index) => {
             <button onClick={() => setProfileModal(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.assistProfile')}
             </button>
-            
+
           </div>
         </div>
 
@@ -275,7 +292,7 @@ const toggleDropdown = (index) => {
                     {/* Progress Dropdown */}
                     <td className="px-3 md:px-6 py-4 relative">
                       <div
-                        className="relative inline-block w-40"      
+                        className="relative inline-block w-40"
                         ref={(el) => (buttonRefs.current[index] = el)}
                       >
                         <button
@@ -294,8 +311,8 @@ const toggleDropdown = (index) => {
                         {activeDropdown === index && (
                           <div
                             className={`absolute left-0 w-full bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden ${dropdownPositions[index]
-                                ? 'bottom-full mb-1'
-                                : 'top-full mt-1'
+                              ? 'bottom-full mb-1'
+                              : 'top-full mt-1'
                               }`}
                           >
                             {['In Progress', 'Completed', 'Reschedule'].map(
@@ -306,8 +323,8 @@ const toggleDropdown = (index) => {
                                     handleProgressChange(actualIndex, status)
                                   }
                                   className={`w-full text-left px-4 py-2 text-sm transition-colors duration-150 ${status === activity.progress
-                                      ? 'bg-[#28A844] text-white font-semibold'
-                                      : 'text-gray-700 hover:bg-gray-100'
+                                    ? 'bg-[#28A844] text-white font-semibold'
+                                    : 'text-gray-700 hover:bg-gray-100'
                                     }`}
                                 >
                                   {status}
@@ -334,8 +351,8 @@ const toggleDropdown = (index) => {
           </table>
         </div>
 
-     
-         <Pagination
+
+        <Pagination
           currentPage={currentPage}
           totalItems={filteredActivities.length}
           itemsPerPage={itemsPerPage}
@@ -345,7 +362,7 @@ const toggleDropdown = (index) => {
 
       {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
-      
+
       <ProfileSetupModal isOpen={profileModal} onClose={() => setProfileModal(false)} />
     </div>
   );
