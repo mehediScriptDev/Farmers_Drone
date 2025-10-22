@@ -638,7 +638,7 @@
         "incorrectCharge": "Incorrect Charge"
       },
       "pages": {
-        "orderdetails": {
+        "orderDetails": {
           "serviceOrderID": "Service Order ID",
           "customerOrderID": "Customer Order ID",
           "basicSpecificsInfo": "Basic Specifics Info",
