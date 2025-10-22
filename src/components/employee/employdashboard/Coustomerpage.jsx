@@ -1,43 +1,30 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { BiChevronDown } from 'react-icons/bi';
 import { LuEye } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../../../config/axiosConfig';
 import { useTranslation } from 'react-i18next';
 import RegistrationModal from './components/Modal/RegistrationModal';
-import {
-  AssistProfileSetupModal2,
-  PersonalInfoModal,
-  ServiceLocationModal,
-  VerificationModal,
-} from './components/Modal/AssistProfileSetupModal';
+
 import Pagination from '../../common/Pagination';
+import ProfileSetupModal from './components/Modal/ProfileSetupModal';
 const Coustomerpage = () => {
   const [open, setOpen] = useState(false);
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [mainModalOpen, setMainModalOpen] = useState(false);
-  const [subModalType, setSubModalType] = useState(null);
-  const [customerEmail, setCustomerEmail] = useState('');
+  
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const[profileModal,setProfileModal]=useState(false);
   const [dropdownPositions, setDropdownPositions] = useState({});
   const buttonRefs = useRef({});
 
   const { t } = useTranslation();
   const itemsPerPage = 6;
 
-  const handleOpenSubModal = useCallback((setupType, email) => {
-    setCustomerEmail(email);
-    setSubModalType(setupType);
-    setMainModalOpen(false);
-  }, []);
 
-  const handleCloseSubModal = useCallback(() => {
-    setSubModalType(null);
-    setMainModalOpen(true);
-  }, []);
+  
 
   useEffect(() => {
     const fetchCustomerData = async () => {
@@ -174,12 +161,9 @@ const toggleDropdown = (index) => {
               >
                 {t('dashboard.employee.button.registerNewCustomer')}
               </button>
-              <button
-                onClick={() => setMainModalOpen(true)}
-                className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base"
-              >
-                {t('dashboard.employee.button.assistProfile')}
-              </button>
+                <button onClick={() => setProfileModal(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
+              {t('dashboard.employee.button.assistProfile')}
+            </button>
               <Link to="/employee/customers/report-analysis">
                 <button className="px-4 w-full md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-[#DC3545] font-medium text-sm md:text-base">
                   {t('dashboard.employee.button.reportAnalysis')}
@@ -350,26 +334,8 @@ const toggleDropdown = (index) => {
 
       {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
-      <AssistProfileSetupModal2
-        isOpen={mainModalOpen}
-        onClose={() => setMainModalOpen(false)}
-        onOpenSubModal={handleOpenSubModal}
-      />
-      <PersonalInfoModal
-        isOpen={subModalType === 'Personal Information'}
-        onClose={handleCloseSubModal}
-        email={customerEmail}
-      />
-      <VerificationModal
-        isOpen={subModalType === 'Verification Details'}
-        onClose={handleCloseSubModal}
-        email={customerEmail}
-      />
-      <ServiceLocationModal
-        isOpen={subModalType === 'Service Location'}
-        onClose={handleCloseSubModal}
-        email={customerEmail}
-      />
+       <ProfileSetupModal isOpen={profileModal} onClose={() => setProfileModal(false)} />
+      
     </div>
   );
 };

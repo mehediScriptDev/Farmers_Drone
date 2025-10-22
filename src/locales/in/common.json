@@ -464,10 +464,10 @@
         "droneMaintenance": "ड्रोन रखरखाव (DMN)",
         "droneTraining": "ड्रोन प्रशिक्षण (TRN)",
         "miscellaneous": "विविध / कस्टम",
-         "infrastructureInspectionServices": "इन्फ्रास्ट्रक्चर निरीक्षण सेवाएं (INF)",
-  "aerialInspections": "एरियल निरीक्षण (AIN)",
-  "constructionSiteMonitoring": "निर्माण स्थल निगरानी (CON)",
-  "generalInfrastructure": "सामान्य बुनियादी ढांचा (IFG)"
+        "infrastructureInspectionServices": "इन्फ्रास्ट्रक्चर निरीक्षण सेवाएं (INF)",
+        "aerialInspections": "एरियल निरीक्षण (AIN)",
+        "constructionSiteMonitoring": "निर्माण स्थल निगरानी (CON)",
+        "generalInfrastructure": "सामान्य बुनियादी ढांचा (IFG)"
       },
       "modal": {
         "collectTitle": "भुगतान एकत्र करें",
@@ -531,13 +531,40 @@
         "customerEmailOrPhone": "ग्राहक ईमेल या फ़ोन",
         "enterCustomerEmailOrPhone": "ग्राहक का ईमेल या फ़ोन दर्ज करें",
         "setupType": "सेटअप प्रकार",
-        "personalInformation": "व्यक्तिगत जानकारी",
-        "notes": "नोट्स",
-        "addNotesAboutSetup": "सेटअप सहायता के लिए कोई नोट्स जोड़ें...",
-        "startSetupAssistance": "सेटअप सहायता शुरू करें",
-        "personalInformation2": "व्यक्तिगत जानकारी",
+        "customerInformation": "ग्राहक जानकारी",
         "verificationDetails": "सत्यापन विवरण",
-        "serviceLocation": "सेवा स्थान"
+        "serviceLocation": "सेवा स्थान",
+        "notes": "टिप्पणियाँ",
+        "addNotes": "सेटअप सहायता की आवश्यकता के बारे में कोई भी टिप्पणी जोड़ें...",
+        "startSetupAssistance": "सेटअप सहायता शुरू करें",
+        "firstName": "पहला नाम",
+  "middleName": "मध्य नाम",
+  "lastName": "अंतिम नाम",
+  "alsoKnownAs": "अन्य नाम से जाना जाता है",
+  "phone": "फोन नंबर",
+  "email": "ईमेल",
+  "geoLocation": "भू-स्थान",
+  "district": "ज़िला",
+  "mandal": "मंडल",
+  "village": "गाँव",
+  "saveButton": "व्यक्तिगत जानकारी सहेजें",
+  "title": "सत्यापन विवरण",
+  "kycDocuments": "केवाईसी दस्तावेज़ अपलोड करें",
+  "kycNumber": "केवाईसी संख्या",
+  "street": "सड़क",
+  "city": "शहर",
+  "state": "राज्य",
+  "postalCode": "डाक कोड",
+  "country": "देश",
+  "industry": "उद्योग",
+  "kycNumberPlaceholder": "केवाईसी संख्या दर्ज करें",
+  "streetPlaceholder": "सड़क का पता दर्ज करें",
+  "cityPlaceholder": "शहर दर्ज करें",
+  "statePlaceholder": "राज्य दर्ज करें",
+  "postalCodePlaceholder": "डाक कोड दर्ज करें",
+  "countryPlaceholder": "देश दर्ज करें",
+  "industryPlaceholder": "उद्योग चुनें",
+  "saveveriButton": "सत्यापन विवरण सहेजें"
       },
       "pages": {
         "dashboard": {
@@ -764,9 +791,9 @@
       "NoUnreadNotifications": "सभी कैच अप! कोई अनपढ़ सूचनाएँ नहीं हैं।",
       "MarkAllRead": "सभी को पढ़ा करें",
       "Heatmap": "हीटमैप",
-      "High" : "उच्च",
-      "Medium" : "मध्यम",
-      "Low" : "कम",
+      "High": "उच्च",
+      "Medium": "मध्यम",
+      "Low": "कम",
       "DemandByRegion": "क्षेत्र द्वारा मांग",
       "CampaignOverview": {
         "SeasonalCampaignOverview": "मौसमी अभियान अवलोकन",
@@ -1080,7 +1107,7 @@
   },
   "mission": {
     "header": "हमारा मिशन",
-    "description": "उद्योगों में क्रांति लाने के लिए सुलभ, सुरक्षित और नवीन ड्रोन प्रौद्योगिकी। हम अत्याधुनिक हवाई क्षमताओं और वास्तविक व्यवसाय की आवश्यकताओं के बीच सेतु बनाते हैं, अपने ग्राहकों को मापनीय मूल्य प्रदान करते हैं। हमारा लक्ष्य पूरे भारत में सबसे भरोसेमंद ड्रोन सेवा साझेदार बनना है, गुणवत्ता, सुरक्षा और ग्राहक संतुष्टि के लिए उद्योग मानक स्थापित करना।",
+    "description": "उद्योगों में क्रांति लाने के लिए सुलभ, सुरक्षित और नवीन ड्रोन प्रौद्योगिकी। हम अत्याधुनिक हवाई क्षमताओं और वास्तविक व्यवसाय की आवश्यकताओं के बीच सेतु बनाते हैं, अपने ग्राहकों को मापनीय मूल्य प्रदान करते हैं। हमारा लक्ष्य पूरे भारत में सबसे भरोसेमंद ड्रोन सेवा साझेदार बनना है, गुणवत्ता, सुरक्षा और ग्राहक संतोष के लिए उद्योग मानक स्थापित करना।",
     "coreValuesHeader": "हमारे मूल मूल्य",
     "safetyFirst": {
       "title": "सुरक्षा पहले",
@@ -1264,7 +1291,7 @@
     "income": "आय",
     "audienceType": "दर्शक प्रकार"
   },
-   "heatmap": {
+  "heatmap": {
     "title": "हीटमैप",
     "high": "उच्च",
     "medium": "मध्यम",

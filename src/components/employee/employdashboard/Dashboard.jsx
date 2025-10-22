@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { LuEye, LuHeadset } from "react-icons/lu";
 import { PiUsersThreeBold } from "react-icons/pi";
@@ -9,9 +9,9 @@ import { IoMdTrendingUp, IoMdTrendingDown, IoIosCalendar } from "react-icons/io"
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../../../config/axiosConfig";
 import RegistrationModal from "./components/Modal/RegistrationModal";
-import { AssistProfileSetupModal2, PersonalInfoModal, ServiceLocationModal, VerificationModal } from "./components/Modal/AssistProfileSetupModal";
 import { BiChevronDown } from "react-icons/bi";
 import Pagination from "../../common/Pagination";
+import ProfileSetupModal from "./components/Modal/ProfileSetupModal";
 
 function DashBoard() {
   const [selectedPeriod, setSelectedPeriod] = useState("last30days");
@@ -19,6 +19,7 @@ function DashBoard() {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const[profileModal,setProfileModal]=useState(false);
   const [summary, setSummary] = useState({
     totalCustomers: 0,
     totalRevenue: 0,
@@ -31,23 +32,12 @@ function DashBoard() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const { t } = useTranslation();
-  const [mainModalOpen, setMainModalOpen] = useState(false);
-  const [subModalType, setSubModalType] = useState(null);
-  const [customerEmail, setCustomerEmail] = useState("");
+ 
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [dropdownPositions, setDropdownPositions] = useState({});
   const buttonRefs = useRef({});
 
-  const handleOpenSubModal = useCallback((setupType, email) => {
-    setCustomerEmail(email);
-    setSubModalType(setupType);
-    setMainModalOpen(false);
-  }, []);
 
-  const handleCloseSubModal = useCallback(() => {
-    setSubModalType(null);
-    setMainModalOpen(true);
-  }, []);
 
   const periodOptions = [
     { key: "last7days", label: t("dashboard.employee.pages.dashboard.dropDown.last7days") },
@@ -247,7 +237,7 @@ const toggleDropdown = (index) => {
             <button onClick={() => setOpen(true)} className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.registerNewCustomer')}
             </button>
-            <button onClick={() => setMainModalOpen(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
+            <button onClick={() => setProfileModal(true)} className="px-4 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-yellow-500 font-medium text-sm md:text-base">
               {t('dashboard.employee.button.assistProfile')}
             </button>
             
@@ -355,10 +345,8 @@ const toggleDropdown = (index) => {
 
       {/* Modals */}
       <RegistrationModal isOpen={open} onClose={() => setOpen(false)} />
-      <AssistProfileSetupModal2 isOpen={mainModalOpen} onClose={() => setMainModalOpen(false)} onOpenSubModal={handleOpenSubModal} />
-      <PersonalInfoModal isOpen={subModalType === "Personal Information"} onClose={handleCloseSubModal} email={customerEmail} />
-      <VerificationModal isOpen={subModalType === "Verification Details"} onClose={handleCloseSubModal} email={customerEmail} />
-      <ServiceLocationModal isOpen={subModalType === "Service Location"} onClose={handleCloseSubModal} email={customerEmail} />
+      
+      <ProfileSetupModal isOpen={profileModal} onClose={() => setProfileModal(false)} />
     </div>
   );
 }
