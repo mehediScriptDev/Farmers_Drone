@@ -93,6 +93,8 @@ export default function RegistrationModal({ isOpen, onClose }) {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const industryDropdownRef = useRef(null);
+  const subcategoryRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   const handleInputChange = useCallback(
     (e) => {
@@ -241,6 +243,56 @@ export default function RegistrationModal({ isOpen, onClose }) {
     };
   }, [industryDropdownRef]);
 
+  // Auto-scroll to subcategory section when industry is selected
+  useEffect(() => {
+    if (formData.industry && subcategoryRef.current && scrollContainerRef.current) {
+      setTimeout(() => {
+        const container = scrollContainerRef.current;
+        const element = subcategoryRef.current;
+        
+        if (container && element) {
+          const elementTop = element.offsetTop;
+          
+          // Scroll to show the element with some padding
+          container.scrollTo({
+            top: elementTop - 20,
+            behavior: 'smooth'
+          });
+        }
+      }, 150);
+    }
+  }, [formData.industry]);
+
+  // Auto-scroll when industry dropdown opens and industry already selected
+  useEffect(() => {
+    if (isDropdownOpen && scrollContainerRef.current) {
+      setTimeout(() => {
+        const container = scrollContainerRef.current;
+        
+        // If industry is selected and subcategory section exists, scroll to it
+        if (formData.industry && subcategoryRef.current) {
+          const element = subcategoryRef.current;
+          const elementTop = element.offsetTop;
+          
+          container.scrollTo({
+            top: elementTop - 20,
+            behavior: 'smooth'
+          });
+        } 
+        // Otherwise, scroll to industry dropdown
+        else if (industryDropdownRef.current) {
+          const element = industryDropdownRef.current;
+          const elementTop = element.offsetTop;
+          
+          container.scrollTo({
+            top: elementTop - 100,
+            behavior: 'smooth'
+          });
+        }
+      }, 100);
+    }
+  }, [isDropdownOpen, formData.industry]);
+
   if (!isOpen) return null;
 
   const stepTitles = [
@@ -293,7 +345,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
         </div>
 
         {/* Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4">
+        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2.5 md:space-y-4">
           {/* Step 1 - Customer Info */}
           {modalStep === 1 && (
             <div className="space-y-2.5 md:space-y-3">
@@ -546,7 +598,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                 </div>
 
                 {formData.industry && (
-                  <div className="mt-4">
+                  <div className="mt-4" ref={subcategoryRef}>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Sub category
                     </label>
@@ -793,7 +845,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                 onClick={handleConfirm}
                 className="w-1/2 bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
               >
-                {t("Confirm Registration")}
+                {t("dashboard.fieldAgent.FirstModal.confirmRegistration")}
               </button>
               <div className="w-1/2 flex gap-2">
                 {formData.locations.length > 1 && (
