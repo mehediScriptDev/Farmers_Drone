@@ -248,34 +248,37 @@ export default function RegistrationModal({ isOpen, onClose }) {
   }, [formData.industry]);
 
   // Handle industry dropdown toggle and scroll
-  const handleIndustryDropdownToggle = useCallback((isDropdownOpen) => {
-    if (isDropdownOpen && scrollContainerRef.current) {
-      setTimeout(() => {
-        const container = scrollContainerRef.current;
-        
-        // If industry is selected and subcategory section exists, scroll to it
-        if (formData.industry && subcategoryRef.current) {
-          const element = subcategoryRef.current;
-          const elementTop = element.offsetTop;
-          
-          container.scrollTo({
-            top: elementTop - 20,
-            behavior: 'smooth'
-          });
-        } 
-        // Otherwise, scroll to industry dropdown
-        else if (industryDropdownRef.current) {
-          const element = industryDropdownRef.current;
-          const elementTop = element.offsetTop;
-          
-          container.scrollTo({
-            top: elementTop - 100,
-            behavior: 'smooth'
-          });
-        }
-      }, 100);
-    }
-  }, [formData.industry]);
+  const handleIndustryDropdownToggle = useCallback(
+    (isDropdownOpen) => {
+      if (isDropdownOpen && scrollContainerRef.current) {
+        setTimeout(() => {
+          const container = scrollContainerRef.current;
+
+          // If industry is selected and subcategory section exists, scroll to it
+          if (formData.industry && subcategoryRef.current) {
+            const element = subcategoryRef.current;
+            const elementTop = element.offsetTop;
+
+            container.scrollTo({
+              top: elementTop - 20,
+              behavior: "smooth",
+            });
+          }
+          // Otherwise, scroll to industry dropdown
+          else if (industryDropdownRef.current) {
+            const element = industryDropdownRef.current;
+            const elementTop = element.offsetTop;
+
+            container.scrollTo({
+              top: elementTop - 100,
+              behavior: "smooth",
+            });
+          }
+        }, 100);
+      }
+    },
+    [formData.industry]
+  );
 
   if (!isOpen) return null;
 
@@ -794,12 +797,6 @@ export default function RegistrationModal({ isOpen, onClose }) {
             </button>
           ) : (
             <div className="flex justify-between gap-4">
-              <button
-                onClick={handleConfirm}
-                className="w-1/2 bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
-              >
-                {t("dashboard.fieldAgent.FirstModal.confirmRegistration")}
-              </button>
               <div className="w-1/2 flex gap-2">
                 {formData.locations.length > 1 && (
                   <button
@@ -809,7 +806,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
                         locations: prev.locations.slice(0, -1),
                       }));
                     }}
-                    className="w-1/2 px-2 md:px-4 py-1 md:py-2 rounded-lg border border-red-400 text-red-600 bg-white"
+                    className="w-1/2 px-2 md:px-1  rounded-lg border border-red-400 text-red-600 bg-white text-sm"
                   >
                     {t("dashboard.fieldAgent.ThirdModal.removeLocation")}
                   </button>
@@ -834,12 +831,18 @@ export default function RegistrationModal({ isOpen, onClose }) {
                     }));
                   }}
                   className={`${
-                    formData.locations.length > 1 ? "w-1/2" : "w-full"
+                    formData.locations.length > 1 ? "w-1/2 text-sm" : "w-full"
                   } md:px-4 py-2 rounded-lg border border-[#28A844] text-[#28A844] bg-white`}
                 >
                   {t("dashboard.fieldAgent.ThirdModal.addLocation")}
                 </button>
               </div>
+              <button
+                onClick={handleConfirm}
+                className="w-1/2 bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md"
+              >
+                {t("dashboard.fieldAgent.FirstModal.confirmRegistration")}
+              </button>
             </div>
           )}
         </div>
