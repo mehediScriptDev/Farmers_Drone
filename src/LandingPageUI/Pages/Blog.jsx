@@ -1,11 +1,10 @@
 import React from 'react';
 import { Calendar, ArrowRight } from 'lucide-react';
-import CForm from "../Components/Form/CForm";
-import banner from "../../../public/assets/images/aboutBanner.jpg";
-import card from "../../../public/assets/images/blogCard.png";
-import card1 from "../../../public/assets/images/blogCard1.png";
-import card2 from "../../../public/assets/images/card1.png";
-import card3 from "../../../public/assets/images/card2.jpg";
+// import banner from "/assets/images/aboutBanner.jpg";
+// import card from "/assets/images/blogCard.png";
+// import card1 from "/assets/images/blogCard1.png";
+// import card2 from "/assets/images/card1.png";
+// import card3 from "/assets/images/card2.jpg";
 import { useTranslation } from "react-i18next";
 
 const BlogCardComponent = ({ image, category, title, description, date }) => (
@@ -46,7 +45,7 @@ const Blog = () => {
   
   const blogs = [
     {
-      image: card,
+      image: "/assets/images/blogCard.png",
       category: "Industry Insights",
       categoryColor: "text-green-600",
       title: "The Future of Precision Agriculture in India",
@@ -54,7 +53,7 @@ const Blog = () => {
       date: "March 15, 2025"
     },
     {
-      image: card1,
+      image: "/assets/images/blogCard1.png",
       category: "Success Stories",
       categoryColor: "text-orange-500",
       title: "5 Drone Innovations in Construction",
@@ -62,7 +61,7 @@ const Blog = () => {
       date: "March 15, 2025"
     },
     {
-      image: card2,
+      image: "/assets/images/card1.png",
       category: "Industry Insights",
       categoryColor: "text-green-600",
       title: "DGCA Regulations: Complete Guide for 2025",
@@ -70,7 +69,7 @@ const Blog = () => {
       date: "March 15, 2025"
     },
     {
-      image: card3,
+      image: "/assets/images/card2.jpg",
       category: "Success Stories",
       categoryColor: "text-orange-500",
       title: "Case Study: Solar Farm Inspection Success",
@@ -78,7 +77,7 @@ const Blog = () => {
       date: "March 15, 2025"
     },
     {
-      image: card2,
+      image: "/assets/images/blogCard.png",
       category: "Industry Insights",
       categoryColor: "text-green-600",
       title: "Thermal Imaging: Applications Beyond Energy",
@@ -86,7 +85,7 @@ const Blog = () => {
       date: "March 15, 2025"
     },
     {
-      image: card,
+      image: "/assets/images/blogCard.png",
       category: "Success Stories",
       categoryColor: "text-orange-500",
       title: "ROI Analysis: Drone Investment for Enterprises",
@@ -98,7 +97,7 @@ const Blog = () => {
   return (
     <div>
       <div
-        style={{ backgroundImage: `url(${banner})` }}
+        style={{ backgroundImage: `url(${"/assets/images/aboutBanner.jpg"})` }}
         className="relative h-[270px] bg-cover bg-center flex items-center justify-center"
       >
         <div className="absolute bg-gradient-to-l from-[#00C805] to-[#006202] inset-0"></div>

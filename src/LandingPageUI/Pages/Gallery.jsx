@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import banner1 from '../../../public/assets/images/banner1.png';
-import banner2 from '../../../public/assets/images/banner2.jpg';
-import banner3 from '../../../public/assets/images/banner3.jpg';
+// import banner1 from '/assets/images/banner1.png';
+// import banner2 from '/assets/images/banner2.jpg';
+// import banner3 from '/assets/images/banner3.jpg';
 import { Link } from 'react-router';
 
 const Gallery = () => {
@@ -10,25 +10,25 @@ const Gallery = () => {
 
   const galleryItems = [
     {
-      image: banner1,
+      image: '/assets/images/banner1.png',
       categoryKey: 'industries.agriculture.title',
       titleKey: 'industries.agriculture.description',
     },
     {
-      image: banner2,
+      image: '/assets/images/banner2.jpg',
       categoryKey: 'industries.construction.title',
       titleKey: 'industries.construction.description',
     },
     {
-      image: banner3,
+      image: '/assets/images/banner3.jpg',
       categoryKey: 'industries.energy.title',
       titleKey: 'industries.energy.description',
     },
   ];
 
   return (
-    <div className="py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10 bg-gray-50">
-      <div className="lg:w-10/12 xl:max-w-7xl mx-auto">
+    <div className="section-padding bg-gray-50">
+      <div className="section-container">
         {/* Header */}
         <div className="text-center mb-6 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">

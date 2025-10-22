@@ -11,8 +11,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from '../../../config/axiosConfig';
 import LoadingSpinner from '../../common/LoadingSpinner';
 // import { FaChevronDown } from "react-icons/fa";
-import MapAudience from "../MapAudience";
+
 import { useTranslation } from "react-i18next";
+import MapAudience from './MapAudience';
 
 const ChannelCard = ({
   leads,

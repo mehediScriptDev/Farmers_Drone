@@ -14,17 +14,17 @@ export const DashboardLayout = () => {
   return (
     <div className='flex flex-col h-screen '>
       <Header /> {/* Navbar at the top */}
-      <div className='flex flex-1 overflow-hidden'>
-        {user?.role === 'admin' && (
+      <div className="flex flex-1 overflow-hidden">
+        {user?.role === "admin" && (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         )}
-        {user?.role === 'marketing' && (
+        {user?.role === "marketing" && (
           <MarketingSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
           />
         )}
-        {user?.role === 'employee' && (
+        {user?.role === "employee" && (
           <CustomerAgentServiceSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}

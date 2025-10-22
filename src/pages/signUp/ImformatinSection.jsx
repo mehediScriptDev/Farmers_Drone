@@ -42,15 +42,15 @@ export default function ImformatinSection({ formData, setFormData }) {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center px-2 sm:px-4 md:px-8 lg:px-0">
-  <div className="bg-white/70 backdrop-blur-lg rounded-2xl w-full max-w-4xl p-4 sm:p-8">
+     <div className="min-h-screen flex items-center justify-center px-2  md:px-6 lg:px-0 bg-gray-100">
+  <div className="bg-white/80 backdrop-blur-lg rounded-2xl w-full max-w-5xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-lg">
     {/* Header */}
-    <h2 className="text-3xl font-bold text-center text-gray-800 mb-8 drop-shadow-sm">
+    <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-8 drop-shadow-sm">
       Field Agent Info
     </h2>
 
     {/* Grid Form */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 md:gap-6">
       {/* First Name */}
       <InputField
         label="First Name"
@@ -85,7 +85,7 @@ export default function ImformatinSection({ formData, setFormData }) {
 
       {/* Latitude/Longitude */}
       <div className="flex flex-col relative">
-        <label className="text-sm font-medium mb-1 text-gray-700">
+        <label className="text-sm sm:text-base font-medium mb-1 text-gray-700">
           Latitude/Longitude <span className="text-red-500">*</span>
         </label>
         <div className="relative">
@@ -94,7 +94,7 @@ export default function ImformatinSection({ formData, setFormData }) {
             value={formData.latitude}
             onChange={(e) => setFormData({ ...formData, latitude: e.target.value })}
             placeholder="Latitude and longitude"
-            className="w-full px-3 sm:px-4 pr-10 py-2 rounded-xl border border-gray-300 bg-white/60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-3 sm:px-4 pr-10 py-2 sm:py-3 rounded-xl border border-gray-300 bg-white/60 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-green-400"
           />
           <div className="absolute inset-y-0 right-3 flex items-center">
             <FaMapMarkerAlt className="text-gray-400" />
@@ -112,10 +112,10 @@ export default function ImformatinSection({ formData, setFormData }) {
 
       {/* Industry Dropdown */}
       <div className="flex flex-col sm:col-span-2 relative" ref={dropdownRef}>
-        <label className="text-sm font-medium mb-1 text-gray-700">Industry</label>
+        <label className="text-sm sm:text-base font-medium mb-1 text-gray-700">Industry</label>
         <div
           onClick={() => setIsIndustryOpen(!isIndustryOpen)}
-          className="flex items-center justify-between px-3 sm:px-4 py-3 rounded-xl cursor-pointer border border-gray-300 bg-white/60 backdrop-blur-sm shadow-md hover:shadow-lg w-full"
+          className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 rounded-xl cursor-pointer border border-gray-300 bg-white/60 backdrop-blur-sm shadow-md hover:shadow-lg w-full"
         >
           <span>{formData.industry || 'Select Industry'}</span>
           <FaChevronDown
@@ -145,23 +145,23 @@ export default function ImformatinSection({ formData, setFormData }) {
 
       {/* Upload Profile */}
       <div className="flex flex-col sm:col-span-2">
-        <label className="text-sm font-medium mb-2 text-gray-700">
+        <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">
           Upload Profile <span className="text-red-500">*</span>
         </label>
-        <label className="border-2 border-dashed border-gray-300 rounded-2xl p-4 sm:p-8 text-center cursor-pointer hover:bg-green-50 transition flex flex-col items-center justify-center bg-white/50 backdrop-blur-sm shadow-inner">
+        <label className="border-2 border-dashed border-gray-300 rounded-2xl p-4 sm:p-6 md:p-8 text-center cursor-pointer hover:bg-green-50 transition flex flex-col items-center justify-center bg-white/50 backdrop-blur-sm shadow-inner">
           {formData.profileImage ? (
             <img
               src={URL.createObjectURL(formData.profileImage)}
               alt="Preview"
-              className="mb-3 w-28 h-28 object-cover rounded-full ring-2 ring-green-500 shadow-md"
+              className="mb-3 w-24 sm:w-28 h-24 sm:h-28 object-cover rounded-full ring-2 ring-green-500 shadow-md"
             />
           ) : (
-            <FaUpload className="mb-2 text-green-600" size={32} />
+            <FaUpload className="mb-2 text-green-600" size={28} />
           )}
-          <p className="text-sm text-green-600 font-semibold mb-1">
+          <p className="text-sm sm:text-base text-green-600 font-semibold mb-1">
             {formData.profileImage ? 'Change Photo' : 'Upload Profile'}
           </p>
-          <p className="text-xs text-gray-400">(PNG, JPG; max 5MB)</p>
+          <p className="text-xs sm:text-sm text-gray-400">(PNG, JPG; max 5MB)</p>
           <input
             type="file"
             className="hidden"
@@ -173,19 +173,19 @@ export default function ImformatinSection({ formData, setFormData }) {
 
       {/* Sub Categories */}
       <div className="flex flex-col sm:col-span-2">
-        <label className="text-sm font-medium mb-2 text-gray-700">Sub category</label>
+        <label className="text-sm sm:text-base font-medium mb-2 text-gray-700">Sub category</label>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           {subCategories.map((cat) => (
             <div
               key={cat.id}
               onClick={() => handleSubCategoryToggle(cat.id)}
-              className={`flex items-center justify-between px-3 sm:px-4 py-2 rounded-xl cursor-pointer transition shadow-md hover:shadow-lg ${
+              className={`flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 rounded-xl cursor-pointer transition shadow-md hover:shadow-lg ${
                 formData.subCategories.includes(cat.id)
                   ? 'border-green-500 bg-green-50'
                   : 'border-gray-300 bg-white/60 backdrop-blur-sm'
               }`}
             >
-              <span className="text-sm text-gray-800">{cat.name}</span>
+              <span className="text-sm sm:text-base text-gray-800">{cat.name}</span>
             </div>
           ))}
         </div>
@@ -196,30 +196,30 @@ export default function ImformatinSection({ formData, setFormData }) {
     <div className="mt-6 sm:mt-8 flex flex-col space-y-4">
       <button
         onClick={handleSubmit}
-        className="w-full bg-green-600 text-white py-3 rounded-2xl font-semibold hover:bg-green-700 transition shadow-lg"
+        className="w-full bg-green-600 text-white py-3 sm:py-3.5 rounded-2xl font-semibold hover:bg-green-700 transition shadow-lg"
       >
         Submit for verification
       </button>
 
       <div className="flex items-center gap-2">
         <div className="flex-1 h-px bg-gray-300"></div>
-        <span className="text-sm text-gray-500">Or sign in with</span>
+        <span className="text-sm sm:text-base text-gray-500">Or sign in with</span>
         <div className="flex-1 h-px bg-gray-300"></div>
       </div>
 
       <div className="flex justify-center gap-4">
-        <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
-          <FcGoogle className="w-6 h-6" />
+        <button className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
+          <FcGoogle className="w-6 h-6 sm:w-7 sm:h-7" />
         </button>
-        <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
-          <FaFacebookF className="w-5 h-5" />
+        <button className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
+          <FaFacebookF className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
-        <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
-          <FaApple className="w-5 h-5" />
+        <button className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center border border-gray-300 rounded-full hover:bg-gray-50 transition shadow-lg">
+          <FaApple className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
       </div>
 
-      <div className="text-center text-sm text-gray-600">
+      <div className="text-center text-sm sm:text-base text-gray-600">
         I have an account?{' '}
         <Link to="/login" className="text-green-600 font-medium hover:underline">
           Sign in
@@ -228,6 +228,7 @@ export default function ImformatinSection({ formData, setFormData }) {
     </div>
   </div>
 </div>
+
 
     );
 }

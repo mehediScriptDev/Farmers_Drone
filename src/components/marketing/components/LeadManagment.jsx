@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import MapAudience from "../MapAudience";
+import MapAudience from "./MapAudience";
 import LeadsTable from "./LeadsTable";
 import { useTranslation } from "react-i18next";
 import LeadStatusDropdown from "./LeadStatusDropdown";

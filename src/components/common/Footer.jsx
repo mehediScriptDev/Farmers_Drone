@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPin, Phone, Mail } from "lucide-react";
-import logo from "../../../public/assets/images/logo1.png";
+// import logo from "/assets/images/logo1.png";
 import { useTranslation } from "react-i18next";
 
 export default function Footer() {
@@ -10,8 +10,8 @@ export default function Footer() {
   return (
     <div>
       {/* CTA Section */}
-      <div className="bg-gray-50 py-6 sm:py-10 lg:pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 ">
-        <div className="lg:w-10/12 mx-auto max-w-7xl">
+      <div className="bg-[#f0f8ff] py-6 sm:py-10 lg:pt-6 pb-6 px-4 sm:px-6 md:px-8 lg:px-10 ">
+        <div className="lg:w-11/12 mx-auto max-w-7xl">
           <div className="bg-[#002347] relative -mb-40 z-40 rounded-2xl p-8 md:p-12 text-center shadow-lg">
             <h2 className="text-xl sm:text-3xl xl:text-4xl font-bold text-white mb-6">
               {t("footer.cta.title")}
@@ -33,7 +33,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div>
               <div className="flex items-center mb-4">
-                <img src={logo} alt="Logo" />
+                <img src={"/assets/images/logo1.png"} alt="Logo" />
                 <span className="font-bold text-lg">
                   {t("footer.brand.name")}
                 </span>

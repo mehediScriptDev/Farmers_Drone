@@ -46,8 +46,9 @@ export const Layout = () => {
 
   return (
     <div className='flex flex-col min-h-screen bg-gray-50 w-full'>
+      <ScrollToTop/>
       {isAdminPath ? <Header /> : <UserNav />}
-
+      
       <main className='flex-grow w-full flex flex-col'>
         <Outlet />
       </main>

@@ -64,6 +64,7 @@ import SeasonalCampaignDetails from "../components/marketing/components/Seasonal
 import LoyalityCampaingnDetails from "../components/marketing/components/LoyalityCampaingnDetails";
 import Campaigns from "./../components/marketing/components/Campaigns";
 import NotificationPanel from "../components/marketing/components/NotificationPanel";
+import TrainingNCertification from "../LandingPageUI/Components/TrainingNCertification";
 
 const AppRoutes = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const AppRoutes = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/trainings",
+        element: <TrainingNCertification/>
       },
       {
         path: "/blog",

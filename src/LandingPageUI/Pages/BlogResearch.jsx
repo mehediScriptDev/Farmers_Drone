@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import card from "../../../public/assets/images/card1.png";
-import card1 from "../../../public/assets/images/card2.jpg";
+// import card from "/assets/images/card1.png"
+// import card1 from "/assets/images/card2.jpg";
 import { FaCalendarAlt } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 
@@ -10,14 +10,14 @@ const BlogResearch = () => {
 
   const blogs = [
     {
-      image: card,
+      image: "/assets/images/card1.png",
       categoryKey: "blogs.agriculture.category",
       titleKey: "blogs.agriculture.title",
       descriptionKey: "blogs.agriculture.description",
       date: "March 15, 2025",
     },
     {
-      image: card1,
+      image: "/assets/images/card2.jpg",
       categoryKey: "blogs.construction.category",
       titleKey: "blogs.construction.title",
       descriptionKey: "blogs.construction.description",
@@ -26,8 +26,8 @@ const BlogResearch = () => {
   ];
 
   return (
-    <div className="py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10 bg-white">
-      <div className="lg:w-10/12 xl:max-w-7xl mx-auto">
+    <div className="section-padding bg-white">
+      <div className="section-container">
         {/* Header */}
         <div className="text-center mb-6 lg:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">

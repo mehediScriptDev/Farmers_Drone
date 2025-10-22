@@ -1,5 +1,5 @@
 import  { useEffect, useState } from "react";
-import MapChart from "../MapChart";
+import MapChart from "./MapChart";
 import axiosInstance from "../../../config/axiosConfig";
 import { t } from "i18next";
 

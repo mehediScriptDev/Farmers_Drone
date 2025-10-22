@@ -25,11 +25,11 @@ export default function SignUpFlow() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F4F4F4] flex items-center justify-center p-5">
+    <div className="min-h-screen bg-[#F4F4F4] flex items-center justify-center py-5 px-3">
       
       {/* STEP 1 */}
       {step === 1 && (
-        <div className="bg-white rounded-lg shadow-xl p-12 w-full max-w-md">
+        <div className="bg-white rounded-lg shadow-lg md:p-12 p-6 w-full md:max-w-md">
           <h1 className="text-3xl font-bold text-center mb-2">Sign Up</h1>
           <p className="text-center text-gray-600 text-sm mb-8">
             Hi! Welcome back, you've been missed
@@ -53,9 +53,7 @@ export default function SignUpFlow() {
             >
               Next
             </button>
-            <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50">
-              <FaFingerprint size={24} className="text-gray-600" />
-            </button>
+           
           </div>
 
           <SocialLogin />
@@ -70,10 +68,10 @@ export default function SignUpFlow() {
 
       {/* STEP 2 */}
       {step === 2 && (
-        <div className="bg-white rounded-lg shadow-lg p-12 w-full max-w-lg">
-          <div className="p-8">
-            <h1 className="text-3xl font-bold text-center mb-4">Confirm Your Gmail</h1>
-            <p className="text-center text-gray-600 text-sm mb-8">
+        <div className="bg-white rounded-lg shadow-lg md:p-12 p-6 w-full md:max-w-md">
+         
+            <h1 className=" text-xl md:text-3xl font-bold text-center mb-4">Confirm Your Gmail</h1>
+            <p className="text-center text-gray-600 text-sm mb-4">
               We have sent a code in an Email message to ex***@gmail.com. Enter your code.
             </p>
 
@@ -95,9 +93,7 @@ export default function SignUpFlow() {
               >
                 Next
               </button>
-              <button className="w-12 h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50">
-                <FaFingerprint size={24} className="text-gray-600" />
-              </button>
+             
             </div>
 
             <SocialLogin />
@@ -108,7 +104,7 @@ export default function SignUpFlow() {
                 Sign in
               </Link>
             </div>
-          </div>
+          
         </div>
       )}
 

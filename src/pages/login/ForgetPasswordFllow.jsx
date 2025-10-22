@@ -32,10 +32,10 @@ const handleBack = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center p-5">
+    <div className="min-h-screen bg-gray-200 flex items-center justify-center py-5 px-2">
       {/* Step 1: Forgot Password - Email */}
       {step === 1 && (
-        <div className="bg-white rounded-lg shadow-lg p-12 w-full max-w-md">
+        <div className="bg-white rounded-lg shadow-lg md:p-12 p-6 w-full md:max-w-md">
           <h1 className="text-3xl font-bold text-center mb-4">
             Forgot Your Password?
           </h1>
@@ -72,12 +72,12 @@ const handleBack = () => {
 
       {/* Step 2: Confirm Gmail - Code Verification */}
       {step === 2 && (
-        <div className="bg-white rounded-lg shadow-lg p-12 w-full max-w-md ">
-          <div className=" p-8">
-            <h1 className="text-3xl font-bold text-center mb-4">
+        <div className="bg-white rounded-lg shadow-lg md:p-12 p-6 w-full md:max-w-md ">
+          
+            <h1 className="text-xl md:text-3xl  font-bold text-center mb-2">
               Confirm Your Gmail
             </h1>
-            <p className="text-center text-gray-600 text-sm mb-8">
+            <p className="text-center text-gray-600 text-sm mb-4">
               We have sent a code in an Email message to ex***@grmaol.co TO confirm your account. Enter your code.
             </p>
 
@@ -111,14 +111,14 @@ const handleBack = () => {
             >
               Back
             </button>
-          </div>
+          
         </div>
       )}
 
       {/* Step 3: Create New Password */}
       {step === 3 && (
-        <div className="bg-white rounded-lg shadow-lg p-12 w-full max-w-md">
-          <h1 className="text-3xl font-bold text-center mb-4">
+        <div className="bg-white rounded-lg shadow-lg md:p-12 p-6 w-full md:max-w-md">
+          <h1 className="text-xl md:text-3xl font-bold text-center mb-4">
             Create New Password
           </h1>
           <p className="text-center text-gray-600 text-sm mb-8">

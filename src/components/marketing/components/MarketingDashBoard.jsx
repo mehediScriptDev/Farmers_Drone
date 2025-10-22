@@ -180,7 +180,6 @@ const MarketingDashBoard = () => {
               : null}
           </h2>
         </div>
-
         <div className="relative mb-4 md:mb-6 w-34">
           <select
             value={selectedPeriod}

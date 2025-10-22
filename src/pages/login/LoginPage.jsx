@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, Navigate, useLocation} from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../hooks/useAuth';
 import { Eye, EyeOff, Fingerprint } from 'lucide-react';
@@ -18,10 +18,10 @@ const LoginPage = () => {
   const { t } = useTranslation();
 
   // Redirect if already logged in
-  if (user) {
-    const from = location.state?.from?.pathname || '/dashboard';
-    return <Navigate to={from} replace />;
-  }
+ if (user) {
+  const from = location.state?.from?.pathname || '/dashboard';
+  return <Navigate to={from} replace />;
+}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -107,13 +107,6 @@ const LoginPage = () => {
                 className="flex-1 bg-green-600 text-white py-2 sm:py-3 rounded font-medium hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? t('auth.signingIn') : t('auth.signIn')}
-              </button>
-              <button
-                type="button"
-                className="w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-50 transition mt-2 sm:mt-0"
-                title="Fingerprint Login"
-              >
-                <Fingerprint size={20} className="text-gray-600" />
               </button>
             </div>
           </form>

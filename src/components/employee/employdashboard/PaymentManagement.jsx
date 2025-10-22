@@ -73,20 +73,23 @@ const PaymentManagement = () => {
   }, [i18n]);
 
   // Search
-  const handleSearch = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
+ 
+const handleSearch = (e) => {
+  const value = e.target.value;
+  setSearchQuery(value);
 
-    const filtered = recentTransactions.filter(txn =>
-      txn.serviceId.toLowerCase().includes(query) ||
-      txn.customerName.toLowerCase().includes(query) ||
-      txn.payment.toString().toLowerCase().includes(query) ||
-      txn.progress.toLowerCase().includes(query)
-    );
+  const query = value.toLowerCase();
+  const filtered = recentTransactions.filter(txn =>
+    txn.serviceId.toLowerCase().includes(query) ||
+    txn.customerName.toLowerCase().includes(query) ||
+    txn.payment.toString().toLowerCase().includes(query) ||
+    txn.progress.toLowerCase().includes(query)
+  );
 
-    setFilteredTransactions(filtered);
-    setCurrentPage(1);
-  };
+  setFilteredTransactions(filtered);
+  setCurrentPage(1);
+};
+
 
   // Paginated Transactions
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -126,7 +129,7 @@ const PaymentManagement = () => {
           onClick={() => setIsBillingModalOpen(true)}
           className="flex items-center justify-center w-full sm:w-auto px-3 md:px-6 py-2 bg-[#DC3545] text-white rounded-lg hover:bg-red-700 font-medium text-xs md:text-sm lg:text-base"
         >
-          <FaWrench className="w-4 h-4 md:w-6 md:h-6 mr-1" />
+          <FaWrench className="w-4 h-4  md:h-6 mr-1" />
           {t('dashboard.employee.button.billing')}
         </button>
       </div>
@@ -168,7 +171,7 @@ const PaymentManagement = () => {
               placeholder={t('dashboard.employee.table.searchField')}
               value={searchQuery}
               onChange={handleSearch}
-              className="w-full pl-10 pr-4 py-2 sm:py-3 border-2 border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#002244] text-sm sm:text-base"
+              className="w-full pl-10 pr-4 py-2 sm:py-3 border border-[#C2C2C2] rounded-lg sm:rounded-xl focus:outline-none focus:ring-2 focus:ring-[#002244] text-sm sm:text-base"
             />
           </div>
         </div>

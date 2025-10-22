@@ -1,4 +1,4 @@
-import Banner from "../../../public/assets/images/serviceBanner.jpg";
+// import Banner from "/assets/images/serviceBanner.jpg";
 import { ArrowRight, Sprout, HardHat, Zap, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -66,7 +66,7 @@ const Services = () => {
       <div
       id="services"
         className="relative h-[372px] flex items-center justify-center bg-center bg-cover px-4 sm:px-6 md:px-8"
-        style={{ backgroundImage: `url(${Banner})` }}
+        style={{ backgroundImage: `url(${"/assets/images/serviceBanner.jpg"})` }}
       >
         <div className='absolute bg-gradient-to-r from-[#06422c]/70 via-[#013522cd]/60 to-[#035a3ab8]/35 inset-0'></div>
         <div className="z-10 w-full lg:w-10/12 xl:max-w-7xl mx-auto ">

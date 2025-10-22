@@ -1,87 +1,126 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
+// import industry1 from "/assets/images/industry1.png";
+// import industry2 from "/assets/images/industry2.png";
+// import industry3 from "/assets/images/industry3.png";
+// import industry4 from "/assets/images/industry4.png";
+// import industry5 from "/assets/images/industry5.png";
 
-const Industry = () => {
-      const { t } = useTranslation();
+import { Link } from "react-router";
 
-    const industries = [
-        {
-            icon: '🌾',
-            titleKey: 'industries.agriculture.title',
-            descriptionKey: 'industries.agriculture.description',
-        },
-        {
-            icon: '🏗️',
-            titleKey: 'industries.construction.title',
-            descriptionKey: 'industries.construction.description',
-        },
-        {
-            icon: '⚡',
-            titleKey: 'industries.energy.title',
-            descriptionKey: 'industries.energy.description',
-        },
-        {
-            icon: '👮',
-            titleKey: 'industries.publicSafety.title',
-            descriptionKey: 'industries.publicSafety.description',
-        },
-    ];
+// import industry6 from "/assets/images/industry6.png";
+export default function Industry() {
+  const services = [
+    {
+      id: "01",
+      icon: "/assets/images/industry1.png",
+      title: "Aerial Media Services",
+      description:
+        "Capture stunning aerial footage and photography to elevate your media projects.",
 
-    return (
-        <div className="py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10 bg-white">
-            <div className="lg:w-10/12 xl:max-w-7xl mx-auto">
-                {/* Header */}
-                <div className="text-center mb-6 lg:mb-12">
-                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                        {t('industries.header')}
-                    </h2>
-                    <p className="text-gray-600 text-xs sm:text-sm md:text-base">
-                       {t('industries.subheader')}
-                    </p>
+      iconColor: "text-blue-600",
+    },
+    {
+      id: "02",
+      icon: "/assets/images/industry2.png",
+      title: "Real Estate & Marketing",
+      description:
+        "Showcase properties from the sky for effective real estate promotion and marketing.",
+
+      iconColor: "text-purple-600",
+    },
+    {
+      id: "03",
+      icon: "/assets/images/industry3.png",
+      title: "Mapping & Surveying",
+      description:
+        "Accurate aerial mapping and surveying solutions for precise planning and analysis.",
+
+      iconColor: "text-orange-600",
+    },
+    {
+      id: "04",
+      icon: "/assets/images/industry4.png",
+      title: "Agriculture",
+      description:
+        "Monitor crops and optimize farm management with advanced drone technology.",
+
+      iconColor: "text-green-600",
+    },
+    {
+      id: "05",
+      icon: "/assets/images/industry5.png",
+      title: "Inspection & Infrastructure",
+      description:
+        "Conduct safe and efficient inspections of bridges, towers, and other infrastructure.",
+
+      iconColor: "text-red-600",
+    },
+    {
+      id: "06",
+      icon: "/assets/images/industry6.png",
+      title: "Specialized Operations",
+      description:
+        "Handle custom drone operations with specialized equipment for unique tasks.",
+
+      iconColor: "text-indigo-600",
+    },
+  ];
+
+  return (
+    <div className=" bg-[#E6EBF1] section-padding">
+      <div className="section-container">
+        <h1 className="lg:text-[40px] text-2xl sm:text-3xl font-medium text-center text-gray-900 mb-4 lg:mb-16">
+          Our Services
+        </h1>
+
+        <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2 lg:gap-6 xl:gap-8">
+          {services.map((service) => {
+            return (
+              <div
+                key={service.id}
+                className="bg-white rounded-lg
+                transition-all duration-300 transform  p-8 relative overflow-hidden"
+              >
+                <div className="absolute top-6 right-6 text-2xl font-bold text-[#A8A8A8] transition-colors">
+                  {service.id}
                 </div>
 
-                {/* Industry Cards Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:gap-6 gap-2 sm:gap-3 lg:mb-8 mb-5">
-                    {industries?.map((industry, index) => (
-                        <div
-                            key={index}
-                            className="bg-sky-100 rounded-lg p-8 hover:shadow-lg transition-shadow duration-300"
-                        >
-                            {/* Icon */}
-                            <div className="lg:text-4xl text-3xl mb-4">{industry.icon}</div>
-
-                            {/* Title */}
-                            <h3 className="text-lg lg:text-xl font-semibold text-gray-900 mb-2">
-                                {t(industry.titleKey)}
-                            </h3>
-
-                            {/* Description */}
-                            <p className="text-gray-600 mb-4 text-sm md:text-base">
-                                {t(industry.descriptionKey)}
-                            </p>
-
-                            {/* Learn More Link */}
-                            <a
-                                href="/services"
-                                className="text-green-600 font-medium inline-flex items-center gap-2 hover:gap-3 transition-all text-xs sm:text-sm md:text-base"
-                            >
-                                {t('industries.learnMore')}
-                                <span>→</span>
-                            </a>
-                        </div>
-                    ))}
+                <div className="w-16 h-16 bg-white shadow-2xl border border-gray-100 rounded-full flex items-center justify-center mb-6 relative z-10 transition-transform duration-300">
+                  <img
+                    src={service.icon}
+                    alt="icon"
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
 
-                {/* View All Services Button */}
-                <div className="text-center mb-2">
-                    <Link to={'services'} className="bg-green-600 hover:bg-green-700 text-white font-semibold lg:px-8 lg:py-3 px-4 py-2 text-sm rounded transition-colors duration-300">
-                        {t('industries.viewAllServices')}
-                    </Link>
-                </div>
-            </div>
+                <h3 className="text-[18px] font-medium text-black mb-4 relative z-10">
+                  {service.title}
+                </h3>
+
+                <p className="text-[#303030] md:text-[16px] text-xs mb-6 leading-relaxed relative z-10">
+                  {service.description}
+                </p>
+
+                <Link to={'/services'} className="flex mt-3 items-center text-[#28A844] font-semibold cursor-pointer transition-colors  relative z-10">
+                  Learn more
+                  <svg
+                    className="w-5 h-5 ml-2  transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            );
+          })}
         </div>
-    );
-};
-
-export default Industry;
+      </div>
+    </div>
+  );
+}
