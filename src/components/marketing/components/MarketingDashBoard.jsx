@@ -85,6 +85,8 @@ const MarketingDashBoard = () => {
         setLeads(data.leads);
         setAllSeasonalCampaigns(data.allSeasonalCampaigns);
         setAllLoyaltyPrograms(data.allLoyaltyPrograms);
+        setSeasonalPage(1);
+        setLoyaltyPage(1);
       } catch (err) {
         console.log(err);
       }
@@ -301,25 +303,27 @@ const MarketingDashBoard = () => {
             {seasonalCampaigns.map((campaign, idx) => (
               <div
                 key={idx}
-                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103"
+                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103 flex flex-col h-full"
               >
                 <img
                   src={campaign.image}
                   alt={campaign.title}
                   className="w-full h-72 object-cover"
                 />
-                <div className="p-4">
+                <div className="p-4 flex flex-col h-full">
                   <h3 className="font-semibold text-lg mb-2 text-gray-800">
                     {campaign.title}
                   </h3>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                     {campaign.description}
                   </p>
-                  <Link to={`campaigns/seasonal/${campaign.id}`}>
-                    <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
-                      {t("dashboard.marketing.SeeDetails")}
-                    </button>
-                  </Link>
+                  <div className="mt-auto">
+                    <Link to={`campaigns/seasonal/${campaign.id}`}>
+                      <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                        {t("dashboard.marketing.SeeDetails")}
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
@@ -349,28 +353,30 @@ const MarketingDashBoard = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loyaltyPrograms.map((program, idx) => (
+            {seasonalCampaigns.map((campaign, idx) => (
               <div
                 key={idx}
-                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103"
+                className="bg-[#F9FAFB] rounded-lg shadow-md overflow-hidden transition-transform hover:scale-103 flex flex-col h-full"
               >
                 <img
-                  src={program.image}
-                  alt={program.title}
+                  src={campaign.image}
+                  alt={campaign.title}
                   className="w-full h-72 object-cover"
                 />
-                <div className="p-4">
+                <div className="p-4 flex flex-col h-full">
                   <h3 className="font-semibold text-lg mb-2 text-gray-800">
-                    {program.title}
+                    {campaign.title}
                   </h3>
                   <p className="text-sm text-gray-600 mb-4 line-clamp-3">
-                    {program.description}
+                    {campaign.description}
                   </p>
-                  <Link to={`campaigns/loyality/${program.id}`}>
-                    <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
-                      {t("dashboard.marketing.SeeDetails")}
-                    </button>
-                  </Link>
+                  <div className="mt-auto">
+                    <Link to={`campaigns/seasonal/${campaign.id}`}>
+                      <button className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors">
+                        {t("dashboard.marketing.SeeDetails")}
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

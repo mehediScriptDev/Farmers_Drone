@@ -118,7 +118,7 @@ export default function SeasonalCampaignOverview() {
                     <th className="text-left px-6 py-3 text-sm md:text-base font-semibold text-black whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.ROI")}
                     </th>
-                    <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-right whitespace-nowrap">
+                    <th className="px-6 py-3 text-sm md:text-base font-semibold text-black text-center whitespace-nowrap">
                       {t("dashboard.marketing.CampaignOverview.Actions")}
                     </th>
                   </tr>
@@ -141,7 +141,7 @@ export default function SeasonalCampaignOverview() {
                       <td className="px-6 py-4 text-sm md:text-base text-black">
                         {campaign.roi}
                       </td>
-                      <td className="px-6 py-4 text-right">
+                      <td className="px-6 py-4 text-center">
                         <Link
                           to={`${url}/${campaign.id}`}
                           className="inline-block whitespace-nowrap bg-[#28A844] hover:bg-green-600 text-white font-semibold px-4 py-2 rounded text-sm min-w-[96px] text-center"

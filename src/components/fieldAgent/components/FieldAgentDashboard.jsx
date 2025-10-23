@@ -13,7 +13,7 @@ import CreateServiceCard from "./CreateServiceCard";
 import FilterBar from "./FilterBar";
 import UsersTable from "./UsersTable";
 import Pagination from "../../common/Pagination";
-import RegistrationModal from "../../employee/employdashboard/components/Modal/RegistrationModal";
+import AddCustomerModal from "./modals/AddCustomerModal"
 
 const FieldAgentDashboard = () => {
   // const { user } = useAuth();
@@ -243,7 +243,7 @@ const FieldAgentDashboard = () => {
 
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-[#28A844] hover:bg-green-700 hover:cursor-pointer text-white px-1 sm:px-2 py-2 md:px-6 sm:py-1 md:py-2.5 rounded-sm font-medium flex items-center gap-2 text-sm md:text-base transition-colors"
+                className="bg-[#28A844] hover:bg-green-700 hover:cursor-pointer text-white px-4 sm:px-2 py-2 md:px-6 sm:py-1 md:py-2.5 rounded-sm font-medium flex items-center gap-2 text-sm md:text-base transition-colors"
               >
                 <FiUserPlus size={18} />
                 {t("dashboard.fieldAgent.userAdd.AddCustomer")}
@@ -273,7 +273,7 @@ const FieldAgentDashboard = () => {
       </div>
 
       {/* Modals */}
-      <RegistrationModal
+      <AddCustomerModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
       />
