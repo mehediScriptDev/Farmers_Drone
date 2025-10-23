@@ -1,1346 +1,680 @@
-// import React, { useState, useCallback, memo, useEffect } from 'react';
-// import { X, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { X, Plus, ArrowLeft } from 'lucide-react';
+import { IoChevronDown } from "react-icons/io5";
+import { useTranslation } from 'react-i18next';
 
-// // Validation utilities
-// const validators = {
-//   email: (value) => {
-//     if (!value.trim()) return "Email or phone is required";
-//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//     const phoneRegex = /^[\d\s\-+()]+$/;
-//     if (!emailRegex.test(value) && !phoneRegex.test(value)) {
-//       return "Please enter a valid email or phone number";
-//     }
-//     return "";
-//   },
-//   required: (value, fieldName) => {
-//     return !value.trim() ? `${fieldName} is required` : "";
-//   },
-//   phone: (value) => {
-//     if (!value.trim()) return "Phone is required";
-//     const phoneRegex = /^[\d\s\-+()]{10,}$/;
-//     return !phoneRegex.test(value) ? "Please enter a valid phone number" : "";
-//   },
-// };
+export default function ProfileSetupModal({ isOpen, onClose }) {
+  const { t } = useTranslation('common'); // Corrected to use the 'common' namespace
+  const [currentStep, setCurrentStep] = useState(null);
+  const [selectedStep, setSelectedStep] = useState('step2');
 
-// // Input component
-// const Input = memo(
-//   ({
-//     label,
-//     name,
-//     value,
-//     onChange,
-//     placeholder,
-//     type = "text",
-//     required = false,
-//     error,
-//     className = "",
-//   }) => (
-//     <div>
-//       <label className="block text-sm md:text-base font-medium text-[#002244]">
-//         {label}
-//         {required && <span className="text-red-500">*</span>}
-//       </label>
-//       <input
-//         type={type}
-//         name={name}
-//         value={value}
-//         onChange={onChange}
-//         placeholder={placeholder}
-//         className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-//           } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
-//       />
-//       {error && <p className="text-xs md:text-sm text-red-500 mt-1">{error}</p>}
-//     </div>
-//   )
-// );
-
-// // Select component
-// const Select = memo(
-//   ({ label, name, value, onChange, options, required = false, error }) => (
-//     <div>
-//       <label className="block text-sm md:text-base font-medium text-[#002244]">
-//         {label}
-//         {required && <span className="text-red-500">*</span>}
-//       </label>
-//       <select
-//         name={name}
-//         value={value}
-//         onChange={onChange}
-//         className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-//           } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500`}
-//       >
-//         {options.map((opt) => (
-//           <option key={opt.value} value={opt.value}>
-//             {opt.label}
-//           </option>
-//         ))}
-//       </select>
-//       {error && <p className="text-xs md:text-sm text-red-500 mt-1">{error}</p>}
-//     </div>
-//   )
-// );
-
-// // Main MultiStep Modal Component
-// export default function ProfileSetupModal() {
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [currentStep, setCurrentStep] = useState('step1');
-//   const [email, setEmail] = useState("");
-//   const [setupType, setSetupType] = useState("");
-//   const [notes, setNotes] = useState("");
-//   const [errors, setErrors] = useState({});
-
-//   // Personal Info State
-//   const [personalInfo, setPersonalInfo] = useState({
-//     firstName: "",
-//     middleName: "",
-//     lastName: "",
-//     alsoKnownAs: "",
-//     phone: "",
-//     email: "",
-//     geoLocation: "",
-//     district: "",
-//     mandal: "",
-//     village: "",
-//     registeredBy: "",
-//   });
-//   const [personalErrors, setPersonalErrors] = useState({});
-
-//   // Verification State
-//   const [verificationInfo, setVerificationInfo] = useState({
-//     kycDocument: null,
-//     street: "",
-//     city: "",
-//     state: "",
-//     postalCode: "",
-//     country: "",
-//     industry: "",
-//   });
-//   const [verificationErrors, setVerificationErrors] = useState({});
-
-//   // Service Location State
-//   const [locations, setLocations] = useState([
-//     { id: 1, lat: "", long: "" },
-//     { id: 2, lat: "", long: "" },
-//     { id: 3, lat: "", long: "" },
-//   ]);
-//   const [acres, setAcres] = useState("");
-
-//   // Reset all state when modal closes
-//   useEffect(() => {
-//     if (!isOpen) {
-//       setCurrentStep('step1');
-//       setEmail("");
-//       setSetupType("");
-//       setNotes("");
-//       setErrors({});
-//       setPersonalInfo({
-//         firstName: "",
-//         middleName: "",
-//         lastName: "",
-//         alsoKnownAs: "",
-//         phone: "",
-//         email: "",
-//         geoLocation: "",
-//         district: "",
-//         mandal: "",
-//         village: "",
-//         registeredBy: "",
-//       });
-//       setPersonalErrors({});
-//       setVerificationInfo({
-//         kycDocument: null,
-//         street: "",
-//         city: "",
-//         state: "",
-//         postalCode: "",
-//         country: "",
-//         industry: "",
-//       });
-//       setVerificationErrors({});
-//       setLocations([
-//         { id: 1, lat: "", long: "" },
-//         { id: 2, lat: "", long: "" },
-//         { id: 3, lat: "", long: "" },
-//       ]);
-//       setAcres("");
-//     }
-//   }, [isOpen]);
-
-//   // Step 1: Validate and proceed
-//   const handleStep1Submit = useCallback(() => {
-//     const newErrors = {
-//       email: validators.email(email),
-//       setupType: validators.required(setupType, "Setup type"),
-//     };
-
-//     const hasErrors = Object.values(newErrors).some((err) => err);
-
-//     if (hasErrors) {
-//       setErrors(newErrors);
-//       return;
-//     }
-
-//     if (setupType === "Personal Information") {
-//       setCurrentStep('step2');
-//       setPersonalInfo(prev => ({ ...prev, email }));
-//     } else if (setupType === "Verification Details") {
-//       setCurrentStep('step3');
-//     } else if (setupType === "Service Location") {
-//       setCurrentStep('step4');
-//     }
-//   }, [email, setupType]);
-
-//   // Step 2: Personal Info handlers
-//   const handlePersonalChange = useCallback((e) => {
-//     const { name, value } = e.target;
-//     setPersonalInfo(prev => ({ ...prev, [name]: value }));
-//     setPersonalErrors(prev => ({ ...prev, [name]: "" }));
-//   }, []);
-
-//   const handlePersonalSave = useCallback(() => {
-//     const newErrors = {
-//       firstName: validators.required(personalInfo.firstName, "First Name"),
-//       lastName: validators.required(personalInfo.lastName, "Last Name"),
-//       phone: validators.phone(personalInfo.phone),
-//       geoLocation: validators.required(personalInfo.geoLocation, "Geo Location"),
-//       registeredBy: validators.required(personalInfo.registeredBy, "Registered By"),
-//     };
-
-//     const hasErrors = Object.values(newErrors).some((err) => err);
-
-//     if (hasErrors) {
-//       setPersonalErrors(newErrors);
-//       return;
-//     }
-
-//     console.log("Personal Info Saved:", { customerEmail: email, ...personalInfo });
-//     setIsOpen(false);
-//   }, [personalInfo, email]);
-
-//   // Step 3: Verification handlers
-//   const handleVerificationChange = useCallback((e) => {
-//     const { name, value, files } = e.target;
-//     setVerificationInfo(prev => ({
-//       ...prev,
-//       [name]: files ? files[0] : value,
-//     }));
-//     setVerificationErrors(prev => ({ ...prev, [name]: "" }));
-//   }, []);
-
-//   const handleVerificationSave = useCallback(() => {
-//     const newErrors = {
-//       street: validators.required(verificationInfo.street, "Street"),
-//       city: validators.required(verificationInfo.city, "City"),
-//       state: validators.required(verificationInfo.state, "State"),
-//       postalCode: validators.required(verificationInfo.postalCode, "Postal Code"),
-//       country: validators.required(verificationInfo.country, "Country"),
-//       industry: validators.required(verificationInfo.industry, "Industry"),
-//     };
-
-//     const hasErrors = Object.values(newErrors).some((err) => err);
-
-//     if (hasErrors) {
-//       setVerificationErrors(newErrors);
-//       return;
-//     }
-
-//     console.log("Verification Details Saved:", { customerEmail: email, ...verificationInfo });
-//     setIsOpen(false);
-//   }, [verificationInfo, email]);
-
-//   // Step 4: Service Location handlers
-//   const handleLocationChange = useCallback((id, field, value) => {
-//     setLocations(prev =>
-//       prev.map(loc => (loc.id === id ? { ...loc, [field]: value } : loc))
-//     );
-//   }, []);
-
-//   const addLocation = useCallback(() => {
-//     setLocations(prev => [
-//       ...prev,
-//       { id: Math.max(...prev.map(l => l.id), 0) + 1, lat: "", long: "" },
-//     ]);
-//   }, []);
-
-//   const handleServiceLocationSave = useCallback(() => {
-//     const validLocations = locations.filter((loc) => loc.lat || loc.long);
-
-//     if (validLocations.length === 0) {
-//       alert("Please enter at least one Latitude/Longitude pair.");
-//       return;
-//     }
-
-//     const formData = {
-//       locations: validLocations,
-//       acres,
-//     };
-//     console.log("Service Location Saved:", { email, ...formData });
-//     setIsOpen(false);
-//   }, [locations, acres, email]);
-
-//   return (
-//     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-//       <button
-//         onClick={() => setIsOpen(true)}
-//         className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-md transition text-lg"
-//       >
-//         Assist in Profile Setup
-//       </button>
-
-//       {/* STEP 1: Initial Modal */}
-//       {isOpen && currentStep === 'step1' && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-//           <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
-//             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300">
-//               <h2 className="text-lg md:text-xl font-semibold text-[#002244]">
-//                 Assist in Profile Setup
-//               </h2>
-//               <button
-//                 onClick={() => setIsOpen(false)}
-//                 className="text-gray-400 hover:text-gray-600"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             <div className="px-4 md:px-6 py-6 space-y-5">
-//               <div>
-//                 <label className="block text-base font-medium text-[#002244] mb-2">
-//                   Customer email or phone
-//                 </label>
-//                 <input
-//                   type="text"
-//                   value={email}
-//                   onChange={(e) => {
-//                     setEmail(e.target.value);
-//                     setErrors(prev => ({ ...prev, email: "" }));
-//                   }}
-//                   placeholder="Enter customer email or phone"
-//                   className={`w-full text-sm px-3 py-2 border ${errors.email ? "border-red-500" : "border-gray-300"
-//                     } rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
-//                 />
-//                 {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
-//               </div>
-
-//               <div>
-//                 <label className="block text-base font-medium text-[#002244] mb-2">
-//                   Setup Type<span className="text-red-500">*</span>
-//                 </label>
-//                 <div className="relative">
-//                   <select
-//                     value={setupType}
-//                     onChange={(e) => {
-//                       setSetupType(e.target.value);
-//                       setErrors(prev => ({ ...prev, setupType: "" }));
-//                     }}
-//                     className={`w-full text-sm px-3 py-2 border ${errors.setupType ? "border-red-500" : "border-gray-300"
-//                       } rounded-md bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500`}
-//                   >
-//                     <option value="">Select Setup Type</option>
-//                     <option value="Personal Information">Personal Information</option>
-//                     <option value="Verification Details">Verification Details</option>
-//                     <option value="Service Location">Service Location</option>
-//                   </select>
-//                   <ChevronDown
-//                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
-//                     size={20}
-//                   />
-//                 </div>
-//                 {errors.setupType && <p className="text-sm text-red-500 mt-1">{errors.setupType}</p>}
-//               </div>
-
-//               <div>
-//                 <label className="block text-base font-medium text-[#002244] mb-2">
-//                   Notes
-//                 </label>
-//                 <textarea
-//                   value={notes}
-//                   onChange={(e) => setNotes(e.target.value)}
-//                   placeholder="Add any notes about the setup assistance needed..."
-//                   rows={4}
-//                   className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
-//                 />
-//               </div>
-
-//               <button
-//                 onClick={handleStep1Submit}
-//                 className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-//               >
-//                 Start Setup Assistance
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {/* STEP 2: Personal Information Modal */}
-//       {isOpen && currentStep === 'step2' && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-//           <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-//             <div className="flex justify-between items-center px-6 py-4 border-b">
-//               <div>
-//                 <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-//                   Customer Information
-//                 </h2>
-//                 <p className="text-sm text-gray-500 mt-1">Customer: {email}</p>
-//               </div>
-//               <button
-//                 onClick={() => setIsOpen(false)}
-//                 className="text-gray-400 hover:text-gray-600"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             <div className="px-6 py-4 overflow-y-auto flex-1 space-y-3">
-//               <Input
-//                 label="First Name"
-//                 name="firstName"
-//                 value={personalInfo.firstName}
-//                 onChange={handlePersonalChange}
-//                 placeholder="First Name"
-//                 required
-//                 error={personalErrors.firstName}
-//               />
-//               <Input
-//                 label="Middle Name"
-//                 name="middleName"
-//                 value={personalInfo.middleName}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Middle Name"
-//               />
-//               <Input
-//                 label="Last Name"
-//                 name="lastName"
-//                 value={personalInfo.lastName}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Last Name"
-//                 required
-//                 error={personalErrors.lastName}
-//               />
-//               <Input
-//                 label="Also Known As"
-//                 name="alsoKnownAs"
-//                 value={personalInfo.alsoKnownAs}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Nickname"
-//               />
-//               <Input
-//                 label="Phone"
-//                 name="phone"
-//                 type="tel"
-//                 value={personalInfo.phone}
-//                 onChange={handlePersonalChange}
-//                 placeholder="+92 9876543210"
-//                 required
-//                 error={personalErrors.phone}
-//               />
-//               <Input
-//                 label="Email"
-//                 name="email"
-//                 type="email"
-//                 value={personalInfo.email}
-//                 onChange={handlePersonalChange}
-//                 placeholder="example@gmail.com"
-//               />
-//               <Input
-//                 label="Geo Location"
-//                 name="geoLocation"
-//                 value={personalInfo.geoLocation}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Select on map"
-//                 required
-//                 error={personalErrors.geoLocation}
-//               />
-//               <Input
-//                 label="District"
-//                 name="district"
-//                 value={personalInfo.district}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Enter District"
-//               />
-//               <Input
-//                 label="Mandal"
-//                 name="mandal"
-//                 value={personalInfo.mandal}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Enter Mandal"
-//               />
-//               <Input
-//                 label="Village"
-//                 name="village"
-//                 value={personalInfo.village}
-//                 onChange={handlePersonalChange}
-//                 placeholder="Enter Village"
-//               />
-//               <Select
-//                 label="Registered By"
-//                 name="registeredBy"
-//                 value={personalInfo.registeredBy}
-//                 onChange={handlePersonalChange}
-//                 required
-//                 error={personalErrors.registeredBy}
-//                 options={[
-//                   { value: "", label: "Select Agent" },
-//                   { value: "agent1", label: "Field Agent" },
-//                 ]}
-//               />
-//             </div>
-
-//             <div className="px-6 py-4 border-t">
-//               <button
-//                 onClick={handlePersonalSave}
-//                 className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-//               >
-//                 Save Personal Information
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {/* STEP 3: Verification Details Modal */}
-//       {isOpen && currentStep === 'step3' && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-//           <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-y-auto">
-//             <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-white">
-//               <div>
-//                 <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-[#002244]">
-//                   Verification Details
-//                 </h2>
-//                 <p className="text-sm text-gray-500 mt-1">Customer: {email}</p>
-//               </div>
-//               <button
-//                 onClick={() => setIsOpen(false)}
-//                 className="text-gray-400 hover:text-gray-600"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             <div className="px-6 py-6 flex-1 space-y-4">
-//               <div>
-//                 <label className="block text-sm font-medium mb-1">
-//                   KYC Documents
-//                 </label>
-//                 <input
-//                   type="file"
-//                   name="kycDocument"
-//                   accept=".doc,.docx,.jpg,.pdf,.png"
-//                   onChange={handleVerificationChange}
-//                   className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-//                 />
-//               </div>
-//               <Input
-//                 label="Street"
-//                 name="street"
-//                 value={verificationInfo.street}
-//                 onChange={handleVerificationChange}
-//                 placeholder="Street address"
-//                 required
-//                 error={verificationErrors.street}
-//               />
-//               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                 <Input
-//                   label="City"
-//                   name="city"
-//                   value={verificationInfo.city}
-//                   onChange={handleVerificationChange}
-//                   placeholder="City"
-//                   required
-//                   error={verificationErrors.city}
-//                 />
-//                 <Input
-//                   label="State"
-//                   name="state"
-//                   value={verificationInfo.state}
-//                   onChange={handleVerificationChange}
-//                   placeholder="State"
-//                   required
-//                   error={verificationErrors.state}
-//                 />
-//               </div>
-//               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-//                 <Input
-//                   label="Postal Code"
-//                   name="postalCode"
-//                   value={verificationInfo.postalCode}
-//                   onChange={handleVerificationChange}
-//                   placeholder="400020"
-//                   required
-//                   error={verificationErrors.postalCode}
-//                 />
-//                 <Input
-//                   label="Country"
-//                   name="country"
-//                   value={verificationInfo.country}
-//                   onChange={handleVerificationChange}
-//                   placeholder="India"
-//                   required
-//                   error={verificationErrors.country}
-//                 />
-//               </div>
-//               <Select
-//                 label="Industry"
-//                 name="industry"
-//                 value={verificationInfo.industry}
-//                 onChange={handleVerificationChange}
-//                 required
-//                 error={verificationErrors.industry}
-//                 options={[
-//                   { value: "", label: "Select industry" },
-//                   { value: "agriculture", label: "Agriculture" },
-//                   { value: "survey", label: "Survey & Mapping" },
-//                 ]}
-//               />
-//             </div>
-
-//             <div className="px-6 py-4 border-t sticky bottom-0 bg-white">
-//               <button
-//                 onClick={handleVerificationSave}
-//                 className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-//               >
-//                 Save Verification Details
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-
-//       {/* STEP 4: Service Location Modal */}
-//       {isOpen && currentStep === 'step4' && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-//           <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-y-auto">
-//             <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-white">
-//               <div>
-//                 <h2 className="text-lg md:text-xl font-semibold text-[#002244]">
-//                   Service Location
-//                 </h2>
-//                 <p className="text-sm text-gray-500 mt-1">Customer: {email}</p>
-//               </div>
-//               <button
-//                 onClick={() => setIsOpen(false)}
-//                 className="text-gray-400 hover:text-gray-600"
-//               >
-//                 <X size={24} />
-//               </button>
-//             </div>
-
-//             <div className="px-6 py-6 flex-1 space-y-4">
-//               {locations.map((loc, idx) => (
-//                 <div key={loc.id}>
-//                   <label className="text-sm font-medium mb-1 flex justify-between items-center">
-//                     <span>
-//                       {idx + 1}
-//                       {idx === 0
-//                         ? "st"
-//                         : idx === 1
-//                           ? "nd"
-//                           : idx === 2
-//                             ? "rd"
-//                             : "th"}{" "}
-//                       Latitude/Longitude
-//                     </span>
-//                     {idx === locations.length - 1 && (
-//                       <button
-//                         type="button"
-//                         onClick={addLocation}
-//                         className="text-green-600 text-xl font-bold px-2 hover:bg-green-50 rounded"
-//                       >
-//                         +
-//                       </button>
-//                     )}
-//                   </label>
-//                   <input
-//                     type="text"
-//                     value={`${loc.lat}${loc.lat && loc.long ? ", " : ""}${loc.long}`}
-//                     onChange={(e) => {
-//                       const [lat, long] = e.target.value
-//                         .split(",")
-//                         .map((s) => s.trim());
-//                       handleLocationChange(loc.id, "lat", lat || "");
-//                       handleLocationChange(loc.id, "long", long || "");
-//                     }}
-//                     placeholder="Lat, Long"
-//                     className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-//                   />
-//                 </div>
-//               ))}
-//               <Input
-//                 label="Number of acres"
-//                 name="acres"
-//                 value={acres}
-//                 onChange={(e) => setAcres(e.target.value)}
-//                 placeholder="Land area in acres"
-//               />
-//             </div>
-
-//             <div className="px-6 py-4 border-t sticky bottom-0 bg-white">
-//               <button
-//                 onClick={handleServiceLocationSave}
-//                 className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-//               >
-//                 Confirm Registration
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-import React, { useState, useCallback, memo, useEffect } from 'react';
-import { X, ChevronDown } from 'lucide-react';
-
-// Validation utilities
-const validators = {
-  email: (value) => {
-    if (!value.trim()) return "Email or phone is required";
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^[\d\s\-+()]+$/;
-    if (!emailRegex.test(value) && !phoneRegex.test(value)) {
-      return "Please enter a valid email or phone number";
-    }
-    return "";
-  },
-  required: (value, fieldName) => {
-    return !value.trim() ? `${fieldName} is required` : "";
-  },
-  phone: (value) => {
-    if (!value.trim()) return "Phone is required";
-    const phoneRegex = /^[\d\s\-+()]{10,}$/;
-    return !phoneRegex.test(value) ? "Please enter a valid phone number" : "";
-  },
-};
-
-// Input component
-const Input = memo(
-  ({
-    label,
-    name,
-    value,
-    onChange,
-    placeholder,
-    type = "text",
-    required = false,
-    error,
-    className = "",
-  }) => (
-    <div>
-      <label className="block text-sm md:text-base font-medium text-[#002244]">
-        {label}
-        {required && <span className="text-red-500">*</span>}
-      </label>
-      <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-          } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500 ${className}`}
-      />
-      {error && <p className="text-xs md:text-sm text-red-500 mt-1">{error}</p>}
-    </div>
-  )
-);
-
-// Select component
-const Select = memo(
-  ({ label, name, value, onChange, options, required = false, error }) => (
-    <div>
-      <label className="block text-sm md:text-base font-medium text-[#002244]">
-        {label}
-        {required && <span className="text-red-500">*</span>}
-      </label>
-      <select
-        name={name}
-        value={value}
-        onChange={onChange}
-        className={`mt-1 w-full px-3 md:px-4 py-2 border ${error ? "border-red-500" : "border-gray-300"
-          } rounded-md md:rounded-lg text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-green-500`}
-      >
-        {options.map((opt) => (
-          <option key={opt.value} value={opt.value}>
-            {opt.label}
-          </option>
-        ))}
-      </select>
-      {error && <p className="text-xs md:text-sm text-red-500 mt-1">{error}</p>}
-    </div>
-  )
-);
-
-export default function ProfileSetupModal() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState('step1');
-  const [email, setEmail] = useState("");
-  const [setupType, setSetupType] = useState("");
-  const [notes, setNotes] = useState("");
-  const [errors, setErrors] = useState({});
-
-  // Personal Info State
-  const [personalInfo, setPersonalInfo] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    alsoKnownAs: "",
-    phone: "",
-    email: "",
-    geoLocation: "",
-    district: "",
-    mandal: "",
-    village: "",
-    registeredBy: "",
+  const [formData, setFormData] = useState({
+    customerEmail: '',
+    setupType: '',
+    notes: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    nickname: '',
+    phone: '',
+    email: '',
+    geoLocation: '',
+    district: '',
+    mandal: '',
+    kycDocuments: null,
+    street: '',
+    city: '',
+    state: '',
+    postalCode: '',
+    country: '',
+    industry: '',
+    latitude1: '',
+    longitude1: '',
+    latitude2: '',
+    longitude2: '',
+    latitude3: '',
+    longitude3: '',
+    acres: '',
+    village: '',
+    locations: [{ lat: '', long: '' }],
   });
-  const [personalErrors, setPersonalErrors] = useState({});
 
-  // Verification State
-  const [verificationInfo, setVerificationInfo] = useState({
-    kycDocument: null,
-    street: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    industry: "",
-  });
-  const [verificationErrors, setVerificationErrors] = useState({});
-
-  // Service Location State
-  const [locations, setLocations] = useState([
-    { id: 1, lat: "", long: "" },
-    { id: 2, lat: "", long: "" },
-    { id: 3, lat: "", long: "" },
-  ]);
-  const [acres, setAcres] = useState("");
-
-  // Reset all state when modal closes
-  const resetAll = useCallback(() => {
-    setCurrentStep('step1');
-    setEmail("");
-    setSetupType("");
-    setNotes("");
-    setErrors({});
-    setPersonalInfo({
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      alsoKnownAs: "",
-      phone: "",
-      email: "",
-      geoLocation: "",
-      district: "",
-      mandal: "",
-      village: "",
-      registeredBy: "",
-    });
-    setPersonalErrors({});
-    setVerificationInfo({
-      kycDocument: null,
-      street: "",
-      city: "",
-      state: "",
-      postalCode: "",
-      country: "",
-      industry: "",
-    });
-    setVerificationErrors({});
-    setLocations([
-      { id: 1, lat: "", long: "" },
-      { id: 2, lat: "", long: "" },
-      { id: 3, lat: "", long: "" },
-    ]);
-    setAcres("");
-  }, []);
-
-  useEffect(() => {
-    if (!isOpen) resetAll();
-  }, [isOpen, resetAll]);
-
-  // Step 1: Validate and proceed
-  const handleStep1Submit = useCallback(() => {
-    const newErrors = {
-      email: validators.email(email),
-      setupType: validators.required(setupType, "Setup type"),
-    };
-
-    const hasErrors = Object.values(newErrors).some((err) => err);
-
-    if (hasErrors) {
-      setErrors(newErrors);
+  const handleStep1Submit = () => {
+    if (!formData.customerEmail.trim()) {
+      alert('Please enter customer email or phone');
       return;
     }
+    setCurrentStep(selectedStep);
+  };
 
-    if (setupType === "Personal Information") {
-      setCurrentStep('step2');
-      setPersonalInfo(prev => ({ ...prev, email }));
-    } else if (setupType === "Verification Details") {
-      setCurrentStep('step3');
-    } else if (setupType === "Service Location") {
-      setCurrentStep('step4');
-    }
-  }, [email, setupType]);
+  const handleStepSubmit = () => {
+    console.log('Form Data:', formData);
+    setCurrentStep(null);
+    onClose();
+  };
 
-  // Step 2: Personal Info handlers
-  const handlePersonalChange = useCallback((e) => {
+  const handleBackClick = () => {
+    setCurrentStep(null);
+  };
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setPersonalInfo(prev => ({ ...prev, [name]: value }));
-    setPersonalErrors(prev => ({ ...prev, [name]: "" }));
-  }, []);
-
-  const handlePersonalSave = useCallback(() => {
-    const newErrors = {
-      firstName: validators.required(personalInfo.firstName, "First Name"),
-      lastName: validators.required(personalInfo.lastName, "Last Name"),
-      phone: validators.phone(personalInfo.phone),
-      geoLocation: validators.required(personalInfo.geoLocation, "Geo Location"),
-      registeredBy: validators.required(personalInfo.registeredBy, "Registered By"),
-    };
-
-    const hasErrors = Object.values(newErrors).some((err) => err);
-
-    if (hasErrors) {
-      setPersonalErrors(newErrors);
-      return;
-    }
-
-    console.log("Personal Info Saved:", { customerEmail: email, ...personalInfo });
-    setIsOpen(false);
-    setCurrentStep('step1');
-  }, [personalInfo, email]);
-
-  // Step 3: Verification handlers
-  const handleVerificationChange = useCallback((e) => {
-    const { name, value, files } = e.target;
-    setVerificationInfo(prev => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: files ? files[0] : value,
+      [name]: value
     }));
-    setVerificationErrors(prev => ({ ...prev, [name]: "" }));
-  }, []);
+  };
 
-  const handleVerificationSave = useCallback(() => {
-    const newErrors = {
-      street: validators.required(verificationInfo.street, "Street"),
-      city: validators.required(verificationInfo.city, "City"),
-      state: validators.required(verificationInfo.state, "State"),
-      postalCode: validators.required(verificationInfo.postalCode, "Postal Code"),
-      country: validators.required(verificationInfo.country, "Country"),
-      industry: validators.required(verificationInfo.industry, "Industry"),
-    };
-
-    const hasErrors = Object.values(newErrors).some((err) => err);
-
-    if (hasErrors) {
-      setVerificationErrors(newErrors);
-      return;
-    }
-
-    console.log("Verification Details Saved:", { customerEmail: email, ...verificationInfo });
-    setIsOpen(false);
-    setCurrentStep('step1');
-  }, [verificationInfo, email]);
-
-  // Step 4: Service Location handlers
-  const handleLocationChange = useCallback((id, field, value) => {
-    setLocations(prev =>
-      prev.map(loc => (loc.id === id ? { ...loc, [field]: value } : loc))
-    );
-  }, []);
-
-  const addLocation = useCallback(() => {
-    setLocations(prev => [
+  const handleFileChange = (e) => {
+    setFormData(prev => ({
       ...prev,
-      { id: Math.max(...prev.map(l => l.id), 0) + 1, lat: "", long: "" },
-    ]);
-  }, []);
+      kycDocuments: e.target.files[0]
+    }));
+  };
 
-  const handleServiceLocationSave = useCallback(() => {
-    const validLocations = locations.filter((loc) => loc.lat || loc.long);
+  const addLocation = () => {
+    setFormData(prev => ({
+      ...prev,
+      locations: [...prev.locations, { lat: '', long: '' }]
+    }));
+  };
 
-    if (validLocations.length === 0) {
-      alert("Please enter at least one Latitude/Longitude pair.");
-      return;
+  const updateLocation = (index, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      locations: prev.locations.map((loc, i) =>
+        i === index ? { ...loc, [field]: value } : loc
+      )
+    }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      customerEmail: '',
+      setupType: '',
+      notes: '',
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      nickname: '',
+      phone: '',
+      email: '',
+      geoLocation: '',
+      district: '',
+      mandal: '',
+      kycDocuments: null,
+      street: '',
+      city: '',
+      state: '',
+      postalCode: '',
+      country: '',
+      industry: '',
+      latitude1: '',
+      longitude1: '',
+      latitude2: '',
+      longitude2: '',
+      latitude3: '',
+      longitude3: '',
+      acres: '',
+      village: '',
+      locations: [{ lat: '', long: '' }],
+    });
+    setCurrentStep(null);
+    setSelectedStep('step2');
+  };
+
+  const closeAll = () => {
+    resetForm();
+    onClose();
+  };
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      closeAll();
     }
+  };
 
-    const formData = {
-      locations: validLocations,
-      acres,
-    };
-    console.log("Service Location Saved:", { email, ...formData });
-    setIsOpen(false);
-    setCurrentStep('step1');
-  }, [locations, acres, email]);
+  if (!isOpen) return null;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <button
-        onClick={() => setIsOpen(true)}
-        className="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-md transition text-lg"
-      >
-        Assist in Profile Setup
-      </button>
-
-      {/* STEP 1 */}
-      {isOpen && currentStep === 'step1' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-300">
-              <h2 className="text-lg md:text-xl font-semibold text-[#002244]">
-                Assist in Profile Setup
-              </h2>
+    <>
+      {/* Step 1 Modal - Assist in Profile Setup */}
+      {!currentStep && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4" onClick={handleBackdropClick}>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-xl">
+            <div className="flex justify-between items-center p-6 border-b border-gray-200">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">{t('dashboard.employee.modal.assistInProfileSetup')}</h2>
+              </div>
               <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-gray-600"
+                onClick={closeAll}
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="px-4 md:px-6 py-6 space-y-5">
+            <div className="p-6 space-y-5">
               <div>
-                <label className="block text-base font-medium text-[#002244] mb-2">
-                  Customer email or phone
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  {t('dashboard.employee.modal.customerEmailOrPhone')}
                 </label>
                 <input
                   type="text"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setErrors(prev => ({ ...prev, email: "" }));
-                  }}
-                  placeholder="Enter customer email or phone"
-                  className={`w-full text-sm px-3 py-2 border ${errors.email ? "border-red-500" : "border-gray-300"
-                    } rounded-md focus:outline-none focus:ring-2 focus:ring-green-500`}
+                  name="customerEmail"
+                  value={formData.customerEmail}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.customerEmailOrPhone')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
-                {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email}</p>}
               </div>
 
               <div>
-                <label className="block text-base font-medium text-[#002244] mb-2">
-                  Setup Type<span className="text-red-500">*</span>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  {t('dashboard.employee.modal.setupType')}
+                  <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <select
-                    value={setupType}
-                    onChange={(e) => {
-                      setSetupType(e.target.value);
-                      setErrors(prev => ({ ...prev, setupType: "" }));
-                    }}
-                    className={`w-full text-sm px-3 py-2 border ${errors.setupType ? "border-red-500" : "border-gray-300"
-                      } rounded-md bg-white appearance-none focus:outline-none focus:ring-2 focus:ring-green-500`}
+                    value={selectedStep}
+                    onChange={(e) => setSelectedStep(e.target.value)}
+                    className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border  border-black/30 rounded-lg focus:ring-black appearance-none  text-sm"
+
                   >
-                    <option value="">Select Setup Type</option>
-                    <option value="Personal Information">Personal Information</option>
-                    <option value="Verification Details">Verification Details</option>
-                    <option value="Service Location">Service Location</option>
+
+                    <option value="step2"> {t('dashboard.employee.modal.customerInformation')}</option>
+                    <option value="step3"> {t('dashboard.employee.modal.verificationDetails')}</option>
+                    <option value="step4">{t('dashboard.employee.modal.serviceLocation')}</option>
                   </select>
-                  <ChevronDown
+                  <IoChevronDown
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
                     size={20}
                   />
                 </div>
-                {errors.setupType && <p className="text-sm text-red-500 mt-1">{errors.setupType}</p>}
               </div>
 
               <div>
-                <label className="block text-base font-medium text-[#002244] mb-2">
-                  Notes
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  {t('dashboard.employee.modal.notes')}
                 </label>
                 <textarea
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Add any notes about the setup assistance needed..."
-                  rows={4}
-                  className="w-full text-sm px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 resize-none"
+                  name="notes"
+                  value={formData.notes}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.addNotes')}
+                  rows="3"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
               </div>
 
               <button
                 onClick={handleStep1Submit}
-                className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+                className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 font-semibold"
               >
-                Start Setup Assistance
+                {t('dashboard.employee.modal.startSetupAssistance')}
               </button>
             </div>
           </div>
         </div>
       )}
+      {/* Step 2 Modal - Customer Information */}
+      {currentStep === 'step2' && (
+        <div className="fixed inset-0 flex items-center  justify-center bg-black/50 z-50 p-4" onClick={handleBackdropClick}>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-xl flex flex-col max-h-[90vh]">
 
-      {/* STEP 2: Personal Info Modal */}
-      {isOpen && currentStep === 'step2' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
-            <div className="flex justify-between items-center px-6 py-4 border-b">
-              <div>
-                <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
-                  Customer Information
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">Customer: {email}</p>
+            {/* Header (Fixed) */}
+            <div className="flex justify-between items-center p-6 border-b rounded-t-lg border-gray-200 sticky top-0 bg-white z-10 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleBackClick}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <ArrowLeft size={24} />
+                </button>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    {t('dashboard.employee.modal.customerInformation')}
+                  </h2>
+                  <p className="text-sm text-gray-600">
+                    {t('dashboard.employee.modal.email')}: {formData.customerEmail}
+                  </p>
+                </div>
+
               </div>
               <button
-                onClick={() => { setIsOpen(false); setCurrentStep('step1'); }}
-                className="text-gray-400 hover:text-gray-600"
+                onClick={closeAll}
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="px-6 py-4 overflow-y-auto flex-1 space-y-3">
-              <Input
-                label="First Name"
-                name="firstName"
-                value={personalInfo.firstName}
-                onChange={handlePersonalChange}
-                placeholder="First Name"
-                required
-                error={personalErrors.firstName}
-              />
-              <Input
-                label="Middle Name"
-                name="middleName"
-                value={personalInfo.middleName}
-                onChange={handlePersonalChange}
-                placeholder="Middle Name"
-              />
-              <Input
-                label="Last Name"
-                name="lastName"
-                value={personalInfo.lastName}
-                onChange={handlePersonalChange}
-                placeholder="Last Name"
-                required
-                error={personalErrors.lastName}
-              />
-              <Input
-                label="Also Known As"
-                name="alsoKnownAs"
-                value={personalInfo.alsoKnownAs}
-                onChange={handlePersonalChange}
-                placeholder="Nickname"
-              />
-              <Input
-                label="Phone"
-                name="phone"
-                type="tel"
-                value={personalInfo.phone}
-                onChange={handlePersonalChange}
-                placeholder="+92 9876543210"
-                required
-                error={personalErrors.phone}
-              />
-              <Input
-                label="Email"
-                name="email"
-                type="email"
-                value={personalInfo.email}
-                onChange={handlePersonalChange}
-                placeholder="example@gmail.com"
-              />
-              <Input
-                label="Geo Location"
-                name="geoLocation"
-                value={personalInfo.geoLocation}
-                onChange={handlePersonalChange}
-                placeholder="Select on map"
-                required
-                error={personalErrors.geoLocation}
-              />
-              <Input
-                label="District"
-                name="district"
-                value={personalInfo.district}
-                onChange={handlePersonalChange}
-                placeholder="Enter District"
-              />
-              <Input
-                label="Mandal"
-                name="mandal"
-                value={personalInfo.mandal}
-                onChange={handlePersonalChange}
-                placeholder="Enter Mandal"
-              />
-              <Input
-                label="Village"
-                name="village"
-                value={personalInfo.village}
-                onChange={handlePersonalChange}
-                placeholder="Enter Village"
-              />
-              <Select
-                label="Registered By"
-                name="registeredBy"
-                value={personalInfo.registeredBy}
-                onChange={handlePersonalChange}
-                required
-                error={personalErrors.registeredBy}
-                options={[
-                  { value: "", label: "Select Agent" },
-                  { value: "agent1", label: "Field Agent" },
-                ]}
-              />
+            {/* Scrollable Form Section */}
+            <div className="p-6 space-y-4 overflow-y-auto flex-1">
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.firstName')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.middleName')}
+                </label>
+                <input
+                  type="text"
+                  name="middleName"
+                  value={formData.middleName}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.middleName')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.lastName')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.lastName')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.alsoKnownAs')}
+                </label>
+                <input
+                  type="text"
+                  name="nickname"
+                  value={formData.nickname}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.alsoKnownAs')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.phone')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  placeholder="+92 9876543210"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.email')}
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  placeholder="m@gmail.com"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.geoLocation')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="geoLocation"
+                  value={formData.geoLocation}
+                  onChange={handleInputChange}
+
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.district')}
+                </label>
+                <input
+                  type="text"
+                  name="district"
+                  value={formData.district}
+                  onChange={handleInputChange}
+
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.mandal')}
+                </label>
+                <input
+                  type="text"
+                  name="mandal"
+                  value={formData.mandal}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.mandal')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.village')}
+                </label>
+                <input
+                  type="text"
+                  name="village"
+                  value={formData.village}
+                  onChange={handleInputChange}
+
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
             </div>
 
-            <div className="px-6 py-4 border-t">
+            {/* Fixed Footer */}
+            <div className="p-6 border-t border-gray-200 sticky rounded-b-lg bottom-0 bg-white flex-shrink-0 z-10">
               <button
-                onClick={handlePersonalSave}
-                className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+                onClick={handleStepSubmit}
+                className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 font-semibold"
               >
-                Save Personal Information
+                {t('dashboard.employee.modal.saveButton')}
               </button>
             </div>
           </div>
         </div>
       )}
+      {/* Step 3 Modal - Verification Details */}
 
-      {/* STEP 3: Verification Modal */}
-      {isOpen && currentStep === 'step3' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-y-auto">
-            <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-white">
-              <div>
-                <h2 className="text-lg md:text-xl lg:text-2xl font-semibold text-[#002244]">
-                  Verification Details
-                </h2>
-                <p className="text-sm text-gray-500 mt-1">Customer: {email}</p>
+      {currentStep === 'step3' && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4" onClick={handleBackdropClick}>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-xl max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleBackClick}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <ArrowLeft size={24} />
+                </button>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{t('dashboard.employee.modal.verificationDetails')}</h2>
+                  <p className="text-sm text-gray-600">{t('dashboard.employee.modal.email')}: {formData.customerEmail}</p>
+                </div>
               </div>
               <button
-                onClick={() => { setIsOpen(false); setCurrentStep('step1'); }}
-                className="text-gray-400 hover:text-gray-600"
+                onClick={closeAll}
+                className="text-gray-500 hover:text-gray-700"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="px-6 py-4 flex-1 space-y-3">
-              <Input
-                label="Street"
-                name="street"
-                value={verificationInfo.street}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.street}
-              />
-              <Input
-                label="City"
-                name="city"
-                value={verificationInfo.city}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.city}
-              />
-              <Input
-                label="State"
-                name="state"
-                value={verificationInfo.state}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.state}
-              />
-              <Input
-                label="Postal Code"
-                name="postalCode"
-                value={verificationInfo.postalCode}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.postalCode}
-              />
-              <Input
-                label="Country"
-                name="country"
-                value={verificationInfo.country}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.country}
-              />
-              <Input
-                label="Industry"
-                name="industry"
-                value={verificationInfo.industry}
-                onChange={handleVerificationChange}
-                required
-                error={verificationErrors.industry}
-              />
-            </div>
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.kycDocuments')}
+                </label>
+                <input
+                  type="file"
+                  onChange={handleFileChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
 
-            <div className="px-6 py-4 border-t">
-              <button
-                onClick={handleVerificationSave}
-                className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
-              >
-                Save Verification Details
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.street')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="street"
+                  value={formData.street}
+                  onChange={handleInputChange}
 
-      {/* STEP 4: Service Location Modal */}
-      {isOpen && currentStep === 'step4' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-y-auto">
-            <div className="flex justify-between items-center px-6 py-4 border-b sticky top-0 bg-white">
-              <h2 className="text-xl font-semibold text-gray-800">Service Locations</h2>
-              <button
-                onClick={() => { setIsOpen(false); setCurrentStep('step1'); }}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X size={24} />
-              </button>
-            </div>
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
 
-            <div className="px-6 py-4 space-y-3 flex-1 overflow-y-auto">
-              {locations.map((loc) => (
-                <div key={loc.id} className="flex gap-3 items-center">
-                  <Input
-                    label={`Latitude ${loc.id}`}
-                    name={`lat-${loc.id}`}
-                    value={loc.lat}
-                    onChange={(e) => handleLocationChange(loc.id, "lat", e.target.value)}
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-1">
+                    {t('dashboard.employee.modal.city')}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
-                  <Input
-                    label={`Longitude ${loc.id}`}
-                    name={`long-${loc.id}`}
-                    value={loc.long}
-                    onChange={(e) => handleLocationChange(loc.id, "long", e.target.value)}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-1">
+                    {t('dashboard.employee.modal.state')}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-1">
+                    {t('dashboard.employee.modal.postalCode')}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="postalCode"
+                    value={formData.postalCode}
+                    onChange={handleInputChange}
+                    placeholder="400020"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-900 mb-1">
+                    {t('dashboard.employee.modal.country')}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.industry')}
+                  <span className="text-red-500">*</span>
+                </label>
+                <div className='relative'>
+                  <select
+                    name="industry"
+                    value={formData.industry}
+                    onChange={handleInputChange}
+                    className=" focus:outline-none focus:ring-2 w-full px-4 py-2  border  border-black/30 rounded-lg focus:ring-black appearance-none  text-sm"
+                  >
+                    <option value="">{t('dashboard.employee.modal.selectIndustry')}</option>
+                    <option value="agriculture">{t('dashboard.employee.modal.agriculture')}</option>
+                    <option value="technology">{t('dashboard.employee.modal.technology')}</option>
+                    <option value="retail">{t('dashboard.employee.modal.retail')}</option>
+                    <option value="healthcare">{t('dashboard.employee.modal.healthcare')}</option>
+                  </select>
+                  <IoChevronDown
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"
+                    size={20}
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={handleStepSubmit}
+                className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 font-semibold mt-4"
+              >
+                {t('dashboard.employee.modal.saveveriButton')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Step 4 Modal - Service Location */}
+      {currentStep === 'step4' && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50 p-4" onClick={handleBackdropClick}>
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center p-6 border-b border-gray-200 sticky top-0 bg-white">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={handleBackClick}
+                  className="text-gray-600 hover:text-gray-900"
+                >
+                  <ArrowLeft size={24} />
+                </button>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{t('dashboard.employee.modal.serviceLocation')}</h2>
+                  <p className="text-sm text-gray-600">{t('dashboard.employee.modal.email')}: {formData.customerEmail}</p>
+                </div>
+              </div>
+              <button
+                onClick={closeAll}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.latitude1')}
+                </label>
+                <input
+                  type="text"
+                  name="latitude1"
+                  value={formData.latitude1}
+                  onChange={handleInputChange}
+                  placeholder="Lat. Long"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.latitude2')}
+                </label>
+                <input
+                  type="text"
+                  name="latitude2"
+                  value={formData.latitude2}
+                  onChange={handleInputChange}
+                  placeholder="Lat. Long"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              <div className="flex items-end justify-between gap-2">
+                <div className="flex-1">
+                  <label className="block text-sm font-semibold text-gray-900 mb-1">
+                    {t('dashboard.employee.modal.latitude3')}
+                  </label>
+                  <input
+                    type="text"
+                    name="latitude3"
+                    value={formData.latitude3}
+                    onChange={handleInputChange}
+                    placeholder="Lat. Long"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                  />
+                </div>
+                <button
+                  onClick={addLocation}
+                  className="bg-green-600 text-white p-2 rounded-md hover:bg-green-700 h-10"
+                >
+                  <Plus size={20} />
+                </button>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-900 mb-1">
+                  {t('dashboard.employee.modal.acres')}
+                </label>
+                <input
+                  type="text"
+                  name="acres"
+                  value={formData.acres}
+                  onChange={handleInputChange}
+                  placeholder={t('dashboard.employee.modal.acresPlaceholder')}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+              </div>
+
+              {formData.locations.map((loc, index) => (
+                <div key={index} className="border-t pt-4 mt-4">
+                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    {t('profileSetup.additionalLocation')} {index + 1}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Lat. Long"
+                    value={`${loc.lat} ${loc.long}`}
+                    onChange={(e) => {
+                      const [lat, long] = e.target.value.split(' ');
+                      updateLocation(index, 'lat', lat || '');
+                      updateLocation(index, 'long', long || '');
+                    }}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                   />
                 </div>
               ))}
-              <button
-                onClick={addLocation}
-                className="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-sm transition"
-              >
-                Add Another Location
-              </button>
 
-              <Input
-                label="Acres"
-                name="acres"
-                value={acres}
-                onChange={(e) => setAcres(e.target.value)}
-              />
-            </div>
-
-            <div className="px-6 py-4 border-t">
               <button
-                onClick={handleServiceLocationSave}
-                className="w-full py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-md transition-colors"
+                onClick={handleStepSubmit}
+                className="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 font-semibold mt-4"
               >
-                Save Service Locations
+                {t('dashboard.employee.modal.savelocaButton')}
               </button>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

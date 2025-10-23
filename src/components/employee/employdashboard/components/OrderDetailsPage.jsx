@@ -4,8 +4,9 @@ import { Star } from "lucide-react";
 import { FaArrowLeft, FaPlay } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
-// ---------------- VideoCard Component ----------------
+// ---------------- VideoCard Component ---------------
 function VideoCard({ src }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef(null);
@@ -45,15 +46,16 @@ function VideoCard({ src }) {
 
 // ---------------- Main Component ----------------
 export default function OrderDetailsPage() {
+   const { t } = useTranslation();
   const [orderData] = useState({
     serviceOrderId: "#0123456789",
     customerOrderId: "#0123456789",
     basicSpecifics: [
-      { label: "Customer ID", value: "#0123456789" },
-      { label: "Sub-Service ID", value: "#0123456789" },
-      { label: "Drone Operator ID", value: "#0123456789" },
-      { label: "Drone ID", value: "#0123456789" },
-      { label: "Customer Order ID", value: "#0123456789" },
+      { label: t('dashboard.employee.pages.orderDetails.customerID'), value: "#0123456789" },
+      { label: t('dashboard.employee.pages.orderDetails.subServiceID'), value: "#0123456789" },
+      { label: t('dashboard.employee.pages.orderDetails.droneOperatorID'), value: "#0123456789" },
+      { label: t('dashboard.employee.pages.orderDetails.droneID'), value: "#0123456789" },
+      { label: t('dashboard.employee.pages.orderDetails.customerOrderID'), value: "#0123456789" },
     ],
     scheduling: {
       serviceLocation:
@@ -69,12 +71,12 @@ export default function OrderDetailsPage() {
         "Marine Drive, Netaji Subhash Chandra Bose Road, Churchgate, South Mumbai",
     },
     serviceMetrics: [
-      { label: "Service Area (in Acres)", value: "1" },
-      { label: "Flight Hours", value: "1.5h" },
-      { label: "Unit Cost", value: "₹150" },
-      { label: "Additional Costs", value: "No additional cost" },
-      { label: "Discount Amount", value: "₹00" },
-      { label: "Service Order Cost", value: "₹150" },
+      { label: t('dashboard.employee.pages.orderDetails.serviceArea'), value: "1" },
+      { label: t('dashboard.employee.pages.orderDetails.flightHours'), value: "1.5h" },
+      { label: t('dashboard.employee.pages.orderDetails.unitCost'), value: "₹150" },
+      { label: t('dashboard.employee.pages.orderDetails.additionalCosts'), value: "No additional cost" },
+      { label: t('dashboard.employee.pages.orderDetails.discountAmount'), value: "₹00" },
+      { label: t('dashboard.employee.pages.orderDetails.serviceOrderCost'), value: "₹150" },
     ],
     paymentStatus: "Paid",
     notes: {
@@ -82,6 +84,7 @@ export default function OrderDetailsPage() {
       acknowledgmentStatus: "Accepted",
     },
   });
+ 
 
   const [images] = useState([
     "https://images.unsplash.com/photo-1599328580087-15c9dab481f3?w=500&auto=format&fit=crop&q=60",
@@ -121,7 +124,7 @@ export default function OrderDetailsPage() {
           <div className="mb-6 space-y-2">
             <div className="flex justify-between items-center text-sm py-1.5">
               <span className="font-medium text-base md:text-lg">
-                Service Order ID:
+                {t('dashboard.employee.pages.orderDetails.serviceOrderID')}
               </span>
               <span className="font-normal text-sm md:text-base">
                 {orderData.serviceOrderId}
@@ -129,7 +132,7 @@ export default function OrderDetailsPage() {
             </div>
             <div className="flex justify-between items-center text-sm py-1.5">
               <span className="font-medium text-base md:text-lg">
-                Customer Order ID:
+                {t('dashboard.employee.pages.orderDetails.customerOrderID')}
               </span>
               <span className="font-normal text-sm md:text-base">
                 {orderData.customerOrderId}
@@ -140,7 +143,7 @@ export default function OrderDetailsPage() {
           {/* Basic Specifics */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Basic Specifics Info
+              {t('dashboard.employee.pages.orderDetails.basicSpecificsInfo')}
             </h3>
             <div className="space-y-2">
               {orderData.basicSpecifics.map((item, idx) => (
@@ -162,12 +165,12 @@ export default function OrderDetailsPage() {
           {/* Scheduling */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Scheduling
+              {t('dashboard.employee.pages.orderDetails.scheduling')}
             </h3>
             <div className="space-y-2">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Service Location:
+                  {t('dashboard.employee.pages.orderDetails.serviceLocation')}  
                 </span>
                 <span className="font-normal text-sm md:text-base mt-1 md:mt-0">
                   {orderData.scheduling.serviceLocation}
@@ -175,7 +178,7 @@ export default function OrderDetailsPage() {
               </div>
               <div className="flex justify-between items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Service Start:
+                  {t('dashboard.employee.pages.orderDetails.serviceStart')}
                 </span>
                 <span className="font-normal text-sm md:text-base">
                   {orderData.scheduling.serviceStart}
@@ -183,7 +186,7 @@ export default function OrderDetailsPage() {
               </div>
               <div className="flex justify-between items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Service End:
+                  {t('dashboard.employee.pages.orderDetails.serviceEnd')}
                 </span>
                 <span className="font-normal text-sm md:text-base">
                   {orderData.scheduling.serviceEnd}
@@ -195,12 +198,12 @@ export default function OrderDetailsPage() {
           {/* Rescheduling */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Rescheduling Info
+              {t('dashboard.employee.pages.orderDetails.reschedulingInfo')}
             </h3>
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Rescheduled By:
+                  {t('dashboard.employee.pages.orderDetails.rescheduledBy')}
                 </span>
                 <span className="font-normal text-sm md:text-base">
                   {orderData.rescheduling.rescheduledBy}
@@ -208,7 +211,7 @@ export default function OrderDetailsPage() {
               </div>
               <div className="flex justify-between items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Rescheduled Date:
+                  {t('dashboard.employee.pages.orderDetails.rescheduledDate')}
                 </span>
                 <span className="font-normal text-sm md:text-base">
                   {orderData.rescheduling.rescheduledDate}
@@ -216,7 +219,7 @@ export default function OrderDetailsPage() {
               </div>
               <div className="flex justify-between items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Reschedule Count:
+                  {t('dashboard.employee.pages.orderDetails.rescheduleCount')}
                 </span>
                 <span className="font-normal text-sm md:text-base">
                   {orderData.rescheduling.rescheduleCount}
@@ -224,7 +227,7 @@ export default function OrderDetailsPage() {
               </div>
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center text-sm py-1.5">
                 <span className="font-medium text-base md:text-lg">
-                  Service Location:
+                  {t('dashboard.employee.pages.orderDetails.serviceLocation')}
                 </span>
                 <span className="font-normal text-sm md:text-base mt-1 md:mt-0">
                   {orderData.rescheduling.rescheduleReason}
@@ -236,7 +239,7 @@ export default function OrderDetailsPage() {
           {/* Service Metrics */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Service Metrics
+              {t('dashboard.employee.pages.orderDetails.serviceMetrics')}
             </h3>
             <div className="space-y-2">
               {orderData.serviceMetrics.map((item, idx) => (
@@ -258,11 +261,11 @@ export default function OrderDetailsPage() {
           {/* Payment & Status */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Payment & Status Section
+              {t('dashboard.employee.pages.orderDetails.paymentStatus')}
             </h3>
             <div className="flex justify-between items-center text-sm py-1.5">
               <span className="font-medium text-base md:text-lg">
-                Service Order Payment Status:
+                {t('dashboard.employee.pages.orderDetails.paymentStatus')}
               </span>
               <span className="font-normal text-sm md:text-base">
                 {orderData.paymentStatus}
@@ -273,7 +276,7 @@ export default function OrderDetailsPage() {
           {/* Notes */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pt-2 border-t border-gray-300">
-              Notes & Confirmation
+              {t('dashboard.employee.pages.orderDetails.notesConfirmation')}
             </h3>
             <div className="space-y-2">
               {Object.entries(orderData.notes).map(([key, value], idx) => (
@@ -298,7 +301,7 @@ export default function OrderDetailsPage() {
           {/* Images */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pb-2">
-              Images
+              {t('dashboard.employee.pages.orderDetails.images')}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {images.map((img, idx) => (
@@ -319,7 +322,7 @@ export default function OrderDetailsPage() {
           {/* Videos */}
           <div className="mb-6">
             <h3 className="text-xl md:text-2xl font-semibold mb-3 pb-2">
-              Videos
+              {t('dashboard.employee.pages.orderDetails.videos')}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {videos.map((video, idx) => (
@@ -331,16 +334,16 @@ export default function OrderDetailsPage() {
           {/* Feedback */}
           <div className="mb-6 bg-[#F0FFF1] rounded-lg p-6 mt-10 shadow-sm">
             <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
-              Customer Feedback
+              {t('dashboard.employee.pages.orderDetails.customerFeedback')}
             </h2>
             <p className="text-gray-600 text-lg mb-6">
-              Your review helps other customers and our operators.
+              {t('dashboard.employee.pages.orderDetails.customerFeedback')}
             </p>
 
             {/* Rating */}
             <div className="mb-6">
               <p className="text-xl font-medium text-gray-900 mb-2">
-                Rate Your Drone Operator
+                {t('dashboard.employee.pages.orderDetails.rateYourDroneOperator')}
               </p>
               <div className="flex gap-1">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -365,7 +368,7 @@ export default function OrderDetailsPage() {
                 htmlFor="tips"
                 className="block text-base font-medium text-gray-900 mb-2"
               >
-                Tips
+                {t('dashboard.employee.pages.orderDetails.tips')}
               </label>
               <input
                 id="tips"
@@ -382,11 +385,11 @@ export default function OrderDetailsPage() {
                 htmlFor="review"
                 className="block text-base font-medium text-gray-900 mb-2"
               >
-                Review
+                {t('dashboard.employee.pages.orderDetails.review')}
               </label>
               <textarea
                 id="review"
-                placeholder="Write here"
+                placeholder={t('dashboard.employee.pages.orderDetails.review')}
                 value={review}
                 onChange={(e) => setReview(e.target.value)}
                 rows="4"

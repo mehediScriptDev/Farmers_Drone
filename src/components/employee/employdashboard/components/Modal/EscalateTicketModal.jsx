@@ -212,15 +212,9 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
-// Options for dropdowns
-const escalationLevels = ["High", "Medium", "Low"];
-const escalationReasons = [
-  "Customer Unhappy",
-  "Delayed Response",
-  "Technical Escalation",
-  "Other",
-];
+
 
 // Dropdown Component
 const Dropdown = ({ label, options, selected, setSelected }) => {
@@ -253,7 +247,7 @@ const Dropdown = ({ label, options, selected, setSelected }) => {
         transition-all duration-200 focus:ring-2 focus:ring-green-500 focus:outline-none hover:border-green-400`}
       >
         <span className={`${selected ? "text-gray-800" : "text-gray-400"}`}>
-          {selected || `Select ${label}`}
+          {selected || `${label}`}
         </span>
         <ChevronDown
           size={18}
@@ -295,8 +289,22 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
   const [assignedTo, setAssignedTo] = useState("");
   const [comments, setComments] = useState("");
   const [ticketId, setTicketId] = useState("");
+   const { t } = useTranslation();
 
   const modalRef = useRef(null);
+
+// Options for dropdowns
+const escalationLevels = [t('dashboard.employee.modal.high'), t('dashboard.employee.modal.medium'), t('dashboard.employee.modal.low'),
+  t('dashboard.employee.modal.critical')
+];
+const escalationReasons = [
+  t('dashboard.employee.modal.technicalComplexity'),
+  t('dashboard.employee.modal.systemAppIssue'),
+  t('dashboard.employee.modal.securityConcern'),
+  
+
+];
+
 
   // Close modal when clicking outside
   useEffect(() => {
@@ -345,7 +353,7 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
         >
           {/* Header */}
           <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200">
-            <h2 className="text-xl font-semibold">Escalate Ticket</h2>
+            <h2 className="text-xl font-semibold">{t("dashboard.employee.modal.escalateTicket")}</h2>
             <button
               onClick={onClose}
               className="text-gray-500 text-xl hover:text-gray-800"
@@ -359,11 +367,11 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
             {/* Ticket ID */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Ticket ID <span className="text-red-500">*</span>
+                {t("dashboard.employee.modal.ticketId")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter Ticket ID"
+                placeholder={t("dashboard.employee.modal.enterTicketId")}
                 value={ticketId}
                 onChange={(e) => setTicketId(e.target.value)}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
@@ -372,7 +380,7 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
 
             {/* Escalation Level */}
             <Dropdown
-              label="Escalation Level"
+              label={t("dashboard.employee.modal.escalationLevel")}
               options={escalationLevels}
               selected={selectedLevel}
               setSelected={setSelectedLevel}
@@ -380,7 +388,7 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
 
             {/* Escalation Reason */}
             <Dropdown
-              label="Escalation Reason"
+              label={t("dashboard.employee.modal.escalationReason")}
               options={escalationReasons}
               selected={selectedReason}
               setSelected={setSelectedReason}
@@ -389,24 +397,35 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
             {/* Assign To */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Assign To <span className="text-red-500">*</span>
+                {t("dashboard.employee.modal.assignTo")} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
-                placeholder="Enter the name or team to assign"
+                placeholder={t("dashboard.employee.modal.enterNameOrTeam")}
                 value={assignedTo}
                 onChange={(e) => setAssignedTo(e.target.value)}
                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
               />
             </div>
-
+            <div className="flex flex-col space-y-1">
+              <label className="text-base font-medium text-gray-700">
+                {t("dashboard.employee.modal.stepsAlreadyTaken")}
+              </label>
+              <textarea
+                placeholder="Provide detailed information about the technical issue for the development team..."
+                rows="4"
+                value={comments}
+                onChange={(e) => setComments(e.target.value)}
+                className="w-full border border-gray-300 rounded-md px-3 py-2 text-base outline-none resize-none focus:ring-2 focus:ring-green-500 focus:border-green-400"
+              ></textarea>
+            </div>
             {/* Comments */}
             <div className="flex flex-col space-y-1">
               <label className="text-base font-medium text-gray-700">
-                Additional Comments
+                {t("dashboard.employee.modal.detailedDescription")}
               </label>
               <textarea
-                placeholder="Add any additional details..."
+                placeholder="List troubleshooting steps already attempted..."
                 rows="4"
                 value={comments}
                 onChange={(e) => setComments(e.target.value)}
@@ -419,7 +438,7 @@ const EscalateTicketModal = ({ isOpen, onClose }) => {
               type="submit"
               className="w-full bg-green-600 hover:bg-green-700 text-white font-medium rounded-md py-2 transition"
             >
-              Escalate Ticket
+              {t("dashboard.employee.modal.escalateTicket")}
             </button>
           </form>
         </div>

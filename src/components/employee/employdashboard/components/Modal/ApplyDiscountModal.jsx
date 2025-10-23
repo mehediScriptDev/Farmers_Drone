@@ -190,9 +190,10 @@ import { useTranslation } from "react-i18next";
 import { IoMdClose } from "react-icons/io";
 
 const ApplyDiscountModal = ({ isOpen, onClose }) => {
+   const { t } = useTranslation();
   const initialState = {
     customer: '',
-    discountType: 'Percentage Discount',
+    discountType: t('dashboard.employee.modal.percentageDiscount'),
     amount: '',
     notes: '',
     isDropdownOpen: false,
@@ -206,9 +207,14 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
   const discountTypeRef = useRef(null);
   const amountRef = useRef(null);
   const notesRef = useRef(null);
-  const { t } = useTranslation();
+ 
 
-  const discountTypes = ['Percentage Discount', 'Referral Bonus', 'Loyalty Bonus', 'Campaign Discount'];
+  const discountTypes = [
+    t('dashboard.employee.modal.percentageDiscount'), 
+    t('dashboard.employee.modal.referralBonus'),
+     t('dashboard.employee.modal.loyaltyBonus'), 
+     t('dashboard.employee.modal.campaignDiscount')
+    ];
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -287,7 +293,7 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
                 value={state.customer}
                 ref={customerRef}
                 onChange={(e) => setState(prev => ({ ...prev, customer: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-green-500 text-base ${errors.customer ? 'border-red-500' : 'border-[#002244]'}`}
+                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-black/70 text-base ${errors.customer ? 'border-red-500' : 'border-gray-300'}`}
               />
               {errors.customer && <p className="text-red-500 text-sm mt-1">{errors.customer}</p>}
             </div>
@@ -298,7 +304,7 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
               <button
                 ref={discountTypeRef}
                 onClick={() => setState(prev => ({ ...prev, isDropdownOpen: !prev.isDropdownOpen }))}
-                className={`w-full px-3 py-2 border rounded text-left text-base text-[#002244] bg-white hover:border-gray-400 flex justify-between items-center ${errors.discountType ? 'border-red-500' : 'border-[#002244]'}`}
+                className={`w-full px-3 py-2 border rounded text-left text-base text-[#002244] bg-white hover:border-gray-400 flex justify-between items-center ${errors.discountType ? 'border-red-500' : 'border-gray-300'}`}
               >
                 {state.discountType}
                 {state.isDropdownOpen ? <BiChevronUp className="text-xl text-[#002244]" /> : <BiChevronDown className="text-xl text-[#002244]" />}
@@ -328,7 +334,7 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
                 value={state.amount}
                 ref={amountRef}
                 onChange={(e) => setState(prev => ({ ...prev, amount: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-green-500 text-base ${errors.amount ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-black/70 text-base ${errors.amount ? 'border-red-500' : 'border-gray-300'}`}
               />
               {errors.amount && <p className="text-red-500 text-sm mt-1">{errors.amount}</p>}
             </div>
@@ -341,7 +347,7 @@ const ApplyDiscountModal = ({ isOpen, onClose }) => {
                 value={state.notes}
                 ref={notesRef}
                 onChange={(e) => setState(prev => ({ ...prev, notes: e.target.value }))}
-                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-green-500 text-base resize-none h-24 ${errors.notes ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-3 py-2 border rounded focus:outline-none focus:border-black/70 text-base resize-none h-24 ${errors.notes ? 'border-red-500' : 'border-gray-300'}`}
               />
               {errors.notes && <p className="text-red-500 text-sm mt-1">{errors.notes}</p>}
             </div>

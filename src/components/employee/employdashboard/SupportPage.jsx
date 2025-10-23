@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { TrendingUp, TrendingDown, Plus } from 'lucide-react';
 import { GrUserSettings } from 'react-icons/gr';
 import { CiSearch } from 'react-icons/ci';
 import { BiChevronDown } from 'react-icons/bi';
+import { BsCalendar3 } from 'react-icons/bs';
 import CreateTicketModal from './components/Modal/CreateTicketModal';
 import EscalateTicketModal from './components/Modal/EscalateTicketModal';
 import ManageTicketModal from './components/Modal/ManageTicketModal';
@@ -10,19 +11,55 @@ import { useTranslation } from 'react-i18next';
 import axiosInstance from '../../../config/axiosConfig';
 import Pagination from '../../common/Pagination';
 import { Link } from 'react-router-dom';
+import { RiResetLeftFill } from "react-icons/ri";
 
 const SupportPage = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [showEscalate, setShowEscalate] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const [stats, setStats] = useState([]);
   const [supportData, setSupportData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [dropdownPositions, setDropdownPositions] = useState({});
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const fromDateRef = useRef(null);
+  const toDateRef = useRef(null);
   const { t } = useTranslation();
   const ITEMS_PER_PAGE = 6;
+
+  // Stats managed in component
+  const stats = [
+    {
+      label: t('dashboard.employee.pages.dashboard.card.openTickets'),
+      value: "23",
+      change: "+2% vs last month",
+      subtext: null,
+      trend: "up"
+    },
+    {
+      label: t('dashboard.employee.pages.dashboard.card.inProgress'),
+      value: "15",
+      change: null,
+      subtext: "Average response 2h",
+      trend: null
+    },
+    {
+      label: t('dashboard.employee.pages.dashboard.card.resolvedToday'),
+      value: "34",
+      change: "+18% from last month",
+      subtext: null,
+      trend: "up"
+    },
+    {
+      label: t('dashboard.employee.pages.dashboard.card.escalated'),
+      value: "5",
+      change: null,
+      subtext: "Awaiting tech team",
+      trend: null
+    }
+  ];
 
   // Fetch data
   useEffect(() => {
@@ -36,7 +73,6 @@ const SupportPage = () => {
           date: item.date || new Date().toLocaleDateString('en-GB'),
         }));
 
-        setStats(data.stats);
         setSupportData(supportWithDate);
       } catch (error) {
         console.error('Error fetching support data:', error);
@@ -46,18 +82,47 @@ const SupportPage = () => {
     fetchData();
   }, []);
 
-  // Improved Search Logic
+  // Improved Search and Date Filter Logic
   const filteredData = useMemo(() => {
-    if (!searchQuery.trim()) return supportData;
+    let filtered = supportData;
 
-    const query = searchQuery.trim().toLowerCase();
-
-    return supportData.filter((item) => {
-      return ['serviceName', 'issues', 'progress', 'priority'].some((key) => {
-        return item[key]?.toString().toLowerCase().includes(query);
+    // Apply search filter
+    if (searchQuery.trim()) {
+      const query = searchQuery.trim().toLowerCase();
+      filtered = filtered.filter((item) => {
+        return ['serviceName', 'issues', 'progress', 'priority'].some((key) => {
+          return item[key]?.toString().toLowerCase().includes(query);
+        });
       });
-    });
-  }, [supportData, searchQuery]);
+    }
+
+    // Apply date range filter
+    if (fromDate || toDate) {
+      filtered = filtered.filter((item) => {
+        if (!item.date) return false;
+
+        // Parse the date from DD/MM/YYYY format
+        const [day, month, year] = item.date.split('/').map(Number);
+        const itemDate = new Date(year, month - 1, day);
+
+        // Create comparison dates
+        const from = fromDate ? new Date(fromDate) : null;
+        const to = toDate ? new Date(toDate) : null;
+
+        // Check if item date is within range
+        if (from && to) {
+          return itemDate >= from && itemDate <= to;
+        } else if (from) {
+          return itemDate >= from;
+        } else if (to) {
+          return itemDate <= to;
+        }
+        return true;
+      });
+    }
+
+    return filtered;
+  }, [supportData, searchQuery, fromDate, toDate]);
 
   // Pagination Slice
   const paginatedData = useMemo(() => {
@@ -145,16 +210,82 @@ const SupportPage = () => {
           onClick={() => setShowCreate(true)}
           className='px-4 md:px-6 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 font-medium text-sm md:text-base flex items-center justify-center'
         >
-          <Plus className='w-5 h-5 mr-2' /> Create SUPPORT TICKET
+          <Plus className='w-5 h-5 mr-2' /> {t('dashboard.employee.button.supportCreateTicket')}
         </button>
         <button
           onClick={() => setShowEscalate(true)}
           className='px-4 md:px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center'
         >
-          <GrUserSettings className='w-5 h-5 mr-2' /> Escalate to technical team
+          <GrUserSettings className='w-5 h-5 mr-2' /> {t('dashboard.employee.button.supportEscalate')}
         </button>
       </div>
-      
+      {/* Filter by date range */}
+      <style>
+        {`
+          input[type="date"]::-webkit-calendar-picker-indicator {
+            opacity: 0;
+            position: absolute;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+          }
+        `}
+      </style>
+      <div className='flex flex-col sm:flex-row mb-4 gap-3'>
+        <div className='flex flex-col w-full sm:w-auto'>
+          <label className='text-sm font-medium text-gray-700 mb-1'>{t('dashboard.employee.button.from')}</label>
+          <div className='relative'>
+            <input
+              ref={fromDateRef}
+              type="date"
+              value={fromDate}
+              onChange={(e) => {
+                setFromDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className='w-full p-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+            <BsCalendar3
+              className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg pointer-events-none'
+            />
+          </div>
+        </div>
+        <div className='flex flex-col w-full sm:w-auto'>
+          <label className='text-sm font-medium text-gray-700 mb-1'>{t('dashboard.employee.button.to')}</label>
+          <div className='relative'>
+            <input
+              ref={toDateRef}
+              type="date"
+              value={toDate}
+              onChange={(e) => {
+                setToDate(e.target.value);
+                setCurrentPage(1);
+              }}
+              className='w-full p-3 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500'
+            />
+            <BsCalendar3
+              className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-lg pointer-events-none'
+            />
+          </div>
+        </div>
+        {(fromDate || toDate) && (
+          <div className='flex items-end'>
+            <button
+              onClick={() => {
+                setFromDate('');
+                setToDate('');
+                setCurrentPage(1);
+              }}
+              className='px-4 py-4 border-gray-200 border text-gray-700 rounded-lg hover:bg-gray-300 font-medium text-sm whitespace-nowrap'
+            >
+              <RiResetLeftFill className='inline-block mr-1 text-xl' />
+              {t('dashboard.employee.button.clearDates')}
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* Stats */}
       <div className='grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 mb-4 md:mb-6'>
         {stats.map((stat, index) => {
@@ -180,7 +311,7 @@ const SupportPage = () => {
       {/* Table */}
       <div className='bg-white rounded-lg shadow-sm border border-gray-200' id="support-table-container">
         <div className='p-4 md:p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4'>
-          <h2 className='text-lg md:text-xl font-bold text-gray-900'>Customer Support Activity</h2>
+          <h2 className='text-lg md:text-xl font-bold text-gray-900'>{t('dashboard.employee.table.customerSupportActivity')}</h2>
           <div className='relative w-full md:w-1/2 lg:w-1/3'>
             <span className='absolute inset-y-0 left-3 flex items-center text-gray-400 text-xl'><CiSearch /></span>
             <input
@@ -199,12 +330,12 @@ const SupportPage = () => {
           <table className='min-w-full table-fixed'>
             <thead className='bg-[#F5F7FA] border-b h-18 border-gray-200'>
               <tr>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Service Name</th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Issues</th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Date</th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Progress</th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Priority</th>
-                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>Action</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.serviceName')}</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.issues')}</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.date')}</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.progress')}</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.priority')}</th>
+                <th className='px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap'>{t('dashboard.employee.table.action')}</th>
               </tr>
             </thead>
             <tbody className='divide-y divide-gray-200'>
@@ -249,14 +380,14 @@ const SupportPage = () => {
                             >
                               <Link to={`/employee/customers/${item.id}`}>
                                 <button className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-[#28A844] hover:text-[#FFFFFF] transition-colors border-t border-gray-100">
-                                  See details
+                                  {t('dashboard.employee.button.seeDetails')}
                                 </button>
                               </Link>
                               <button
                                 onClick={handleManageTicket}
                                 className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors"
                               >
-                                Manage Ticket
+                                {t('dashboard.employee.button.manageTicket')}
                               </button>
                               <button
                                 onClick={() => {
@@ -265,7 +396,7 @@ const SupportPage = () => {
                                 }}
                                 className="block w-full text-left px-4 py-2 text-gray-700 text-sm hover:bg-green-600 hover:text-white transition-colors border-t border-gray-100"
                               >
-                                Escalate
+                                {t('dashboard.employee.button.escalate')}
                               </button>
                             </div>
                           )}

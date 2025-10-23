@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaTimes } from 'react-icons/fa';
 import { IoChevronDown } from 'react-icons/io5';
 import { ToastContainer, toast } from 'react-toastify';
@@ -7,10 +8,10 @@ import 'react-toastify/dist/ReactToastify.css';
 const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
   const modalRef = useRef(null);
   const statusDropdownRef = useRef(null);
-
+const { t } = useTranslation();
   const [formData, setFormData] = useState({
     ticketId: '',
-    status: 'Open',
+    status: t('dashboard.employee.modal.inProgress'),
     internalNotes: '',
     customerResponse: ''
   });
@@ -22,7 +23,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
 
   const [statusOpen, setStatusOpen] = useState(false);
 
-  const statuses = ['Open', 'In Progress', 'Waiting for customer', 'Resolved', 'Closed'];
+  const statuses = [ t('dashboard.employee.modal.inProgress'), t('dashboard.employee.modal.waitingForCustomer'), t('dashboard.employee.modal.resolved'), t('dashboard.employee.modal.closed')];
 
   // Handle dropdown outside click
   useEffect(() => {
@@ -41,7 +42,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
   const resetForm = () => {
     setFormData({
       ticketId: '',
-      status: 'Open',
+      status: t('dashboard.employee.modal.inProgress'),
       internalNotes: '',
       customerResponse: ''
     });
@@ -95,7 +96,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg md:text-xl font-semibold text-gray-800">
-            Manage a Ticket
+            {t('dashboard.employee.modal.manageTicket')}
           </h2>
           <button
             onClick={handleClose}
@@ -110,7 +111,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
           {/* Ticket ID Field */}
           <div className="mb-4">
             <label className="block text-base font-medium text-gray-800 mb-2">
-              Ticket ID
+              {t('dashboard.employee.modal.ticketID')}
             </label>
             <input
               type="text"
@@ -129,7 +130,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
           {/* Status Dropdown */}
           <div className="mb-4 relative" ref={statusDropdownRef}>
             <label className="block text-base font-medium text-gray-800 mb-2">
-              Update status
+              {t('dashboard.employee.modal.updateStatus')}
             </label>
             <button
               type="button"
@@ -168,11 +169,9 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
           <div className="mb-4">
             <div className="flex items-center gap-2 mb-2">
               <label className="block text-base font-medium text-gray-800">
-                Internal Notes
+                {t('dashboard.employee.modal.internalNotes')}
               </label>
-              <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white text-xs font-semibold">
-                JD
-              </div>
+
             </div>
             <textarea
               placeholder="Enter internal notes..."
@@ -188,7 +187,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
           {/* Customer Response */}
           <div className="mb-6">
             <label className="block text-base font-medium text-gray-800 mb-2">
-              Customer Response
+              {t('dashboard.employee.modal.customerResponse')}
             </label>
             <div className="bg-gray-50 border border-gray-200 rounded-md p-3 text-sm">
               <p className="text-gray-600 text-xs mb-2">
@@ -205,7 +204,7 @@ const ManageTicketModal = ({ isOpen, onClose, onSubmit }) => {
             onClick={handleSubmit}
             className="w-full bg-[#28A844] hover:bg-green-600 text-white font-medium py-3 px-4 rounded-md transition-colors duration-200 text-sm md:text-base"
           >
-            Update ticket
+            {t('dashboard.employee.modal.updateTicket')} 
           </button>
         </div>
       </div>

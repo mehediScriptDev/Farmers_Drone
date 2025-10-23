@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef, useMemo } from "react";
 import {
-  FiTrendingUp,
   FiShoppingCart,
   FiClock,
   FiCreditCard,
@@ -10,6 +9,7 @@ import {
   FiChevronUp,
   FiSearch,
 } from "react-icons/fi";
+import { FaSackDollar } from "react-icons/fa6";
 import axiosInstance from "../../../../config/axiosConfig";
 import { useTranslation } from "react-i18next";
 import Pagination from "../../../common/Pagination";
@@ -45,15 +45,6 @@ const CustomDropdown = ({ label, options, value, onChange, placeholder }) => {
 
       {open && (
         <div className="absolute z-10 mt-2 w-full bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-y-auto">
-          <div
-            onClick={() => {
-              onChange("");
-              setOpen(false);
-            }}
-            className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer font-medium"
-          >
-            All
-          </div>
           {options.map((opt, i) => (
             <div
               key={i}
@@ -84,20 +75,24 @@ const ReportAnalysisPage = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const periodDropdownRef = useRef(null);
   const { t } = useTranslation();
- const [selectedPeriod, setSelectedPeriod] = useState("last30days");
+  const [selectedPeriod, setSelectedPeriod] = useState("last30days");
   const filters = useMemo(() => ({
-  customerTypes: [
-    t("dashboard.employee.pages.dashboard.dropDown.customerType"),
-    t("dashboard.employee.pages.dashboard.dropDown.groundMediaServices"),
-  ],
-  serviceCategories: [
-    t("dashboard.employee.pages.dashboard.dropDown.aerialPhotographyVideographyMP"),
-    t("dashboard.employee.pages.dashboard.dropDown.eventPhotography"),
-  ],
-}), [t]);
-  const itemsPerPage = 4;
+    customerTypes: [
+      t("dashboard.employee.dropdown.aerialMedia"),
+      t("dashboard.employee.dropdown.realEstate"),
+      t("dashboard.employee.dropdown.mappingAndSurveying"),
+      t("dashboard.employee.dropdown.agriculture"),
+    ],
+    serviceCategories: [
+      t("dashboard.employee.dropdown.aerialPhotography"),
+      t("dashboard.employee.dropdown.aerialMediaServices"),
+      t("dashboard.employee.dropdown.cinematography"),
+      t("dashboard.employee.dropdown.weddingCoverage"),
+    ],
+  }), [t]);
+  const itemsPerPage = 6;
 
- const periodOptions = [
+  const periodOptions = [
     { key: "last7days", label: t("dashboard.employee.pages.dashboard.dropDown.last7days") },
     { key: "last30days", label: t("dashboard.employee.pages.dashboard.dropDown.last30days") },
     { key: "last60days", label: t("dashboard.employee.pages.dashboard.dropDown.last60days") },
@@ -143,11 +138,11 @@ const ReportAnalysisPage = () => {
 
   const stats = [
     {
-      label: t("dashboard.employee.pages.dashboard.card.totalCustomers"),
+      label: t("dashboard.employee.pages.dashboard.card.totalOrders"),
       value: summary.totalCustomers,
       change: "+13% vs last month",
       positive: true,
-      icon: FiTrendingUp,
+      icon: FiShoppingCart,
       bgColor: "bg-green-50",
     },
     {
@@ -155,7 +150,7 @@ const ReportAnalysisPage = () => {
       value: summary.totalRevenue,
       change: "+8% vs last month",
       positive: true,
-      icon: FiShoppingCart,
+      icon: FaSackDollar,
       bgColor: "bg-blue-50",
     },
     {
@@ -188,7 +183,48 @@ const ReportAnalysisPage = () => {
       ? customer.serviceName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       customer.company.toLowerCase().includes(searchQuery.toLowerCase())
       : true;
-    return matchesCustomerType && matchesServiceCategory && matchesSearch;
+
+    // Period filtering
+    let matchesPeriod = true;
+    if (customer.date) {
+      try {
+       
+        const dateStr = customer.date.split(' - ')[0].trim();
+        
+        const [day, month, year] = dateStr.split('/').map(Number);
+        const customerDate = new Date(year, month - 1, day); 
+        const now = new Date();
+        const diffInDays = Math.floor((now - customerDate) / (1000 * 60 * 60 * 24));
+
+        switch (selectedPeriod) {
+          case "last7days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 7;
+            break;
+          case "last30days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 30;
+            break;
+          case "last60days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 60;
+            break;
+          case "last90days":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 90;
+            break;
+          case "last6months":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 180;
+            break;
+          case "last12months":
+            matchesPeriod = diffInDays >= 0 && diffInDays <= 365;
+            break;
+          default:
+            matchesPeriod = true;
+        }
+      } catch (error) {
+        console.error('Error parsing date:', customer.date, error);
+        matchesPeriod = true; // Show the item if date parsing fails
+      }
+    }
+
+    return matchesCustomerType && matchesServiceCategory && matchesSearch && matchesPeriod;
   });
   const totalPages = Math.ceil(filteredCustomers.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -203,8 +239,8 @@ const ReportAnalysisPage = () => {
     <div className="flex-1 p-4 md:px-12">
       {/* Header */}
       <div className="mb-6 md:mb-8">
-         <button
-            onClick={() => navigate(-1)}
+        <button
+          onClick={() => navigate(-1)}
           aria-label="Back"
           className="mb-2 text-xl  pt-2 cursor-pointer"
         >
@@ -214,7 +250,7 @@ const ReportAnalysisPage = () => {
 
       {/* Filters & Analytics */}
       <div className="p-4 md:p-6 bg-white rounded-lg shadow-sm border border-gray-200 mb-8">
-        <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6">Filters & Analytics</h2>
+        <h2 className="text-lg md:text-xl font-bold text-gray-900 mb-6">{t("dashboard.employee.title.filtersAnalytics")}</h2>
 
         {loading ? (
           <p className="text-sm text-gray-500">Loading...</p>
@@ -267,7 +303,7 @@ const ReportAnalysisPage = () => {
                   setSelectedCustomerType(val);
                   setCurrentPage(1);
                 }}
-                placeholder= {t("dashboard.employee.pages.dashboard.dropDown.customerType")}
+                placeholder={t("dashboard.employee.pages.dashboard.dropDown.customerType")}
               />
 
               <CustomDropdown
@@ -290,8 +326,8 @@ const ReportAnalysisPage = () => {
                   <div key={index} className="p-4 rounded-lg border border-gray-200">
                     <div className="flex items-center justify-between mb-2">
                       <p className="text-sm text-gray-600">{stat.label}</p>
-                      <div className={`w-8 h-8 ${stat.bgColor} rounded-full flex items-center justify-center`}>
-                        <Icon className="w-4 h-4 text-gray-700" />
+                      <div className={`w-10 h-10 ${stat.bgColor} rounded-lg flex items-center justify-center`}>
+                        <Icon className="w-6 h-6 text-gray-700" />
                       </div>
                     </div>
                     <p className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
@@ -309,7 +345,7 @@ const ReportAnalysisPage = () => {
       {/* Customer Table */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-200">
         <div className="p-4 md:p-6 border-b border-gray-200 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <h2 className="text-lg md:text-xl font-bold text-gray-900">{ t("dashboard.employee.table.customerDetails") }</h2>
+          <h2 className="text-lg md:text-xl font-bold text-gray-900">{t("dashboard.employee.table.customerDetails")}</h2>
 
           {/* Search Field */}
           <div className="relative w-full md:w-1/2 lg:w-1/3">
@@ -338,21 +374,21 @@ const ReportAnalysisPage = () => {
                 <thead className="bg-gray-50 border-b h-14 border-gray-200">
                   <tr>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                      { t("dashboard.employee.table.serviceName") }
+                      {t("dashboard.employee.table.serviceName")}
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                      { t("dashboard.employee.table.contact") }
+                      {t("dashboard.employee.table.contact")}
 
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                      { t("dashboard.employee.table.tableDate") }
-                      
+                      {t("dashboard.employee.table.tableDate")}
+
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                       { t("dashboard.employee.table.duration") }
+                      {t("dashboard.employee.table.duration")}
                     </th>
                     <th className="px-3 md:px-6 py-3 text-left text-sm font-medium text-gray-700 uppercase whitespace-nowrap">
-                       { t("dashboard.employee.table.revenue") }
+                      {t("dashboard.employee.table.revenue")}
                     </th>
                   </tr>
                 </thead>
