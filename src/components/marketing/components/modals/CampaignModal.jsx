@@ -153,7 +153,7 @@ export default function CampaignModal({ onClose }) {
     <>
       {step === 1 && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-lg animate-fadeIn p-1">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-xl animate-fadeIn p-1">
             {/* Header */}
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold text-black">
@@ -262,7 +262,7 @@ export default function CampaignModal({ onClose }) {
       {/* strp 2 */}
       {step === 2 && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
                 {t(
@@ -354,7 +354,7 @@ export default function CampaignModal({ onClose }) {
       {/* Step 3 */}
       {step === 3 && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-xl">
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold">
                 {t(

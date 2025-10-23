@@ -19,7 +19,7 @@ const AutomationModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl w-full max-w-md max-h-[70vh] overflow-hidden flex flex-col">
+      <div className="bg-white rounded-xl w-full max-w-lg max-h-[70vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 md:p-5 border-gray-200">
           <div>
@@ -35,7 +35,7 @@ const AutomationModal = ({
             className="text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Close automation modal"
           >
-            <MdClose size={24} />
+            <MdClose size={20} />
           </button>
         </div>
         {console.log(automationSettings)}
