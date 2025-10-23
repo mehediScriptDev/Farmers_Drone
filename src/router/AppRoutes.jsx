@@ -23,12 +23,6 @@ import OrderDetails from "../components/admin/components/OrderDetails";
 
 // Field Agent Components
 import FieldAgentDashboard from "../components/fieldAgent/components/FieldAgentDashboard";
-// import FieldAgentReports from "../components/fieldAgent/Reports";
-// import MyAssignments from "../components/fieldAgent/MyAssignments";
-// import LocationTracking from "../components/fieldAgent/LocationTracking";
-// import PhotoCapture from "../components/fieldAgent/PhotoCapture";
-// import RouteOptimization from "../components/fieldAgent/RouteOptimization";
-// import VehicleManagement from "../components/fieldAgent/VehicleManagement";
 
 // Private Route Components
 import {
