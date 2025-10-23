@@ -81,7 +81,7 @@ export default function SeasonalCampaignOverview() {
     <div className=" bg-white mt-4 md:mt-6 lg:mt-8 rounded-lg shadow-md ">
       <div className="">
         {/* Header */}
-        <div className="flex justify-between items-center py-2 md:py-4 lg:py-4 mx-2 md:mx-4 lg:mx-4 p-2 md:p-4
+        <div className="flex justify-between items-center py-2 md:py-4 lg:py-4 mx-4 md:mx-2 lg:mx-3 p-2 md:p-4
         ">
           <h1 className="font-bold  text-[#000000] text-lg md:text-2xl lg:text-3xl w-1/2">
             {t("dashboard.marketing.CampaignOverview.SeasonalCampaignOverview")}
