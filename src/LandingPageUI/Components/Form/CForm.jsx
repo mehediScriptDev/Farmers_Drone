@@ -116,7 +116,7 @@ export default function CForm() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder={t('contact.form.subjectPlaceholder')}
+              placeholder={t('contact2.form.subjectPlaceholder')}
               className="w-full px-4  py-1.5 lg:py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
             />
           </div>
@@ -131,7 +131,7 @@ export default function CForm() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              placeholder={t('contact.form.messagePlaceholder')}
+              placeholder={t('contact2.form.messagePlaceholder')}
               rows="6"
               className="w-full px-4 py-1.5 lg:py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none"
             ></textarea>

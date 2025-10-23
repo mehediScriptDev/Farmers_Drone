@@ -40,7 +40,7 @@ const JoinCampaign = () => {
                       {campaign.title}
                     </h3>
 
-                    <p className="text-gray-600 mb-6 line-clamp-3 text-sm leading-relaxed">
+                    <p className="text-gray-600 mb-6 line-clamp-2 text-sm leading-relaxed">
                       {campaign.description}
                     </p>
 
