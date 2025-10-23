@@ -153,7 +153,7 @@ export default function CampaignModal({ onClose }) {
     <>
       {step === 1 && (
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-full max-w-md animate-fadeIn">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-lg animate-fadeIn p-1">
             {/* Header */}
             <div className="flex items-center justify-between p-4">
               <h2 className="text-base md:text-lg lg:text-2xl font-semibold text-black">
@@ -163,9 +163,9 @@ export default function CampaignModal({ onClose }) {
               </h2>
               <button
                 onClick={handleClose}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-500"
               >
-                <IoClose className="w-6 h-6" />
+                <IoClose className="w-5 h-5" />
               </button>
             </div>
 
