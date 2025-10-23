@@ -776,7 +776,8 @@
       },
       "userAdd": {
         "AddedByYou": "आपके द्वारा जोड़ा गया",
-        "AddCustomer": "ग्राहक जोड़ें"
+        "AddCustomer": "ग्राहक जोड़ें",
+        "CustomerOnBoarded": "ग्राहक ऑनबोर्डेड"
       },
       "tableHeader": {
         "Filter": "फ़िल्टर",
@@ -1462,5 +1463,72 @@
     "Andhra Pradesh": "आंध्र प्रदेश",
     "Tripura": "त्रिपुरा",
     "Telangana": "तेलंगाना"
+  },
+  "categories": {
+    "mappingAndSurveying": {
+      "label": "मैपिंग और सर्वेक्षण",
+      "sub": {
+        "droneMapping": "ड्रोन मानचित्रण और सर्वेक्षण (MAP)",
+        "generalSurveying": "सामान्य सर्वेक्षण और मानचित्रण (SRV)",
+        "groundCollection": "ज़मीनी संग्रह (GRC)",
+        "dataAnalysis": "डेटा विश्लेषण (DAT)"
+      }
+    },
+    "aerialMediaServices": {
+      "label": "हवाई मीडिया सेवाएँ",
+      "sub": {
+        "aerialPhotography": "हवाई फोटोग्राफी और वीडियोग्राफी (VID)",
+        "cinematography": "सिनेमैटोग्राफी (CIN)",
+        "weddingCoverage": "शादी कवरेज (WED)",
+        "editing": "संपादन (EDT)"
+      }
+    },
+    "realEstateMarketing": {
+      "label": "रियल एस्टेट और मार्केटिंग",
+      "sub": {
+        "realEstateMarketingServices": "रियल एस्टेट मार्केटिंग सेवाएँ (REM)",
+        "residentialPhotography": "आवासीय फ़ोटोग्राफी (RPH)",
+        "landSurveying": "भूमि सर्वेक्षण (LND)",
+        "roofInspection": "छत निरीक्षण (RFI)"
+      }
+    },
+    "agriculture": {
+      "label": "कृषि",
+      "sub": {
+        "agriculturalServices": "कृषि सेवाएँ (AGP)",
+        "agriculturalSpray": "कृषि छिड़काव (AGS)",
+        "agriculturalSpread": "कृषि फैलाव (AGP)"
+      }
+    },
+    "inspectionInfrastructure": {
+      "label": "निरीक्षण और बुनियादी ढाँचा",
+      "sub": {
+        "infrastructureInspectionServices": "बुनियादी ढाँचा निरीक्षण सेवाएँ (INF)",
+        "aerialInspections": "हवाई निरीक्षण (AIN)",
+        "constructionSiteMonitoring": "निर्माण स्थल की निगरानी (CON)",
+        "generalInfrastructure": "सामान्य बुनियादी ढाँचा (IFG)"
+      }
+    },
+    "specializedOperations": {
+      "label": "विशेष संचालन",
+      "sub": {
+        "droneDeliveryServices": "ड्रोन डिलीवरी सेवाएँ (DLV)",
+        "boatingWaterSports": "नौका विहार और जल क्रीड़ा (BWS)",
+        "sports": "खेल (SPR)"
+      }
+    },
+    "supportTraining": {
+      "label": "समर्थन और प्रशिक्षण",
+      "sub": {
+        "droneMaintenance": "ड्रोन रखरखाव (DMN)",
+        "droneTraining": "ड्रोन प्रशिक्षण (TRN)"
+      }
+    },
+    "other": {
+      "label": "अन्य",
+      "sub": {
+        "miscellaneous": "विविध / कस्टम"
+      }
+    }
   }
 }

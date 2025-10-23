@@ -228,7 +228,7 @@ const FieldAgentDashboard = () => {
           {/* Header + Search/Filter + Add */}
           <div className="flex justify-between items-center p-2 sm:p-4 md:p-6 flex-col lg:flex-row gap-3">
             <h2 className="sm:text-lg md:text-2xl font-semibold text-black">
-              {t("dashboard.fieldAgent.userAdd.CustomerOnboard")}
+              {t("dashboard.fieldAgent.userAdd.CustomerOnBoarded")}
             </h2>
 
             <div className="flex items-center flex-col gap-2 md:flex-row">

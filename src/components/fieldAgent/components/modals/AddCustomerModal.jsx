@@ -10,43 +10,44 @@ import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import IndustrySelect from "./IndustrySelect";
 
+// categories are represented by stable IDs; translations are stored in locales
 const categoryData = {
-  "Mapping & Surveying": [
-    "Drone Mapping & Surveying (MAP)",
-    "General Surveying & Mapping (SRV)",
-    "Ground Collection (GRC)",
-    "Data Analysis (DAT)",
+  mappingAndSurveying: [
+    "droneMapping",
+    "generalSurveying",
+    "groundCollection",
+    "dataAnalysis",
   ],
-  "Aerial Media Services": [
-    "Aerial Photography & Videography (VID)",
-    "Cinematography(CIN)",
-    "Wedding Coverage (WED)",
-    "Editing (EDT)",
+  aerialMediaServices: [
+    "aerialPhotography",
+    "cinematography",
+    "weddingCoverage",
+    "editing",
   ],
-  "Real Estate & Marketing": [
-    "Real Estate Marketing Services (REM)",
-    "Residential Photography (RPH)",
-    "Land Surveying (LND)",
-    "Roof Inspection (RFI)",
+  realEstateMarketing: [
+    "realEstateMarketingServices",
+    "residentialPhotography",
+    "landSurveying",
+    "roofInspection",
   ],
-  Agriculture: [
-    "Agricultural Services (AGP)",
-    "Agricultural Spray(AGS)",
-    "Agricultural Spread(AGP)",
+  agriculture: [
+    "agriculturalServices",
+    "agriculturalSpray",
+    "agriculturalSpread",
   ],
-  "Inspection & Infrastructure": [
-    "Infrastructure Inspection Services (INF)",
-    "Aerial Inspections (AIN)",
-    "Construction Site Monitoring (CON)",
-    "General Infrastructure  (IFG)",
+  inspectionInfrastructure: [
+    "infrastructureInspectionServices",
+    "aerialInspections",
+    "constructionSiteMonitoring",
+    "generalInfrastructure",
   ],
-  "Specialized Operations": [
-    "Drone Delivery Services (DLV)",
-    "Boating & Water Sports (BWS)",
-    "Sports (SPR)",
+  specializedOperations: [
+    "droneDeliveryServices",
+    "boatingWaterSports",
+    "sports",
   ],
-  "Support & Training": ["Drone Maintenance (DMN)", "Drone Training (TRN)"],
-  Other: ["Miscellaneous / Custom"],
+  supportTraining: ["droneMaintenance", "droneTraining"],
+  other: ["miscellaneous"],
 };
 
 const INITIAL_FORM = {
@@ -576,7 +577,9 @@ export default function RegistrationModal({ isOpen, onClose }) {
                                 : "  border-gray-50 hover:bg-lime-50 focus:outline-none focus:ring-2 focus:ring-lime-400"
                             }`}
                           >
-                            {subcategory}
+                            {t(
+                              `categories.${formData.industry}.sub.${subcategory}`
+                            ) || subcategory}
                           </button>
                         );
                       })}
@@ -597,7 +600,9 @@ export default function RegistrationModal({ isOpen, onClose }) {
                               key={tag}
                               className="inline-flex items-center gap-x-1.5 rounded-md bg-blue-100 px-2.5 py-1 text-sm font-medium text-blue-800"
                             >
-                              {tag}
+                              {t(
+                                `categories.${formData.industry}.sub.${tag}`
+                              ) || tag}
                               <button
                                 type="button"
                                 onClick={() => removeSubcategory(tag)}
@@ -793,7 +798,7 @@ export default function RegistrationModal({ isOpen, onClose }) {
               onClick={nextStep}
               className="w-full bg-[#28A844] hover:bg-green-600 text-white py-2.5 rounded-lg font-medium transition shadow-md disabled:bg-gray-400"
             >
-              {t("Next")}
+              {t("dashboard.fieldAgent.FirstModal.next")}
             </button>
           ) : (
             <div className="flex justify-between gap-4">
