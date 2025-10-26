@@ -15,7 +15,6 @@ const PaymentMethodCard = ({ title, methods, onSettingsClick }) => {
           <PaymentMethodItem
             key={method.id || index} 
             method={method}
-            // Pass the onSettingsClick function down to each item
             onSettingsClick={onSettingsClick}
           />
         ))}
