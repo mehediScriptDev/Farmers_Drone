@@ -7,7 +7,6 @@ import { LoadingSpinner } from '../../common/LoadingSpinner';
 import RevenueChart from '../charts/RevenueChart';
 import UserActivityTable from '../../common/UserActivityTable';
 import StatsCard from '../../common/StatsCard';
-
 import axiosInstance from '../../../config/axiosConfig';
 
 const AdminDashboard = () => {
