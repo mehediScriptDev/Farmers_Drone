@@ -21,7 +21,7 @@ ChartJS.register(
 );
 
 const BarChart = ({ data, title = 'Bar Chart' }) => {
-  // Memoize the options object to prevent it from being recreated on every render.
+  
   const options = useMemo(
     () => ({
       responsive: true,
