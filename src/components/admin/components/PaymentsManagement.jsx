@@ -8,7 +8,6 @@ import {
 import { BsCurrencyDollar } from 'react-icons/bs';
 import axiosInstance from '../../../config/axiosConfig';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
-import Pagination from '../../common/Pagination';
 
 const PaymentsManagement = () => {
   const { t } = useTranslation();
