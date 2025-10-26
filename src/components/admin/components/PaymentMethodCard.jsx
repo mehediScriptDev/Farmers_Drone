@@ -13,7 +13,7 @@ const PaymentMethodCard = ({ title, methods, onSettingsClick }) => {
       <div className='self-stretch flex flex-col justify-center items-start'>
         {methods.map((method, index) => (
           <PaymentMethodItem
-            key={method.id || index} // Use a unique key like method.id if available
+            key={method.id || index} 
             method={method}
             // Pass the onSettingsClick function down to each item
             onSettingsClick={onSettingsClick}
