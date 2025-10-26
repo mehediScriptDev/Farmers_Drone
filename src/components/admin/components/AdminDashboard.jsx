@@ -8,7 +8,6 @@ import RevenueChart from '../charts/RevenueChart';
 import UserActivityTable from '../../common/UserActivityTable';
 import StatsCard from '../../common/StatsCard';
 
-// Import axios instance
 import axiosInstance from '../../../config/axiosConfig';
 
 const AdminDashboard = () => {
