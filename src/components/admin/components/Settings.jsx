@@ -15,8 +15,6 @@ const Settings = () => {
   const [selectedMethod, setSelectedMethod] = useState(null); 
 
   const paymentMethods = {
-    // ... (Your existing paymentMethods object structure) ...
-    // Example structure (ensure status keys match t() calls)
     indianSystems1: [
       {
         id: 'upi',
