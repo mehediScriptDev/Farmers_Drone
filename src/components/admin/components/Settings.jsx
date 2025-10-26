@@ -161,12 +161,12 @@ const Settings = () => {
               <PaymentMethodCard
                 title={t('dashboard.admin.settings.indianSystems')}
                 methods={paymentMethods.indianSystems2}
-                onSettingsClick={handleOpenConfigModal} // Pass handler
+                onSettingsClick={handleOpenConfigModal} 
               />
               <PaymentMethodCard
                 title={t('dashboard.admin.settings.walletServices')}
                 methods={paymentMethods.walletServices}
-                onSettingsClick={handleOpenConfigModal} // Pass handler
+                onSettingsClick={handleOpenConfigModal} 
               />
             </div>
           </div>
