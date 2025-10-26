@@ -108,7 +108,7 @@ const Settings = () => {
   // Handler to close the config modal
   const handleCloseConfigModal = () => {
     setIsConfigModalOpen(false);
-    setSelectedMethod(null); // Clear selected method on close
+    setSelectedMethod(null); 
   };
 
   return (
@@ -151,12 +151,12 @@ const Settings = () => {
               <PaymentMethodCard
                 title={t('dashboard.admin.settings.indianSystems')}
                 methods={paymentMethods.indianSystems1}
-                onSettingsClick={handleOpenConfigModal} // Pass handler
+                onSettingsClick={handleOpenConfigModal} 
               />
               <PaymentMethodCard
                 title={t('dashboard.admin.settings.international')}
                 methods={paymentMethods.international}
-                onSettingsClick={handleOpenConfigModal} // Pass handler
+                onSettingsClick={handleOpenConfigModal} 
               />
               <PaymentMethodCard
                 title={t('dashboard.admin.settings.indianSystems')}
