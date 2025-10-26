@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { IoArrowBack } from 'react-icons/io5';
 import PaymentMethodCard from './PaymentMethodCard';
 import AddPaymentMethodModal from '../../common/AddPaymentMethodModal';
-import PaymentMethodConfigModal from '../../common/PaymentMethodConfigModal'; // Import the new config modal
+import PaymentMethodConfigModal from '../../common/PaymentMethodConfigModal'; 
 import { Header } from '../../common/Header';
 
 const Settings = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isConfigModalOpen, setIsConfigModalOpen] = useState(false); // State for config modal
-  const [selectedMethod, setSelectedMethod] = useState(null); // State for selected method
+  const [isConfigModalOpen, setIsConfigModalOpen] = useState(false); 
+  const [selectedMethod, setSelectedMethod] = useState(null); 
 
   const paymentMethods = {
     // ... (Your existing paymentMethods object structure) ...
