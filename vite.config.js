@@ -5,4 +5,27 @@ import tailwindcss from '@tailwindcss/vite';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'firebase': ['firebase'],
+          'charts': ['chart.js', 'react-chartjs-2'],
+        }
+      }
+    }
+  },
+  server: {
+    port: 3000,
+    host: true
+  },
+  preview: {
+    port: 3000,
+    host: true
+  }
 });
