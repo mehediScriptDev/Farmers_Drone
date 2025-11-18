@@ -36,47 +36,56 @@ const UserManagementTable = ({
                 </p>
               </div>
 
-              <div className='space-y-2 mb-4 text-sm'>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Location:</span>
-                  <span className='text-gray-900'>{user.location}</span>
+              <div className='mb-3'>
+                <div className='flex justify-between items-center mb-2'>
+                  <span className='text-sm text-gray-600 font-medium'>
+                    Location:
+                  </span>
+                  <span className='text-sm text-gray-900 font-medium text-right'>
+                    {user.location}
+                  </span>
                 </div>
-                <div className='flex justify-between'>
-                  <span className='text-gray-600'>Registration ID:</span>
-                  <span className='text-gray-900 font-mono text-xs'>
+                <div className='flex justify-between items-center'>
+                  <span className='text-sm text-gray-600 font-medium'>
+                    Registration ID:
+                  </span>
+                  <span className='text-sm text-gray-900 font-semibold tracking-wide'>
                     {user.registrationId}
                   </span>
                 </div>
               </div>
 
-              <div className='flex gap-2'>
-                {activeSubTab === 'pending' && (
-                  <>
-                    <button
-                      onClick={() => onReject(user.id)}
-                      className='flex-1 px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm font-medium'
-                      title='Reject'
-                    >
-                      <HiX className='w-5 h-5 mx-auto' />
-                    </button>
-                    <button
-                      onClick={() => onApprove(user.id)}
-                      className='flex-1 px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium'
-                      title='Approve'
-                    >
-                      <HiCheck className='w-5 h-5 mx-auto' />
-                    </button>
-                  </>
-                )}
+              {activeSubTab === 'pending' ? (
+                <div className='flex gap-2.5'>
+                  <button
+                    onClick={() => onReject(user.id)}
+                    className='flex-1 h-8 bg-red-600 text-white rounded-lg hover:bg-red-700 active:bg-red-800 transition-all font-semibold flex items-center justify-center shadow-md hover:shadow-lg'
+                    title='Reject'
+                  >
+                    <HiX className='w-4 h-4' />
+                  </button>
+                  <button
+                    onClick={() => onApprove(user.id)}
+                    className='flex-1 h-8 bg-green-600 text-white rounded-lg hover:bg-green-700 active:bg-green-800 transition-all font-semibold flex items-center justify-center shadow-md hover:shadow-lg'
+                    title='Approve'
+                  >
+                    <HiCheck className='w-4 h-4' />
+                  </button>
+                  <button
+                    onClick={() => onShowDetails(user)}
+                    className='flex-1 h-8 bg-green-600 text-white rounded-lg hover:bg-green-700 active:bg-green-800 transition-all text-xs font-semibold shadow-md hover:shadow-lg whitespace-nowrap'
+                  >
+                    See Details
+                  </button>
+                </div>
+              ) : (
                 <button
                   onClick={() => onShowDetails(user)}
-                  className={`${
-                    activeSubTab === 'pending' ? 'flex-1' : 'w-full'
-                  } px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm font-medium`}
+                  className='w-full h-12 bg-green-600 text-white rounded-lg hover:bg-green-700 active:bg-green-800 transition-all text-sm font-semibold shadow-md hover:shadow-lg'
                 >
                   {t('dashboard.admin.userManagement.seeDetails')}
                 </button>
-              </div>
+              )}
             </div>
           ))
         ) : (
