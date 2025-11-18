@@ -131,51 +131,110 @@ const PaymentsManagement = () => {
 
   return (
     <div className='min-h-screen bg-[#fafffd] w-full overflow-auto'>
-      <div className='w-full px-6 xl:px-11 py-3 lg:py-6'>
+      <div className='w-full px-4 md:px-6 xl:px-11 py-3 lg:py-6'>
         {/* Header Section */}
-        <div className='w-[482px] mb-8 flex flex-col gap-1'>
-          <div className='text-neutral-950 text-2xl font-semibold font-["Poppins"] leading-9'>
+        <div className='w-full max-w-[482px] mb-6 md:mb-8 flex flex-col gap-1'>
+          <div className='text-neutral-950 text-xl md:text-2xl font-semibold font-["Poppins"] leading-7 md:leading-9'>
             {t('dashboard.admin.paymentsManagement.title')}
           </div>
-          <div className='text-gray-800 text-base font-normal font-["Lato"] leading-normal'>
+          <div className='text-gray-800 text-sm md:text-base font-normal font-["Lato"] leading-normal'>
             {t('dashboard.admin.paymentsManagement.subtitle')}
           </div>
         </div>
 
         {/* Tabs */}
-        <div className='w-full border-t border-b border-gray-100 flex gap-5 mb-8'>
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-4 flex items-center gap-2 transition-all ${
-                  activeTab === tab.id
-                    ? 'border-b-2 border-green-500 shadow-[0px_8px_24px_0px_rgba(149,157,165,0.20)]'
-                    : ''
-                }`}
-              >
-                <Icon
-                  className={`w-6 h-6 ${
-                    activeTab === tab.id ? 'text-neutral-950' : 'text-gray-700'
-                  }`}
-                />
-                <div
-                  className={`text-base font-medium font-["Poppins"] leading-normal ${
-                    activeTab === tab.id ? 'text-neutral-950' : 'text-gray-700'
+        <div className='relative w-full border-t border-b border-gray-100 mb-6 md:mb-8'>
+          {/* Left Arrow - Mobile Only */}
+          <button
+            onClick={() => {
+              const container = document.getElementById('tabs-container');
+              container.scrollBy({ left: -200, behavior: 'smooth' });
+            }}
+            className='md:hidden absolute left-0 top-0 bottom-0 z-10 bg-gradient-to-r from-[#fafffd] to-transparent px-2 flex items-center'
+            aria-label='Scroll left'
+          >
+            <svg
+              className='w-5 h-5 text-gray-600'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
+              />
+            </svg>
+          </button>
+
+          {/* Tabs Container */}
+          <div
+            id='tabs-container'
+            className='flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide scroll-smooth'
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {tabs.map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 md:px-6 py-3 md:py-4 flex items-center gap-2 transition-all whitespace-nowrap ${
+                    activeTab === tab.id
+                      ? 'border-b-2 border-green-500 shadow-[0px_8px_24px_0px_rgba(149,157,165,0.20)]'
+                      : ''
                   }`}
                 >
-                  {tab.label}
-                </div>
-              </button>
-            );
-          })}
+                  <Icon
+                    className={`w-5 h-5 md:w-6 md:h-6 ${
+                      activeTab === tab.id
+                        ? 'text-neutral-950'
+                        : 'text-gray-700'
+                    }`}
+                  />
+                  <div
+                    className={`text-sm md:text-base font-medium font-["Poppins"] leading-normal ${
+                      activeTab === tab.id
+                        ? 'text-neutral-950'
+                        : 'text-gray-700'
+                    }`}
+                  >
+                    {tab.label}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Arrow - Mobile Only */}
+          <button
+            onClick={() => {
+              const container = document.getElementById('tabs-container');
+              container.scrollBy({ left: 200, behavior: 'smooth' });
+            }}
+            className='md:hidden absolute right-0 top-0 bottom-0 z-10 bg-gradient-to-l from-[#fafffd] to-transparent px-2 flex items-center'
+            aria-label='Scroll right'
+          >
+            <svg
+              className='w-5 h-5 text-gray-600'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M9 5l7 7-7 7'
+              />
+            </svg>
+          </button>
         </div>
 
         {/* Stats Cards */}
         {activeTab === 'overview' && (
-          <div className='grid grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6'>
             {/* Revenue Card */}
             <div className='flex-1 p-5 bg-white rounded-lg border border-zinc-100 flex flex-col gap-2.5'>
               <div className='w-full flex justify-between items-center'>
@@ -238,14 +297,92 @@ const PaymentsManagement = () => {
 
         {/* Customer Payments Tab Content */}
         {activeTab === 'customerPayments' && (
-          <div className='bg-white rounded-lg border border-zinc-100'>
+          <div className='bg-white rounded-lg border border-zinc-100 overflow-hidden'>
             {customerPaymentsData.length === 0 ? (
               <div className='p-8 text-center text-gray-600'>
                 Loading customer payment data...
               </div>
             ) : (
               <>
-                <div className='overflow-x-auto'>
+                {/* Mobile Card View */}
+                <div className='block lg:hidden divide-y divide-gray-200'>
+                  {paginatedTransactions.length > 0 ? (
+                    paginatedTransactions.map((transaction) => (
+                      <div
+                        key={transaction.id}
+                        className='p-4 hover:bg-gray-50 transition-colors'
+                      >
+                        <div className='space-y-3'>
+                          <div className='flex items-start justify-between gap-2'>
+                            <div className='flex-1 min-w-0'>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.userName'
+                                )}
+                              </p>
+                              <p className='text-sm font-semibold text-gray-900 truncate'>
+                                {transaction.userName}
+                              </p>
+                            </div>
+                            <span
+                              className={`inline-flex px-2 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
+                                transaction.status
+                              )}`}
+                            >
+                              {transaction.status}
+                            </span>
+                          </div>
+
+                          <div>
+                            <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                              {t(
+                                'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.paymentMethod'
+                              )}
+                            </p>
+                            <div className='flex flex-col gap-1'>
+                              <span className='text-sm font-medium text-neutral-950'>
+                                {transaction.paymentMethod}{' '}
+                                <span className='text-green-500 text-xs font-normal'>
+                                  ({transaction.paymentType})
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className='grid grid-cols-2 gap-3'>
+                            <div>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.transactions'
+                                )}
+                              </p>
+                              <p className='text-sm text-gray-900 font-medium'>
+                                {transaction.transactions}
+                              </p>
+                            </div>
+                            <div>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.dateTime'
+                                )}
+                              </p>
+                              <p className='text-sm text-gray-900'>
+                                {transaction.dateTime}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className='px-4 py-8 text-center text-gray-500'>
+                      No customer payments found
+                    </div>
+                  )}
+                </div>
+
+                {/* Desktop Table View */}
+                <div className='hidden lg:block overflow-x-auto'>
                   <table className='w-full table-fixed'>
                     <thead className='bg-gray-50'>
                       <tr>
@@ -259,7 +396,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[25%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.paymentMethod'
@@ -267,7 +404,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[15%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.status'
@@ -275,7 +412,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[15%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.transactions'
@@ -283,7 +420,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[25%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.customerPayments.tableHeaders.dateTime'
@@ -294,32 +431,32 @@ const PaymentsManagement = () => {
                     <tbody className='divide-y divide-gray-200'>
                       {paginatedTransactions.map((transaction) => (
                         <tr key={transaction.id} className='hover:bg-gray-50'>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.userName}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap'>
                             <div className='flex flex-col gap-1'>
-                              <span className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                              <span className='text-neutral-950 text-sm md:text-base font-medium font-["Poppins"] leading-normal'>
                                 {transaction.paymentMethod}{' '}
-                                <span className='text-green-500 text-xs font-normal font-["Lato"] leading-none'>
+                                <span className='text-green-500 text-[10px] md:text-xs font-normal font-["Lato"] leading-none'>
                                   ({transaction.paymentType})
                                 </span>
                               </span>
                             </div>
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap'>
                             <span
-                              className={`inline-flex px-3 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
+                              className={`inline-flex px-2 md:px-3 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
                                 transaction.status
                               )}`}
                             >
                               {transaction.status}
                             </span>
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.transactions}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.dateTime}
                           </td>
                         </tr>
@@ -328,8 +465,8 @@ const PaymentsManagement = () => {
                   </table>
                 </div>
 
-                <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
-                  <div className='text-sm text-gray-700 font-["Lato"]'>
+                <div className='px-4 md:px-6 py-3 md:py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-3'>
+                  <div className='text-xs sm:text-sm text-gray-700 font-["Lato"] text-center sm:text-left order-2 sm:order-1'>
                     {t(
                       'dashboard.admin.paymentsManagement.customerPayments.showing',
                       {
@@ -338,12 +475,12 @@ const PaymentsManagement = () => {
                       }
                     )}
                   </div>
-                  <div className='flex items-center space-x-1'>
+                  <div className='flex items-center space-x-1 order-1 sm:order-2'>
                     <button
                       onClick={() =>
                         currentPage > 1 && setCurrentPage(currentPage - 1)
                       }
-                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
                       disabled={currentPage === 1}
                     >
                       Previous
@@ -367,7 +504,7 @@ const PaymentsManagement = () => {
                       .map((page) => (
                         <button
                           key={page}
-                          className={`px-3 py-2 text-sm font-medium rounded ${
+                          className={`px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded ${
                             currentPage === page
                               ? 'bg-green-500 text-white'
                               : 'text-gray-700 hover:bg-gray-100'
@@ -385,7 +522,7 @@ const PaymentsManagement = () => {
                             customerPaymentsData.length / itemsPerPage
                           ) && setCurrentPage(currentPage + 1)
                       }
-                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
                       disabled={
                         currentPage ===
                         Math.ceil(customerPaymentsData.length / itemsPerPage)
@@ -402,20 +539,98 @@ const PaymentsManagement = () => {
 
         {/* Operator Payments Tab Content */}
         {activeTab === 'operatorPayments' && (
-          <div className='bg-white rounded-lg border border-zinc-100'>
+          <div className='bg-white rounded-lg border border-zinc-100 overflow-hidden'>
             {operatorPaymentsData.length === 0 ? (
               <div className='p-8 text-center text-gray-600'>
                 Loading operator payment data...
               </div>
             ) : (
               <>
-                <div className='overflow-x-auto'>
+                {/* Mobile Card View */}
+                <div className='block lg:hidden divide-y divide-gray-200'>
+                  {paginatedOperatorTransactions.length > 0 ? (
+                    paginatedOperatorTransactions.map((transaction) => (
+                      <div
+                        key={transaction.id}
+                        className='p-4 hover:bg-gray-50 transition-colors'
+                      >
+                        <div className='space-y-3'>
+                          <div className='flex items-start justify-between gap-2'>
+                            <div className='flex-1 min-w-0'>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.serviceProvider'
+                                )}
+                              </p>
+                              <p className='text-sm font-semibold text-gray-900 truncate'>
+                                {transaction.serviceProvider}
+                              </p>
+                            </div>
+                            <span
+                              className={`inline-flex px-2 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
+                                transaction.status
+                              )}`}
+                            >
+                              {transaction.status}
+                            </span>
+                          </div>
+
+                          <div>
+                            <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                              {t(
+                                'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.paymentMethod'
+                              )}
+                            </p>
+                            <div className='flex flex-col gap-1'>
+                              <span className='text-sm font-medium text-neutral-950'>
+                                {transaction.paymentMethod}{' '}
+                                <span className='text-green-500 text-xs font-normal'>
+                                  ({transaction.paymentType})
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className='grid grid-cols-2 gap-3'>
+                            <div>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.payouts'
+                                )}
+                              </p>
+                              <p className='text-sm text-gray-900 font-medium'>
+                                {transaction.payouts}
+                              </p>
+                            </div>
+                            <div>
+                              <p className='text-xs text-gray-500 uppercase font-medium mb-1'>
+                                {t(
+                                  'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.dateTime'
+                                )}
+                              </p>
+                              <p className='text-sm text-gray-900'>
+                                {transaction.dateTime}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <div className='px-4 py-8 text-center text-gray-500'>
+                      No operator payments found
+                    </div>
+                  )}
+                </div>
+
+                {/* Desktop Table View */}
+                <div className='hidden lg:block overflow-x-auto'>
                   <table className='w-full table-fixed'>
                     <thead className='bg-gray-50'>
                       <tr>
                         <th
                           scope='col'
-                          className='w-[20%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[20%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.serviceProvider'
@@ -423,7 +638,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[25%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.paymentMethod'
@@ -431,7 +646,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[15%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.status'
@@ -439,7 +654,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[15%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[15%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.payouts'
@@ -447,7 +662,7 @@ const PaymentsManagement = () => {
                         </th>
                         <th
                           scope='col'
-                          className='w-[25%] px-6 py-3 text-left text-sm font-bold text-gray-700 uppercase tracking-wider'
+                          className='w-[25%] px-4 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-bold text-gray-700 uppercase tracking-wider'
                         >
                           {t(
                             'dashboard.admin.paymentsManagement.operatorPayments.tableHeaders.dateTime'
@@ -458,32 +673,32 @@ const PaymentsManagement = () => {
                     <tbody className='divide-y divide-gray-200'>
                       {paginatedOperatorTransactions.map((transaction) => (
                         <tr key={transaction.id} className='hover:bg-gray-50'>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.serviceProvider}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap'>
                             <div className='flex flex-col gap-1'>
-                              <span className='text-neutral-950 text-base font-medium font-["Poppins"] leading-normal'>
+                              <span className='text-neutral-950 text-sm md:text-base font-medium font-["Poppins"] leading-normal'>
                                 {transaction.paymentMethod}{' '}
-                                <span className='text-green-500 text-xs font-normal font-["Lato"] leading-none'>
+                                <span className='text-green-500 text-[10px] md:text-xs font-normal font-["Lato"] leading-none'>
                                   ({transaction.paymentType})
                                 </span>
                               </span>
                             </div>
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap'>
                             <span
-                              className={`inline-flex px-3 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
+                              className={`inline-flex px-2 md:px-3 py-1 text-[10px] font-normal font-["Lato"] leading-none rounded-lg ${getStatusBadgeClass(
                                 transaction.status
                               )}`}
                             >
                               {transaction.status}
                             </span>
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.payouts}
                           </td>
-                          <td className='px-6 py-4 whitespace-nowrap text-sm font-normal text-gray-900 font-["Lato"]'>
+                          <td className='px-4 md:px-6 py-3 md:py-4 whitespace-nowrap text-xs md:text-sm font-normal text-gray-900 font-["Lato"]'>
                             {transaction.dateTime}
                           </td>
                         </tr>
@@ -492,8 +707,8 @@ const PaymentsManagement = () => {
                   </table>
                 </div>
 
-                <div className='px-6 py-4 border-t border-gray-200 flex justify-between items-center'>
-                  <div className='text-sm text-gray-700 font-["Lato"]'>
+                <div className='px-4 md:px-6 py-3 md:py-4 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center gap-3'>
+                  <div className='text-xs sm:text-sm text-gray-700 font-["Lato"] text-center sm:text-left order-2 sm:order-1'>
                     {t(
                       'dashboard.admin.paymentsManagement.operatorPayments.showing',
                       {
@@ -502,13 +717,13 @@ const PaymentsManagement = () => {
                       }
                     )}
                   </div>
-                  <div className='flex items-center space-x-1'>
+                  <div className='flex items-center space-x-1 order-1 sm:order-2'>
                     <button
                       onClick={() =>
                         operatorCurrentPage > 1 &&
                         setOperatorCurrentPage(operatorCurrentPage - 1)
                       }
-                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
                       disabled={operatorCurrentPage === 1}
                     >
                       Previous
@@ -532,7 +747,7 @@ const PaymentsManagement = () => {
                       .map((page) => (
                         <button
                           key={page}
-                          className={`px-3 py-2 text-sm font-medium rounded ${
+                          className={`px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded ${
                             operatorCurrentPage === page
                               ? 'bg-green-500 text-white'
                               : 'text-gray-700 hover:bg-gray-100'
@@ -550,7 +765,7 @@ const PaymentsManagement = () => {
                             operatorPaymentsData.length / itemsPerPage
                           ) && setOperatorCurrentPage(operatorCurrentPage + 1)
                       }
-                      className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+                      className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
                       disabled={
                         operatorCurrentPage ===
                         Math.ceil(operatorPaymentsData.length / itemsPerPage)
