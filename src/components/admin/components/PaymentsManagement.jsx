@@ -6,6 +6,7 @@ import {
   HiOutlineUser,
 } from 'react-icons/hi';
 import { BsCurrencyDollar } from 'react-icons/bs';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import axiosInstance from '../../../config/axiosConfig';
 import { LoadingSpinner } from '../../common/LoadingSpinner';
 
@@ -143,93 +144,71 @@ const PaymentsManagement = () => {
         </div>
 
         {/* Tabs */}
-        <div className='relative w-full border-t border-b border-gray-100 mb-6 md:mb-8'>
-          {/* Left Arrow - Mobile Only */}
-          <button
-            onClick={() => {
-              const container = document.getElementById('tabs-container');
-              container.scrollBy({ left: -200, behavior: 'smooth' });
-            }}
-            className='md:hidden absolute left-0 top-0 bottom-0 z-10 bg-gradient-to-r from-[#fafffd] to-transparent px-2 flex items-center'
-            aria-label='Scroll left'
-          >
-            <svg
-              className='w-5 h-5 text-gray-600'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
+        <div className='w-full border-t border-b border-gray-100 mb-6 md:mb-8 relative'>
+          <div className='flex items-center'>
+            {/* Left Arrow - Mobile Only */}
+            <button
+              onClick={() => {
+                const container = document.getElementById('tabs-container');
+                container.scrollBy({ left: -200, behavior: 'smooth' });
+              }}
+              className='md:hidden flex-shrink-0 h-full flex items-center justify-center'
+              aria-label='Scroll left'
             >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M15 19l-7-7 7-7'
-              />
-            </svg>
-          </button>
+              <ChevronLeft className='w-6 h-6 text-green-600' />
+            </button>
 
-          {/* Tabs Container */}
-          <div
-            id='tabs-container'
-            className='flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide scroll-smooth'
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 md:px-6 py-3 md:py-4 flex items-center gap-2 transition-all whitespace-nowrap ${
-                    activeTab === tab.id
-                      ? 'border-b-2 border-green-500 shadow-[0px_8px_24px_0px_rgba(149,157,165,0.20)]'
-                      : ''
-                  }`}
-                >
-                  <Icon
-                    className={`w-5 h-5 md:w-6 md:h-6 ${
+            {/* Tabs Container */}
+            <div
+              id='tabs-container'
+              className='flex-1 flex gap-3 md:gap-5 overflow-x-auto scrollbar-hide scroll-smooth'
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`px-4 md:px-6 py-3 md:py-4 flex items-center gap-2 transition-all whitespace-nowrap ${
                       activeTab === tab.id
-                        ? 'text-neutral-950'
-                        : 'text-gray-700'
-                    }`}
-                  />
-                  <div
-                    className={`text-sm md:text-base font-medium font-["Poppins"] leading-normal ${
-                      activeTab === tab.id
-                        ? 'text-neutral-950'
-                        : 'text-gray-700'
+                        ? 'border-b-2 border-green-500 shadow-[0px_8px_24px_0px_rgba(149,157,165,0.20)]'
+                        : ''
                     }`}
                   >
-                    {tab.label}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+                    <Icon
+                      className={`w-5 h-5 md:w-6 md:h-6 ${
+                        activeTab === tab.id
+                          ? 'text-neutral-950'
+                          : 'text-gray-700'
+                      }`}
+                    />
+                    <div
+                      className={`text-sm md:text-base font-medium font-["Poppins"] leading-normal ${
+                        activeTab === tab.id
+                          ? 'text-neutral-950'
+                          : 'text-gray-700'
+                      }`}
+                    >
+                      {tab.label}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
 
-          {/* Right Arrow - Mobile Only */}
-          <button
-            onClick={() => {
-              const container = document.getElementById('tabs-container');
-              container.scrollBy({ left: 200, behavior: 'smooth' });
-            }}
-            className='md:hidden absolute right-0 top-0 bottom-0 z-10 bg-gradient-to-l from-[#fafffd] to-transparent px-2 flex items-center'
-            aria-label='Scroll right'
-          >
-            <svg
-              className='w-5 h-5 text-gray-600'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
+            {/* Right Arrow - Mobile Only */}
+            <button
+              onClick={() => {
+                const container = document.getElementById('tabs-container');
+                container.scrollBy({ left: 200, behavior: 'smooth' });
+              }}
+              className='md:hidden flex-shrink-0 h-full flex items-center justify-center'
+              aria-label='Scroll right'
             >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M9 5l7 7-7 7'
-              />
-            </svg>
-          </button>
+              <ChevronRight className='w-6 h-6 text-green-600' />
+            </button>
+          </div>
         </div>
 
         {/* Stats Cards */}
