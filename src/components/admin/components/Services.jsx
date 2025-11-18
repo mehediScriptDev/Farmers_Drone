@@ -281,28 +281,28 @@ const Services = () => {
     <div className='w-full bg-[#fafffd] px-6 xl:px-11 py-3 lg:py-6'>
       <div className='bg-white rounded-lg shadow-sm'>
         {/* Header */}
-        <div className='p-6 border-b border-gray-200'>
-          <h1 className='text-2xl font-bold text-gray-900'>
+        <div className='p-4 md:p-6 border-b border-gray-200'>
+          <h1 className='text-xl md:text-2xl font-bold text-gray-900'>
             Services Management
           </h1>
-          <p className='text-gray-600 mt-1'>
+          <p className='text-sm md:text-base text-gray-600 mt-1'>
             Manage drone service categories and sub-services for booking system
           </p>
         </div>
 
         {/* Actions Bar */}
-        <div className='p-6 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center'>
+        <div className='p-4 md:p-6 flex flex-col md:flex-row gap-3 md:gap-4 justify-between items-stretch md:items-center'>
           <button
             onClick={() => {
               setEditingCategory(null);
               setShowCategoryModal(true);
             }}
-            className='px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
+            className='w-full md:w-auto px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
           >
             Add Service Category
           </button>
 
-          <div className='relative w-full sm:w-96'>
+          <div className='relative w-full md:w-80 lg:w-96'>
             <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5' />
             <input
               type='text'
@@ -315,57 +315,62 @@ const Services = () => {
         </div>
 
         {/* Service Categories List */}
-        <div className='px-6 pb-6 space-y-4'>
+        <div className='px-4 md:px-6 pb-4 md:pb-6 space-y-3 md:space-y-4'>
           {filteredCategories.map((category) => (
             <div
               key={category.id}
               className='border border-gray-200 rounded-lg overflow-hidden'
             >
               {/* Category Header */}
-              <div className='bg-gray-50 px-6 py-4 flex items-center justify-between'>
-                <div className='flex items-center gap-4'>
-                  <div className='w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center'>
-                    <div className='w-8 h-8 bg-white/50 rounded'></div>
+              <div className='bg-gray-50 px-4 md:px-6 py-3 md:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3'>
+                <div className='flex items-center gap-3 md:gap-4 min-w-0'>
+                  <div className='w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded-lg flex items-center justify-center flex-shrink-0'>
+                    <div className='w-6 h-6 md:w-8 md:h-8 bg-white/50 rounded'></div>
                   </div>
-                  <div>
-                    <h3 className='text-lg font-semibold text-gray-900'>
+                  <div className='min-w-0 flex-1'>
+                    <h3 className='text-base md:text-lg font-semibold text-gray-900 truncate'>
                       {category.name}
                     </h3>
-                    <p className='text-sm text-gray-600'>
+                    <p className='text-xs md:text-sm text-gray-600'>
                       {category.subServices.length} sub-services
                     </p>
                   </div>
                 </div>
 
-                <div className='flex items-center gap-3'>
+                <div className='flex items-center gap-2 md:gap-3 flex-wrap sm:flex-nowrap'>
                   <button
                     onClick={() => handleAddSubService(category)}
-                    className='px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-sm font-medium rounded-lg transition-colors duration-200'
+                    className='flex-1 sm:flex-none px-3 md:px-4 py-1.5 md:py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 text-xs md:text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap'
                   >
                     Add Sub Service
                   </button>
-                  <button
-                    onClick={() => handleEditCategory(category)}
-                    className='p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
-                  >
-                    <Edit2 className='w-5 h-5 text-gray-600' />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteCategory(category.id)}
-                    className='p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
-                  >
-                    <Trash2 className='w-5 h-5 text-gray-600' />
-                  </button>
-                  <button
-                    onClick={() => toggleCategory(category.id)}
-                    className='p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
-                  >
-                    <ChevronDown
-                      className={`w-5 h-5 text-gray-600 transition-transform duration-200 ${
-                        expandedCategory === category.id ? 'rotate-180' : ''
-                      }`}
-                    />
-                  </button>
+                  <div className='flex items-center gap-1 md:gap-2'>
+                    <button
+                      onClick={() => handleEditCategory(category)}
+                      className='p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                      aria-label='Edit category'
+                    >
+                      <Edit2 className='w-4 h-4 md:w-5 md:h-5 text-gray-600' />
+                    </button>
+                    <button
+                      onClick={() => handleDeleteCategory(category.id)}
+                      className='p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                      aria-label='Delete category'
+                    >
+                      <Trash2 className='w-4 h-4 md:w-5 md:h-5 text-gray-600' />
+                    </button>
+                    <button
+                      onClick={() => toggleCategory(category.id)}
+                      className='p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                      aria-label='Toggle category'
+                    >
+                      <ChevronDown
+                        className={`w-4 h-4 md:w-5 md:h-5 text-gray-600 transition-transform duration-200 ${
+                          expandedCategory === category.id ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -375,38 +380,40 @@ const Services = () => {
                   {category.subServices.map((subService) => (
                     <div
                       key={subService.id}
-                      className='px-6 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors duration-150'
+                      className='px-4 md:px-6 py-3 md:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-gray-50 transition-colors duration-150'
                     >
-                      <div className='flex items-center gap-4'>
-                        <div className='w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center'>
-                          <div className='w-8 h-8 bg-white/50 rounded'></div>
+                      <div className='flex items-center gap-3 md:gap-4 min-w-0 flex-1'>
+                        <div className='w-10 h-10 md:w-12 md:h-12 bg-gray-300 rounded-lg flex items-center justify-center flex-shrink-0'>
+                          <div className='w-6 h-6 md:w-8 md:h-8 bg-white/50 rounded'></div>
                         </div>
-                        <div>
-                          <h4 className='text-base font-semibold text-gray-900'>
+                        <div className='min-w-0 flex-1'>
+                          <h4 className='text-sm md:text-base font-semibold text-gray-900 truncate'>
                             {subService.name}
                           </h4>
-                          <p className='text-sm text-gray-600'>
+                          <p className='text-xs md:text-sm text-gray-600 line-clamp-2'>
                             {subService.description}
                           </p>
                         </div>
                       </div>
 
-                      <div className='flex items-center gap-3'>
+                      <div className='flex items-center gap-2 md:gap-3 justify-end sm:justify-start'>
                         <button
                           onClick={() =>
                             handleEditSubService(category, subService)
                           }
-                          className='p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                          className='p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                          aria-label='Edit sub-service'
                         >
-                          <Edit2 className='w-5 h-5 text-gray-600' />
+                          <Edit2 className='w-4 h-4 md:w-5 md:h-5 text-gray-600' />
                         </button>
                         <button
                           onClick={() =>
                             handleDeleteSubService(category.id, subService.id)
                           }
-                          className='p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                          className='p-1.5 md:p-2 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+                          aria-label='Delete sub-service'
                         >
-                          <Trash2 className='w-5 h-5 text-gray-600' />
+                          <Trash2 className='w-4 h-4 md:w-5 md:h-5 text-gray-600' />
                         </button>
                       </div>
                     </div>
@@ -517,11 +524,11 @@ const CategoryModal = ({ category, onClose, onSave }) => {
   };
 
   return (
-    <div className='fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4'>
-      <div className='bg-white rounded-xl shadow-xl w-full max-w-md'>
+    <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4'>
+      <div className='bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto'>
         <form onSubmit={handleSubmit}>
-          <div className='p-6'>
-            <h2 className='text-xl font-bold text-gray-900 mb-6'>
+          <div className='p-4 md:p-6'>
+            <h2 className='text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6'>
               {category ? 'Edit Service Category' : 'Add Service Category'}
             </h2>
 
@@ -535,24 +542,24 @@ const CategoryModal = ({ category, onClose, onSave }) => {
                   value={categoryName}
                   onChange={(e) => setCategoryName(e.target.value)}
                   placeholder='Aerial Media Services'
-                  className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+                  className='w-full px-3 md:px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
                   required
                 />
               </div>
             </div>
           </div>
 
-          <div className='flex gap-3 px-6 pb-6'>
+          <div className='flex gap-2 md:gap-3 px-4 md:px-6 pb-4 md:pb-6'>
             <button
               type='button'
               onClick={onClose}
-              className='flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200'
+              className='flex-1 px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200'
             >
               Cancel
             </button>
             <button
               type='submit'
-              className='flex-1 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
+              className='flex-1 px-4 py-2 md:py-2.5 text-sm md:text-base bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
             >
               Create Category
             </button>
@@ -590,10 +597,10 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
 
   return (
     <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4'>
-      <div className='bg-white rounded-xl shadow-xl w-full max-w-md'>
+      <div className='bg-white rounded-xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto'>
         <form onSubmit={handleSubmit}>
-          <div className='p-6'>
-            <h2 className='text-xl font-bold text-gray-900 mb-6'>
+          <div className='p-4 md:p-6'>
+            <h2 className='text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-6'>
               {subService
                 ? `Edit Sub-service`
                 : `Add Sub-service to ${category.name}`}
@@ -609,7 +616,7 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
                   value={formData.code}
                   onChange={(e) => handleChange('code', e.target.value)}
                   placeholder='E.G. VID'
-                  className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+                  className='w-full px-3 md:px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
                   required
                 />
               </div>
@@ -623,7 +630,7 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
                   placeholder='Aerial Photography & Videography'
-                  className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+                  className='w-full px-3 md:px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
                   required
                 />
               </div>
@@ -637,7 +644,7 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
                   value={formData.price}
                   onChange={(e) => handleChange('price', e.target.value)}
                   placeholder='₹150/ Acre'
-                  className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
+                  className='w-full px-3 md:px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent'
                   required
                 />
               </div>
@@ -651,24 +658,24 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
                   onChange={(e) => handleChange('description', e.target.value)}
                   placeholder='Brief description of the service...'
                   rows={3}
-                  className='w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none'
+                  className='w-full px-3 md:px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none'
                   required
                 />
               </div>
             </div>
           </div>
 
-          <div className='flex gap-3 px-6 pb-6'>
+          <div className='flex gap-2 md:gap-3 px-4 md:px-6 pb-4 md:pb-6'>
             <button
               type='button'
               onClick={onClose}
-              className='flex-1 px-4 py-2.5 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200'
+              className='flex-1 px-4 py-2 md:py-2.5 text-sm md:text-base border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200'
             >
               Cancel
             </button>
             <button
               type='submit'
-              className='flex-1 px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
+              className='flex-1 px-4 py-2 md:py-2.5 text-sm md:text-base bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors duration-200'
             >
               Create Category
             </button>
