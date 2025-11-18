@@ -9,6 +9,8 @@ const Services = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [editingCategory, setEditingCategory] = useState(null);
   const [editingSubService, setEditingSubService] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   // Sample data structure
   const [serviceCategories, setServiceCategories] = useState([
@@ -240,20 +242,17 @@ const Services = () => {
   };
 
   const handleDeleteSubService = (categoryId, subServiceId) => {
-    if (window.confirm('Are you sure you want to delete this sub-service?')) {
-      setServiceCategories((prevCategories) =>
-        prevCategories.map((cat) =>
-          cat.id === categoryId
-            ? {
-                ...cat,
-                subServices: cat.subServices.filter(
-                  (sub) => sub.id !== subServiceId
-                ),
-              }
-            : cat
-        )
-      );
-    }
+    const category = serviceCategories.find((cat) => cat.id === categoryId);
+    const subService = category?.subServices.find(
+      (sub) => sub.id === subServiceId
+    );
+    setDeleteTarget({
+      type: 'subService',
+      categoryId,
+      subServiceId,
+      name: subService?.name || '',
+    });
+    setShowDeleteModal(true);
   };
 
   const handleEditCategory = (category) => {
@@ -262,11 +261,41 @@ const Services = () => {
   };
 
   const handleDeleteCategory = (categoryId) => {
-    if (window.confirm('Are you sure you want to delete this category?')) {
+    const category = serviceCategories.find((cat) => cat.id === categoryId);
+    setDeleteTarget({
+      type: 'category',
+      categoryId,
+      name: category?.name || '',
+    });
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (deleteTarget?.type === 'category') {
       setServiceCategories((prevCategories) =>
-        prevCategories.filter((cat) => cat.id !== categoryId)
+        prevCategories.filter((cat) => cat.id !== deleteTarget.categoryId)
+      );
+    } else if (deleteTarget?.type === 'subService') {
+      setServiceCategories((prevCategories) =>
+        prevCategories.map((cat) =>
+          cat.id === deleteTarget.categoryId
+            ? {
+                ...cat,
+                subServices: cat.subServices.filter(
+                  (sub) => sub.id !== deleteTarget.subServiceId
+                ),
+              }
+            : cat
+        )
       );
     }
+    setShowDeleteModal(false);
+    setDeleteTarget(null);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteModal(false);
+    setDeleteTarget(null);
   };
 
   const filteredCategories = serviceCategories.filter(
@@ -508,6 +537,16 @@ const Services = () => {
           }}
         />
       )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteModal && (
+        <DeleteConfirmationModal
+          type={deleteTarget?.type}
+          name={deleteTarget?.name}
+          onConfirm={confirmDelete}
+          onCancel={cancelDelete}
+        />
+      )}
     </div>
   );
 };
@@ -681,6 +720,46 @@ const SubServiceModal = ({ category, subService, onClose, onSave }) => {
             </button>
           </div>
         </form>
+      </div>
+    </div>
+  );
+};
+
+// Delete Confirmation Modal Component
+const DeleteConfirmationModal = ({ type, name, onConfirm, onCancel }) => {
+  const getMessage = () => {
+    if (type === 'category') {
+      return 'Are you sure you want to delete this category?';
+    }
+    return 'Are you sure you want to delete this sub-service?';
+  };
+
+  return (
+    <div className='fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4'>
+      <div className='bg-white rounded-xl shadow-xl w-full max-w-md'>
+        <div className='p-6'>
+          <h2 className='text-lg md:text-xl font-semibold text-gray-900 mb-2'>
+            {name || 'localhost:5173 says'}
+          </h2>
+          <p className='text-sm md:text-base text-gray-700 mb-6'>
+            {getMessage()}
+          </p>
+
+          <div className='flex gap-3 justify-end'>
+            <button
+              onClick={onCancel}
+              className='px-6 py-2 text-sm md:text-base text-gray-700 font-medium rounded-lg hover:bg-gray-100 transition-colors duration-200'
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onConfirm}
+              className='px-6 py-2 text-sm md:text-base bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200'
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
