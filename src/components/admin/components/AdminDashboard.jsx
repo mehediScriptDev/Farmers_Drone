@@ -134,7 +134,6 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* User Activity Table */}
       {dashboardData.recentActivity && (
         <div>
           <UserActivityTable
