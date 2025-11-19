@@ -68,7 +68,7 @@ const LeadStatusDropdown = ({ selectedStatus, setSelectedStatus }) => {
                 className={`block px-4 py-2 text-xs md:text-sm cursor-pointer transition-colors ${
                   option.value === selectedStatus
                     ? `${activeBg} text-gray-900 font-semibold`
-                    : `text-gray-700 hover:${activeBg}/70`
+                    : `text-gray-700 hover:${activeBg}/70 hover:bg-[#9AE600]`
                 }`}
                 role="menuitem"
               >

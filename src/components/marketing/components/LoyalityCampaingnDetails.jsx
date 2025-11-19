@@ -217,7 +217,7 @@ const LoyalityCampaingnDetails = () => {
                 <button className="px-4 md:px-6 py-2 bg-[#28A844] text-white rounded-lg hover:bg-green-600 transition cursor-pointer">
                   {t("dashboard.marketing.CampaignDetails.Export")}
                 </button>
-                <button className="px-4 md:px-6 py-2 bg-red-500 text-black rounded-lg hover:bg-[#DC3545] transition cursor-pointer">
+                <button className="px-4 md:px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-[#DC3545] transition cursor-pointer">
                   {t("dashboard.marketing.CampaignDetails.Delete")}
                 </button>
               </div>

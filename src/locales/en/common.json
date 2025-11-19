@@ -769,11 +769,14 @@
       },
       "userAdd": {
         "AddedByYou": "Added by you",
-        "AddCustomer": "Add Customer"
+        "AddCustomer": "Add Customer",
+        "CustomerOnBoarded": "Customer Onboarded"
       },
       "tableHeader": {
         "CustomerList": "Customer List",
         "Role": "Role",
+        "Filter": "Filter",
+        "Search": "Search",
         "RegistrationCommission": "Registration Commission",
         "FirstOrderCommission": "First Order Commission",
         "EffectiveDate": "Effective Date",
@@ -847,8 +850,7 @@
         "enterCountry": "India",
         "industry": "Industry",
         "selectIndustry": "Select industry",
-        "agriculture": "Agriculture",
-        "surveyMapping": "Survey & Mapping"
+        "agriculture": "Agriculture"
       },
       "ThirdModal": {
         "serviceLocations": "Service Locations",
@@ -877,7 +879,9 @@
     "marketing": {
       "title": "Marketing Dashboard",
       "monitor": "Monitor your customer service performance",
-      "daysOverview": "Last 30 days overview",
+      "Last30daysOverview": "Last 30 days overview",
+      "Last90daysOverview": "Last 90 days overview",
+      "Last7daysOverview": "Last 7 days overview",
       "last_90_days": "last 90 days",
       "last_30_days": "last 30 days",
       "last_7_days": "last 7 days",
@@ -1395,6 +1399,73 @@
       "showing": "Showing {{count}} of {{total}} Customer",
       "previous": "Previous",
       "next": "Next"
+    }
+  },
+  "categories": {
+    "mappingAndSurveying": {
+      "label": "Mapping & Surveying",
+      "sub": {
+        "droneMapping": "Drone Mapping & Surveying (MAP)",
+        "generalSurveying": "General Surveying & Mapping (SRV)",
+        "groundCollection": "Ground Collection (GRC)",
+        "dataAnalysis": "Data Analysis (DAT)"
+      }
+    },
+    "aerialMediaServices": {
+      "label": "Aerial Media Services",
+      "sub": {
+        "aerialPhotography": "Aerial Photography & Videography (VID)",
+        "cinematography": "Cinematography (CIN)",
+        "weddingCoverage": "Wedding Coverage (WED)",
+        "editing": "Editing (EDT)"
+      }
+    },
+    "realEstateMarketing": {
+      "label": "Real Estate & Marketing",
+      "sub": {
+        "realEstateMarketingServices": "Real Estate Marketing Services (REM)",
+        "residentialPhotography": "Residential Photography (RPH)",
+        "landSurveying": "Land Surveying (LND)",
+        "roofInspection": "Roof Inspection (RFI)"
+      }
+    },
+    "agriculture": {
+      "label": "Agriculture",
+      "sub": {
+        "agriculturalServices": "Agricultural Services (AGP)",
+        "agriculturalSpray": "Agricultural Spray (AGS)",
+        "agriculturalSpread": "Agricultural Spread (AGP)"
+      }
+    },
+    "inspectionInfrastructure": {
+      "label": "Inspection & Infrastructure",
+      "sub": {
+        "infrastructureInspectionServices": "Infrastructure Inspection Services (INF)",
+        "aerialInspections": "Aerial Inspections (AIN)",
+        "constructionSiteMonitoring": "Construction Site Monitoring (CON)",
+        "generalInfrastructure": "General Infrastructure (IFG)"
+      }
+    },
+    "specializedOperations": {
+      "label": "Specialized Operations",
+      "sub": {
+        "droneDeliveryServices": "Drone Delivery Services (DLV)",
+        "boatingWaterSports": "Boating & Water Sports (BWS)",
+        "sports": "Sports (SPR)"
+      }
+    },
+    "supportTraining": {
+      "label": "Support & Training",
+      "sub": {
+        "droneMaintenance": "Drone Maintenance (DMN)",
+        "droneTraining": "Drone Training (TRN)"
+      }
+    },
+    "other": {
+      "label": "Other",
+      "sub": {
+        "miscellaneous": "Miscellaneous / Custom"
+      }
     }
   }
 }

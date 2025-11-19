@@ -115,7 +115,7 @@ const LeadManagment = () => {
               </button>
               <button
                 onClick={() => setIsAutomationModalOpen(true)}
-                className="px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-red-700 font-medium text-sm md:text-base flex items-center justify-center gap-1"
+                className="px-3 md:px-6 py-2 bg-[#FFC107] text-white rounded-lg hover:bg-[#ff9307]  font-medium text-sm md:text-base flex items-center justify-center gap-1"
               >
                 {t("dashboard.marketing.Automation")}
               </button>
