@@ -6,7 +6,7 @@ const HomePage = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 w-full'>
+    <div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 w-full scroll-smooth'>
       {/* Hero Section */}
       <div className='flex flex-col items-center justify-center min-h-[70vh] text-center w-full px-8 lg:px-16'>
         <div className='w-full'>
