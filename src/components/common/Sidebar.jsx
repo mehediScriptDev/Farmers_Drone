@@ -11,6 +11,7 @@ import {
   AlertTriangle,
   Settings,
 } from 'lucide-react';
+import SmoothScroll from '../utility/SmoothScroll';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -93,7 +94,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <HiX className='w-7 h-7 text-gray-700' />
           </button>
           {/* Menu Items */}
-          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
+          <SmoothScroll
+            root={false}
+            className='flex-1 px-3 py-4 overflow-y-auto'
+          >
             {menuItems.map((item) => {
               const Icon = item.icon;
               // Check if current path matches this menu item or its sub-routes
@@ -123,7 +127,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </NavLink>
               );
             })}
-          </nav>
+          </SmoothScroll>
         </div>
       </div>
 

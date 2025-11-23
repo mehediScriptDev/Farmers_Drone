@@ -5,7 +5,7 @@ import 'lenis/dist/lenis.css';
  * Global Smooth Scroll Provider
  * Wraps the application to provide inertial scrolling context.
  */
-const SmoothScroll = ({ children }) => {
+const SmoothScroll = ({ children, root = true, className = '' }) => {
   // Configuration Options
   const lenisOptions = {
     lerp: 0.1, // Inertia factor (0-1)
@@ -20,7 +20,7 @@ const SmoothScroll = ({ children }) => {
   };
 
   return (
-    <ReactLenis root options={lenisOptions}>
+    <ReactLenis root={root} options={lenisOptions} className={className}>
       {children}
     </ReactLenis>
   );

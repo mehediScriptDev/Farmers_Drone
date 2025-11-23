@@ -6,6 +6,7 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { FaRegCreditCard } from 'react-icons/fa';
 import { LuHeadset, LuMessageCircle } from 'react-icons/lu';
 import { BiGridAlt } from 'react-icons/bi';
+import SmoothScroll from '../utility/SmoothScroll';
 
 const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -81,7 +82,10 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </div>
 
           {/* Menu Items */}
-          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
+          <SmoothScroll
+            root={false}
+            className='flex-1 px-3 py-4 overflow-y-auto'
+          >
             {menuItems.map((item) => {
               const Icon = item.icon;
               return (
@@ -105,7 +109,7 @@ const CustomerAgentServiceSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </NavLink>
               );
             })}
-          </nav>
+          </SmoothScroll>
         </div>
       </div>
 

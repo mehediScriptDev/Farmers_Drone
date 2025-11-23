@@ -5,7 +5,7 @@ import { Header } from './Header';
 import { useAuth } from '../../hooks/useAuth';
 import MarketingSidebar from './MarketingSidebar';
 import CustomerAgentServiceSidebar from './CustomerAgentServiceSidebar';
-
+import SmoothScroll from '../utility/SmoothScroll';
 
 export const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -14,17 +14,17 @@ export const DashboardLayout = () => {
   return (
     <div className='flex flex-col h-screen '>
       <Header /> {/* Navbar at the top */}
-      <div className="flex flex-1 overflow-hidden">
-        {user?.role === "admin" && (
+      <div className='flex flex-1 overflow-hidden'>
+        {user?.role === 'admin' && (
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         )}
-        {user?.role === "marketing" && (
+        {user?.role === 'marketing' && (
           <MarketingSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
           />
         )}
-        {user?.role === "employee" && (
+        {user?.role === 'employee' && (
           <CustomerAgentServiceSidebar
             sidebarOpen={sidebarOpen}
             setSidebarOpen={setSidebarOpen}
@@ -34,12 +34,15 @@ export const DashboardLayout = () => {
         {/* {user?.role === 'field_agent' && (
       <FieldSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
     )} */}
-    <main className="flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]">
-      <div className="w-full ">
-        <Outlet />
+        <SmoothScroll
+          root={false}
+          className='flex-1 overflow-x-hidden overflow-y-auto bg-[#fafffd]'
+        >
+          <div className='w-full '>
+            <Outlet />
+          </div>
+        </SmoothScroll>
       </div>
-    </main>
-  </div>
-</div>
+    </div>
   );
 };
