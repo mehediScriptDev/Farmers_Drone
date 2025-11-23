@@ -1,4 +1,5 @@
 import React from 'react';
+import SmoothScroll from '../../components/utility/SmoothScroll';
 
 import Hero from './../Pages/Hero';
 import Statistics from './../Pages/Statistics';
@@ -11,21 +12,22 @@ import JoinCampaign from '../Components/JoinCampaign';
 import MilestoneGallery from '../Components/MilestoneGallery';
 
 const MainLayout = () => {
-    return (
-        <div>
-            
-            <Hero/>
-            <Statistics/>
-            <Industry/>
-            <TrainingNCertification/>
-            <JoinCampaign/>
-            <MilestoneGallery/> 
-            <Gallery/>
-            <BlogResearch/>
-            <FAQ/>
-            {/* <CTAFooter/> */}
-        </div>
-    );
+  return (
+    <SmoothScroll>
+      <div>
+        <Hero />
+        <Statistics />
+        <Industry />
+        <TrainingNCertification />
+        <JoinCampaign />
+        <MilestoneGallery />
+        <Gallery />
+        <BlogResearch />
+        <FAQ />
+        {/* <CTAFooter/> */}
+      </div>
+    </SmoothScroll>
+  );
 };
 
 export default MainLayout;

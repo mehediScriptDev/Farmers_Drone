@@ -1,6 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 /* Ensure full width layout */
-html,
+html {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   width: 100%;
   margin: 0;
@@ -12,8 +17,6 @@ body {
   min-height: 100vh;
 }
 
-
-
 body {
   margin: 0;
   display: flex;
@@ -22,7 +25,6 @@ body {
   min-height: 100vh;
 }
 
-
 .active {
   border-radius: 0%;
   border-bottom: 2px solid rgb(61, 230, 61);
@@ -30,10 +32,10 @@ body {
 
 @layer components {
   .section-container {
-     @apply w-full lg:w-10/12 xl:max-w-7xl mx-auto;
+    @apply w-full lg:w-10/12 xl:max-w-7xl mx-auto;
   }
 
   .section-padding {
-     @apply py-6 sm:py-10 xl:py-20 px-4 sm:px-6 md:px-8 lg:px-10;
+    @apply py-6 sm:py-10 xl:py-20 px-4 sm:px-6 md:px-8 lg:px-10;
   }
 }
