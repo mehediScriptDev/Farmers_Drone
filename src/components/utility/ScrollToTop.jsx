@@ -13,7 +13,6 @@ const ScrollToTop = ({ mainContentRef }) => {
       // <<< 3. If so, scroll that specific element
       mainContentRef.current.scrollTop = 0;
     } else {
-      // <<< 4. Otherwise, scroll the whole window (for your normal Layout)
       window.scrollTo(0, 0);
     }
   }, [pathname, mainContentRef]);
