@@ -10,7 +10,6 @@ const ScrollToTop = ({ mainContentRef }) => {
   useEffect(() => {
     // <<< 2. Check if the ref was provided
     if (mainContentRef && mainContentRef.current) {
-      // <<< 3. If so, scroll that specific element
       mainContentRef.current.scrollTop = 0;
     } else {
       window.scrollTo(0, 0);
