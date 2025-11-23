@@ -8,7 +8,6 @@ const ScrollToTop = ({ mainContentRef }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // <<< 2. Check if the ref was provided
     if (mainContentRef && mainContentRef.current) {
       mainContentRef.current.scrollTop = 0;
     } else {
