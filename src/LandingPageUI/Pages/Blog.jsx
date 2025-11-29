@@ -103,40 +103,33 @@ const Blog = () => {
     <SmoothScroll>
       <div>
         <div
-          style={{
-            backgroundImage: `url(${'/assets/images/aboutBanner.jpg'})`,
-          }}
-          className='relative h-[270px] bg-cover bg-center flex items-center justify-center'
+          style={{ backgroundImage: "url('/assets/images/aboutBanner.jpg')" }}
+          className="relative h-[270px] bg-cover bg-center flex items-center justify-center"
         >
-          <div className='absolute bg-gradient-to-l from-[#00C805] to-[#006202] inset-0'></div>
-          <div className='lg:hidden absolute bg-gray-600/50 inset-0'></div>
-          <div className='z-10 w-11/12 lg:w-10/12 xl:max-w-7xl mx-auto'>
-            <div className='text-white max-w-2xl'>
-              <h1 className='leading-relaxed text-left text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-0'>
+          <div className="absolute bg-gradient-to-l from-[#00C805] to-[#006202] inset-0"></div>
+          <div className="lg:hidden absolute bg-gray-600/50 inset-0"></div>
+          <div className="z-10 w-11/12 lg:w-10/12 xl:max-w-7xl mx-auto">
+            <div className="text-white max-w-2xl">
+              <h1 className="leading-relaxed text-left text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-0">
                 {t('blog.title')}
               </h1>
-              <p className='text-white text-base sm:text-lg md:text-xl py-3'>
-                {t('blog.subtitle')}
-              </p>
+              <p className="text-white text-base sm:text-lg md:text-xl py-3">{t('blog.subtitle')}</p>
             </div>
           </div>
         </div>
 
-        <div className='bg-gray-50  py-6 lg:py-12 px-4 sm:px-6 lg:px-8'>
-          <div className='lg:w-10/12 xl:max-w-7xl mx-auto'>
-            <div className='text-center mb-6 lg:mb-12'>
-              <h2 className='text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3'>
-                {t('blog.title')}
-              </h2>
-              <p className='text-gray-600 text-xs sm:text-sm md:text-base py-3 max-w-2xl mx-auto'>
-                {t('blog.description')}
-              </p>
+        <div className="bg-gray-50 py-6 lg:py-12 px-4 sm:px-6 lg:px-8">
+          <div className="lg:w-10/12 xl:max-w-7xl mx-auto">
+            <div className="text-center mb-6 lg:mb-12">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3">{t('blog.title')}</h2>
+              <p className="text-gray-600 text-xs sm:text-sm md:text-base py-3 max-w-2xl mx-auto">{t('blog.description')}</p>
             </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2.5 lg:gap-8">
-            {blogs.map((blog, index) => (
-              <BlogCardComponent key={index} {...blog} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2.5 lg:gap-8">
+              {blogs.map((blog, index) => (
+                <BlogCardComponent key={index} {...blog} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

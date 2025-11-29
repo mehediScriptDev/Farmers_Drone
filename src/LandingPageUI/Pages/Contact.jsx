@@ -7,7 +7,7 @@ const Contact = () => {
   const { t } = useTranslation();
 
   return (
-    <div>
+    <SmoothScroll>
       {/* Banner */}
       <div
         style={{ backgroundImage: `url(${"/assets/images/aboutBanner.jpg"})` }}
