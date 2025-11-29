@@ -41,7 +41,7 @@ export default function MissionValues() {
             {t("mission.coreValuesHeader")}
           </h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 lg:gap-8">
             {coreValues.map((value, index) => (
               <div 
                 key={index}

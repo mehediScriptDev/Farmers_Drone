@@ -85,23 +85,21 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Services Grid */}
-        <div className='bg-white lg:pt-30 pt-9 py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10'>
-          <div className='xl:max-w-7xl  lg:w-10/12 w-full mx-auto'>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6'>
-              {services.map((service, index) => {
-                const Icon = service.icon;
-                return (
-                  <div
-                    key={index}
-                    className='bg-sky-50 rounded-2xl lg:p-8 p-5 shadow-sm hover:shadow-md transition-shadow'
-                  >
-                    {/* Icon */}
-                    <div
-                      className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center mb-4`}
-                    >
-                      <Icon className={`w-6 h-6 ${service.iconColor}`} />
-                    </div>
+      {/* Services Grid */}
+      <div className="bg-white lg:pt-30 pt-9 py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10">
+        <div className="xl:max-w-7xl  lg:w-10/12 w-full mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 lg:gap-6">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-sky-50 rounded-2xl lg:p-8 p-5 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  {/* Icon */}
+                  <div className={`w-12 h-12 ${service.iconBg} rounded-xl flex items-center justify-center mb-4`}>
+                    <Icon className={`w-6 h-6 ${service.iconColor}`} />
+                  </div>
 
                     {/* Title */}
                     <h3 className='text-lg md:text-2xl font-bold text-gray-900 mb-2'>
@@ -126,16 +124,15 @@ const Services = () => {
                       ))}
                     </ul>
 
-                    {/* Buttons */}
-                    <div className='flex items-center justify-between gap-4'>
-                      <button className='bg-green-500 hover:bg-green-600 text-white px-3 sm:px-6 py-2.5 btn border-none text-xs btn-sm sm:btn-md md:rounded-sm font-medium sm:text-sm transition-colors'>
-                        {t('services.bookService')}
-                      </button>
-                      <button className='flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-xs lg:text-sm transition-colors'>
-                        {t('services.learnMore')}
-                        <ArrowRight className='w-4 h-4' />
-                      </button>
-                    </div>
+                  {/* Buttons */}
+                  <div className="flex items-center justify-between gap-4">
+                    <button className="bg-green-500 hover:bg-green-600 text-white px-3 sm:px-6 py-2.5 btn border-none text-sm btn-sm sm:btn-md md:rounded-sm font-medium sm:text-sm transition-colors">
+                      {t('services.bookService')}
+                    </button>
+                    <button className="flex items-center gap-2 text-green-600 hover:text-green-700 font-medium text-xs lg:text-sm transition-colors">
+                      {t('services.learnMore')}
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
                 );
               })}

@@ -28,7 +28,7 @@ export default function CForm() {
   };
 
   return (
-    <div className="xl:min-h-screen bg-gray-50 py-10 lg:py-20 px-4">
+    <div className=" bg-gray-50 py-10 lg:py-20 px-4">
       <div className="max-w-7xl w-11/12 mx-auto md:bg-white rounded-lg lg:shadow-sm p-2 lg:p-8 md:p-12">
         <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
           {t('contact2.form.header')}
@@ -36,7 +36,7 @@ export default function CForm() {
 
         <form onSubmit={handleSubmit}>
           {/* First Name & Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6 mb-2 lg:mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6 mb-3 lg:mb-6">
             <div>
               <label htmlFor="firstName" className="block text-sm font-medium text-gray-900 mb-2">
                 {t('contact2.form.firstName')}<span className="text-red-500">*</span>
@@ -71,7 +71,7 @@ export default function CForm() {
           </div>
 
           {/* Phone & Email */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6 mb-2 lg:mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6 mb-3 lg:mb-6">
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-gray-900 mb-2">
                 {t('contact2.form.phone')}<span className="text-red-500">*</span>
@@ -106,7 +106,7 @@ export default function CForm() {
           </div>
 
           {/* Subject */}
-          <div className="mb-2 lg:mb-6">
+          <div className="mb-3 lg:mb-6">
             <label htmlFor="subject" className="block text-sm font-medium text-gray-900 mb-2">
               {t('contact2.form.subject')}
             </label>
@@ -140,7 +140,7 @@ export default function CForm() {
           {/* Submit */}
           <button
             type="submit"
-            className="bg-green-500 hover:bg-green-600 text-white font-medium sm:px-8 px-4 py-1 sm:py-3 rounded-md transition-colors duration-200"
+            className="bg-green-500 hover:bg-green-600 text-white font-medium sm:px-8 px-5 py-3 rounded-md transition-colors duration-200"
           >
             {t('contact2.form.submit')}
           </button>

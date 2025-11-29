@@ -133,11 +133,10 @@ const Blog = () => {
               </p>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 lg:gap-8'>
-              {blogs.map((blog, index) => (
-                <BlogCardComponent key={index} {...blog} />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2.5 lg:gap-8">
+            {blogs.map((blog, index) => (
+              <BlogCardComponent key={index} {...blog} />
+            ))}
           </div>
         </div>
       </div>

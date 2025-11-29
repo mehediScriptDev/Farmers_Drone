@@ -71,7 +71,7 @@ const Gallery = () => {
 
         {/* View All Services Button */}
         <div className="text-center  mb-2">
-          <Link to={"/services"} className="bg-green-600 hover:bg-green-700 text-white font-semibold lg:px-8 lg:py-3 px-4 py-2 text-sm rounded transition-colors duration-300">
+          <Link to={"/services"} className="bg-green-600 hover:bg-green-700 text-white font-semibold lg:px-8 lg:py-3 px-6 py-3 text-sm rounded transition-colors duration-300">
             {t('industries.viewAllServices')}
           </Link>
         </div>

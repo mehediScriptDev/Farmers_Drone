@@ -39,7 +39,7 @@ const BlogResearch = () => {
         </div>
 
         {/* Blog Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-6 lg:mb-8 mb-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 md:gap-6 lg:mb-8 mb-5">
           {blogs?.map((blog, index) => (
             <div
               key={index}
@@ -95,7 +95,7 @@ const BlogResearch = () => {
 
         {/* View All Button */}
         <div className="text-center mb-2">
-          <Link to={"/blog"} className="bg-green-600 hover:bg-green-700 text-white font-semibold lg:px-8 lg:py-3 px-4 py-2 text-sm rounded transition-colors duration-300">
+          <Link to={"/blog"} className="bg-green-600 hover:bg-green-700 text-white font-semibold lg:px-8 lg:py-3 px-6 py-3 text-sm rounded transition-colors duration-300">
             {t("blogs.viewAll")}
           </Link>
         </div>
