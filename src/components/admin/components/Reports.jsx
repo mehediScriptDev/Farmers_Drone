@@ -31,13 +31,13 @@ const Reports = () => {
 
   return (
     <div className='min-h-screen bg-[#fafffd] w-full'>
-      <div className='w-full px-6 xl:px-11 py-3 lg:py-6'>
+      <div className='w-full px-4 md:px-6 xl:px-11 py-3 lg:py-6'>
         {/* Page Header */}
-        <div className='w-[482px] inline-flex flex-col justify-start items-start gap-1 mb-8'>
-          <div className="self-stretch justify-start text-White-950 text-2xl font-semibold font-['Poppins'] leading-9">
+        <div className='w-full max-w-[482px] flex flex-col justify-start items-start gap-1 mb-6 md:mb-8'>
+          <div className="self-stretch justify-start text-White-950 text-xl md:text-2xl font-semibold font-['Poppins'] leading-7 md:leading-9">
             {t('reports.title')}
           </div>
-          <div className="self-stretch justify-start text-White-800 text-base font-normal font-['Lato'] leading-normal">
+          <div className="self-stretch justify-start text-White-800 text-sm md:text-base font-normal font-['Lato'] leading-normal">
             {t('reports.subtitle')}
           </div>
         </div>

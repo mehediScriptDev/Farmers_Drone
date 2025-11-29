@@ -30,24 +30,29 @@ const Pagination = ({
   for (let i = startPage; i <= endPage; i++) pages.push(i);
 
   return (
-    <div className='px-6 py-4 bg-white border-t border-gray-200'>
-      <div className='flex items-center justify-between'>
-       <div className='text-sm text-gray-700'>
-  {`${t("dashboard.fieldAgent.pagination.showing")} ${Math.min(currentPage * itemsPerPage, totalItems)} ${t("dashboard.fieldAgent.pagination.of")} ${totalItems} ${t("dashboard.fieldAgent.pagination.users")}`}
-</div>
-        <div className='flex items-center space-x-1'>
+    <div className='px-4 md:px-6 py-3 md:py-4 bg-white border-t border-gray-200'>
+      <div className='flex flex-col sm:flex-row items-center justify-between gap-3'>
+        <div className='text-xs sm:text-sm text-gray-700 text-center sm:text-left order-2 sm:order-1'>
+          {`${t('dashboard.fieldAgent.pagination.showing')} ${Math.min(
+            currentPage * itemsPerPage,
+            totalItems
+          )} ${t('dashboard.fieldAgent.pagination.of')} ${totalItems} ${t(
+            'dashboard.fieldAgent.pagination.users'
+          )}`}
+        </div>
+        <div className='flex items-center space-x-1 order-1 sm:order-2'>
           <button
             onClick={handlePreviousClick}
-            className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+            className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
             disabled={currentPage === 1}
           >
-            {t("dashboard.fieldAgent.pagination.previous")}
+            {t('dashboard.fieldAgent.pagination.previous')}
           </button>
 
           {pages.map((page) => (
             <button
               key={page}
-              className={`px-3 py-2 text-sm font-medium rounded ${
+              className={`px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded ${
                 currentPage === page
                   ? 'bg-green-500 text-white'
                   : 'text-gray-700 hover:bg-gray-100'
@@ -60,10 +65,10 @@ const Pagination = ({
 
           <button
             onClick={handleNextClick}
-            className='px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed'
+            className='px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap'
             disabled={currentPage === totalPages}
           >
-            {t("dashboard.fieldAgent.pagination.next")}
+            {t('dashboard.fieldAgent.pagination.next')}
           </button>
         </div>
       </div>

@@ -11,6 +11,7 @@ import {
   AlertTriangle,
   Settings,
 } from 'lucide-react';
+import SmoothScroll from '../utility/SmoothScroll';
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { t } = useTranslation();
@@ -68,13 +69,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {!sidebarOpen && (
         <div className='lg:hidden fixed top-4 left-4 z-50'>
           <div className='lg:hidden fixed top-4 left-4 z-50'>
-                   <button
-                     onClick={() => setSidebarOpen(true)}
-                     className=' p-3  hover:bg-gray-50 transition-all duration-200 '
-                   >
-                     <HiMenuAlt2 className='w-8 h-7 text-gray-700' />
-                   </button>
-                 </div>
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className=' p-3  hover:bg-gray-50 transition-all duration-200 '
+            >
+              <HiMenuAlt2 className='w-8 h-7 text-gray-700' />
+            </button>
+          </div>
         </div>
       )}
 
@@ -93,7 +94,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <HiX className='w-7 h-7 text-gray-700' />
           </button>
           {/* Menu Items */}
-          <nav className='flex-1 px-3 py-4 overflow-y-auto'>
+          <SmoothScroll
+            root={false}
+            className='flex-1 px-3 py-4 overflow-y-auto'
+          >
             {menuItems.map((item) => {
               const Icon = item.icon;
               // Check if current path matches this menu item or its sub-routes
@@ -123,7 +127,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 </NavLink>
               );
             })}
-          </nav>
+          </SmoothScroll>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 // import Banner from "/assets/images/serviceBanner.jpg";
 import { ArrowRight, Sprout, HardHat, Zap, Shield } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import SmoothScroll from '../../components/utility/SmoothScroll';
 
 const Services = () => {
   const { t } = useTranslation();
@@ -16,8 +17,8 @@ const Services = () => {
         'services.agriculture.features.cropMonitoring',
         'services.agriculture.features.precisionSpraying',
         'services.agriculture.features.irrigationMapping',
-        'services.agriculture.features.yieldPrediction'
-      ]
+        'services.agriculture.features.yieldPrediction',
+      ],
     },
     {
       icon: HardHat,
@@ -29,8 +30,8 @@ const Services = () => {
         'services.construction.features.siteMapping',
         'services.construction.features.progressTracking',
         'services.construction.features.volumetricCalc',
-        'services.construction.features.safetyAudits'
-      ]
+        'services.construction.features.safetyAudits',
+      ],
     },
     {
       icon: Zap,
@@ -42,8 +43,8 @@ const Services = () => {
         'services.energy.features.thermalImaging',
         'services.energy.features.assetInspection',
         'services.energy.features.vegetationMgmt',
-        'services.energy.features.faultDetection'
-      ]
+        'services.energy.features.faultDetection',
+      ],
     },
     {
       icon: Shield,
@@ -55,31 +56,34 @@ const Services = () => {
         'services.publicSafety.features.emergency',
         'services.publicSafety.features.disaster',
         'services.publicSafety.features.surveillance',
-        'services.publicSafety.features.trafficMonitoring'
-      ]
-    }
+        'services.publicSafety.features.trafficMonitoring',
+      ],
+    },
   ];
 
   return (
-    <div>
-      {/* Banner */}
-      <div
-      id="services"
-        className="relative h-[372px] flex items-center justify-center bg-center bg-cover px-4 sm:px-6 md:px-8"
-        style={{ backgroundImage: `url(${"/assets/images/serviceBanner.jpg"})` }}
-      >
-        <div className='absolute bg-gradient-to-r from-[#06422c]/70 via-[#013522cd]/60 to-[#035a3ab8]/35 inset-0'></div>
-        <div className="z-10 w-full lg:w-10/12 xl:max-w-7xl mx-auto ">
-          <div className="text-white max-w-2xl">
-            <h1 className="leading-relaxed text-left text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-0">
-              {t('services.header')}
-            </h1>
-            <p className="text-white text-base sm:text-lg md:text-xl py-3">
-              {t('services.subheader')}
-            </p>
+    <SmoothScroll>
+      <div>
+        {/* Banner */}
+        <div
+          id='services'
+          className='relative h-[372px] flex items-center justify-center bg-center bg-cover px-4 sm:px-6 md:px-8'
+          style={{
+            backgroundImage: `url(${'/assets/images/serviceBanner.jpg'})`,
+          }}
+        >
+          <div className='absolute bg-gradient-to-r from-[#06422c]/70 via-[#013522cd]/60 to-[#035a3ab8]/35 inset-0'></div>
+          <div className='z-10 w-full lg:w-10/12 xl:max-w-7xl mx-auto '>
+            <div className='text-white max-w-2xl'>
+              <h1 className='leading-relaxed text-left text-3xl sm:text-4xl md:text-5xl font-bold mt-4 sm:mt-0'>
+                {t('services.header')}
+              </h1>
+              <p className='text-white text-base sm:text-lg md:text-xl py-3'>
+                {t('services.subheader')}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
 
       {/* Services Grid */}
       <div className="bg-white lg:pt-30 pt-9 py-4 lg:py-16 px-4 sm:px-6 md:px-8 lg:px-10">
@@ -97,25 +101,28 @@ const Services = () => {
                     <Icon className={`w-6 h-6 ${service.iconColor}`} />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-lg md:text-2xl font-bold text-gray-900 mb-2">
-                    {t(service.titleKey)}
-                  </h3>
+                    {/* Title */}
+                    <h3 className='text-lg md:text-2xl font-bold text-gray-900 mb-2'>
+                      {t(service.titleKey)}
+                    </h3>
 
-                  {/* Description */}
-                  <p className="md:text-xl text-gray-600 mb-4">
-                    {t(service.descriptionKey)}
-                  </p>
+                    {/* Description */}
+                    <p className='md:text-xl text-gray-600 mb-4'>
+                      {t(service.descriptionKey)}
+                    </p>
 
-                  {/* Features List */}
-                  <ul className="space-y-2 mb-6 text-xs md:text-lg">
-                    {service.featuresKeys.map((featureKey, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-[16px] text-gray-700">
-                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                        {t(featureKey)}
-                      </li>
-                    ))}
-                  </ul>
+                    {/* Features List */}
+                    <ul className='space-y-2 mb-6 text-xs md:text-lg'>
+                      {service.featuresKeys.map((featureKey, idx) => (
+                        <li
+                          key={idx}
+                          className='flex items-center gap-2 text-[16px] text-gray-700'
+                        >
+                          <span className='w-1.5 h-1.5 bg-green-500 rounded-full'></span>
+                          {t(featureKey)}
+                        </li>
+                      ))}
+                    </ul>
 
                   {/* Buttons */}
                   <div className="flex items-center justify-between gap-4">
@@ -127,13 +134,13 @@ const Services = () => {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </SmoothScroll>
   );
 };
 

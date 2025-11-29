@@ -17,7 +17,7 @@ const PaymentMethodItem = ({ method, onSettingsClick }) => {
       </div>
       {/* Added onClick handler */}
       <button
-        onClick={() => onSettingsClick(method)} // Call handler with method data
+        onClick={() => onSettingsClick(method)} 
         className='w-6 h-6 relative flex items-center justify-center text-gray-400 hover:text-gray-600 cursor-pointer' // Added cursor-pointer
         aria-label={`Configure ${method.name}`}
       >

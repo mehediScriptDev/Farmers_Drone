@@ -28,7 +28,7 @@ const EmployeeDetailsModal = ({
   };
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center'>
+    <div className='fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4'>
       {/* Backdrop */}
       <div
         className='absolute inset-0 bg-black/70 bg-opacity-50'
@@ -36,22 +36,22 @@ const EmployeeDetailsModal = ({
       />
 
       {/* Modal */}
-      <div className='relative bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto'>
+      <div className='relative bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto'>
         {/* Header */}
-        <div className='sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center'>
-          <h2 className='text-xl font-semibold font-["Poppins"] text-[#1A1A1A]'>
+        <div className='sticky top-0 bg-white border-b border-gray-200 px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center'>
+          <h2 className='text-lg sm:text-xl font-semibold font-["Poppins"] text-[#1A1A1A]'>
             {t('dashboard.admin.employeeManagement.modal.title')}
           </h2>
           <button
             onClick={onClose}
             className='text-gray-400 hover:text-gray-600 transition-colors'
           >
-            <HiX className='w-6 h-6' />
+            <HiX className='w-5 h-5 sm:w-6 sm:h-6' />
           </button>
         </div>
 
         {/* Body */}
-        <div className='px-6 py-6'>
+        <div className='px-4 sm:px-6 py-4 sm:py-6'>
           <div className='space-y-6'>
             {/* Employee Info */}
             <div className='flex items-start gap-4'>
@@ -190,16 +190,16 @@ const EmployeeDetailsModal = ({
         </div>
 
         {/* Footer */}
-        <div className='sticky bottom-0 bg-gray-50 px-6 py-4 border-t border-gray-200 flex justify-end gap-3'>
+        <div className='sticky bottom-0 bg-gray-50 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 flex flex-col-reverse sm:flex-row justify-end gap-2 sm:gap-3'>
           <button
             onClick={onClose}
-            className='px-6 py-2.5 rounded-lg font-medium text-[#1A1A1A] font-["Poppins"] border border-gray-300 hover:bg-gray-100 transition-colors'
+            className='w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg font-medium text-[#1A1A1A] font-["Poppins"] border border-gray-300 hover:bg-gray-100 transition-colors text-sm sm:text-base'
           >
             {t('dashboard.admin.employeeManagement.modal.close')}
           </button>
           <button
             onClick={handleAction}
-            className={`px-6 py-2.5 rounded-lg font-medium font-["Poppins"] transition-colors ${
+            className={`w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg font-medium font-["Poppins"] transition-colors text-sm sm:text-base ${
               employee.status === 'active'
                 ? 'bg-red-600 text-white hover:bg-red-700'
                 : 'bg-green-600 text-white hover:bg-green-700'

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { IoChevronDown } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 const ReusableDropdown = ({
   label,
@@ -12,6 +13,7 @@ const ReusableDropdown = ({
   isRequired = false,
   onDropdownToggle,
 }) => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -58,7 +60,9 @@ const ReusableDropdown = ({
               selectedValue ? "text-black" : "text-gray-500"
             }`}
           >
-            {selectedValue || placeholder}
+            {selectedValue
+              ? t(`categories.${selectedValue}.label`) || selectedValue
+              : placeholder}
           </span>
           <IoChevronDown
             className={`text-gray-400 transition-transform duration-200 size-5 ${
@@ -76,7 +80,9 @@ const ReusableDropdown = ({
                 className="text-gray-900 relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-gray-100"
                 role="option"
               >
-                <span className="font-normal block truncate">{option}</span>
+                <span className="font-normal block truncate">
+                  {t(`categories.${option}.label`) || option}
+                </span>
               </li>
             ))}
           </ul>

@@ -1,6 +1,7 @@
-import CForm from "../Components/Form/CForm";
+import CForm from '../Components/Form/CForm';
+import SmoothScroll from '../../components/utility/SmoothScroll';
 // import banner from "/assets/images/aboutBanner.jpg";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -24,11 +25,11 @@ const Contact = () => {
             </p>
           </div>
         </div>
-      </div>
 
-      {/* Contact Form */}
-      <CForm />
-    </div>
+        {/* Contact Form */}
+        <CForm />
+      </div>
+    </SmoothScroll>
   );
 };
 

@@ -19,11 +19,11 @@ const AutomationModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl w-full max-w-md max-h-[70vh] overflow-hidden flex flex-col">
+      <div className="bg-white rounded-xl w-full max-w-lg max-h-[70vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-4 md:p-5 border-gray-200">
+        <div className="flex items-center justify-between  md:py-4 px-6 md:px-8  border-gray-200">
           <div>
-            <h2 className="text-base md:text-lg font-semibold text-gray-900">
+            <h2 className="text-lg md:text-xl font-semibold text-gray-900 mt-5">
               {t("dashboard.marketing.AutomationModal.IfLeadIsHot")}
             </h2>
             <p className="text-xs md:text-sm text-gray-500 mt-0.5">
@@ -35,7 +35,7 @@ const AutomationModal = ({
             className="text-gray-400 hover:text-gray-600 transition-colors"
             aria-label="Close automation modal"
           >
-            <MdClose size={24} />
+            <MdClose size={20} />
           </button>
         </div>
         {console.log(automationSettings)}
