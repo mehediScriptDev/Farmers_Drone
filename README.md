@@ -2,6 +2,8 @@
 
 A modern, role-based dashboard application built with React, Vite, and static authentication.
 
+🌐 **Live Demo**: [https://farmers-drone.vercel.app/](https://farmers-drone.vercel.app/)
+
 ## Features
 
 - 🔐 **Role-Based Access Control**: Different dashboard views for Admin, Marketing, Employee, and Field Agent roles
